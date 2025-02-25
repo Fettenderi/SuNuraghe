@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwu0wx88hvs2q"]
+
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_ox7lp"]
+[ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="2_0eoc4"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="3_rue8p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iu2d7"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fi6k3"]
+sky_material = SubResource("ProceduralSkyMaterial_iu2d7")
+
+[sub_resource type="Environment" id="Environment_wkx6x"]
+background_mode = 2
+sky = SubResource("Sky_fi6k3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrtyu"]
+albedo_texture = ExtResource("1_ox7lp")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8trgu"]
+material = SubResource("StandardMaterial3D_lrtyu")
+size = Vector2(50, 50)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7gnne"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wkx6x")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_8trgu")
+
+[node name="Basic FPS Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10738, 0)
+script = ExtResource("2_0eoc4")
+SPEED = 3.0
+HEAD_BOB_FREQUENCY = 0.2
+HEAD_BOB_AMPLITUDE = 0.005
+KEY_BIND_UP = "move_forward"
+KEY_BIND_LEFT = "move_left"
+KEY_BIND_RIGHT = "move_right"
+KEY_BIND_DOWN = "move_backward"
+KEY_BIND_JUMP = "jump"
+
+[node name="Head" parent="Basic FPS Player" instance=ExtResource("3_rue8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.661722, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
+shape = SubResource("CapsuleShape3D_7gnne")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.945342, 0.32608, 0, -0.32608, 0.945342, 0, 2.29905, 0)

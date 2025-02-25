@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt1vdiir6tlvu"]
+
+[ext_resource type="Script" path="res://addons/free_look_camera/free_look_camera.gd" id="1_ej5x2"]
+
+[node name="Camera3D" type="Camera3D"]
+current = true
+script = ExtResource("1_ej5x2")
