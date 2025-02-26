@@ -1,21 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwu0wx88hvs2q"]
+[gd_scene load_steps=7 format=3 uid="uid://dwu0wx88hvs2q"]
 
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_ox7lp"]
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="2_0eoc4"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="3_rue8p"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iu2d7"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_fi6k3"]
-sky_material = SubResource("ProceduralSkyMaterial_iu2d7")
-
-[sub_resource type="Environment" id="Environment_wkx6x"]
-background_mode = 2
-sky = SubResource("Sky_fi6k3")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrtyu"]
 albedo_texture = ExtResource("1_ox7lp")
@@ -29,11 +16,24 @@ size = Vector2(50, 50)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_wkx6x")
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.50634, 9.56852, -13.4784)
+radius = 10.6494
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="CSGCombiner3D"]
+transform = Transform3D(1.39707, -0.946066, 0, 0.946066, 1.39707, 0, 0, 0, 1.68726, 0.29837, -0.319505, -13.4404)
+operation = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0298045, 0.138875, 0)
+size = Vector3(1.92798, 1, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.648386, 0)
+height = 1.45357
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -54,8 +54,29 @@ KEY_BIND_JUMP = "jump"
 [node name="Head" parent="Basic FPS Player" instance=ExtResource("3_rue8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.661722, 0)
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="Basic FPS Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.982784, 0.184758, 0, -0.184758, 0.982784, 0, 0, 0)
+visible = false
+light_energy = 16.0
+spot_range = 11.0119
+spot_angle = 29.1887
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
 shape = SubResource("CapsuleShape3D_7gnne")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.945342, 0.32608, 0, -0.32608, 0.945342, 0, 2.29905, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0.000925422, 0, -0.000925422, 1, 0, 1.77358, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29826, -12.4136)
+light_color = Color(0.77, 0.601755, 0.3311, 1)
+light_energy = 0.375
+light_size = 0.597
+omni_range = 4.114
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29826, -14.5798)
+light_color = Color(0.77, 0.601755, 0.3311, 1)
+light_energy = 0.375
+light_size = 0.597
+omni_range = 4.114
