@@ -1,4 +1,5 @@
 @tool
+class_name BasicPlayer
 extends CharacterBody3D
 
 var BasicFPSPlayerScene : PackedScene = preload("basic_player_head.tscn")
@@ -144,10 +145,12 @@ func move_player(delta):
 		# Set speed and accel to defualt
 		speed = SPEED
 		accel = ACCEL
+		set_noise(false)
 
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		set_noise(true)
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
@@ -157,6 +160,9 @@ func move_player(delta):
 	velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)
 
 	move_and_slide()
+
+func set_noise(value):
+	%CollisionShape3D.set_deferred("disabled", not value)
 
 func head_bob_motion():
 	var pos = Vector3.ZERO

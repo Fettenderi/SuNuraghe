@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dopbmor0bk274"]
+
+[ext_resource type="Script" path="res://prototypes/basic_fps_player.gd" id="1_38njw"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_qg8c1"]
+[ext_resource type="Texture2D" uid="uid://degouh1dc7mmf" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="3_q8yys"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n4avi"]
+height = 1.98895
+radius = 0.920832
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swoup"]
+albedo_texture = ExtResource("3_q8yys")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4uhyw"]
+material = SubResource("StandardMaterial3D_swoup")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7gnne"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h5vqf"]
+
+[node name="Basic FPS Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_38njw")
+SPEED = 3.0
+KEY_BIND_MOUSE_SENS = 0.003
+KEY_BIND_UP = "move_forward"
+KEY_BIND_LEFT = "move_left"
+KEY_BIND_RIGHT = "move_right"
+KEY_BIND_DOWN = "move_backward"
+KEY_BIND_JUMP = "jump"
+
+[node name="FmodListener3D" type="FmodListener3D" parent="."]
+
+[node name="Head" parent="." instance=ExtResource("2_qg8c1")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.661722, 0)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.982784, 0.184758, 0, -0.184758, 0.982784, 0, 0, 0)
+light_energy = 16.0
+spot_range = 11.0119
+spot_angle = 29.1887
+
+[node name="InteractionBox" type="Area3D" parent="Head" groups=["Interaction"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.79462)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/InteractionBox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.659335)
+visible = false
+shape = SubResource("CylinderShape3D_n4avi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(0.439017, 0, 0, 0, 0.439017, 0, 0, 0, 0.439017, 0, 0.505907, 0)
+mesh = SubResource("CylinderMesh_4uhyw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7gnne")
+
+[node name="SoundMaker" type="Area3D" parent="." groups=["Sound"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SoundMaker"]
+unique_name_in_owner = true
+visible = false
+shape = SubResource("SphereShape3D_h5vqf")
+disabled = true
