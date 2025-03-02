@@ -153,8 +153,11 @@ func move_player(delta):
 		set_noise(true)
 
 	# Get the input direction and handle the movement/deceleration.
-	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN).normalized()
+	var nerfed_input = Vector3(input_dir.x, 0.0, input_dir.y) * (1.0 if input_dir.y <= 0.0 else 0.5)
+	var direction = (transform.basis * nerfed_input)
+	
+	print(nerfed_input)
 	
 	velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
 	velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)

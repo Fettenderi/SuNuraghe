@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvdhqvacrttlw"]
+
+[ext_resource type="Texture2D" uid="uid://degouh1dc7mmf" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="1_f5ni8"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_x0hk6"]
+[ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_oxbe4"]
+[ext_resource type="Script" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
+[ext_resource type="Script" path="res://scenes/player/movement_states/walk_state.gd" id="5_r05ns"]
+[ext_resource type="Script" path="res://scenes/player/movement_states/sprint_state.gd" id="6_x4bpx"]
+[ext_resource type="Script" path="res://scenes/player/movement_states/cover_state.gd" id="7_ijtw4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dig1p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swoup"]
+albedo_texture = ExtResource("1_f5ni8")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mcmbn"]
+material = SubResource("StandardMaterial3D_swoup")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sd4yv"]
+radius = 0.25
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_x0hk6")
+
+[node name="FmodListener3D" type="FmodListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dig1p")
+
+[node name="Head" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.662, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(0.439017, 0, 0, 0, 0.439017, 0, 0, 0, 0.439017, 0, 0.505907, 0)
+mesh = SubResource("CylinderMesh_mcmbn")
+
+[node name="SoundMaker" parent="." instance=ExtResource("3_oxbe4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_sd4yv")
+
+[node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("user", "starting_state")]
+unique_name_in_owner = true
+script = ExtResource("4_ou5my")
+user = NodePath("..")
+starting_state = NodePath("WalkState")
+automatic = true
+
+[node name="WalkState" type="Node" parent="MovementSM"]
+script = ExtResource("5_r05ns")
+
+[node name="SprintState" type="Node" parent="MovementSM"]
+script = ExtResource("6_x4bpx")
+head_bob_amplitude = 0.02
+
+[node name="CoverState" type="Node" parent="MovementSM"]
+script = ExtResource("7_ijtw4")
+head_bob_amplitude = 0.007
+head_bob_frequency = 0.17
+
+[node name="JumpBuffer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="JumpBuffer" to="." method="_on_jump_buffer_timeout"]

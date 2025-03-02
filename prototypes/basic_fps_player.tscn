@@ -8,11 +8,11 @@
 height = 1.98895
 radius = 0.920832
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swoup"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y56eq"]
 albedo_texture = ExtResource("3_q8yys")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4uhyw"]
-material = SubResource("StandardMaterial3D_swoup")
+material = SubResource("StandardMaterial3D_y56eq")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.5

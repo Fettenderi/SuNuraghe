@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_ox7lp"]
 [ext_resource type="PackedScene" uid="uid://dehcuxqevpwws" path="res://prototypes/bright_world_environment.tscn" id="1_tm70w"]
-[ext_resource type="PackedScene" uid="uid://dopbmor0bk274" path="res://prototypes/basic_fps_player.tscn" id="2_rrjsf"]
 [ext_resource type="PackedScene" uid="uid://cvtv8ik7vf8e2" path="res://prototypes/creature.tscn" id="4_x74dq"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/player/player.tscn" id="5_05l1d"]
 [ext_resource type="PackedScene" uid="uid://cmb4o1odrqso5" path="res://prototypes/node_3d.tscn" id="5_12bgs"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_0lwrs"]
@@ -21,9 +21,6 @@ size = Vector2(50, 50)
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_tm70w")]
-
-[node name="Basic FPS Player" parent="." instance=ExtResource("2_rrjsf")]
-collision_layer = 3
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0.000925422, 0, -0.000925422, 1, 0, 1.77358, 0)
@@ -90,3 +87,6 @@ spot_angle = 47.057
 
 [node name="Node3D" parent="." instance=ExtResource("5_12bgs")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.9413, -0.583105, -0.969679)
+
+[node name="Player" parent="." instance=ExtResource("5_05l1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18533, -0.759933, 10.0182)
