@@ -64,7 +64,7 @@ func create_rays():
 func _physics_process(_delta: float) -> void:
 	var _seen := false
 	for _ray in _rays:
-		if not _seen and _ray.is_colliding() and _ray.get_collider() is BasicPlayer:
+		if not _seen and _ray.is_colliding() and _ray.get_collider() is Player:
 			located.emit(_ray.get_collider())
 			_seen = true
 	

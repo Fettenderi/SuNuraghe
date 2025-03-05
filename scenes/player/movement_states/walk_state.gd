@@ -14,6 +14,12 @@ func start(_info : Dictionary = {}) -> void:
 	user._head_bob_frequency = head_bob_frequency
 
 
+func _physics_process(delta: float) -> void:
+	if not _active: return
+	
+	if user.is_on_floor():
+		user._sound_maker.set_enabled(false)
+
 func _input(event : InputEvent) -> void:
 	if not _active: return
 	

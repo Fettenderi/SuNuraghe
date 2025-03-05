@@ -36,6 +36,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 FmodManager="*res://addons/fmod/FmodManager.gd"
+Gui="*res://globals/gui.tscn"
 
 [display]
 
@@ -48,6 +49,10 @@ window/vsync/vsync_mode=2
 [dotnet]
 
 project/assembly_name="ProjectNuraghe"
+
+[editor]
+
+movie_writer/movie_file="F:/RobaNerd/GitHub/ProjectNuraghe/prototypes/proto1.avi"
 
 [editor_plugins]
 
@@ -105,6 +110,11 @@ sprint={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
 
 [rendering]
 

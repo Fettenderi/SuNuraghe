@@ -88,7 +88,7 @@ func _move_player(delta : float) -> void:
 	else:
 		_speed = _max_speed
 		_accel = acceleration
-		_sound_maker.set_enabled(false)
+		#_sound_maker.set_enabled(false)
 
 	velocity.x = move_toward(velocity.x, _direction.x * _speed, _accel * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * _speed, _accel * delta)

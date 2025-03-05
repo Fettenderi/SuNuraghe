@@ -42,9 +42,9 @@ texture_albedo = ExtResource("2_7hlr2")
 modulate = Color(0.43, 0.1204, 0.1204, 1)
 upper_fade = 0.135188
 
-[node name="Ears" type="Area3D" parent="Mesh"]
+[node name="Ears-NO" type="Area3D" parent="Mesh"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Ears"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Ears-NO"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CylinderShape3D_f7tmj")
 
@@ -53,6 +53,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.1
 ray_lenght = 30.0
 reset_rays = false
 
-[connection signal="area_entered" from="Mesh/Ears" to="." method="_on_ears_area_entered"]
+[connection signal="area_entered" from="Mesh/Ears-NO" to="." method="_on_ears_area_entered"]
 [connection signal="located" from="Mesh/Eyes" to="." method="_on_eyes_located"]
 [connection signal="not_visible" from="Mesh/Eyes" to="." method="_on_eyes_not_visible"]

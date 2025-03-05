@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2vdei1iobb7m"]
+
+[ext_resource type="Script" path="res://globals/gui.gd" id="1_w8mk6"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_w8mk6")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InteractionText" type="RichTextLabel" parent="CenterContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
