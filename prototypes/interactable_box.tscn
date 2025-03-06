@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8iu5ixe4rwgk"]
 
-[ext_resource type="Script" path="res://prototypes/interactable_box.gd" id="1_66amp"]
+[ext_resource type="Script" uid="uid://d4nvqqmewoy6h" path="res://prototypes/interactable_box.gd" id="1_66amp"]
 
 [node name="InteractableBox" type="Area3D"]
 script = ExtResource("1_66amp")

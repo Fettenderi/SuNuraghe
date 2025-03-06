@@ -30,7 +30,7 @@ DSP/dsp_buffer_count=4
 
 config/name="ProjectNuraghe"
 run/main_scene="res://scenes/levels/map_debug.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -56,7 +56,7 @@ movie_writer/movie_file="F:/RobaNerd/GitHub/ProjectNuraghe/prototypes/proto1.avi
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Basic FPS Player/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/extra_snaps/plugin.cfg", "res://addons/fettemplate/plugin.cfg", "res://addons/fmod/plugin.cfg")
+enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/fmod/plugin.cfg")
 
 [global_group]
 
@@ -115,6 +115,10 @@ sprint={
 
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

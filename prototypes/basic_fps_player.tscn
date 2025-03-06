@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dopbmor0bk274"]
 
-[ext_resource type="Script" path="res://prototypes/basic_fps_player.gd" id="1_38njw"]
+[ext_resource type="Script" uid="uid://cq52baif3a6n" path="res://prototypes/basic_fps_player.gd" id="1_38njw"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_qg8c1"]
 [ext_resource type="Texture2D" uid="uid://degouh1dc7mmf" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="3_q8yys"]
 

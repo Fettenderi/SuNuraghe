@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmb4o1odrqso5"]
 
-[ext_resource type="Script" path="res://prototypes/node_3d.gd" id="1_qrfve"]
+[ext_resource type="Script" uid="uid://ba52jkwx6e467" path="res://prototypes/node_3d.gd" id="1_qrfve"]
 [ext_resource type="PackedScene" uid="uid://nelobp0ltjgl" path="res://assets/models/placeholder/truck-grey.glb" id="1_w33ds"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://prototypes/interactable_box.tscn" id="2_eg7qy"]
 

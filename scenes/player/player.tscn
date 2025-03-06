@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://cvdhqvacrttlw"]
 
 [ext_resource type="Texture2D" uid="uid://degouh1dc7mmf" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="1_f5ni8"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_x0hk6"]
+[ext_resource type="Script" uid="uid://g8atcph4wi6q" path="res://scripts/player.gd" id="1_x0hk6"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_oxbe4"]
-[ext_resource type="Script" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
-[ext_resource type="Script" path="res://scenes/player/movement_states/walk_state.gd" id="5_r05ns"]
-[ext_resource type="Script" path="res://scenes/player/movement_states/sprint_state.gd" id="6_x4bpx"]
-[ext_resource type="Script" path="res://scenes/player/movement_states/cover_state.gd" id="7_ijtw4"]
+[ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
+[ext_resource type="Script" uid="uid://bf35frq3511vv" path="res://scenes/player/movement_states/walk_state.gd" id="5_r05ns"]
+[ext_resource type="Script" uid="uid://cdi5fw2eujhkr" path="res://scenes/player/movement_states/sprint_state.gd" id="6_x4bpx"]
+[ext_resource type="Script" uid="uid://cvsupjg0baixa" path="res://scenes/player/movement_states/cover_state.gd" id="7_ijtw4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dig1p"]
 
@@ -36,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_dig1p")
+debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
 
 [node name="Head" type="Node3D" parent="."]
 unique_name_in_owner = true
