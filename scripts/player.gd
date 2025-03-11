@@ -12,6 +12,7 @@ const KEY_BIND_BACKWARD = "move_backward"
 const KEY_BIND_JUMP = "jump"
 const KEY_BIND_COVER = "cover"
 const KEY_BIND_SPRINT = "sprint"
+const KEY_BIND_NOCLIP = "noclip"
 
 
 @export_subgroup("Movement")
@@ -23,9 +24,11 @@ const KEY_BIND_SPRINT = "sprint"
 @export var mouse_sentitivity := 0.002
 @export var mouse_acceleration := 50
 
+@onready var camera_3d: Camera3D = $Head/Camera3D
 
 @onready var _head: Node3D = %Head
 @onready var _sound_maker: ExpandedHitBox = %SoundMaker
+@onready var _collision_shape_3d: CollisionShape3D = %CollisionShape3D
 
 
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -56,7 +59,7 @@ func _ready() -> void:
 
 	_head_start_pos = _head.position
 
-func _physics_process(delta : float) -> void:
+func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
 	
 	_head_bob_tick += 1
@@ -67,6 +70,7 @@ func _physics_process(delta : float) -> void:
 	if velocity and is_on_floor():
 		_head_bob_update()
 	_reset_head_bob(delta)
+
 
 func _input(event : InputEvent) -> void:
 	if Engine.is_editor_hint(): return
@@ -120,6 +124,9 @@ func _reset_head_bob(delta : float) -> void:
 	
 	_head.position = lerp(_head.position, _head_start_pos, 2 * (1 / _head_bob_frequency) * delta)
 
+
+func set_collision(value : bool) -> void:
+	_collision_shape_3d.set_deferred("disabled", not value)
 
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false

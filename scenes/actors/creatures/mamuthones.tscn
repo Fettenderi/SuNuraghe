@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6fbx2cag2tkv"]
+
+[ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="1_8p86u"]
+[ext_resource type="Script" uid="uid://bts41hj3n57mm" path="res://scripts/mamuthones.gd" id="1_u7wol"]
+[ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="3_5nnlu"]
+[ext_resource type="Script" uid="uid://b045x2vvvv4hq" path="res://scenes/actors/creatures/movement_states/patrol_state.gd" id="4_uvnkw"]
+[ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="5_dr4gf"]
+[ext_resource type="Script" uid="uid://c36wyajajwypx" path="res://scenes/actors/creatures/movement_states/wandering_state.gd" id="6_vexqk"]
+[ext_resource type="Script" uid="uid://c7ubq7oc8fh0f" path="res://scenes/actors/creatures/movement_states/returning_state.gd" id="7_nu7mx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nlvv0"]
+
+[node name="Mamuthones" type="CharacterBody3D"]
+script = ExtResource("1_u7wol")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uhukm")
+debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+visible = false
+mesh = SubResource("CapsuleMesh_nlvv0")
+
+[node name="Eyes" parent="Mesh" instance=ExtResource("1_8p86u")]
+
+[node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("user", "starting_state")]
+script = ExtResource("3_5nnlu")
+user = NodePath("..")
+starting_state = NodePath("PatrolState")
+automatic = true
+metadata/_custom_type_script = "uid://cy2neyq5e26g4"
+
+[node name="PatrolState" type="Node" parent="MovementSM"]
+script = ExtResource("4_uvnkw")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="ChaseState" type="Node" parent="MovementSM"]
+script = ExtResource("5_dr4gf")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="WanderingState" type="Node" parent="MovementSM"]
+script = ExtResource("6_vexqk")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="ReturningState" type="Node" parent="MovementSM"]
+script = ExtResource("7_nu7mx")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"

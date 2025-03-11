@@ -1,0 +1,307 @@
+[gd_scene load_steps=20 format=3 uid="uid://b33dcghknjyek"]
+
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_jkmi3"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="2_e6psu"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="3_xr3nu"]
+[ext_resource type="Texture2D" uid="uid://bg2a3k4dm4sm6" path="res://addons/kenney_prototype_textures/red/texture_09.png" id="4_xr3nu"]
+[ext_resource type="Script" uid="uid://bn84ol180qg2t" path="res://prototypes/bell.gd" id="5_j2kyl"]
+[ext_resource type="Texture2D" uid="uid://b3xygpehjaouq" path="res://addons/kenney_prototype_textures/green/texture_08.png" id="5_l4qxa"]
+[ext_resource type="PackedScene" uid="uid://b6fbx2cag2tkv" path="res://scenes/actors/creatures/mamuthones.tscn" id="7_c45xa"]
+[ext_resource type="Resource" uid="uid://dmu0443e05mqc" path="res://prototypes/patrol1.tres" id="8_c45xa"]
+[ext_resource type="Resource" uid="uid://uphuct35tjjs" path="res://prototypes/patrol2.tres" id="9_ina5q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e6psu"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_xr3nu"]
+sky_material = SubResource("ProceduralSkyMaterial_e6psu")
+
+[sub_resource type="Environment" id="Environment_yh7dg"]
+background_mode = 2
+sky = SubResource("Sky_xr3nu")
+ambient_light_energy = 0.0
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh7dg"]
+albedo_texture = ExtResource("2_e6psu")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_l4qxa"]
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c45xa"]
+albedo_texture = ExtResource("4_xr3nu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ina5q"]
+albedo_texture = ExtResource("2_e6psu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rnyf8"]
+albedo_texture = ExtResource("5_l4qxa")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21wnt"]
+albedo_texture = ExtResource("3_xr3nu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2kyl"]
+albedo_texture = ExtResource("3_xr3nu")
+
+[node name="Level" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 31.1256)
+light_energy = 0.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yh7dg")
+
+[node name="Player" parent="." instance=ExtResource("1_jkmi3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64902, 1.79112, 29.9617)
+
+[node name="Decos" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00721741, 0.114042, -0.103172)
+
+[node name="Bell" type="CSGCylinder3D" parent="Decos"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, -2.74828, 16.7469, 1.67988)
+radius = 7.02979
+height = 16.8247
+sides = 32
+material = SubResource("StandardMaterial3D_yh7dg")
+script = ExtResource("5_j2kyl")
+
+[node name="Bell2" type="CSGCylinder3D" parent="Decos"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, 15.2517, 29.4363, 15.7325)
+radius = 6.0
+height = 19.1669
+sides = 32
+material = SubResource("StandardMaterial3D_yh7dg")
+script = ExtResource("5_j2kyl")
+
+[node name="Bell3" type="CSGCylinder3D" parent="Decos"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, -25.7111, 23.0136, -9.76711)
+radius = 6.0
+height = 19.1669
+sides = 32
+material = SubResource("StandardMaterial3D_yh7dg")
+script = ExtResource("5_j2kyl")
+
+[node name="Bell4" type="CSGCylinder3D" parent="Decos"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, 11.8833, 13.2228, -20.631)
+radius = 6.0
+height = 19.1669
+sides = 32
+material = SubResource("StandardMaterial3D_yh7dg")
+script = ExtResource("5_j2kyl")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75652, -5.52906, -6.43489)
+mesh = SubResource("CapsuleMesh_l4qxa")
+material = SubResource("StandardMaterial3D_c45xa")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.76787, -5.52906, -1.01395)
+mesh = SubResource("CapsuleMesh_l4qxa")
+material = SubResource("StandardMaterial3D_c45xa")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97234, -5.52906, -1.497)
+mesh = SubResource("CapsuleMesh_l4qxa")
+material = SubResource("StandardMaterial3D_c45xa")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1379, -5.52906, 8.27142)
+mesh = SubResource("CapsuleMesh_l4qxa")
+material = SubResource("StandardMaterial3D_c45xa")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18683, -5.05493, 1.05315)
+radius = 2.15967
+height = 2.69141
+cone = true
+material = SubResource("StandardMaterial3D_ina5q")
+
+[node name="CSGMesh3D5" type="CSGMesh3D" parent="Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69747, -5.52906, 7.17906)
+mesh = SubResource("CapsuleMesh_l4qxa")
+material = SubResource("StandardMaterial3D_c45xa")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Decos"]
+transform = Transform3D(1.00066, 0, 1.55444, 0, 1.84868, 0, -1.55444, 0, 1.00066, -22.8452, 1.75676, 28.4408)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Decos"]
+transform = Transform3D(1.00066, 0, 1.55444, 0, 1.84868, 0, -1.55444, 0, 1.00066, -38.7677, 1.75676, 22.4581)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Decos"]
+transform = Transform3D(0.552645, 0, 1.76414, 0, 1.84868, 0, -1.76414, 0, 0.552645, -48.0216, 1.75676, 23.8335)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Decos"]
+transform = Transform3D(1.81334, 0, -0.359741, 0, 1.84868, 0, 0.359741, 0, 1.81334, -19.7636, 1.75676, 35.0648)
+
+[node name="Rooms" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00721741, 0.114042, -0.103172)
+use_collision = true
+
+[node name="CircularHallway" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.12308, -20.9646, -18.4459)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Rooms/CircularHallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.0813, 18.5997)
+flip_faces = true
+radius = 28.6719
+height = 4.18851
+sides = 32
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Rooms/CircularHallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099987, 23.1405, 18.5944)
+operation = 2
+flip_faces = true
+radius = 24.2104
+height = 14.8541
+sides = 32
+
+[node name="Entrance" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(0.246114, 0, 0, 0, 0.246114, 0, 0, 0, 0.395942, -2.09264, 2.21631, 26.2539)
+
+[node name="Cilinder" type="CSGCylinder3D" parent="Rooms/Entrance"]
+transform = Transform3D(1.91068e-15, 4.37114e-08, 0.706591, 1, -4.37114e-08, 0, 4.37114e-08, 1, -3.08861e-08, -2.748, -4.67247, 35.1876)
+flip_faces = true
+radius = 36.0
+height = 127.586
+sides = 32
+cone = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Entrance"]
+transform = Transform3D(0.999986, 0, 0, 0, 0.999986, 0, 0, 0, 0.999967, 0, -25.616, 20.6534)
+operation = 2
+flip_faces = true
+size = Vector3(85.4678, 41.5047, 100.863)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Entrance"]
+transform = Transform3D(0.999993, 0, 0, 0, 0.999993, 0, 0, 0, 0.999995, 0, -1.80765, 84.5825)
+operation = 2
+flip_faces = true
+size = Vector3(34.2227, 25.5548, 29.7834)
+
+[node name="Room" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(-0.380683, 0, -0.924706, 0, 1, 0, 0.924706, 0, -0.380683, -20.058, 4.264, 30.5631)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392771, -0.817535, 1.49012e-08)
+flip_faces = true
+size = Vector3(11.2943, 5, 12.6064)
+material = SubResource("StandardMaterial3D_rnyf8")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41862, -2.02371, -9.53674e-07)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room3" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(-0.416408, 0, -0.909178, 0, 1, 0, 0.909178, 0, -0.416408, -36.4951, 4.264, 36.001)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.58706, -0.817535, 0.570496)
+flip_faces = true
+size = Vector3(5.33466, 5, 9.6947)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41862, -2.02371, 0)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room4" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(0.416408, 0, 0.909178, 0, 1, 0, -0.909178, 0, 0.416408, -40.1408, 4.264, 14.6762)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392769, -0.817535, -1.90735e-06)
+flip_faces = true
+size = Vector3(11.2943, 5, 8.55371)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41862, -2.02371, 3.8147e-06)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room6" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(-0.901938, 0, 0.431865, 0, 1, 0, -0.431865, 0, -0.901938, -61.196, 4.264, 14.7199)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.392769, -0.817535, -1.90735e-06)
+flip_faces = true
+size = Vector3(11.2943, 5, 8.55371)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room6"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -5.41862, -2.02371, 0)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room5" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(-0.416408, 0, -0.909178, 0, 1, 0, 0.909178, 0, -0.416408, -54.2677, 4.264, 27.7214)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.13271, -0.817535, -3.8147e-06)
+flip_faces = true
+size = Vector3(6.24335, 5, 6.42676)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41862, -2.02371, 0)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room2" type="CSGCombiner3D" parent="Rooms"]
+transform = Transform3D(-0.924706, 0, 0.380683, 0, 1, 0, -0.380683, 0, -0.924706, -32.3472, 4.264, 29.0371)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Rooms/Room2"]
+transform = Transform3D(0.998814, 0, -0.049024, 0, 1, 0, 0.049024, 0, 0.998814, 10.6685, -0.817535, 1.24147)
+flip_faces = true
+size = Vector3(31.7156, 5, 6.47095)
+material = SubResource("StandardMaterial3D_21wnt")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Rooms/Room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41862, -2.02371, 0)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="CircularRooms" type="CSGCombiner3D" parent="Rooms"]
+
+[node name="BellRoom" type="CSGCylinder3D" parent="Rooms/CircularRooms"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, -2.74828, 8.43438, 1.67988)
+flip_faces = true
+radius = 17.0269
+height = 29.8343
+sides = 32
+material = SubResource("StandardMaterial3D_j2kyl")
+
+[node name="BellRoom2" type="CSGCylinder3D" parent="Rooms/CircularRooms"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, 15.2517, 23.7441, 15.7325)
+flip_faces = true
+radius = 13.0
+height = 26.9359
+sides = 32
+material = SubResource("StandardMaterial3D_j2kyl")
+
+[node name="BellRoom3" type="CSGCylinder3D" parent="Rooms/CircularRooms"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, -25.7111, 19.4438, -9.76711)
+flip_faces = true
+radius = 13.0
+height = 26.9359
+sides = 32
+material = SubResource("StandardMaterial3D_j2kyl")
+
+[node name="BellRoom4" type="CSGCylinder3D" parent="Rooms/CircularRooms"]
+transform = Transform3D(0.992734, 0, 0.120327, 0, 1, 0, -0.120327, 0, 0.992734, 11.8833, 11.2919, -20.631)
+flip_faces = true
+radius = 13.0
+height = 26.9359
+sides = 32
+material = SubResource("StandardMaterial3D_j2kyl")
+
+[node name="Mamuthones" parent="." instance=ExtResource("7_c45xa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.7209, 2.05994, 25.7501)
+_patroling_resource = ExtResource("8_c45xa")
+
+[node name="Mamuthones2" parent="." instance=ExtResource("7_c45xa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.4177, 2.05994, 29.8786)
+_patroling_resource = ExtResource("9_ina5q")

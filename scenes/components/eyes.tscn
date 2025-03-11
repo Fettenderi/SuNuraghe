@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bwdbp47madk0o"]
 
-[ext_resource type="Script" uid="uid://imknkfikjyl5" path="res://prototypes/eyes.gd" id="1_farwp"]
+[ext_resource type="Script" uid="uid://imknkfikjyl5" path="res://scripts/eyes.gd" id="1_farwp"]
 
 [node name="Eyes" type="Node3D"]
 script = ExtResource("1_farwp")
