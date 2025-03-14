@@ -1,10 +1,21 @@
 extends State
 
-func start(_info : Dictionary = {}) -> void:
-	pass
+var _patroling_resource : PatrolingResource
 
-func update(_info : Dictionary = {}) -> void:
-	pass
+func start(info : Dictionary = {}) -> void:
+	if info.has("arrived"):
+		_patroling_resource.waypoint_reached()
+
+	if _patroling_resource == null:
+		_patroling_resource = user.patroling_resource
+
+func update(info : Dictionary = {}) -> void:
+	if info.has("arrived"):
+		_patroling_resource.waypoint_reached()
+	
+	if _patroling_resource.has_targets():
+		user.navigation_agent_3d.target_position = _patroling_resource.get_current_target()
+	
 
 func end() -> void:
-	pass
+	%ReturningState.last_position = user.position

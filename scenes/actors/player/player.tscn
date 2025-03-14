@@ -1,15 +1,24 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvdhqvacrttlw"]
+[gd_scene load_steps=20 format=3 uid="uid://cvdhqvacrttlw"]
 
 [ext_resource type="Texture2D" uid="uid://degouh1dc7mmf" path="res://addons/kenney_prototype_textures/red/texture_01.png" id="1_f5ni8"]
 [ext_resource type="Script" uid="uid://g8atcph4wi6q" path="res://scripts/player.gd" id="1_x0hk6"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_oxbe4"]
+[ext_resource type="Script" uid="uid://040x4sow0hu2" path="res://scripts/shape_controller.gd" id="4_i174x"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
 [ext_resource type="Script" uid="uid://bf35frq3511vv" path="res://scenes/actors/player/movement_states/walk_state.gd" id="5_r05ns"]
 [ext_resource type="Script" uid="uid://igk0i8afm1ku" path="res://scenes/actors/player/movement_states/noclip_state.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://cdi5fw2eujhkr" path="res://scenes/actors/player/movement_states/sprint_state.gd" id="6_x4bpx"]
 [ext_resource type="Script" uid="uid://cvsupjg0baixa" path="res://scenes/actors/player/movement_states/cover_state.gd" id="7_ijtw4"]
+[ext_resource type="Script" uid="uid://q5tb2ywxc423" path="res://scenes/actors/player/movement_states/crawling_state.gd" id="9_5bhx7"]
+[ext_resource type="Script" uid="uid://bm4cbg27bim4v" path="res://scenes/actors/player/movement_states/die_state.gd" id="11_8bj4u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dig1p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5bhx7"]
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i174x"]
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swoup"]
 albedo_texture = ExtResource("1_f5ni8")
@@ -24,6 +33,9 @@ height = 0.5
 height = 1.98895
 radius = 0.920832
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bhx7"]
+size = Vector3(0.666016, 0.659912, 1.74609)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_sd4yv"]
 radius = 0.25
 
@@ -34,10 +46,24 @@ script = ExtResource("1_x0hk6")
 [node name="FmodListener3D" type="FmodListener3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="StandingShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_dig1p")
+debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
+
+[node name="CrouchingShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_5bhx7")
+disabled = true
+debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
+
+[node name="CrawlingShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_i174x")
+disabled = true
 debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
 
 [node name="Head" type="Node3D" parent="."]
@@ -49,14 +75,23 @@ current = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(0.439017, 0, 0, 0, 0.439017, 0, 0, 0, 0.439017, 0, 0.505907, 0)
+visible = false
 mesh = SubResource("CylinderMesh_mcmbn")
 
 [node name="InteractionBox" type="Area3D" parent="Head" groups=["Interaction"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.79462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.990628)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/InteractionBox"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.659335)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_n3p3a")
+
+[node name="CrawlDetectorBox" type="Area3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0560695, -0.90171)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/CrawlDetectorBox"]
+shape = SubResource("BoxShape3D_5bhx7")
 
 [node name="SoundMaker" parent="." groups=["Sound"] instance=ExtResource("3_oxbe4")]
 unique_name_in_owner = true
@@ -64,7 +99,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_sd4yv")
 enabled = false
 
+[node name="ShapeController" type="Node" parent="." node_paths=PackedStringArray("shapes")]
+unique_name_in_owner = true
+script = ExtResource("4_i174x")
+shapes = [NodePath("../StandingShape"), NodePath("../CrouchingShape"), NodePath("../CrawlingShape")]
+
 [node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("user", "starting_state")]
+unique_name_in_owner = true
 script = ExtResource("4_ou5my")
 user = NodePath("..")
 starting_state = NodePath("WalkState")
@@ -85,9 +126,24 @@ script = ExtResource("7_ijtw4")
 head_bob_amplitude = 0.007
 head_bob_frequency = 0.17
 
+[node name="CrawlState" type="Node" parent="MovementSM"]
+script = ExtResource("9_5bhx7")
+max_speed = 0.9
+head_bob_amplitude = 0.007
+head_bob_frequency = 0.1
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="DieState" type="Node" parent="MovementSM"]
+script = ExtResource("11_8bj4u")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
 [node name="JumpBuffer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
 
+[connection signal="area_entered" from="Head/CrawlDetectorBox" to="MovementSM/CoverState" method="_on_crawl_detector_box_area_entered"]
+[connection signal="area_entered" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_entered"]
+[connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CoverState" method="_on_crawl_detector_box_area_exited"]
+[connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_exited"]
 [connection signal="timeout" from="JumpBuffer" to="." method="_on_jump_buffer_timeout"]

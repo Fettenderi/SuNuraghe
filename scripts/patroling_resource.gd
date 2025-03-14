@@ -6,10 +6,13 @@ extends Resource
 		waypoints = value
 		changed.emit()
 
-var _current_waypoint_index : int = 0
+var current_waypoint_index : int = 0
+
+func has_targets():
+	return len(waypoints) > 0
 
 func get_current_target():
-	return waypoints[_current_waypoint_index]
+	return waypoints[current_waypoint_index]
 
 func waypoint_reached():
-	_current_waypoint_index = (_current_waypoint_index + 1) % len(waypoints)
+	current_waypoint_index = (current_waypoint_index + 1) % len(waypoints)

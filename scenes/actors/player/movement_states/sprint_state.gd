@@ -52,7 +52,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			#_end_sprint_buffer = true
 		#return
 
-	if event.is_action_pressed(user.KEY_BIND_COVER):
+	if Input.is_action_pressed(user.KEY_BIND_COVER):
 		state_machine.change_state("CoverState")
 	elif event.is_action_released(user.KEY_BIND_SPRINT):
 		state_machine.change_state("WalkState")

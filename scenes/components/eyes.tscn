@@ -4,6 +4,4 @@
 
 [node name="Eyes" type="Node3D"]
 script = ExtResource("1_farwp")
-rays_paralellness = 0.06
-view_angle = 1.48353
-reset_rays = null
+rays_collision_mask = 3

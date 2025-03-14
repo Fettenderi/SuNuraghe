@@ -1,19 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6fbx2cag2tkv"]
+[gd_scene load_steps=15 format=3 uid="uid://b6fbx2cag2tkv"]
 
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="1_8p86u"]
 [ext_resource type="Script" uid="uid://bts41hj3n57mm" path="res://scripts/mamuthones.gd" id="1_u7wol"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="3_5nnlu"]
+[ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="3_uvnkw"]
 [ext_resource type="Script" uid="uid://b045x2vvvv4hq" path="res://scenes/actors/creatures/movement_states/patrol_state.gd" id="4_uvnkw"]
 [ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="5_dr4gf"]
 [ext_resource type="Script" uid="uid://c36wyajajwypx" path="res://scenes/actors/creatures/movement_states/wandering_state.gd" id="6_vexqk"]
 [ext_resource type="Script" uid="uid://c7ubq7oc8fh0f" path="res://scenes/actors/creatures/movement_states/returning_state.gd" id="7_nu7mx"]
+[ext_resource type="Script" uid="uid://b4oyanx38u8op" path="res://scenes/actors/creatures/movement_states/killing_state.gd" id="9_uvnkw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nlvv0"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4gf"]
+albedo_texture = ExtResource("3_uvnkw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vexqk"]
+albedo_texture = ExtResource("3_uvnkw")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5nnlu"]
+radius = 1.0
 
 [node name="Mamuthones" type="CharacterBody3D"]
 script = ExtResource("1_u7wol")
+speed = 100.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 unique_name_in_owner = true
@@ -25,13 +38,37 @@ debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
-visible = false
-mesh = SubResource("CapsuleMesh_nlvv0")
+[node name="Eyes" parent="Mesh" node_paths=PackedStringArray("excluded_collider") instance=ExtResource("1_8p86u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.475663, -0.272783)
+ray_lenght = 20.0
+rays_paralellness = 0.02
+view_angle = 1.65806
+tooltip_visible = false
+excluded_collider = NodePath("../..")
 
-[node name="Eyes" parent="Mesh" instance=ExtResource("1_8p86u")]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Mesh"]
+mesh = SubResource("CapsuleMesh_u7wol")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178535, 0.498162, 0.497653)
+material_override = SubResource("StandardMaterial3D_dr4gf")
+radius = 0.1
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179, 0.498, 0.498)
+material_override = SubResource("StandardMaterial3D_vexqk")
+radius = 0.1
+
+[node name="KillBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+shape = SubResource("CylinderShape3D_5nnlu")
+debug_fill = false
 
 [node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("user", "starting_state")]
+unique_name_in_owner = true
 script = ExtResource("3_5nnlu")
 user = NodePath("..")
 starting_state = NodePath("PatrolState")
@@ -51,5 +88,15 @@ script = ExtResource("6_vexqk")
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="ReturningState" type="Node" parent="MovementSM"]
+unique_name_in_owner = true
 script = ExtResource("7_nu7mx")
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="KillingState" type="Node" parent="MovementSM"]
+script = ExtResource("9_uvnkw")
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[connection signal="located" from="Mesh/Eyes" to="." method="_on_eyes_located"]
+[connection signal="located" from="Mesh/Eyes" to="MovementSM/ChaseState" method="_on_eyes_located"]
+[connection signal="not_visible" from="Mesh/Eyes" to="MovementSM/ChaseState" method="_on_eyes_not_visible"]
+[connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]

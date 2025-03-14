@@ -10,6 +10,20 @@ var _in_toggle_cooldown := false
 var _active := false
 var _speed : float
 
+func start(_info : Dictionary = {}) -> void:
+	_active = true
+	_in_toggle_cooldown = true
+	_toggle_cooldown_timer.start()
+
+	_speed = user._max_speed
+	user.shape_controller.set_active(false)
+
+func end() -> void:
+	_active = false
+	
+	user.shape_controller.set_active(true)
+
+
 func _ready() -> void:
 	_toggle_cooldown_timer = Timer.new()
 	_toggle_cooldown_timer.one_shot = true
@@ -18,14 +32,6 @@ func _ready() -> void:
 	_toggle_cooldown_timer.timeout.connect(_toggle_cooldown_ended)
 	
 	add_child(_toggle_cooldown_timer, true)
-
-func start(_info : Dictionary = {}) -> void:
-	_active = true
-	_in_toggle_cooldown = true
-	_toggle_cooldown_timer.start()
-
-	_speed = user._max_speed
-	user.set_collision(false)
 
 func _physics_process(delta: float) -> void:
 	if not _active: return
@@ -48,19 +54,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_speed = lerp(_speed, min_speed, speed_sensitivity)
 		user._max_speed = _speed
 
-func end() -> void:
-	_active = false
-	
-	user.set_collision(true)
-
-
-func _move_player(delta : float) -> void:
+func _move_player(_delta : float) -> void:
 	var _input_dir := Input.get_vector(user.KEY_BIND_LEFT, user.KEY_BIND_RIGHT, user.KEY_BIND_FORWARD, user.KEY_BIND_BACKWARD).normalized()
 	var _direction : Vector3 = user.camera_3d.global_transform.basis * Vector3(_input_dir.x, 0.0, _input_dir.y)
 
 	user._speed = user._max_speed
 
-	user.velocity = _direction * user._speed
+	user.velocity = _direction * user._speed # * delta
 	
 	user.move_and_slide()
 

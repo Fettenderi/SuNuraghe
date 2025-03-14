@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="PatrolingResource" load_steps=2 format=3 uid="uid://uphuct35tjjs"]
+[gd_resource type="Resource" script_class="PatrolingResource" load_steps=2 format=3 uid="uid://cd62uga84kmog"]
 
 [ext_resource type="Script" uid="uid://daighntisv4st" path="res://scripts/patroling_resource.gd" id="1_gfqxq"]
 
 [resource]
 script = ExtResource("1_gfqxq")
-waypoints = Array[Vector3]([Vector3(-37.2009, 2.05994, 25.4804), Vector3(-28.7826, 2.05994, 27.2671), Vector3(-34.4177, 2.05994, 29.8786)])
+waypoints = Array[Vector3]([])
 metadata/_custom_type_script = "uid://daighntisv4st"

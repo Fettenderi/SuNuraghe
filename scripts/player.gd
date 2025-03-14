@@ -27,9 +27,11 @@ const KEY_BIND_NOCLIP = "noclip"
 @onready var camera_3d: Camera3D = $Head/Camera3D
 
 @onready var _head: Node3D = %Head
+@warning_ignore("unused_private_class_variable")
 @onready var _sound_maker: ExpandedHitBox = %SoundMaker
-@onready var _collision_shape_3d: CollisionShape3D = %CollisionShape3D
 
+@onready var _movement_sm: StateMachine = %MovementSM
+@onready var shape_controller: ShapeController = %ShapeController
 
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -50,7 +52,6 @@ var _jump_buffered := false:
 		_jump_buffered = value
 		
 		if value: %JumpBuffer.start()
-
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -104,7 +105,6 @@ func _rotate_player(delta : float) -> void:
 	
 	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.RIGHT, _rotation_target_head), mouse_acceleration * delta)
 
-
 func _set_rotation_target(mouse_motion : Vector2) -> void:
 	_rotation_target_player += -mouse_motion.x * mouse_sentitivity
 	_rotation_target_head += -mouse_motion.y * mouse_sentitivity
@@ -124,9 +124,11 @@ func _reset_head_bob(delta : float) -> void:
 	
 	_head.position = lerp(_head.position, _head_start_pos, 2 * (1 / _head_bob_frequency) * delta)
 
-
-func set_collision(value : bool) -> void:
-	_collision_shape_3d.set_deferred("disabled", not value)
-
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false
+
+#func start_dying(to_look : Vector3):
+	#_movement_sm.change_state("DieState", {"to_look": to_look})
+
+func get_visibility() -> float:
+	return 1.0 - float(shape_controller.get_active_shape_index()) / float(shape_controller.get_shapes_count())

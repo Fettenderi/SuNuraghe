@@ -18,6 +18,8 @@ extends Node
 ## Automatically executes [method start] after the node has entered the scene.
 @export var automatic := false
 
+@export var verbose := false
+
 @onready var _states : Array[State]
 
 ## Reference to the currently active [State] of the [StateMachine]
@@ -42,6 +44,9 @@ func _ready():
 
 ## Starts the [StateMachine] using the [member starting_state] [State].
 func start():
+	if verbose:
+		print("State Machine Started")
+		print(str(current_state) + " Started")
 	current_state.start(starting_info)
 	_is_active = true
 
@@ -51,6 +56,8 @@ func update(info : Dictionary = {}):
 	if _is_active:
 		if not current_state.state_machine:
 			current_state.state_machine = self
+		if verbose:
+			print(str(current_state) + " Updated")
 		current_state.update(info)
 
 ## Transitions [member current_state] into [param state_name].
@@ -58,16 +65,24 @@ func update(info : Dictionary = {}):
 ## You can provide additional informations to the new [State] using [param info]
 func change_state(state_name : String, info : Dictionary = {}):
 	if state_name == current_state.name or not _is_active: 
+		if verbose:
+			print(str(current_state) + " Updated")
 		current_state.update(info)
 		return
-		
+	
+	if verbose:
+		print(str(current_state) + " Ended")
 	current_state.end()
 	current_state = _states[_states_names.find(state_name)]
 	if current_state is State:
 		current_state.state_machine = self
 		current_state.user = user
+		if verbose:
+			print(str(current_state) + " Started")
 		current_state.start(info)
 
 ## Stops the [StateMachine].
 func stop():
+	if verbose:
+		print("State Machine stopped")
 	_is_active = false

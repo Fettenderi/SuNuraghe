@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	if user.is_on_floor():
 		user._sound_maker.set_enabled(false)
 
-func _unhandled_input(event : InputEvent) -> void:
+func _unhandled_input(_event : InputEvent) -> void:
 	if not _active: return
 	
 	if Input.is_action_just_pressed(user.KEY_BIND_NOCLIP):
@@ -37,9 +37,9 @@ func _unhandled_input(event : InputEvent) -> void:
 
 	if not user.is_on_floor(): return
 	
-	if event.is_action_pressed(user.KEY_BIND_SPRINT):
+	if Input.is_action_pressed(user.KEY_BIND_SPRINT):
 		state_machine.change_state("SprintState")
-	elif event.is_action_pressed(user.KEY_BIND_COVER):
+	elif Input.is_action_pressed(user.KEY_BIND_COVER):
 		state_machine.change_state("CoverState")
 
 
