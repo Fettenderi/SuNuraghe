@@ -29,8 +29,6 @@ const PLAYER_COLLISION_LAYER = 2
 
 @export_flags_3d_physics var rays_collision_mask
 
-var excluded_collider : CollisionObject3D
-
 var _rays : Array[RayCast3D] = []
 var _ray_weights : Array[float] = []
 var _editor_rays : Array[CSGCylinder3D] = []
@@ -67,7 +65,7 @@ func _update_rays():
 		if not tooltip_visible: return
 		_create_debug_rays()
 
-func create_rays():
+func create_rays(excluded_collider):
 	var _ray_direction : Vector3
 	var _ray_offset : Vector3
 	var _ray : RayCast3D

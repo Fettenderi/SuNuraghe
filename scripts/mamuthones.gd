@@ -31,6 +31,7 @@ const TURNING_SPEED = 10.0
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var _movement_state_machine: StateMachine = %MovementSM
 @onready var _mesh: Node3D = %Mesh
+@onready var _eyes: Node3D = %Eyes
 
 var speed := 0.0
 
@@ -54,15 +55,10 @@ var _on_arrived_cooldown := false:
 		if _on_arrived_cooldown: _arrived_cooldown.start()
 
 func _ready() -> void:
-	_setup_arrived_cooldown()
 	if not Engine.is_editor_hint():
-		if patroling_resource != null:
-			position = patroling_resource.get_current_target()
-		else:
-			print("MANCA UN PATROL RESOURCE")
-		%Eyes.excluded_collider = self
-		%Eyes.create_rays()
-		#patroling_resource.waypoint_reached()
+		_setup_arrived_cooldown()
+		position = patroling_resource.get_current_target()
+		_eyes.create_rays(self)
 	else:
 		if show_tooltip:
 			_update_tooltip()
@@ -101,19 +97,6 @@ func _clear_waypoints():
 	patroling_resource.waypoints.clear()
 	if show_tooltip:
 		_update_tooltip()
-
-
-func _on_eyes_located(collider: Player) -> void:
-	_movement_state_machine.change_state("ChaseState")
-	navigation_agent_3d.target_position = collider.position
-
-func _on_kill_box_body_entered(_body: Node3D) -> void:
-	pass
-	#_movement_state_machine.change_state("KillingState")
-	#if body is Player:
-		#body.start_dying(position)
-	#navigation_agent_3d.target_position = body.position
-
 
 func _clear_tooltip():
 	for _sph in _spheres:
@@ -154,20 +137,6 @@ func _update_tooltip():
 	if not Engine.is_editor_hint():
 		_target_indicator = _create_sphere(position, _target_debug_material, 0.4)
 
-func _setup_arrived_cooldown():
-	if Engine.is_editor_hint(): return
-	
-	_arrived_cooldown = Timer.new()
-	_arrived_cooldown.one_shot = true
-	_arrived_cooldown.autostart = false
-	_arrived_cooldown.wait_time = 0.3
-	_arrived_cooldown.timeout.connect(_arrived_cooldown_ended)
-	add_child(_arrived_cooldown, true)
-
-func _arrived_cooldown_ended():
-	_on_arrived_cooldown = false
-
-
 func _create_sphere(pos : Vector3, mat : Material, radius : float) -> CSGSphere3D:
 	var _sphere := CSGSphere3D.new()
 	_sphere.radius = radius
@@ -199,3 +168,26 @@ func _create_line(from : Vector3, to : Vector3, mat : Material) -> void:
 	_line.material = mat
 	_lines.append(_line)
 	_sphere_container.add_child(_line, true)
+
+
+func _on_eyes_located(collider: Player) -> void:
+	_movement_state_machine.change_state("ChaseState")
+	navigation_agent_3d.target_position = collider.position
+
+func _on_kill_box_body_entered(_body: Node3D) -> void:
+	pass
+	#_movement_state_machine.change_state("KillingState")
+	#if body is Player:
+		#body.start_dying(position)
+	#navigation_agent_3d.target_position = body.position
+
+func _setup_arrived_cooldown():
+	_arrived_cooldown = Timer.new()
+	_arrived_cooldown.one_shot = true
+	_arrived_cooldown.autostart = false
+	_arrived_cooldown.wait_time = 0.3
+	_arrived_cooldown.timeout.connect(_arrived_cooldown_ended)
+	add_child(_arrived_cooldown, true)
+
+func _arrived_cooldown_ended():
+	_on_arrived_cooldown = false
