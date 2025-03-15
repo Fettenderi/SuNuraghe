@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_8xnfg")
-waypoints = Array[Vector3]([Vector3(-52.9764, 2.06, 18.2641), Vector3(-30.1317, 2.06, 29.2895)])
+waypoints = Array[Vector3]([Vector3(-50.3232, 2.06, 14.467), Vector3(-27.7642, 2.06, 28.2256)])
 metadata/_custom_type_script = "uid://daighntisv4st"

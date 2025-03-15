@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl7hhvhi8nb37"]
+
+[ext_resource type="Script" uid="uid://4eeat58m4xx1" path="res://scripts/environment_manager.gd" id="1_y0sbe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e6psu"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_xr3nu"]
+sky_material = SubResource("ProceduralSkyMaterial_e6psu")
+
+[sub_resource type="Environment" id="Environment_yh7dg"]
+background_mode = 2
+sky = SubResource("Sky_xr3nu")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="EnvironmentManager" type="Node3D"]
+script = ExtResource("1_y0sbe")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 0, 31.1256)
+shadow_enabled = true
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_yh7dg")

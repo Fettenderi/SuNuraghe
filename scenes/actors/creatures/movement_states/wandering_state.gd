@@ -4,11 +4,15 @@ const MAX_ELAPSED = 10
 const MAX_SWINGS = 2
 const SWING_ANGLE = PI / 2
 
+@export var speed := 300.0
+
 var _is_active := false
 var _elapsed : float
 var _starting_rotation : float
 
 func start(_info : Dictionary = {}) -> void:
+	user.speed = speed
+	
 	_is_active = true
 	_elapsed = 0.0
 	_starting_rotation = user._mesh.rotation.y

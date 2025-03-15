@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccai0kd8mw23"]
+
+[ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
+[ext_resource type="Texture2D" uid="uid://dom1j0ujiubwy" path="res://addons/kenney_prototype_textures/red/texture_08.png" id="2_4ynsd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5gy4"]
+albedo_texture = ExtResource("2_4ynsd")
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_5i02r")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+unique_name_in_owner = true
+use_collision = true
+material = SubResource("StandardMaterial3D_f5gy4")

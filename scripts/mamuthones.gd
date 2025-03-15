@@ -2,8 +2,9 @@
 class_name Mamuthones
 extends CharacterBody3D
 
+const TURNING_SPEED = 10.0
+
 @export_subgroup("Movement")
-@export var speed := 300.0
 @export var distance_threshold := 0.5
 
 @export_subgroup("Patroling")
@@ -19,6 +20,8 @@ extends CharacterBody3D
 @export_tool_button("Add Waypoint", "Add") var _add = _add_waypoint
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Clear Waypoints", "Clear") var _clear = _clear_waypoints
+@warning_ignore("unused_private_class_variable")
+@export_tool_button("Update Waypoints", "Clear") var _update = _update_tooltip
 @export var patroling_resource : PatrolingResource:
 	set(value):
 		patroling_resource = value
@@ -28,6 +31,8 @@ extends CharacterBody3D
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var _movement_state_machine: StateMachine = %MovementSM
 @onready var _mesh: Node3D = %Mesh
+
+var speed := 0.0
 
 var _direction : Vector3
 
@@ -51,7 +56,12 @@ var _on_arrived_cooldown := false:
 func _ready() -> void:
 	_setup_arrived_cooldown()
 	if not Engine.is_editor_hint():
-		position = patroling_resource.get_current_target()
+		if patroling_resource != null:
+			position = patroling_resource.get_current_target()
+		else:
+			print("MANCA UN PATROL RESOURCE")
+		%Eyes.excluded_collider = self
+		%Eyes.create_rays()
 		#patroling_resource.waypoint_reached()
 	else:
 		if show_tooltip:
@@ -69,7 +79,8 @@ func _physics_process(delta: float) -> void:
 	
 	if Vector2(_local_destination.x, _local_destination.z).length() > distance_threshold:
 		_direction = _local_destination.normalized()
-		_mesh.rotation.y = atan2(_direction.x, _direction.z) - PI / 2
+		
+		_mesh.rotation.y = lerp_angle(_mesh.rotation.y, atan2(_direction.x, _direction.z), TURNING_SPEED * delta)
 	elif not _on_arrived_cooldown:
 		_on_arrived_cooldown = true
 		_direction = Vector3.ZERO
@@ -96,7 +107,7 @@ func _on_eyes_located(collider: Player) -> void:
 	_movement_state_machine.change_state("ChaseState")
 	navigation_agent_3d.target_position = collider.position
 
-func _on_kill_box_body_entered(body: Node3D) -> void:
+func _on_kill_box_body_entered(_body: Node3D) -> void:
 	pass
 	#_movement_state_machine.change_state("KillingState")
 	#if body is Player:
@@ -164,6 +175,9 @@ func _create_sphere(pos : Vector3, mat : Material, radius : float) -> CSGSphere3
 	_sphere.material = mat
 	_spheres.append(_sphere)
 	_sphere_container.add_child(_sphere, true)
+	print(_spheres)
+	print(_sphere_container.get_children())
+	
 	return _sphere
 
 func _create_line(from : Vector3, to : Vector3, mat : Material) -> void:

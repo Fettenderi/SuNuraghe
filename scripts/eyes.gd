@@ -27,9 +27,9 @@ const PLAYER_COLLISION_LAYER = 2
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Refresh Rays", "Clear") var _reset = _update_rays
 
-@export var excluded_collider : CollisionObject3D
-
 @export_flags_3d_physics var rays_collision_mask
+
+var excluded_collider : CollisionObject3D
 
 var _rays : Array[RayCast3D] = []
 var _ray_weights : Array[float] = []
@@ -41,7 +41,9 @@ signal located(collider: Player)
 signal not_visible
 
 func _ready() -> void:
-	_update_rays()
+	if Engine.is_editor_hint():
+		if not tooltip_visible: return
+		_create_debug_rays()
 
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -64,10 +66,8 @@ func _update_rays():
 	if Engine.is_editor_hint():
 		if not tooltip_visible: return
 		_create_debug_rays()
-	else:
-		_create_rays()
 
-func _create_rays():
+func create_rays():
 	var _ray_direction : Vector3
 	var _ray_offset : Vector3
 	var _ray : RayCast3D
@@ -84,7 +84,7 @@ func _create_rays():
 		_ray.collide_with_areas = false
 		_ray.collide_with_bodies = true
 		_ray.collision_mask = rays_collision_mask
-		_ray.add_exception(excluded_collider)
+		_ray.add_exception_rid(excluded_collider.get_rid())
 		_ray.position = _ray_offset
 		_ray.target_position = _ray_direction
 		_rays.append(_ray)

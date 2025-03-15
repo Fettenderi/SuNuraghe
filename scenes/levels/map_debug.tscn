@@ -158,8 +158,5 @@ material = SubResource("StandardMaterial3D_bolc0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7817, 0, 0.752661)
 material = SubResource("StandardMaterial3D_ft1ty")
 
-[connection signal="activated" from="Node3D/InteractableBox" to="Node3D" method="_on_interactable_box_activated"]
-[connection signal="activated" from="Node3D/InteractableBox2" to="Node3D" method="_on_interactable_box_2_activated"]
-
 [editable path="Node3D/InteractableBox"]
 [editable path="Node3D/InteractableBox2"]

@@ -1,8 +1,12 @@
 extends State
 
+@export var speed := 300.0
+
 var _patroling_resource : PatrolingResource
 
 func start(info : Dictionary = {}) -> void:
+	user.speed = speed
+	
 	if info.has("arrived"):
 		_patroling_resource.waypoint_reached()
 

@@ -30,6 +30,7 @@ const KEY_BIND_NOCLIP = "noclip"
 @warning_ignore("unused_private_class_variable")
 @onready var _sound_maker: ExpandedHitBox = %SoundMaker
 
+@warning_ignore("unused_private_class_variable")
 @onready var _movement_sm: StateMachine = %MovementSM
 @onready var shape_controller: ShapeController = %ShapeController
 

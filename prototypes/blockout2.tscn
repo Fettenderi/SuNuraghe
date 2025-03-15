@@ -1,0 +1,631 @@
+[gd_scene load_steps=26 format=3 uid="uid://cuoims65677ck"]
+
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="1_32b00"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_ngosd"]
+[ext_resource type="PackedScene" uid="uid://b6fbx2cag2tkv" path="res://scenes/actors/creatures/mamuthones.tscn" id="3_todq0"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="5_fwg74"]
+[ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="5_s5wr7"]
+[ext_resource type="Script" uid="uid://buaunp4xkr8mo" path="res://scripts/layers_manager.gd" id="6_3hc6s"]
+[ext_resource type="Texture2D" uid="uid://cmlmyoplmk7y8" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="6_64qdx"]
+[ext_resource type="Texture2D" uid="uid://bg2a3k4dm4sm6" path="res://addons/kenney_prototype_textures/red/texture_09.png" id="7_4smnt"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="9_s8urv"]
+[ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="16_w74wv"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ina5q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40c77"]
+albedo_texture = ExtResource("5_fwg74")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywa5c"]
+albedo_texture = ExtResource("7_4smnt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vm38"]
+albedo_texture = ExtResource("5_fwg74")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32b00"]
+albedo_texture = ExtResource("5_s5wr7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hc6s"]
+albedo_texture = ExtResource("9_s8urv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwqu8"]
+albedo_texture = ExtResource("9_s8urv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64qdx"]
+albedo_texture = ExtResource("9_s8urv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5wr7"]
+albedo_texture = ExtResource("9_s8urv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdejf"]
+albedo_texture = ExtResource("9_s8urv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngosd"]
+albedo_texture = ExtResource("7_4smnt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vtgh"]
+albedo_texture = ExtResource("7_4smnt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_maqym"]
+albedo_texture = ExtResource("7_4smnt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bite"]
+albedo_texture = ExtResource("7_4smnt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jusjw"]
+albedo_texture = ExtResource("6_64qdx")
+
+[node name="Level" type="Node3D"]
+
+[node name="EnvironmentManager" parent="." instance=ExtResource("1_32b00")]
+
+[node name="Player" parent="." instance=ExtResource("2_ngosd")]
+transform = Transform3D(0.933325, 0, -0.359036, 0, 1, 0, 0.359036, 0, 0.933325, -7.08724, -2.09425, 26.0721)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(0.986259, -0.117225, -0.116417, 0.117225, -4.37114e-08, 0.993106, -0.116417, -0.993105, 0.0137416, 0, 14.724, 0)
+remote_path = NodePath("../../TopCam/SubViewportContainer/SubViewport/Camera3D")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_ina5q")
+
+[node name="Decos" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="Bells" type="CSGCombiner3D" parent="NavigationRegion3D/Decos"]
+
+[node name="CentralBell" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2785, 0)
+radius = 10.0
+height = 36.425
+sides = 32
+material = SubResource("StandardMaterial3D_40c77")
+
+[node name="Bell1" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11061, 19.5325, -28.4573)
+radius = 6.443
+height = 23.231
+sides = 32
+material = SubResource("StandardMaterial3D_40c77")
+
+[node name="Bell2" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9581, 27.1198, 10.3727)
+visible = false
+radius = 9.636
+height = 23.199
+sides = 32
+material = SubResource("StandardMaterial3D_40c77")
+
+[node name="Bell3" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5436, 34.9968, -9.38544)
+visible = false
+radius = 8.803
+height = 23.386
+sides = 32
+material = SubResource("StandardMaterial3D_40c77")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -58.4826, -0.604428, -5.57324)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -59.4705, -0.604428, -2.75603)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -62.5072, -0.604428, -3.59753)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -60.9705, -0.604428, -5.79276)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -60.5315, 2.09465, -4.2561)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12643, -1.57837, -40.3553)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_ywa5c")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(-0.537726, 0, 0.843119, 0, 1, 0, -0.843119, 0, -0.537726, -22.3588, -1.57837, -47.9088)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_5vm38")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.843119, 0, 0.537726, 0, 1, 0, -0.537726, 0, 0.843119, -45.9878, -1.57837, 24.564)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_5vm38")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.843119, 0, 0.537726, 0, 1, 0, -0.537726, 0, 0.843119, -48.0389, -1.57837, -14.9788)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_5vm38")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.795241, 0, 0.606294, 0, 1, 0, -0.606294, 0, 0.795241, -41.4311, -1.57837, 1.24461)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_5vm38")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.4613, 0, 0.887244, 0, 1, 0, -0.887244, 0, 0.4613, -26.9082, -1.57837, -20.9755)
+size = Vector3(2.47754, 1, 2.07202)
+material = SubResource("StandardMaterial3D_5vm38")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.956013, 0, 0.293323, 0, 1, 0, -0.293323, 0, 0.956013, -25.9885, -1.20068, -41.797)
+size = Vector3(2, 1.8075, 2)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.819592, 0, 0.572947, 0, 1, 0, -0.572947, 0, 0.819592, -30.0927, -0.604428, -29.3087)
+size = Vector3(7.53522, 3, 3)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.819592, 0, 0.572947, 0, 1, 0, -0.572947, 0, 0.819592, -23.1181, -1.29315, -34.3597)
+size = Vector3(2.60327, 1.62256, 2.76855)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.819592, 0, 0.572947, 0, 1, 0, -0.572947, 0, 0.819592, -22.2838, -1.29315, -14.2165)
+size = Vector3(2.60327, 1.62256, 2.76855)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.819592, 0, 0.572947, 0, 1, 0, -0.572947, 0, 0.819592, -29.9963, -0.795041, -14.8526)
+size = Vector3(2.60327, 2.61877, 2.76855)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.819592, 0, 0.572947, 0, 1, 0, -0.572947, 0, 0.819592, -21.9636, -1.29315, -21.2901)
+size = Vector3(2.60327, 1.62256, 2.76855)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -41.4534, -0.604428, 5.15706)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -40.2804, -0.604428, -5.67295)
+size = Vector3(1.33984, 3, 1.375)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -25.2172, -0.604428, -25.484)
+size = Vector3(1.33984, 3, 1.375)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -21.6316, -0.604428, 10.5029)
+size = Vector3(2.86125, 3, 3.86829)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -22.445, -0.604428, 19.158)
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -33.7301, -0.604428, 1.90425)
+size = Vector3(1.5, 3, 2)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.572947, 0, -0.819592, 0, 1, 0, 0.819592, 0, 0.572947, -45.0185, -0.604428, 15.1717)
+size = Vector3(2.86125, 3, 2.56641)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.636738, 0, -0.77108, 0, 1, 0, 0.77108, 0, 0.636738, -23.9729, -1.5209, -43.0925)
+size = Vector3(2, 1.16705, 2)
+
+[node name="METTERE TORCIA QUI" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.56905, 0, -0.822303, 0, 1, 0, 0.822303, 0, 0.56905, -33.8148, 0.614322, -31.092)
+size = Vector3(2, 5.4375, 2)
+material = SubResource("StandardMaterial3D_32b00")
+
+[node name="METTERE EASTER EGG QUI" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.56905, 0, -0.822303, 0, 1, 0, 0.822303, 0, 0.56905, -47.8015, -0.984799, -43.7253)
+size = Vector3(2, 2.23926, 2)
+material = SubResource("StandardMaterial3D_32b00")
+
+[node name="METTERE TORCIA QUI2" type="CSGBox3D" parent="NavigationRegion3D/Decos"]
+transform = Transform3D(0.56905, 0, -0.822303, 0, 1, 0, 0.822303, 0, 0.56905, -45.7095, 0.614322, -16.7919)
+size = Vector3(5.09741, 5.4375, 5.16309)
+material = SubResource("StandardMaterial3D_32b00")
+
+[node name="Railway" type="CSGCombiner3D" parent="NavigationRegion3D"]
+visible = false
+use_collision = true
+
+[node name="OuterCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Railway"]
+radius = 20.251
+height = 4.18851
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="InnerCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Railway"]
+operation = 2
+radius = 20.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Railway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.4441)
+operation = 1
+size = Vector3(12.7539, 5.14355, 2.42993)
+
+[node name="Rooms" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CircularHallway1" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+
+[node name="OuterCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway1"]
+flip_faces = true
+radius = 30.0
+height = 4.18851
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="InnerCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway1"]
+operation = 2
+flip_faces = true
+radius = 25.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/CircularHallway1"]
+transform = Transform3D(0.832041, 0, 0.554714, 0, 1, 0, -0.554714, 0, 0.832041, -17.1249, 0, 21.6733)
+operation = 2
+flip_faces = true
+size = Vector3(8.29517, 7.42871, 2.15674)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Rooms/CircularHallway1"]
+transform = Transform3D(-0.554714, 0, 0.832041, 0, 1, 0, -0.832041, 0, -0.554714, -17.3461, 0, -20.8279)
+operation = 2
+flip_faces = true
+size = Vector3(8.29517, 7.42871, 1.1748)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms/CircularHallway1"]
+operation = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Rooms/CircularHallway1/CSGCombiner3D"]
+transform = Transform3D(0.232257, 0, 0.972654, 0, 1, 0, -0.972654, 0, 0.232257, -11.1334, -1.90735e-06, 25.0301)
+size = Vector3(8.29517, 7.42871, 20.7441)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/CircularHallway1/CSGCombiner3D"]
+transform = Transform3D(-0.564924, 0, 0.825143, 0, 1, 0, -0.825143, 0, -0.564924, -15.2917, -1.90735e-06, -22.4031)
+size = Vector3(8.29517, 7.42871, 10.8733)
+
+[node name="CircularHallway2" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.6, 0)
+visible = false
+
+[node name="OuterCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway2"]
+flip_faces = true
+radius = 40.0
+height = 4.18851
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="InnerCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway2"]
+operation = 2
+flip_faces = true
+radius = 35.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="CircularHallway3" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.2, 0)
+visible = false
+
+[node name="OuterCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway3"]
+flip_faces = true
+radius = 50.0
+height = 4.18851
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="InnerCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/CircularHallway3"]
+operation = 2
+flip_faces = true
+radius = 45.0
+height = 5.0
+sides = 32
+material = SubResource("StandardMaterial3D_3hc6s")
+
+[node name="Entrance" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.246114, 0, 0, 0, 0.246114, 0, 0, 0, 0.395942, 0, -2.094, 39.9819)
+
+[node name="Cilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/Entrance"]
+transform = Transform3D(1.91068e-15, 4.37114e-08, 0.706591, 1, -4.37114e-08, 0, 4.37114e-08, 1, -3.08861e-08, 0, 0, 0)
+flip_faces = true
+radius = 36.0
+height = 127.586
+sides = 32
+cone = true
+material = SubResource("StandardMaterial3D_qwqu8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Entrance"]
+transform = Transform3D(0.999986, 0, 0, 0, 0.999986, 0, 0, 0, 0.999944, 0, -18, -0.0354614)
+operation = 2
+flip_faces = true
+size = Vector3(55.8857, 36, 130.283)
+material = SubResource("StandardMaterial3D_64qdx")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Entrance"]
+transform = Transform3D(0.999993, 0, 0, 0, 0.999993, 0, 0, 0, 0.999986, 0, 0.683839, 49.5434)
+operation = 2
+flip_faces = true
+size = Vector3(15.8936, 18.6504, 29.7834)
+material = SubResource("StandardMaterial3D_s5wr7")
+
+[node name="CentralBellRoom" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.466, 0)
+flip_faces = true
+radius = 20.0
+height = 52.0356
+sides = 32
+material = SubResource("StandardMaterial3D_xdejf")
+
+[node name="BellRoom1" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11061, 14.5153, -28.4573)
+flip_faces = true
+radius = 12.8862
+height = 33.1872
+sides = 32
+material = SubResource("StandardMaterial3D_xdejf")
+
+[node name="BellRoom2" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9581, 22.1027, 10.3727)
+visible = false
+flip_faces = true
+radius = 19.2715
+height = 33.1413
+sides = 32
+material = SubResource("StandardMaterial3D_xdejf")
+
+[node name="BellRoom3" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5436, 29.8363, -9.38544)
+visible = false
+flip_faces = true
+radius = 17.6064
+height = 33.4085
+sides = 32
+material = SubResource("StandardMaterial3D_xdejf")
+
+[node name="Room4" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(-0.563526, 0, 0.826098, 0, 1, 0, -0.826098, 0, -0.563526, -35.5708, -2.1, 5.09658)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room4"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -0.00196266, 2.50024, -11.0886)
+flip_faces = true
+size = Vector3(25.6877, 5, 8.59863)
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room4"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0019713, 1.3, 2.00197)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room9" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(-0.826098, 0, -0.563526, 0, 1, 0, 0.563526, 0, -0.826098, -48.0487, -2.1, 21.6109)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room9"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -0.00196457, 2.50024, -2.01759)
+flip_faces = true
+size = Vector3(7.54559, 5, 8.59863)
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room9"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0019713, 1.3, 2.00197)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room10" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(-0.563526, 0, 0.826098, 0, 1, 0, -0.826098, 0, -0.563526, -53.4611, -2.1, -4.6713)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room10"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, 3.60129, 3.34521, -5.75938)
+flip_faces = true
+size = Vector3(15.0292, 6.68994, 15.8052)
+material = SubResource("StandardMaterial3D_ngosd")
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room10"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.67746, 1.3, 2.00197)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_ngosd")
+
+[node name="DoorFrame2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room10"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 3.51338, 2.49078, 2.00198)
+flip_faces = true
+size = Vector3(1, 2.59, 5.13574)
+
+[node name="Room5" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, -26.3035, -2.1, -27.0754)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 2.97116, 2.50024, -4.2971)
+flip_faces = true
+size = Vector3(12.1046, 5, 16.9871)
+material = SubResource("StandardMaterial3D_7vtgh")
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0019713, 1.3, 2.00197)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_maqym")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.671, 0.560114, -7.41219)
+flip_faces = true
+size = Vector3(16.9058, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22415, 0.560114, -16.9824)
+flip_faces = true
+size = Vector3(16.9058, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35558, 0.560114, -25.8353)
+flip_faces = true
+size = Vector3(8.75468, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, -20.109, 0.560114, -6.62945)
+flip_faces = true
+size = Vector3(5.25146, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, -8.76723, 0.560114, -12.2972)
+flip_faces = true
+size = Vector3(12.9192, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room5"]
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, 1.10345, 0.560114, -21.3067)
+flip_faces = true
+size = Vector3(12.9192, 1.11974, 1.46899)
+material = SubResource("StandardMaterial3D_8bite")
+
+[node name="Room7" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, -46.6617, -2.1, -8.40955)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room7"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 2.96474, 2.50024, -3.29512)
+flip_faces = true
+size = Vector3(10.1006, 5, 17)
+material = SubResource("StandardMaterial3D_7vtgh")
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room7"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.7826, 2.49078, 2.00197)
+flip_faces = true
+size = Vector3(1, 2.59, 3.84375)
+
+[node name="Room8" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(-0.563526, 0, 0.826098, 0, 1, 0, -0.826098, 0, -0.563526, -41.5408, -2.1, -3.33128)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room8"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, 3.0394, 2.50024, -2.4286)
+flip_faces = true
+size = Vector3(9, 5, 16.8507)
+material = SubResource("StandardMaterial3D_7vtgh")
+
+[node name="DoorFrame5" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room8"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, 1.24247, 1.3, 2.30439)
+flip_faces = true
+size = Vector3(0.681885, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_jusjw")
+
+[node name="Room6" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, -24.3125, -2.1, -41.1121)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room6"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 1.76213, 2.50024, -4.36899)
+flip_faces = true
+size = Vector3(8, 5, 12.0344)
+material = SubResource("StandardMaterial3D_7vtgh")
+
+[node name="RoomHole3" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room6"]
+transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, -16.543, 2.50024, -15.6367)
+flip_faces = true
+size = Vector3(8, 5, 8)
+material = SubResource("StandardMaterial3D_7vtgh")
+
+[node name="DoorFrame" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room6"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.00197127, 1.3, -0.113028)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_maqym")
+
+[node name="Room" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.825911, 0, 0.5638, 0, 1, 0, -0.5638, 0, 0.825911, -19.2105, -2.1, 19.9295)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room"]
+transform = Transform3D(-0.00556773, 0, -0.999984, 0, 1, 0, 0.999984, 0, -0.00556773, -5.90382, 2.50024, -6.53899)
+flip_faces = true
+size = Vector3(19.6775, 5, 21.5653)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room"]
+transform = Transform3D(-0.999996, 0, 0.00289711, 0, 1, 0, -0.00289711, 0, -0.999996, -6.34198, 2.52506, -6.69154)
+operation = 2
+flip_faces = true
+size = Vector3(8.04309, 5.54126, 7)
+
+[node name="Room3" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, -29.4577, -2.1, 3.79799)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-0.00556752, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00556752, 0.0553246, 2.5, -9.93734)
+flip_faces = true
+size = Vector3(15.2268, 5, 6.88611)
+
+[node name="RoomHole2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-0.00556752, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00556752, 0.387058, 2.5, -7.58197)
+flip_faces = true
+size = Vector3(19.9337, 5, 7.57578)
+
+[node name="DoorFrame5" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-8.9407e-08, 0, -1, 0, 1, 0, 1, 0, -8.9407e-08, -12.7138, 1.3, 2.32967)
+flip_faces = true
+size = Vector3(1.3418, 2.59, 1.8)
+
+[node name="DoorFrame3" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.638056, 1.3, 22.5005)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="DoorFrame2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.35876, 1.3, -14.6833)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="DoorFrame4" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 24.3406, 1.3, -13.9907)
+flip_faces = true
+size = Vector3(1, 2.59, 1.8)
+
+[node name="Room2" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, -28.8613, -2.1, -4.78239)
+
+[node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room2"]
+transform = Transform3D(-0.00556827, 0, -0.999988, 0, 1, 0, 0.999988, 0, -0.00556827, 9.00226, 2.50024, -7.53661)
+flip_faces = true
+size = Vector3(14.4621, 5, 19.4941)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Room2"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 7.07877, 2.52506, -12.3858)
+operation = 2
+flip_faces = true
+size = Vector3(8.29517, 5.54126, 2.15674)
+
+[node name="StaticObjects" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="MovingObjects" type="Node3D" parent="."]
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Mamuthones" parent="Enemies" instance=ExtResource("3_todq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0795, -1.09949, 16.6445)
+
+[node name="Mamuthones2" parent="Enemies" instance=ExtResource("3_todq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.2829, -1.09973, 2.20089)
+
+[node name="Mamuthones3" parent="Enemies" instance=ExtResource("3_todq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.0121, -1.09985, -1.0486)
+
+[node name="Mamuthones4" parent="Enemies" instance=ExtResource("3_todq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.4299, -1.09998, -35.5867)
+
+[node name="TopCam" parent="." instance=ExtResource("16_w74wv")]
+
+[node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(0.962298, 0.247151, -0.113589, 0.117225, -4.37114e-08, 0.993106, 0.245448, -0.968978, -0.0289725, -7.08724, 12.6298, 26.0721)
+
+[node name="LayersManager" type="Node" parent="." node_paths=PackedStringArray("layer0", "layer1", "layer2", "layer3")]
+script = ExtResource("6_3hc6s")
+layer2_enabled = false
+layer3_enabled = false
+layer0 = [NodePath("../NavigationRegion3D/Rooms/CentralBellRoom"), NodePath("../NavigationRegion3D/Decos/Bells/CentralBell")]
+layer1 = [NodePath("../NavigationRegion3D/Rooms/BellRoom1"), NodePath("../NavigationRegion3D/Rooms/CircularHallway1"), NodePath("../NavigationRegion3D/Decos/Bells/Bell1")]
+layer2 = [NodePath("../NavigationRegion3D/Rooms/BellRoom2"), NodePath("../NavigationRegion3D/Rooms/CircularHallway2"), NodePath("../NavigationRegion3D/Decos/Bells/Bell2")]
+layer3 = [NodePath("../NavigationRegion3D/Rooms/BellRoom3"), NodePath("../NavigationRegion3D/Decos/Bells/Bell3"), NodePath("../NavigationRegion3D/Rooms/CircularHallway3")]
+
+[editable path="TopCam"]

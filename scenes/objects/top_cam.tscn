@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://nm1sp5my8fpp"]
+
+[ext_resource type="Script" uid="uid://ci0v2opkdnile" path="res://scripts/top_cam.gd" id="1_7l4d8"]
+
+[node name="TopCam" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_7l4d8")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 521.0
+offset_bottom = 516.0
+scale = Vector2(0.523333, 0.523333)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.962298, 0.247151, -0.113589, 0.117225, -4.37114e-08, 0.993106, 0.245448, -0.968978, -0.0289725, -3.02382, 15.8573, 37.1094)
+size = 40.0

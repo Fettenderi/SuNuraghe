@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6fbx2cag2tkv"]
+[gd_scene load_steps=17 format=3 uid="uid://b6fbx2cag2tkv"]
 
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="1_8p86u"]
 [ext_resource type="Script" uid="uid://bts41hj3n57mm" path="res://scripts/mamuthones.gd" id="1_u7wol"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="3_5nnlu"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_dr4gf"]
 [ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="3_uvnkw"]
 [ext_resource type="Script" uid="uid://b045x2vvvv4hq" path="res://scenes/actors/creatures/movement_states/patrol_state.gd" id="4_uvnkw"]
 [ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="5_dr4gf"]
@@ -15,6 +16,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu7mx"]
+albedo_texture = ExtResource("3_dr4gf")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4gf"]
 albedo_texture = ExtResource("3_uvnkw")
 
@@ -26,7 +30,6 @@ radius = 1.0
 
 [node name="Mamuthones" type="CharacterBody3D"]
 script = ExtResource("1_u7wol")
-speed = 100.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 unique_name_in_owner = true
@@ -38,16 +41,17 @@ debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="Eyes" parent="Mesh" node_paths=PackedStringArray("excluded_collider") instance=ExtResource("1_8p86u")]
+[node name="Eyes" parent="Mesh" instance=ExtResource("1_8p86u")]
+unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.475663, -0.272783)
 ray_lenght = 20.0
 rays_paralellness = 0.02
 view_angle = 1.65806
 tooltip_visible = false
-excluded_collider = NodePath("../..")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Mesh"]
 mesh = SubResource("CapsuleMesh_u7wol")
+material = SubResource("StandardMaterial3D_nu7mx")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178535, 0.498162, 0.497653)
@@ -77,19 +81,23 @@ metadata/_custom_type_script = "uid://cy2neyq5e26g4"
 
 [node name="PatrolState" type="Node" parent="MovementSM"]
 script = ExtResource("4_uvnkw")
+speed = 100.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="ChaseState" type="Node" parent="MovementSM"]
 script = ExtResource("5_dr4gf")
+speed = 200.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="WanderingState" type="Node" parent="MovementSM"]
 script = ExtResource("6_vexqk")
+speed = 100.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="ReturningState" type="Node" parent="MovementSM"]
 unique_name_in_owner = true
 script = ExtResource("7_nu7mx")
+speed = 100.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="KillingState" type="Node" parent="MovementSM"]
