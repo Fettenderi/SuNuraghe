@@ -1,15 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccai0kd8mw23"]
+[gd_scene load_steps=6 format=3 uid="uid://ccai0kd8mw23"]
 
 [ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
-[ext_resource type="Texture2D" uid="uid://dom1j0ujiubwy" path="res://addons/kenney_prototype_textures/red/texture_08.png" id="2_4ynsd"]
+[ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_uw3m6"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://prototypes/interactable_box.tscn" id="3_xm0wp"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5gy4"]
-albedo_texture = ExtResource("2_4ynsd")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm0wp"]
+albedo_texture = ExtResource("2_uw3m6")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aji8h"]
+size = Vector3(0.683594, 2.58203, 1.7998)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_5i02r")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 0.9)
+
+[node name="DoorFrame" type="CSGBox3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
 use_collision = true
-material = SubResource("StandardMaterial3D_f5gy4")
+size = Vector3(0.13501, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame2" type="CSGBox3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.48076)
+size = Vector3(0.357422, 0.314453, 0.313477)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="InteractableBox" parent="Mesh" instance=ExtResource("3_xm0wp")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -0.9)
+required_input = &"open_door"
+gui_text = "Premi E per aprire"
+
+[node name="CollisionShape3D" parent="Mesh/InteractableBox" index="0"]
+shape = SubResource("BoxShape3D_aji8h")
+
+[connection signal="signal_emitted" from="Mesh/InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="Mesh/InteractableBox"]

@@ -6,7 +6,13 @@ extends Resource
 		waypoints = value
 		changed.emit()
 
-var current_waypoint_index : int = 0
+var current_waypoint_index : int
+
+func _init() -> void:
+	resource_local_to_scene = true
+	waypoints = []
+	current_waypoint_index = 0
+	
 
 func has_targets():
 	return len(waypoints) > 0

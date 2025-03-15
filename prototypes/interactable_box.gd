@@ -6,8 +6,10 @@ extends Area3D
 @export var required_input : StringName
 @export_multiline var gui_text : String
 
-var _is_active := false
+@export var is_active := false
 var _is_interactable := false
+
+signal signal_emitted(value)
 
 func _ready() -> void:
 	area_entered.connect(_interactable_entered)
@@ -27,5 +29,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _is_interactable: return
 	
 	if event.is_action_pressed(required_input, false, true):
-		_is_active = not _is_active
-		emitter_resource.send_signal(_is_active)
+		is_active = not is_active
+		if emitter_resource != null:
+			emitter_resource.send_signal(is_active)
+		signal_emitted.emit(is_active)

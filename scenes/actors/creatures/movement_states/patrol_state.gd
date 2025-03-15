@@ -11,6 +11,7 @@ func start(info : Dictionary = {}) -> void:
 		_patroling_resource.waypoint_reached()
 
 	if _patroling_resource == null:
+		print(user.patroling_resource)
 		_patroling_resource = user.patroling_resource
 
 func update(info : Dictionary = {}) -> void:

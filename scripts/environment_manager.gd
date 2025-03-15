@@ -12,12 +12,16 @@ extends Node3D
 @onready var _environment : Environment = %Environment.environment
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
+	
 	_update_env()
 
 func set_enabled(value: bool) -> void:
 	_is_enabled = value
 
 func _update_env() -> void:
-	_sun.light_energy = 1.0 if _is_enabled else 0.0
-	_environment.background_energy_multiplier = 1.0 if _is_enabled else 0.0
-	_environment.ambient_light_energy = 1.0 if _is_enabled else 0.0
+	if _sun != null:
+		_sun.light_energy = 1.0 if _is_enabled else 0.0
+	if _environment != null:
+		_environment.background_energy_multiplier = 1.0 if _is_enabled else 0.0
+		_environment.ambient_light_energy = 1.0 if _is_enabled else 0.0

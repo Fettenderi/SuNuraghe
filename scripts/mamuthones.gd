@@ -21,12 +21,9 @@ const TURNING_SPEED = 10.0
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Clear Waypoints", "Clear") var _clear = _clear_waypoints
 @warning_ignore("unused_private_class_variable")
-@export_tool_button("Update Waypoints", "Clear") var _update = _update_tooltip
-@export var patroling_resource : PatrolingResource:
-	set(value):
-		patroling_resource = value
-		patroling_resource.changed.connect(_update_tooltip)
-		_update_tooltip()
+@export_tool_button("Update Waypoints", "Reload") var _update = _update_tooltip
+
+@export_storage var patroling_resource := PatrolingResource.new()
 
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var _movement_state_machine: StateMachine = %MovementSM
@@ -55,19 +52,23 @@ var _on_arrived_cooldown := false:
 		if _on_arrived_cooldown: _arrived_cooldown.start()
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		_setup_arrived_cooldown()
-		position = patroling_resource.get_current_target()
-		_eyes.create_rays(self)
-	else:
-		if show_tooltip:
-			_update_tooltip()
+	_setup_patrol_resource()
+	
+	if show_tooltip:
+		_update_tooltip()
+
+	if Engine.is_editor_hint(): return
+	
+	_setup_arrived_cooldown()
+	position = patroling_resource.get_current_target()
+	_eyes.create_rays(self)
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
 	if show_tooltip:
 		_target_indicator.position = navigation_agent_3d.target_position
+	
 	_movement_state_machine.update()
 	
 	var _destination := navigation_agent_3d.get_next_path_position()
@@ -88,13 +89,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func _setup_patrol_resource():
+	if patroling_resource != null: return
+	
+	if Engine.is_editor_hint():
+		patroling_resource = PatrolingResource.new()
+	else:
+		assert(false, "Non dovresti cercare di setuppare una patrol resource on runtime")
+
 func _add_waypoint():
 	patroling_resource.waypoints.append(global_position)
 	if show_tooltip:
 		_update_tooltip()
 
 func _clear_waypoints():
-	patroling_resource.waypoints.clear()
+	patroling_resource = null
+	
+	_setup_patrol_resource()
 	if show_tooltip:
 		_update_tooltip()
 
@@ -121,9 +132,11 @@ func _update_tooltip():
 		_waypoint_debug_material.albedo_color = Color("#33beff40")
 		_target_debug_material.albedo_color = Color("#ff00007e")
 
+	
 	_clear_tooltip()
 	
-	if patroling_resource == null: return
+	if patroling_resource == null:
+		assert(false, "Patroling resource mancante")
 	
 	for _pos in patroling_resource.waypoints:
 		_create_sphere(_pos, _waypoint_debug_material, 0.3)
@@ -144,8 +157,6 @@ func _create_sphere(pos : Vector3, mat : Material, radius : float) -> CSGSphere3
 	_sphere.material = mat
 	_spheres.append(_sphere)
 	_sphere_container.add_child(_sphere, true)
-	print(_spheres)
-	print(_sphere_container.get_children())
 	
 	return _sphere
 
@@ -175,6 +186,7 @@ func _on_eyes_located(collider: Player) -> void:
 	navigation_agent_3d.target_position = collider.position
 
 func _on_kill_box_body_entered(_body: Node3D) -> void:
+	get_tree().reload_current_scene()
 	pass
 	#_movement_state_machine.change_state("KillingState")
 	#if body is Player:
