@@ -1,6 +1,7 @@
 extends State
 
 @export var max_speed := 5.0
+@export var stamina_drain_speed := 0.7
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
 
@@ -22,7 +23,14 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
+	user._stamina += delta * stamina_drain_speed
+	
+	if user._stamina >= user.max_stamina:
+		state_machine.change_state("WalkState")
+	
 	user._usual_update(delta)
+	
+	
 	
 	#if not user.is_on_floor():
 		#if Input.is_action_just_pressed(user.KEY_BIND_COVER):
@@ -37,6 +45,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	
 	if Input.is_action_just_pressed(user.KEY_BIND_NOCLIP):
 		state_machine.change_state("NoclipState")
+		return
 
 	
 	if (Input.is_action_just_pressed(user.KEY_BIND_JUMP) or user._jump_buffered) and user.is_on_floor():

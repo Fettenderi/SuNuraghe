@@ -18,6 +18,7 @@ script = ExtResource("2_vexqk")
 waypoints = Array[Vector3]([])
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
+radius = 0.330362
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
@@ -83,7 +84,6 @@ unique_name_in_owner = true
 script = ExtResource("3_5nnlu")
 user = NodePath("..")
 starting_state = NodePath("PatrolState")
-automatic = true
 metadata/_custom_type_script = "uid://cy2neyq5e26g4"
 
 [node name="PatrolState" type="Node" parent="MovementSM"]
@@ -93,7 +93,6 @@ metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="ChaseState" type="Node" parent="MovementSM"]
 script = ExtResource("5_dr4gf")
-speed = 200.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="WanderingState" type="Node" parent="MovementSM"]

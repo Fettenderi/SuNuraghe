@@ -7,6 +7,7 @@ enum {
 }
 
 @export var max_speed := 1.0
+@export var stamina_replanish_speed := 0.2
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
 
@@ -25,6 +26,9 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
+	if user._stamina > 0.0:
+		user._stamina = max(0.0, user._stamina - delta * stamina_replanish_speed)
+
 	user._usual_update(delta)
 	if not _should_crawl:
 		state_machine.change_state("WalkState")

@@ -42,6 +42,7 @@ radius = 0.25
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_x0hk6")
+max_stamina = 2.0
 
 [node name="FmodListener3D" type="FmodListener3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -110,15 +111,18 @@ script = ExtResource("4_ou5my")
 user = NodePath("..")
 starting_state = NodePath("WalkState")
 automatic = true
+verbose = true
 
 [node name="WalkState" type="Node" parent="MovementSM"]
 script = ExtResource("5_r05ns")
+max_speed = 2.4
 
 [node name="NoclipState" type="Node" parent="MovementSM"]
 script = ExtResource("6_qek5x")
 
 [node name="SprintState" type="Node" parent="MovementSM"]
 script = ExtResource("6_x4bpx")
+max_speed = 4.0
 head_bob_amplitude = 0.02
 
 [node name="CoverState" type="Node" parent="MovementSM"]
@@ -142,8 +146,14 @@ unique_name_in_owner = true
 wait_time = 0.3
 one_shot = true
 
+[node name="StaminaCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.4
+one_shot = true
+
 [connection signal="area_entered" from="Head/CrawlDetectorBox" to="MovementSM/CoverState" method="_on_crawl_detector_box_area_entered"]
 [connection signal="area_entered" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_entered"]
 [connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CoverState" method="_on_crawl_detector_box_area_exited"]
 [connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_exited"]
 [connection signal="timeout" from="JumpBuffer" to="." method="_on_jump_buffer_timeout"]
+[connection signal="timeout" from="StaminaCooldown" to="." method="_stamina_cooldown_ended"]

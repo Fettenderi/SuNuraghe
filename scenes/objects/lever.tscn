@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvr7pgc0xlv51"]
+
+[ext_resource type="Script" uid="uid://dr4gg20me4inx" path="res://scripts/lever.gd" id="1_donkj"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://prototypes/interactable_box.tscn" id="2_1gg2o"]
+[ext_resource type="Texture2D" uid="uid://bg2a3k4dm4sm6" path="res://addons/kenney_prototype_textures/red/texture_09.png" id="2_ru7jp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q11tp"]
+albedo_texture = ExtResource("2_ru7jp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ru7jp"]
+size = Vector3(1.94946, 1.57031, 2.13965)
+
+[node name="Lever" type="Node3D"]
+script = ExtResource("1_donkj")
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh"]
+use_collision = true
+size = Vector3(2.09351, 1.50024, 1.99805)
+material = SubResource("StandardMaterial3D_q11tp")
+
+[node name="InteractableBox" parent="." instance=ExtResource("2_1gg2o")]
+unique_name_in_owner = true
+required_input = &"interact"
+gui_text = "[ E ] Attiva"
+
+[node name="CollisionShape3D" parent="InteractableBox" index="0"]
+shape = SubResource("BoxShape3D_ru7jp")
+
+[connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="InteractableBox"]

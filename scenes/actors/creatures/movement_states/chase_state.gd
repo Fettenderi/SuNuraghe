@@ -13,7 +13,7 @@ func start(_info : Dictionary = {}) -> void:
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("arrived") and not _target_visible:
-		state_machine.change_state("WanderingState")
+		state_machine.change_state("WanderingState", {"next_state": "ReturningState"})
 
 func end() -> void:
 	_is_active = false

@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="PatrolingResource" load_steps=2 format=3 uid="uid://bwdoa0mar0blo"]
-
-[ext_resource type="Script" uid="uid://daighntisv4st" path="res://scripts/patroling_resource.gd" id="1_fu44k"]
-
-[resource]
-script = ExtResource("1_fu44k")
-waypoints = Array[Vector3]([])
-metadata/_custom_type_script = "uid://daighntisv4st"

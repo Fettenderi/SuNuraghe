@@ -20,6 +20,7 @@ const KEY_BIND_NOCLIP = "noclip"
 @export var in_air_acceleration := 5.0
 @export var jump_velocity := 4.5
 @export var backward_speed_factor := 0.5
+@export var max_stamina := 3.0
 @export_subgroup("Mouse")
 @export var mouse_sentitivity := 0.002
 @export var mouse_acceleration := 50
@@ -37,6 +38,11 @@ const KEY_BIND_NOCLIP = "noclip"
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _max_speed : float
+var _stamina := 0.0:
+	set(value):
+		_stamina = value
+		_start_stamina_cooldown()
+var _on_stamina_cooldown := false
 var _speed : float
 var _accel := acceleration
 
@@ -124,6 +130,13 @@ func _reset_head_bob(delta : float) -> void:
 	if _head.position == _head_start_pos: return
 	
 	_head.position = lerp(_head.position, _head_start_pos, 2 * (1 / _head_bob_frequency) * delta)
+
+func _start_stamina_cooldown():
+	_on_stamina_cooldown = true
+	%StaminaCooldown.start()
+
+func _stamina_cooldown_ended():
+	_on_stamina_cooldown = false
 
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false

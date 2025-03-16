@@ -8,6 +8,8 @@ const TURNING_SPEED = 10.0
 @export var distance_threshold := 0.5
 
 @export_subgroup("Patroling")
+@export var activation_receiver : ReceiverRes
+@export var deactivation_receiver : ReceiverRes
 @export var show_tooltip := true:
 	set(value):
 		show_tooltip = value
@@ -30,6 +32,10 @@ const TURNING_SPEED = 10.0
 @onready var _mesh: Node3D = %Mesh
 @onready var _eyes: Node3D = %Eyes
 
+var _is_active := false:
+	set(value):
+		_is_active = value
+		visible = value
 var speed := 0.0
 
 var _direction : Vector3
@@ -59,6 +65,15 @@ func _ready() -> void:
 
 	if Engine.is_editor_hint(): return
 	
+	if activation_receiver != null:
+		_is_active = false
+		activation_receiver.received.connect(_start_movement.unbind(1))
+	else:
+		_start_movement()
+	
+	if deactivation_receiver != null:
+		deactivation_receiver.received.connect(queue_free.unbind(1))
+
 	_setup_arrived_cooldown()
 	position = patroling_resource.get_current_target()
 	_eyes.create_rays(self)
@@ -181,13 +196,20 @@ func _create_line(from : Vector3, to : Vector3, mat : Material) -> void:
 	_sphere_container.add_child(_line, true)
 
 
+func _start_movement():
+	_is_active = true
+	_movement_state_machine.start()
+
 func _on_eyes_located(collider: Player) -> void:
+	if not _is_active: return
+	
 	_movement_state_machine.change_state("ChaseState")
 	navigation_agent_3d.target_position = collider.position
 
 func _on_kill_box_body_entered(_body: Node3D) -> void:
-	get_tree().reload_current_scene()
-	pass
+	if not _is_active: return
+	
+	get_tree().call_deferred("reload_current_scene")
 	#_movement_state_machine.change_state("KillingState")
 	#if body is Player:
 		#body.start_dying(position)

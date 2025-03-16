@@ -1,14 +1,18 @@
 @tool
+class_name Door
 extends Node3D
 
 const ARRIVED_THRESHOLD = 0.01
 
-@export var debug := false
+@export var bake_override := false:
+	set(value):
+		bake_override = value
+		_set_open(is_open or value)
 
 @export var is_open := false:
 	set(value):
 		is_open = value
-		_set_open(value)
+		_set_open(value or bake_override)
 
 @export var receiver_resource : ReceiverRes
 
@@ -19,9 +23,9 @@ var _target_rotation := 0.0
 var _arrived := true
 
 func _ready() -> void:
+	_set_open(is_open or bake_override)
 	if Engine.is_editor_hint(): return
 	
-	_set_open(is_open)
 	if receiver_resource == null:
 		_interactable_box.is_active = is_open
 	else:
@@ -30,10 +34,10 @@ func _ready() -> void:
 func _set_open(value : bool):
 	if Engine.is_editor_hint():
 		if _mesh != null:
-			_mesh.rotation.y = 0.0 if value else PI / 2
+			_mesh.rotation.y = PI / 2 if value else 0.0
 	else:
 		_arrived = false
-		_target_rotation = 0.0 if value else PI / 2
+		_target_rotation = PI / 2 if value else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -45,4 +49,6 @@ func _physics_process(delta: float) -> void:
 		_arrived = true
 
 func _on_interactable_box_signal_emitted(value: Variant) -> void:
+	if receiver_resource != null: return
+	
 	is_open = value

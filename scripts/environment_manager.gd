@@ -12,8 +12,6 @@ extends Node3D
 @onready var _environment : Environment = %Environment.environment
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
-	
 	_update_env()
 
 func set_enabled(value: bool) -> void:
