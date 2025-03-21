@@ -43,6 +43,7 @@ patroling_resource = SubResource("Resource_nu7mx")
 unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("CapsuleShape3D_uhukm")
 debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 

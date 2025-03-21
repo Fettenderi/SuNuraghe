@@ -19,4 +19,5 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if _is_active: return
 	
 	_is_active = true
+	_interactable_box.set_active(false)
 	_mesh.visible = false

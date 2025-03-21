@@ -17,5 +17,6 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if not _available: return
 	
 	_available = false
-	_mesh.visible = false
+	_interactable_box.set_active(false)
 	PlayerStats.wool_pieces += amount
+	_mesh.visible = false

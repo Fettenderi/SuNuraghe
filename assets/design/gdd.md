@@ -3,27 +3,30 @@ Era già da qualche settiamana che alcune pecorelle di un semplice pastore sardo
 
 Arrivato a pochi metri dalla creatura nota che non si tratta di un essere vivente, bensì di una struttura sorvegliata da creature inquietanti, vestite di pelle di capra nere, il volto, rigido e contorto come legno pietrificato, è di un nero profondo simile al carbone, sul dorso quello che sembrano essere tante campane di varie dimensioni.
 
-Il pastore intimorito ma deciso a risolvere la questione si avvicina alla struttura e vi entra senza farsi vedere dalle creature. L'interno si presenta come un labirinto di corridoi e stanze sorvegliate da queste creature e da altre dall'aspetto più demoniaco. Qua e là sono presenti trappole fatte da campane ed è possibile trovare anche le pecore rapite nel corso delle settimane, alcune saranno particolamente felici di vederti * . Esplorando trova 4 grosse stanze circolari con all'interno enormi campane e nel punto centrale della struttura una stanza rituale, piena di creature intente a fare una danza particolare attorno a un fuoco.
+Il pastore intimorito ma deciso a risolvere la questione si avvicina alla struttura e vi entra senza farsi vedere dalle creature. L'interno si presenta come un labirinto di corridoi e stanze sorvegliate da queste creature e da altre dall'aspetto più demoniaco. Qua e là sono presenti trappole fatte da campane ed è possibile trovare anche pezzi delle pecore rapite nel corso delle settimane. Esplorando trova 3 grosse stanze circolari con all'interno enormi campane e nel punto centrale della struttura una stanza rituale, piena di creature intente a fare una danza particolare attorno a un fuoco.
 
 
 Bad Ending: le creature ti trovano e fai la stessa fine delle pecore. Gli alieni continuano periodicamente a tornare e a rubare il bestiame senza essere mai visti.
 
 Good Ending: riesci ad interrompere il rito ammutolendo le varie campane giganti della struttura e facendo collassare la struttura su se stessa mentre scappi, seppellendo le creature al suo interno. La struttura negli anni viene ricoperta da vegetazione e ciò che ne rimane è solo il rimasuglio del tetto della struttura e il ricordo del pastore di queste creature.
 
-# Gameplay
-Il pastore sardo è munito solo di un mantello, un coltellino, un bastone e dei sonagli?
 
-All'interno della struttura sono distribuite varie pecore, queste vanno liberate e portate in salvo in qualche modo. Tosando le pecore si ottiene la lana, utile per silenziare trappole e per bloccare il suono delle grosse campane nelle 4 stanze.
+# Illustrazioni
+Cutscene scena iniziale, fino all'ingresso nella struttura (Il gioco inizia appunto già dentro la struttura).
 
-* Le pecore più vecchie o comunque quelle più affezionate al pastore sono 4 e appena lo vedono si mettono ad urlare a squarciagola, muovendosi in modo frenetico, facendo suonare i sonagli. Di solito queste sono più grosse e si trovano in prossimità della grossa campana rituale.   
+Cutscene finale buono, dal rituale che viene interrotto nello stanzone circolare con il campanaccio e dei mamuthones e issoadores e il pastore nascosto da qualche parte che sta scappando dalla struttura da un cunicolo. Poi il pastore lo vediamo ritornato a pascolare i giorni successivi ma il focus rimane sulla struttura che viene coperta dalla vegetazione negli anni.
 
+Cutscene finale cattivo, il pastore viene catturato nello stanzone finale e viene usato in un rituale con un fuoco al centro e i mamuthones che fanno la danza attorno. Il focus si sposta sulla struttura da fuori che la vediamo comparire e scomparire e nel corso degli anni vediamo generazioni di pastori che vedono il loro bestiame scomparire.
 
-In alcune zone il giocatore dovrà omologarsi al movimento delle creature, mimetizzandosi nei suoni e nelle movenze. In altre dovrà invece coprirsi con il suo mantello.
+Cover art per itch (630x500) qualcosa di semplice e spooky. Usando gli stessi disegni fare il main menu magari idk.
 
-Per sfuggire alle creature il giocatore può fare rumore usando le trappole o con i sonagli che ha appresso??
+(Se avete in mente altro dite pure)
+
 
 
 # SFX
+#! Camminare nei cunicoli 
+
 Camminare e saltare
 Metti e togli mantello
 
@@ -40,29 +43,21 @@ Campana rituale suona (per il Bad Ending se non le trovi e disarmi tutte)
 Campanello trappola viene disarmata, viene armata (suono lanoso e metallo)
 Campanello trappola viene attivata 
 
-Pecora viene tosata (come tagliare della stoffa grossa con un coltello)
-* Pecora felice fa bordello
-
-
 (Dimmi tu cosa altro potrebbe servire)
 
 
+# Modelli + Animazioni
 
-# Modelli
+#! Pezzi di pecora con lana e sangue (Not too much) 
+
 Mamuthones con 2 o 3 variazioni facciali/maschera
+#! Issohadores
+#! Mamuthones snorkler se rimane tempo
+
 Campana rituale grossa (stile sardo)
 
 Trappola con campana (DA DEFINIRE)
 
-Pecora con e senza lana
-
-Muri e angoli modulari in similmattone/pietra (più grigio che mattonato però non è ancora vecchio, dimmi un po' tu come potrebbe stare)
-Stanza piccola circolare.
-
-Struttura nuragica da fuori (me lo immagino un po' come il castello errante di howl, però calcola che è visibile solo nella cutscene iniziale di notte, quindi non la fare iperdettagliata)
-
-	
-# Animazioni
 Danza Mamuthones (Con saltino)
 Walk cycle Mamuthones
 
@@ -70,7 +65,12 @@ Run walk cycle Mamuthones (quando ti ha individuato e ti sta per aprire la facci
 Jumpscare 
 
 
+# Gameplay
+All'interno della struttura sono distribuite vari oezzi di pecora, questi se raccolti possono essere usati per silenziare trappole e per disattivare le campane rituali dela struttura
 
+In alcune zone il giocatore dovrà omologarsi al movimento delle creature, mimetizzandosi nei suoni e nelle movenze. In altre dovrà invece chinarsi e nascondersi dentro dei cunicoli.
+
+Per sfuggire alle creature il giocatore può fare rumore usando le trappole o con i sonagli che ha appresso??
 
 
 # References

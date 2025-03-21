@@ -7,6 +7,10 @@ var _patroling_resource : PatrolingResource
 func start(info : Dictionary = {}) -> void:
 	user.speed = speed
 	
+	if user.end_buffered:
+		state_machine.stop()
+		user.queue_free()
+	
 	if info.has("arrived"):
 		_patroling_resource.waypoint_reached()
 
@@ -14,6 +18,10 @@ func start(info : Dictionary = {}) -> void:
 		_patroling_resource = user.patroling_resource
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("end"):
+		state_machine.stop()
+		user.queue_free()
+
 	if info.has("arrived"):
 		_patroling_resource.waypoint_reached()
 		state_machine.change_state("WanderingState", {"next_state": "PatrolState"})

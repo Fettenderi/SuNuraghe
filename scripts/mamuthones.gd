@@ -29,14 +29,18 @@ const TURNING_SPEED = 10.0
 
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var _movement_state_machine: StateMachine = %MovementSM
+@onready var _collision_shape: CollisionShape3D = %CollisionShape3D
 @onready var _mesh: Node3D = %Mesh
 @onready var _eyes: Node3D = %Eyes
 
 var _is_active := false:
 	set(value):
 		_is_active = value
+		_collision_shape.set_deferred("disabled", not value)
 		visible = value
 var speed := 0.0
+
+var end_buffered := false
 
 var _direction : Vector3
 
@@ -72,10 +76,11 @@ func _ready() -> void:
 		_start_movement()
 	
 	if deactivation_receiver != null:
-		deactivation_receiver.received.connect(queue_free.unbind(1))
+		deactivation_receiver.received.connect(_end_movement.unbind(1))
 
 	_setup_arrived_cooldown()
 	position = patroling_resource.get_current_target()
+	patroling_resource.waypoint_reached()
 	_eyes.create_rays(self)
 
 func _physics_process(delta: float) -> void:
@@ -199,6 +204,10 @@ func _create_line(from : Vector3, to : Vector3, mat : Material) -> void:
 func _start_movement():
 	_is_active = true
 	_movement_state_machine.start()
+
+func _end_movement():
+	_movement_state_machine.update({"end": true})
+	queue_free()
 
 func _on_eyes_located(collider: Player) -> void:
 	if not _is_active: return

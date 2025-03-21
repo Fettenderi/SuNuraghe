@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs2txkuxjrcs2"]
+
+[ext_resource type="Script" uid="uid://cj01p3h4hvf3s" path="res://scripts/sight_detector_box.gd" id="1_twlus"]
+
+[node name="SightDetectorBox" type="Area3D"]
+script = ExtResource("1_twlus")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

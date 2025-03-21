@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
 [ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_uw3m6"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://prototypes/interactable_box.tscn" id="3_xm0wp"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_xm0wp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm0wp"]
 albedo_texture = ExtResource("2_uw3m6")

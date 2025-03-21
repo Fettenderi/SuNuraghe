@@ -1,44 +1,26 @@
 extends State
 
 @export var max_speed := 5.0
-@export var stamina_drain_speed := 0.7
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
 
 var _active := false
 
-#var _cover_buffer := false
-#var _end_sprint_buffer := false
 
 func start(_info : Dictionary = {}) -> void:
 	_active = true
-	#_cover_buffer = false
-	#_end_sprint_buffer = false
 
-	user._sound_maker.set_enabled(true)
+	user.sound_maker.set_enabled(true)
 	user._max_speed = max_speed
 	user._head_bob_amplitude = head_bob_amplitude
 	user._head_bob_frequency = head_bob_frequency
+	user.stamina_sm.update({"consuming": true})
 
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
-	user._stamina += delta * stamina_drain_speed
-	
-	if user._stamina >= user.max_stamina:
-		state_machine.change_state("WalkState")
-	
-	user._usual_update(delta)
-	
-	
-	
-	#if not user.is_on_floor():
-		#if Input.is_action_just_pressed(user.KEY_BIND_COVER):
-			#_cover_buffer = true
-		#elif Input.is_action_just_released(user.KEY_BIND_SPRINT):
-			#_end_sprint_buffer = true
-		#return
 
+	user._usual_update(delta)
 
 func _unhandled_input(event : InputEvent) -> void:
 	if not _active: return
@@ -69,4 +51,6 @@ func _unhandled_input(event : InputEvent) -> void:
 func end() -> void:
 	_active = false
 
-	user._sound_maker.set_enabled(false)
+	user.sound_maker.set_enabled(false)
+	user.stamina_sm.update({"consuming": false})
+	

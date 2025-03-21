@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwndxm0c4cbqk"]
+
+[ext_resource type="PackedScene" uid="uid://b5kdg8ygykld" path="res://scenes/objects/weird_room.tscn" id="1_a4wm7"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_wtsn5"]
+[ext_resource type="Texture2D" uid="uid://cmlmyoplmk7y8" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="2_11ggy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_t8fxv"]
+sky_material = SubResource("ProceduralSkyMaterial_u4f27")
+
+[sub_resource type="Environment" id="Environment_o4fph"]
+background_mode = 2
+sky = SubResource("Sky_t8fxv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3bghs"]
+albedo_texture = ExtResource("2_11ggy")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o4fph")
+
+[node name="WeirdRoom" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_a4wm7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.63809)
+size = Vector3(5.14624, 5, 17.4579)
+target = NodePath("../Player")
+
+[node name="Start" parent="WeirdRoom/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.25304)
+
+[node name="End" parent="WeirdRoom/Node" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72128, 0, 24.4845)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.61322, -2.49665)
+material_override = SubResource("StandardMaterial3D_3bghs")
+use_collision = true
+size = Vector3(10.2756, 4.77356, 2.62293)
+
+[node name="Player" parent="." instance=ExtResource("1_wtsn5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0956542, -2.99988, 0.461348)
+
+[editable path="WeirdRoom"]

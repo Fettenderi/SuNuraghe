@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5kdg8ygykld"]
+
+[ext_resource type="Script" uid="uid://hxogcjd8kxtn" path="res://prototypes/beta2/weird_room.gd" id="1_b2d0p"]
+
+[node name="WeirdRoom" type="CSGBox3D"]
+use_collision = true
+flip_faces = true
+size = Vector3(4, 5, 4)
+script = ExtResource("1_b2d0p")
+direction = Vector3(0, 0, 1)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Start" type="Marker3D" parent="Node"]
+unique_name_in_owner = true
+
+[node name="End" type="Marker3D" parent="Node"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.21043)

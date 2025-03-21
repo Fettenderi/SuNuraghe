@@ -20,7 +20,6 @@ const KEY_BIND_NOCLIP = "noclip"
 @export var in_air_acceleration := 5.0
 @export var jump_velocity := 4.5
 @export var backward_speed_factor := 0.5
-@export var max_stamina := 3.0
 @export_subgroup("Mouse")
 @export var mouse_sentitivity := 0.002
 @export var mouse_acceleration := 50
@@ -28,23 +27,19 @@ const KEY_BIND_NOCLIP = "noclip"
 @onready var camera_3d: Camera3D = $Head/Camera3D
 
 @onready var _head: Node3D = %Head
-@warning_ignore("unused_private_class_variable")
-@onready var _sound_maker: ExpandedHitBox = %SoundMaker
+@onready var sound_maker: ExpandedHitBox = %SoundMaker
 
-@warning_ignore("unused_private_class_variable")
-@onready var _movement_sm: StateMachine = %MovementSM
+@onready var movement_sm: StateMachine = %MovementSM
+@onready var stamina_sm: StateMachine = %StaminaSM
 @onready var shape_controller: ShapeController = %ShapeController
 
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _max_speed : float
-var _stamina := 0.0:
-	set(value):
-		_stamina = value
-		_start_stamina_cooldown()
-var _on_stamina_cooldown := false
 var _speed : float
 var _accel := acceleration
+
+var stamina : float
 
 var _rotation_target_player : float
 var _rotation_target_head : float
@@ -66,6 +61,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 	_head_start_pos = _head.position
+	_rotation_target_player = quaternion.get_angle()
 
 func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
@@ -130,13 +126,6 @@ func _reset_head_bob(delta : float) -> void:
 	if _head.position == _head_start_pos: return
 	
 	_head.position = lerp(_head.position, _head_start_pos, 2 * (1 / _head_bob_frequency) * delta)
-
-func _start_stamina_cooldown():
-	_on_stamina_cooldown = true
-	%StaminaCooldown.start()
-
-func _stamina_cooldown_ended():
-	_on_stamina_cooldown = false
 
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false

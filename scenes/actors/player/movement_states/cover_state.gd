@@ -7,7 +7,6 @@ enum {
 }
 
 @export var max_speed := 1.0
-@export var stamina_replanish_speed := 0.2
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
 
@@ -30,9 +29,6 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
-	if user._stamina > 0.0:
-		user._stamina = max(0.0, user._stamina - delta * stamina_replanish_speed)
-
 	user._usual_update(delta)
 	
 	if _wants_crawl:
@@ -48,7 +44,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
 		user._jump_buffered = true
 
-	if not user._on_stamina_cooldown and Input.is_action_pressed(user.KEY_BIND_SPRINT):
+	if user.stamina > 0.0 and Input.is_action_pressed(user.KEY_BIND_SPRINT):
 		state_machine.change_state("SprintState")
 	elif Input.is_action_pressed(user.KEY_BIND_COVER):
 		state_machine.change_state("CoverState")
