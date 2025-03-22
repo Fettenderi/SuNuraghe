@@ -12,6 +12,10 @@ func start(_info : Dictionary = {}) -> void:
 func update(info : Dictionary = {}) -> void:
 	if info.has("end"):
 		user.end_buffered = true
-
+	
+	if info.has("located"):
+		state_machine.change_state("ChaseState", {"located": info["located"]})
+		return
+	
 	if info.has("arrived"):
 		state_machine.change_state("PatrolState")

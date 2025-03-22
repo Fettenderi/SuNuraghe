@@ -14,3 +14,6 @@ func progess_tasks() -> ScheduleTaskRes:
 	else: _progress += 1
 	
 	return task
+
+func get_receiver(index: int) -> ReceiverRes:
+	return receivers[index]

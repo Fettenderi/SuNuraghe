@@ -26,6 +26,9 @@ func start(info : Dictionary = {}) -> void:
 func update(info : Dictionary = {}) -> void:
 	if info.has("end"):
 		user.end_buffered = true
+	
+	if info.has("located"):
+		state_machine.change_state("ChaseState", {"located": info["located"]})
 
 func end() -> void:
 	_is_active = false

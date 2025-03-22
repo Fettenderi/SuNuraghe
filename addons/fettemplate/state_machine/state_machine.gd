@@ -46,7 +46,7 @@ func _ready():
 func start():
 	if verbose:
 		print("State Machine Started")
-		print(str(current_state) + " Started")
+		print(str(current_state) + " Started with info: " + str(starting_info))
 	current_state.start(starting_info)
 	_is_active = true
 
@@ -57,7 +57,7 @@ func update(info : Dictionary = {}):
 		if not current_state.state_machine:
 			current_state.state_machine = self
 		if verbose:
-			print(str(current_state) + " Updated")
+			print(str(current_state) + " Updated with info: " + str(info))
 		current_state.update(info)
 
 ## Transitions [member current_state] into [param state_name].
@@ -66,7 +66,7 @@ func update(info : Dictionary = {}):
 func change_state(state_name : String, info : Dictionary = {}):
 	if state_name == current_state.name or not _is_active: 
 		if verbose:
-			print(str(current_state) + " Updated")
+			print(str(current_state) + " Updated with info: " + str(info))
 		current_state.update(info)
 		return
 	
@@ -78,7 +78,7 @@ func change_state(state_name : String, info : Dictionary = {}):
 		current_state.state_machine = self
 		current_state.user = user
 		if verbose:
-			print(str(current_state) + " Started")
+			print(str(current_state) + " Started with info: " + str(info))
 		current_state.start(info)
 
 ## Stops the [StateMachine].

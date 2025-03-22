@@ -1,27 +1,34 @@
 extends State
 
+const STARE_TIME = 3.0
+
+var _stare_timer : Timer
+
 var _is_active := false
-var _direction : Vector3
+var _stare_target : Vector3
 
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
-	if info.has("to_look"):
-		_direction = (info["to_look"])# - user.position)
-	
+	#state_machine.change_state("WalkState")
 	state_machine.stop()
+	
+	_stare_timer = Utils.timer(STARE_TIME, _on_stare_timer_ended, _stare_timer)
+	add_child(_stare_timer, true)
+	
+	_stare_timer.start()
+
+	if info.has("to_look"):
+		_stare_target = info["to_look"]
+
+func end() -> void:
+	_is_active = false
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
-	#user._head.look_at(_direction)
+	user.look(_stare_target, delta)
 
-	#user.quaternion = user.quaternion.slerp(Quaternion(Vector3.UP, _direction.normalized()), 2 * delta)
-	user._head.quaternion = user._head.quaternion.slerp(Quaternion(Vector3.RIGHT, _direction.normalized()), 2 * delta)
+func _on_stare_timer_ended() -> void:
+	if not _is_active: return
 	
-	user.velocity.y -= user._gravity * delta
-	
-	user.move_and_slide()
-
-
-func end():
-	_is_active = false
+	get_tree().call_deferred("reload_current_scene")

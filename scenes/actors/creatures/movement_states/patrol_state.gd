@@ -22,6 +22,10 @@ func update(info : Dictionary = {}) -> void:
 		state_machine.stop()
 		user.queue_free()
 
+	if info.has("located"):
+		state_machine.change_state("ChaseState", {"located": info["located"]})
+		return
+
 	if info.has("arrived"):
 		_patroling_resource.waypoint_reached()
 		state_machine.change_state("WanderingState", {"next_state": "PatrolState"})

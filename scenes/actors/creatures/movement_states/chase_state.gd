@@ -5,18 +5,31 @@ extends State
 var _is_active := false
 var _target_visible := true
 
-func start(_info : Dictionary = {}) -> void:
+var _navigation_agent_3d : NavigationAgent3D
+
+func start(info : Dictionary = {}) -> void:
+	_is_active = true
+	
 	user.speed = speed
 	
-	_is_active = true
+	if _navigation_agent_3d == null:
+		_navigation_agent_3d = user.navigation_agent_3d
+
 	_target_visible = true
+	
+	if info.has("located"):
+		_navigation_agent_3d.target_position = info["located"]
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("arrived") and not _target_visible:
-		state_machine.change_state("WanderingState", {"next_state": "ReturningState"})
-	
 	if info.has("end"):
 		user.end_buffered = true
+
+	if info.has("located"):
+		_navigation_agent_3d.target_position = info["located"]
+		return
+
+	if info.has("arrived") and not _target_visible:
+		state_machine.change_state("WanderingState", {"next_state": "ReturningState"})
 
 func end() -> void:
 	_is_active = false

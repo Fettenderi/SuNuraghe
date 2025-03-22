@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://cuoims65677ck"
+run/main_scene="uid://3x3h6ncb5mvs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -131,6 +131,7 @@ interact={
 3d_physics/layer_3="Interaction"
 3d_physics/layer_4="Crawl"
 3d_physics/layer_5="Sight"
+3d_physics/layer_6="Agents"
 
 [physics]
 

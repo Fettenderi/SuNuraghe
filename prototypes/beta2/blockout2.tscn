@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://cmlmyoplmk7y8" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="20_p1688"]
 [ext_resource type="Resource" uid="uid://dm3vhu0kj0n0x" path="res://assets/receivers/lay1-4.tres" id="21_gs4to"]
 [ext_resource type="PackedScene" uid="uid://cp04shreg2nl5" path="res://scenes/objects/conduct_door.tscn" id="22_psjm5"]
-[ext_resource type="PackedScene" uid="uid://b6fbx2cag2tkv" path="res://scenes/actors/creatures/mamuthones.tscn" id="23_uufp4"]
+[ext_resource type="PackedScene" uid="uid://b6fbx2cag2tkv" path="res://prototypes/beta2/beta_mamuthones.tscn" id="23_uufp4"]
 [ext_resource type="Script" uid="uid://daighntisv4st" path="res://scripts/patroling_resource.gd" id="24_bthet"]
 [ext_resource type="Script" uid="uid://c0xg8ote2osqq" path="res://scripts/flickering_light.gd" id="25_ubk04"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="26_chfn7"]

@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+const TURNING_SPEED = 6.0
 
 const HEAD_ROTATION_MIN = -90.0
 const HEAD_ROTATION_MAX = 90.0
@@ -86,7 +87,7 @@ func _input(event : InputEvent) -> void:
 func _move_player(delta : float) -> void:
 	var _input_dir := Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_FORWARD, KEY_BIND_BACKWARD).normalized()
 	var _backward_factor := (1.0 if _input_dir.y <= 0.0 else backward_speed_factor)
-	var _direction := transform.basis * Vector3(_input_dir.x, 0.0, _input_dir.y) * _backward_factor
+	var _direction := transform.basis * Vector3(-_input_dir.x, 0.0, -_input_dir.y) * _backward_factor
 
 	if not is_on_floor():
 		_speed = _max_speed
@@ -106,7 +107,7 @@ func _move_player(delta : float) -> void:
 func _rotate_player(delta : float) -> void:
 	quaternion = quaternion.slerp(Quaternion(Vector3.UP, _rotation_target_player), mouse_acceleration * delta)
 	
-	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.RIGHT, _rotation_target_head), mouse_acceleration * delta)
+	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, _rotation_target_head), mouse_acceleration * delta)
 
 func _set_rotation_target(mouse_motion : Vector2) -> void:
 	_rotation_target_player += -mouse_motion.x * mouse_sentitivity
@@ -130,8 +131,15 @@ func _reset_head_bob(delta : float) -> void:
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false
 
-#func start_dying(to_look : Vector3):
-	#_movement_sm.change_state("DieState", {"to_look": to_look})
+func start_dying(to_look : Vector3):
+	movement_sm.change_state("DieState", {"to_look": to_look})
 
 func get_visibility() -> float:
 	return 1.0 - float(shape_controller.get_active_shape_index()) / float(shape_controller.get_shapes_count())
+
+func look(target : Vector3, delta : float) -> void:
+	var _local_destination := target - global_position
+	var _local_direction := _local_destination.normalized()
+	
+	quaternion = quaternion.slerp(Quaternion(Vector3.UP, atan2(_local_direction.x, _local_direction.z)), mouse_acceleration * delta)
+	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, atan2(_local_direction.z, _local_direction.y)), mouse_acceleration * delta)
