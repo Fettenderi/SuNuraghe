@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cvtv8ik7vf8e2"]
 
-[ext_resource type="Script" uid="uid://dlf3mvuhrc5u6" path="res://prototypes/beta1/creature.gd" id="1_5cwik"]
+[ext_resource type="Script" uid="uid://dlf3mvuhrc5u6" path="res://prototypes/beta1/beta_creature.gd" id="1_5cwik"]
 [ext_resource type="Texture2D" uid="uid://cg4y725yu0ni4" path="res://icon.svg" id="2_7hlr2"]
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_w12gl"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="3_ummoo"]
