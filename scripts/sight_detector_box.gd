@@ -10,7 +10,7 @@ signal signal_emitted(value)
 func _ready() -> void:
 	area_entered.connect(_interactable_entered)
 
-func _interactable_entered(area: Area3D):
+func _interactable_entered(_area: Area3D):
 	if _state: return
 	
 	_state = true

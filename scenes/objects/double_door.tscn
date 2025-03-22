@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://k0jltjct40oa"]
+
+[ext_resource type="Script" uid="uid://btnwgudm65s0g" path="res://scripts/double_door.gd" id="1_hik7s"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="1_prbdi"]
+[ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_hik7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4hhpn"]
+size = Vector3(0.684, 2.582, 1.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm0wp"]
+albedo_texture = ExtResource("2_hik7s")
+
+[node name="DoubleDoor" type="Node3D"]
+script = ExtResource("1_hik7s")
+
+[node name="InteractableBox" parent="." instance=ExtResource("1_prbdi")]
+unique_name_in_owner = true
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+required_input = &"interact"
+gui_text = "[ E ] Apri "
+
+[node name="CollisionShape3D" parent="InteractableBox" index="0"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -1.04216e-14, 1.19209e-07, 0.9)
+shape = SubResource("BoxShape3D_4hhpn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractableBox"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, 8.74228e-08, -1, 7.64274e-15, 8.74228e-08, 0, -1, -7.86805e-08, 1.19209e-07, -0.9)
+shape = SubResource("BoxShape3D_4hhpn")
+
+[node name="MeshRight" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.42109e-14, -1.19209e-07, -1.8)
+
+[node name="DoorFrame" type="CSGBox3D" parent="MeshRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
+use_collision = true
+size = Vector3(0.13501, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame2" type="CSGBox3D" parent="MeshRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.48076)
+size = Vector3(0.357422, 0.314453, 0.313477)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MeshRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
+remote_path = NodePath("../../InteractableBox/CollisionShape3D2")
+
+[node name="MeshLeft" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.19209e-07, 1.8)
+
+[node name="DoorFrame" type="CSGBox3D" parent="MeshLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
+use_collision = true
+size = Vector3(0.13501, 2.59, 1.8)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame2" type="CSGBox3D" parent="MeshLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.48076)
+size = Vector3(0.357422, 0.314453, 0.313477)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MeshLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
+remote_path = NodePath("../../InteractableBox/CollisionShape3D")
+
+[connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="InteractableBox"]
