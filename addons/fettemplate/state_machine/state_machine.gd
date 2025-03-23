@@ -63,8 +63,8 @@ func update(info : Dictionary = {}):
 ## Transitions [member current_state] into [param state_name].
 ## It firstly executes [method State.end] on [member current_state] and then [method State.start] on [param state_name] [State].[br][br]
 ## You can provide additional informations to the new [State] using [param info]
-func change_state(state_name : String, info : Dictionary = {}):
-	if state_name == current_state.name or not _is_active: 
+func change_state(state_name : String, info : Dictionary = {}, force_stop := false):
+	if not force_stop and (state_name == current_state.name or not _is_active): 
 		if verbose:
 			print(str(current_state) + " Updated with info: " + str(info))
 		current_state.update(info)

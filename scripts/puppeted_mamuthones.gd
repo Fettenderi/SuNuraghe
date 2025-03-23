@@ -2,6 +2,8 @@
 class_name PuppetedMamuthones
 extends Creature
 
+@export var verbose := false
+
 @export var schedule : ScheduleRes
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("PrintTransform") var _print_transform_button = _print_transform
@@ -25,7 +27,9 @@ func _read_schedule() -> bool:
 	var task := schedule.progess_tasks()
 	if task == null: return false
 	
-	movement_state_machine.change_state(task.state, task.info)
+	if verbose:
+		print(task.state, task.info)
+	movement_state_machine.change_state(task.state, task.info, true)
 	return true
 
 func progress() -> void:
@@ -37,7 +41,6 @@ func progress() -> void:
 
 func _print_transform() -> void:
 	print("Position: " + str(position))
-	print("Rotation: " + str(rotation))
 
 
 func get_schedule_receiver(index: int) -> ReceiverRes:

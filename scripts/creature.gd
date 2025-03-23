@@ -84,7 +84,7 @@ func _on_eyes_located(collider: Player) -> void:
 	
 	target = collider
 	
-	movement_state_machine.update({"located": collider.global_position})
+	movement_state_machine.update({"located": collider.global_position, "is_disguised": collider.is_disguised()})
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return

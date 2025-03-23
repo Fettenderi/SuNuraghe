@@ -50,6 +50,8 @@ var _head_bob_tick := 0
 var _head_bob_frequency := 0.3
 var _head_bob_amplitude := 0.01
 
+var _disguised := false
+
 var _jump_buffered := false:
 	set(value):
 		_jump_buffered = value
@@ -134,8 +136,8 @@ func _on_jump_buffer_timeout() -> void:
 func start_dying(to_look : Vector3):
 	movement_sm.change_state("DieState", {"to_look": to_look})
 
-func get_visibility() -> float:
-	return 1.0 - float(shape_controller.get_active_shape_index()) / float(shape_controller.get_shapes_count())
+func is_disguised() -> float:
+	return _disguised
 
 func look(target : Vector3, delta : float) -> void:
 	var _local_destination := target - global_position

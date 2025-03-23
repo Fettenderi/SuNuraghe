@@ -16,13 +16,6 @@ func start(info : Dictionary = {}) -> void:
 		_vigilant = info["vigilant"]
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("await"):
-		_receiver = user.get_schedule_receiver(info["await"])
-		_receiver.received.connect(_on_received_signal)
-	
-	if info.has("vigilant"):
-		_vigilant = info["vigilant"]
-
 	if _vigilant and info.has("located"):
 		state_machine.change_state("ChaseState", {"located": info["located"]})
 		return
@@ -41,4 +34,3 @@ func _on_received_signal(_value) -> void:
 	if not _is_active: return
 	
 	user.progress()
-	_receiver.received.disconnect(_on_received_signal)

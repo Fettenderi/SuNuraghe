@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://cvtv8ik7vf8e2"]
 
-[ext_resource type="Script" uid="uid://dlf3mvuhrc5u6" path="res://prototypes/beta1/beta_creature.gd" id="1_5cwik"]
-[ext_resource type="Texture2D" uid="uid://cg4y725yu0ni4" path="res://icon.svg" id="2_7hlr2"]
-[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_w12gl"]
-[ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="3_ummoo"]
+[ext_resource type="Script" uid="uid://dlf3mvuhrc5u6" path="res://prototypes/beta1/beta_creature.gd" id="1_ywb5n"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_y4pdw"]
+[ext_resource type="Texture2D" uid="uid://cg4y725yu0ni4" path="res://icon.svg" id="3_rbuq7"]
+[ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="4_x174f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hle7g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3lby"]
-albedo_texture = ExtResource("2_w12gl")
+albedo_texture = ExtResource("2_y4pdw")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_b1yeu"]
 material = SubResource("StandardMaterial3D_b3lby")
@@ -16,8 +16,8 @@ material = SubResource("StandardMaterial3D_b3lby")
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f7tmj"]
 radius = 6.78148
 
-[node name="Creature" type="CharacterBody3D"]
-script = ExtResource("1_5cwik")
+[node name="BetaCreature" type="CharacterBody3D"]
+script = ExtResource("1_ywb5n")
 speed = 5.0
 distance_threshold = 0.05
 
@@ -39,7 +39,7 @@ skeleton = NodePath("../..")
 [node name="Decal" type="Decal" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43657, 0.420923)
 size = Vector3(1.19727, 0.954224, 0.64917)
-texture_albedo = ExtResource("2_7hlr2")
+texture_albedo = ExtResource("3_rbuq7")
 modulate = Color(0.43, 0.1204, 0.1204, 1)
 upper_fade = 0.135188
 
@@ -47,11 +47,13 @@ upper_fade = 0.135188
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Ears-NO"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+visible = false
 shape = SubResource("CylinderShape3D_f7tmj")
 
-[node name="Eyes" parent="Mesh" instance=ExtResource("3_ummoo")]
+[node name="Eyes" parent="Mesh" instance=ExtResource("4_x174f")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.10947, 0)
 ray_lenght = 30.0
+tooltip_visible = false
 
 [connection signal="area_entered" from="Mesh/Ears-NO" to="." method="_on_ears_area_entered"]
 [connection signal="located" from="Mesh/Eyes" to="." method="_on_eyes_located"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3x3h6ncb5mvs"]
+[gd_scene load_steps=19 format=3 uid="uid://3x3h6ncb5mvs"]
 
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_ouckr"]
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="2_c4voo"]
@@ -23,42 +23,54 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
-vertices = PackedVector3Array(2.24071, -2.50398, -0.1045, 2.74071, -2.50398, -0.1045, 2.99071, -2.50398, -0.8545, 1.99071, -2.50398, -2.3545, -5.75929, -2.50398, -0.8545, 0.74071, -2.50398, -2.1045, 5.99071, -2.50398, -10.1045, -5.75929, -2.50398, -10.1045, 5.99071, -2.50398, -0.8545, 0.74071, -2.50398, -0.8545, 1.99071, -2.50398, 0.8955, 2.99071, -2.50398, 0.8955, -5.75929, -2.50398, 0.8955, -5.75929, -2.50398, 10.1455, 5.99071, -2.50398, 10.1455, 5.99071, -2.50398, 0.8955)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 3), PackedInt32Array(3, 4, 7), PackedInt32Array(3, 7, 6), PackedInt32Array(2, 3, 8), PackedInt32Array(8, 3, 6), PackedInt32Array(5, 9, 4), PackedInt32Array(1, 11, 0), PackedInt32Array(0, 11, 10), PackedInt32Array(12, 10, 13), PackedInt32Array(13, 10, 14), PackedInt32Array(11, 15, 14), PackedInt32Array(10, 11, 14)]
+vertices = PackedVector3Array(5.84029, -2.50398, -10.1045, -5.90971, -2.50398, -10.1045, -6.15971, -2.50398, -0.1045, -5.90971, -2.50398, 10.1455, 5.84029, -2.50398, 10.1455)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4)]
 
-[sub_resource type="Resource" id="Resource_c4voo"]
+[sub_resource type="Resource" id="Resource_vogdc"]
 script = ExtResource("10_8rfoc")
-state = &"FollowState"
-info = Dictionary[String, Variant]({})
+state = &"MoveState"
+info = Dictionary[String, Variant]({
+"position": Vector3(-0.97, -2, -4.807)
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_c3yit"]
+script = ExtResource("10_8rfoc")
+state = &"StareState"
+info = Dictionary[String, Variant]({
+"time": 5.0
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_1b7mp"]
+script = ExtResource("10_8rfoc")
+state = &"MoveState"
+info = Dictionary[String, Variant]({
+"position": Vector3(2.908, -2, -0.279)
+})
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 
 [sub_resource type="Resource" id="Resource_if455"]
 script = ExtResource("9_wv6uw")
-tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_c4voo")])
+tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_vogdc"), SubResource("Resource_c3yit"), SubResource("Resource_1b7mp")])
 receivers = Array[ExtResource("3_luevv")]([])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
-[sub_resource type="Resource" id="Resource_7adat"]
-script = ExtResource("10_8rfoc")
-state = &"FollowState"
-info = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
-
-[sub_resource type="Resource" id="Resource_vogdc"]
+[sub_resource type="Resource" id="Resource_j3ef6"]
 script = ExtResource("9_wv6uw")
-tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_7adat")])
+tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_vogdc"), SubResource("Resource_c3yit"), SubResource("Resource_1b7mp")])
 receivers = Array[ExtResource("3_luevv")]([])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
-[sub_resource type="Resource" id="Resource_c3yit"]
-script = ExtResource("10_8rfoc")
-state = &"FollowState"
-info = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
-
-[sub_resource type="Resource" id="Resource_1b7mp"]
+[sub_resource type="Resource" id="Resource_4x0dl"]
 script = ExtResource("9_wv6uw")
-tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_c3yit")])
+tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_vogdc"), SubResource("Resource_c3yit"), SubResource("Resource_1b7mp")])
+receivers = Array[ExtResource("3_luevv")]([])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_ouckr"]
+script = ExtResource("9_wv6uw")
+tasks = Array[ExtResource("10_8rfoc")]([SubResource("Resource_vogdc"), SubResource("Resource_c3yit"), SubResource("Resource_1b7mp")])
 receivers = Array[ExtResource("3_luevv")]([])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
@@ -83,13 +95,6 @@ use_collision = true
 flip_faces = true
 size = Vector3(13, 6, 21.709)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 5.03777, 0)
-operation = 2
-use_collision = true
-flip_faces = true
-size = Vector3(13, 6, 0.505859)
-
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -6.81791, -1.70898, -0.0219285)
 use_collision = true
@@ -99,7 +104,7 @@ size = Vector3(0.683594, 2.58203, 1.7998)
 [node name="Door" parent="NavigationRegion3D/CSGCombiner3D/CSGBox3D3" instance=ExtResource("12_t1niu")]
 
 [node name="Player" parent="." instance=ExtResource("1_ouckr")]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -2.61628, -3, 4.53174)
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -2.5571, -3, -6.2446)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
@@ -108,26 +113,36 @@ remote_path = NodePath("../../TopCam/SubViewportContainer/SubViewport/Camera3D")
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="PuppetedMamuthones" parent="Enemies" instance=ExtResource("2_c4voo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75342, -2.00024, -7.81536)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88697, -2, 1.38402)
 collision_layer = 1
 collision_mask = 1
+verbose = false
 schedule = SubResource("Resource_if455")
 
 [node name="PuppetedMamuthones2" parent="Enemies" instance=ExtResource("2_c4voo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130131, -2.00024, -8.12099)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22553, -2, 2.56965)
 collision_layer = 1
 collision_mask = 1
-schedule = SubResource("Resource_vogdc")
+verbose = false
+schedule = SubResource("Resource_j3ef6")
 
 [node name="PuppetedMamuthones3" parent="Enemies" instance=ExtResource("2_c4voo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60346, -2.00024, -8.26073)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51474, -2, -0.33923)
 collision_layer = 1
 collision_mask = 1
-schedule = SubResource("Resource_1b7mp")
+verbose = false
+schedule = SubResource("Resource_4x0dl")
+
+[node name="PuppetedMamuthones4" parent="Enemies" instance=ExtResource("2_c4voo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.25958, -2, -6.49325)
+collision_layer = 1
+collision_mask = 1
+verbose = false
+schedule = SubResource("Resource_ouckr")
 
 [node name="TopCam" parent="." instance=ExtResource("6_7adat")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(-0.965926, 0.258819, 1.13133e-08, 0, -4.37114e-08, 1, 0.258819, 0.965926, 4.2222e-08, -2.61628, 11.724, 4.53174)
+transform = Transform3D(-0.965926, 0.258819, 1.13133e-08, 0, -4.37114e-08, 1, 0.258819, 0.965926, 4.2222e-08, -2.5571, 11.724, -6.2446)
 
 [editable path="TopCam"]

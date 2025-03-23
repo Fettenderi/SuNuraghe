@@ -12,7 +12,6 @@ size = Vector3(0.683594, 2.58203, 1.7998)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_5i02r")
-is_locked = null
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
