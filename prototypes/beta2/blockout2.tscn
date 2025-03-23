@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://cuoims65677ck"]
+[gd_scene load_steps=128 format=3 uid="uid://cuoims65677ck"]
 
 [ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="1_agoc0"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_wv6xo"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="9_375i7"]
 [ext_resource type="Resource" uid="uid://gbj2wp7n2y01" path="res://assets/receivers/lay1-5.tres" id="10_gdxgs"]
 [ext_resource type="Resource" uid="uid://dyy4v7b8cram8" path="res://assets/receivers/lay1-1.tres" id="11_7fpce"]
+[ext_resource type="Resource" uid="uid://bswoakhy7ons7" path="res://assets/receivers/layer2/lay2-door1-lock.tres" id="11_fhnap"]
 [ext_resource type="Resource" uid="uid://b74h6oov74nkf" path="res://assets/receivers/lay1-6.tres" id="12_6k51y"]
+[ext_resource type="Resource" uid="uid://bcora5efg2t0q" path="res://assets/receivers/layer2/lay2-door2.tres" id="12_ykxfq"]
 [ext_resource type="Resource" uid="uid://cwuquitghdc48" path="res://assets/receivers/lay1-2.tres" id="13_diod7"]
 [ext_resource type="Texture2D" uid="uid://caffsu7lhe38y" path="res://addons/kenney_prototype_textures/dark/texture_09.png" id="14_dumgw"]
 [ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="15_utonr"]
@@ -31,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://k0jltjct40oa" path="res://scenes/objects/double_door.tscn" id="24_7fpce"]
 [ext_resource type="Script" uid="uid://daighntisv4st" path="res://scripts/patroling_resource.gd" id="24_bthet"]
 [ext_resource type="Script" uid="uid://c0xg8ote2osqq" path="res://scripts/flickering_light.gd" id="25_ubk04"]
+[ext_resource type="Resource" uid="uid://dh0xpie6xgeq" path="res://assets/receivers/layer2/lay2-door1-open.tres" id="26_6fe2q"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="26_chfn7"]
 [ext_resource type="Script" uid="uid://buaunp4xkr8mo" path="res://scripts/layers_manager.gd" id="27_abg2s"]
 [ext_resource type="Resource" uid="uid://cb6n7u4womw2c" path="res://assets/receivers/layer2/lay2-1.tres" id="28_375i7"]
@@ -108,7 +111,7 @@ albedo_texture = ExtResource("17_ykxfq")
 
 [sub_resource type="Resource" id="Resource_6k51y"]
 script = ExtResource("8_wosrd")
-receivers = Array[ExtResource("5_wo4c6")]([ExtResource("28_375i7")])
+receivers = Array[ExtResource("5_wo4c6")]([ExtResource("28_375i7"), ExtResource("11_fhnap"), ExtResource("12_ykxfq")])
 metadata/_custom_type_script = "uid://daqy62a65vloj"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hc6s"]
@@ -145,11 +148,16 @@ albedo_texture = ExtResource("19_0l4do")
 
 [sub_resource type="Resource" id="Resource_abg2s"]
 script = ExtResource("8_wosrd")
-receivers = Array[ExtResource("5_wo4c6")]([ExtResource("29_gdxgs")])
+receivers = Array[ExtResource("5_wo4c6")]([ExtResource("29_gdxgs"), ExtResource("11_fhnap"), ExtResource("26_6fe2q")])
 metadata/_custom_type_script = "uid://daqy62a65vloj"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cimvt"]
 size = Vector3(4.01587, 2.46851, 1)
+
+[sub_resource type="Resource" id="Resource_fq4q7"]
+script = ExtResource("8_wosrd")
+receivers = Array[ExtResource("5_wo4c6")]([null])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
 
 [sub_resource type="Resource" id="Resource_jly37"]
 script = ExtResource("8_wosrd")
@@ -161,6 +169,21 @@ albedo_texture = ExtResource("19_0l4do")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbeek"]
 albedo_texture = ExtResource("19_0l4do")
+
+[sub_resource type="Resource" id="Resource_diod7"]
+script = ExtResource("5_wo4c6")
+receivers = Array[ExtResource("5_wo4c6")]([])
+metadata/_custom_type_script = "uid://bf63sx3umnijy"
+
+[sub_resource type="Resource" id="Resource_cimvt"]
+script = ExtResource("5_wo4c6")
+receivers = Array[ExtResource("5_wo4c6")]([])
+metadata/_custom_type_script = "uid://bf63sx3umnijy"
+
+[sub_resource type="Resource" id="Resource_mtmsn"]
+script = ExtResource("5_wo4c6")
+receivers = Array[ExtResource("5_wo4c6")]([])
+metadata/_custom_type_script = "uid://bf63sx3umnijy"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wosrd"]
 albedo_texture = ExtResource("19_0l4do")
@@ -418,6 +441,7 @@ use_collision = true
 
 [node name="CentralBell" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2785, 0)
+visible = false
 radius = 10.0
 height = 36.425
 sides = 32
@@ -425,7 +449,6 @@ material = SubResource("StandardMaterial3D_40c77")
 
 [node name="Bell2" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9581, 27.1198, 10.3727)
-visible = false
 radius = 9.636
 height = 23.199
 sides = 32
@@ -440,6 +463,7 @@ sides = 32
 material = SubResource("StandardMaterial3D_40c77")
 
 [node name="Layer1" type="CSGCombiner3D" parent="NavigationRegion3D/Decos"]
+visible = false
 
 [node name="Bell1" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Layer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.11061, 16.8554, -28.4573)
@@ -666,7 +690,6 @@ size = Vector3(2, 2.23926, 2)
 material = SubResource("StandardMaterial3D_32b00")
 
 [node name="Layer2" type="CSGCombiner3D" parent="NavigationRegion3D/Decos"]
-visible = false
 
 [node name="Box" type="CSGBox3D" parent="NavigationRegion3D/Decos/Layer2"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 44.8858, 6.14951, -43.4825)
@@ -1073,6 +1096,7 @@ material = SubResource("StandardMaterial3D_3hc6s")
 
 [node name="CentralBellRoom" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.466, 0)
+visible = false
 flip_faces = true
 radius = 20.0
 height = 52.0356
@@ -1080,7 +1104,6 @@ sides = 32
 
 [node name="BellRoom2" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.9581, 22.1027, 10.3727)
-visible = false
 flip_faces = true
 radius = 19.2715
 height = 33.1413
@@ -1097,6 +1120,7 @@ material = SubResource("StandardMaterial3D_xdejf")
 
 [node name="BellRoom1" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, -3.11061, 14.5153, -28.4573)
+visible = false
 flip_faces = true
 radius = 12.8862
 height = 33.1872
@@ -1106,6 +1130,7 @@ sides = 32
 transform = Transform3D(0.246114, 0, 0, 0, 0.451863, 0, 0, 0, 0.395942, 0, -5.91077, 108.885)
 
 [node name="Layer0" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+visible = false
 
 [node name="Entrance" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms/Layer0"]
 transform = Transform3D(0.246114, 0, 0, 0, 0.246114, 0, 0, 0, 0.395942, 0, -2.094, 39.9819)
@@ -1132,6 +1157,7 @@ size = Vector3(15.8936, 18.6504, 29.7834)
 material = SubResource("StandardMaterial3D_s5wr7")
 
 [node name="Layer1" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+visible = false
 
 [node name="CircularHallway1" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms/Layer1"]
 
@@ -1425,11 +1451,9 @@ flip_faces = true
 size = Vector3(1, 2.59, 5.13574)
 
 [node name="Layer2" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
-visible = false
 
 [node name="CircularHallway2" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms/Layer2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.6, 0)
-visible = false
 
 [node name="OuterCilinder" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms/Layer2/CircularHallway2"]
 flip_faces = true
@@ -1505,16 +1529,27 @@ flip_faces = true
 size = Vector3(1, 2.59, 1.8)
 
 [node name="Door" parent="NavigationRegion3D/Rooms/Layer2/Room2/DoorFrame" instance=ExtResource("18_6fe2q")]
+is_locked = true
 
 [node name="SightDetectorBox" parent="NavigationRegion3D/Rooms/Layer2/Room2" instance=ExtResource("21_gdxgs")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.4462, 1.80304, -8.11174)
+receiver_resource = ExtResource("28_375i7")
 emitter_resource = SubResource("Resource_abg2s")
 
 [node name="CollisionShape3D" parent="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox" index="0"]
 shape = SubResource("BoxShape3D_cimvt")
 
+[node name="SightDetectorBox3" parent="NavigationRegion3D/Rooms/Layer2/Room2" instance=ExtResource("21_gdxgs")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.4462, 1.80304, -18.522)
+receiver_resource = ExtResource("28_375i7")
+emitter_resource = SubResource("Resource_fq4q7")
+
+[node name="CollisionShape3D" parent="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox3" index="0"]
+shape = SubResource("BoxShape3D_cimvt")
+
 [node name="SightDetectorBox2" parent="NavigationRegion3D/Rooms/Layer2/Room2" instance=ExtResource("21_gdxgs")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -45.7778, 1.80304, -33.7102)
+receiver_resource = ExtResource("28_375i7")
 emitter_resource = SubResource("Resource_jly37")
 
 [node name="CollisionShape3D" parent="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox2" index="0"]
@@ -1535,6 +1570,9 @@ size = Vector3(1, 2.59, 1.8)
 
 [node name="Door" parent="NavigationRegion3D/Rooms/Layer2/Room2/DoorFrame2" instance=ExtResource("18_6fe2q")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+is_locked = true
+lock_receiver_resource = ExtResource("11_fhnap")
+open_receiver_resource = ExtResource("26_6fe2q")
 
 [node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room2"]
 transform = Transform3D(-4.47013e-08, 0, -1, 0, 1, 0, 1, 0, -4.47013e-08, -2.23833, 2.5, 0.0380249)
@@ -1551,6 +1589,8 @@ flip_faces = true
 size = Vector3(0.991821, 2.59, 1.8)
 
 [node name="Door" parent="NavigationRegion3D/Rooms/Layer2/Room3/DoorFrame" instance=ExtResource("18_6fe2q")]
+lock_receiver_resource = ExtResource("12_ykxfq")
+close_receiver_resource = ExtResource("12_ykxfq")
 
 [node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room3"]
 transform = Transform3D(-4.47013e-08, 0, -1, 0, 1, 0, 1, 0, -4.47013e-08, -0.377361, 2.50024, -8.62146)
@@ -1576,6 +1616,7 @@ flip_faces = true
 size = Vector3(1, 2.59, 1.8)
 
 [node name="Door" parent="NavigationRegion3D/Rooms/Layer2/Room4/DoorFrame" instance=ExtResource("18_6fe2q")]
+is_locked = true
 
 [node name="DoorFrame4" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room4"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.952797, 1.88226, -8.74685)
@@ -1625,6 +1666,7 @@ size = Vector3(1.193, 2.59, 3.6)
 
 [node name="DoubleDoor" parent="NavigationRegion3D/Rooms/Layer2/Room8/DoorFrame" instance=ExtResource("24_7fpce")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+receiver_resource = SubResource("Resource_diod7")
 
 [node name="DoorFrame3" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room8"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -28.5169, 1.3, -4.18042)
@@ -1633,6 +1675,7 @@ size = Vector3(1.193, 2.59, 3.6)
 
 [node name="DoubleDoor" parent="NavigationRegion3D/Rooms/Layer2/Room8/DoorFrame3" instance=ExtResource("24_7fpce")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+is_open = true
 
 [node name="DoorFrame4" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room8"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -40.4715, 1.3, -1.442)
@@ -1641,6 +1684,7 @@ size = Vector3(1.193, 2.59, 3.6)
 
 [node name="DoubleDoor" parent="NavigationRegion3D/Rooms/Layer2/Room8/DoorFrame4" instance=ExtResource("24_7fpce")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+receiver_resource = SubResource("Resource_cimvt")
 
 [node name="DoorFrame2" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room8"]
 transform = Transform3D(1, 0, 4.9738e-14, 0, 1, 0, -4.9738e-14, 0, 1, -8.47732, 1.3, -4.18042)
@@ -1649,6 +1693,7 @@ size = Vector3(1.193, 2.59, 3.6)
 
 [node name="DoubleDoor" parent="NavigationRegion3D/Rooms/Layer2/Room8/DoorFrame2" instance=ExtResource("24_7fpce")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+receiver_resource = SubResource("Resource_mtmsn")
 
 [node name="RoomHole" type="CSGBox3D" parent="NavigationRegion3D/Rooms/Layer2/Room8"]
 transform = Transform3D(-0.00563743, 6.95653e-13, -0.999984, 2.46418e-10, 1, -6.95642e-13, 0.999984, -2.46418e-10, -0.00563743, -2.64027, 2.50024, -2.83498)
@@ -1778,6 +1823,7 @@ material = SubResource("StandardMaterial3D_jbeek")
 [node name="StaticObjects" type="Node3D" parent="NavigationRegion3D"]
 
 [node name="Layer1" type="Node3D" parent="NavigationRegion3D/StaticObjects"]
+visible = false
 
 [node name="Lever" parent="NavigationRegion3D/StaticObjects/Layer1" instance=ExtResource("4_a6o5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.12781, -1.32825, -40.3632)
@@ -1860,7 +1906,6 @@ is_open = true
 receiver_resource = ExtResource("10_gdxgs")
 
 [node name="Layer2" type="Node3D" parent="NavigationRegion3D/StaticObjects"]
-visible = false
 
 [node name="WoolPiece" parent="NavigationRegion3D/StaticObjects/Layer2" instance=ExtResource("9_375i7")]
 transform = Transform3D(0.843119, 0, 0.537726, 0, 1, 0, -0.537726, 0, 0.843119, 17.8115, 5.50961, -33.255)
@@ -1962,6 +2007,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.523, 6.06574, -38.9307)
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Layer1" type="Node3D" parent="Enemies"]
+visible = false
 
 [node name="Mamuthones" parent="Enemies/Layer1" instance=ExtResource("23_uufp4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.4202, -1.09973, 1.44521)
@@ -1991,7 +2037,6 @@ show_tooltip = false
 patroling_resource = SubResource("Resource_1p20i")
 
 [node name="Layer2" type="Node3D" parent="Enemies"]
-visible = false
 
 [node name="PuppetedMamuthones" parent="Enemies/Layer2" instance=ExtResource("30_a6o5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.959, 6.505, -62.148)
@@ -2023,6 +2068,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.9633, 6.50586, 9.41526)
 visible = false
 
 [node name="Layer0" type="Node3D" parent="Lights"]
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5114, 0, 40.6962)
@@ -2201,6 +2247,7 @@ lerp_speed = 2.0
 actual_max_energy = 0.5
 
 [node name="Layer1" type="Node3D" parent="Lights"]
+visible = false
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Lights/Layer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.89613, 0.427562, 27.8014)
@@ -2588,7 +2635,6 @@ lerp_speed = 2.0
 actual_min_energy = 0.5
 
 [node name="Layer2" type="Node3D" parent="Lights"]
-visible = false
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Lights/Layer2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.1233, 9.49788, -44.2908)
@@ -2995,14 +3041,16 @@ transform = Transform3D(0.576675, -0.816974, 2.52073e-08, -4.37114e-08, 1.91068e
 
 [node name="LayersManager" type="Node" parent="." node_paths=PackedStringArray("layer0", "layer1", "layer2", "layer3")]
 script = ExtResource("27_abg2s")
-layer2_enabled = false
+layer0_enabled = false
+layer1_enabled = false
 layer3_enabled = false
 layer0 = [NodePath("../Lights/Layer0"), NodePath("../NavigationRegion3D/Rooms/CentralBellRoom"), NodePath("../NavigationRegion3D/Decos/Bells/CentralBell"), NodePath("../NavigationRegion3D/Rooms/Layer0")]
-layer1 = [NodePath("../Lights/Layer1"), NodePath("../Enemies/Layer1"), NodePath("../NavigationRegion3D/Rooms/Layer1"), NodePath("../NavigationRegion3D/StaticObjects/Layer1"), NodePath("../NavigationRegion3D/Rooms/BellRoom1")]
+layer1 = [NodePath("../Lights/Layer1"), NodePath("../Enemies/Layer1"), NodePath("../NavigationRegion3D/Rooms/Layer1"), NodePath("../NavigationRegion3D/StaticObjects/Layer1"), NodePath("../NavigationRegion3D/Rooms/BellRoom1"), NodePath("../NavigationRegion3D/Decos/Layer1")]
 layer2 = [NodePath("../NavigationRegion3D/Rooms/BellRoom2"), NodePath("../NavigationRegion3D/Rooms/Layer2/CircularHallway2"), NodePath("../NavigationRegion3D/Decos/Bells/Bell2"), NodePath("../Lights/Layer2"), NodePath("../Enemies/Layer2"), NodePath("../NavigationRegion3D/StaticObjects/Layer2"), NodePath("../NavigationRegion3D/Rooms/Layer2"), NodePath("../NavigationRegion3D/Decos/Layer2")]
 layer3 = [NodePath("../NavigationRegion3D/Rooms/BellRoom3"), NodePath("../NavigationRegion3D/Decos/Bells/Bell3"), NodePath("../NavigationRegion3D/Rooms/CircularHallway3")]
 
 [editable path="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox"]
+[editable path="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox3"]
 [editable path="NavigationRegion3D/Rooms/Layer2/Room2/SightDetectorBox2"]
 [editable path="Enemies/Layer2/PuppetedMamuthones2"]
 [editable path="TopCam"]

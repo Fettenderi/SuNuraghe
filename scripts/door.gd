@@ -7,12 +7,12 @@ const ARRIVED_THRESHOLD = 0.01
 @export var bake_override := false:
 	set(value):
 		bake_override = value
-		_set_open(is_open or value)
+		_set_bake_mode(value)
 
 @export var is_open := false:
 	set(value):
 		is_open = value
-		_set_open(value or bake_override)
+		_set_open(value)
 
 @export var is_locked := false
 
@@ -47,13 +47,16 @@ func _ready() -> void:
 	if close_receiver_resource != null:
 		close_receiver_resource.received.connect((func(): is_open = false).unbind(1))
 
-func _set_open(value : bool):
+func _set_open(value : bool) -> void:
 	if Engine.is_editor_hint():
 		if _mesh != null:
 			_mesh.rotation.y = PI / 2 if value else 0.0
 	else:
 		_arrived = false
 		_target_rotation = PI / 2 if value else 0.0
+
+func _set_bake_mode(value : bool) -> void:
+	_mesh.position.y = -2.65 if value else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return

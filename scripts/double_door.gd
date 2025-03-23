@@ -7,12 +7,12 @@ const ARRIVED_THRESHOLD = 0.01
 @export var bake_override := false:
 	set(value):
 		bake_override = value
-		_set_open(is_open or value)
+		_set_bake_mode(value)
 
 @export var is_open := false:
 	set(value):
 		is_open = value
-		_set_open(value or bake_override)
+		_set_open(value)
 
 @export var receiver_resource : ReceiverRes
 @export var strattle_emitter_resource : EmitterRes
@@ -31,7 +31,7 @@ var _vibration_angle := PI / 16
 var _vibration_amount := 2
 
 func _ready() -> void:
-	_set_open(is_open or bake_override)
+	_set_open(is_open)
 	if Engine.is_editor_hint(): return
 	
 	if receiver_resource == null:
@@ -49,6 +49,10 @@ func _set_open(value : bool):
 		_arrived = false
 		_right_target_rotation = - PI / 2 if value else PI
 		_left_target_rotation = - PI / 2 if value else 0.0
+
+func _set_bake_mode(value : bool) -> void:
+	_mesh_right.position.y = -2.65 if value else 0.0
+	_mesh_left.position.y = -2.65 if value else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
