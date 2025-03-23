@@ -14,10 +14,7 @@
 script = ExtResource("2_7u4uq")
 schedule = null
 
-[node name="Head" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42367, 0)
-
-[node name="MovementSM" parent="." index="5" node_paths=PackedStringArray("starting_state")]
+[node name="MovementSM" parent="." index="6" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("IdleState")
 automatic = true
 

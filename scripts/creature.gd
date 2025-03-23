@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	if Vector2(_local_destination.x, _local_destination.z).length() > distance_threshold:
 		_direction = _local_destination.normalized()
 		
-		_mesh.rotation.y = lerp_angle(_mesh.rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+		_mesh.global_rotation.y = lerp_angle(_mesh.global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 	elif not _on_arrived_cooldown:
 		_on_arrived_cooldown = true
 		_direction = Vector3.ZERO
@@ -84,16 +84,16 @@ func _on_eyes_located(collider: Player) -> void:
 	
 	target = collider
 	
-	movement_state_machine.update({"located": collider.position})
+	movement_state_machine.update({"located": collider.global_position})
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return
 	
-	movement_state_machine.change_state("KillingState", {"to_look" : body.position})
+	movement_state_machine.change_state("KillingState", {"to_look" : body.global_position})
 	
 	if body is Player:
 		body.start_dying(_head.global_position)
-	navigation_agent_3d.target_position = body.position
+	navigation_agent_3d.target_position = body.global_position
 
 func _setup_arrived_cooldown() -> void:
 	_arrived_cooldown = Timer.new()
@@ -110,4 +110,4 @@ func look(target_position : Vector3, delta : float) -> void:
 	var _local_destination := target_position - global_position
 	var _local_direction := _local_destination.normalized()
 	
-	_mesh.rotation.y = lerp_angle(_mesh.rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+	_mesh.global_rotation.y = lerp_angle(_mesh.global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))

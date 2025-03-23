@@ -37,17 +37,20 @@ unique_name_in_owner = true
 
 [node name="WorldCollisionShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CapsuleShape3D_uhukm")
 debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 
 [node name="AgentsCollisionShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CapsuleShape3D_frv8s")
 debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 
 [node name="Head" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42367, 0)
+visible = false
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -79,6 +82,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+visible = false
 shape = SubResource("CylinderShape3D_5nnlu")
 debug_fill = false
 

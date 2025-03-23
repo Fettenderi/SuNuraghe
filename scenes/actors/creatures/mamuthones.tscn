@@ -19,7 +19,7 @@ script = ExtResource("1_u7wol")
 show_tooltip = true
 patroling_resource = SubResource("Resource_5nnlu")
 
-[node name="MovementSM" parent="." index="4" node_paths=PackedStringArray("starting_state")]
+[node name="MovementSM" parent="." index="6" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("PatrolState")
 
 [node name="PatrolState" type="Node" parent="MovementSM" index="0"]

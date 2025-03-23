@@ -37,10 +37,10 @@ func _physics_process(delta: float) -> void:
 	
 	if _target == null: return
 	
-	user.look(_target.position, delta)
-	_navigation_agent_3d.target_position = _get_actual_target_position(_target.position)
+	user.look(_target.global_position, delta)
+	_navigation_agent_3d.target_position = _get_actual_target_position(_target.global_position)
 
 func _get_actual_target_position(target_position : Vector3) -> Vector3:
-	if (user.position - target_position).length() > distance:
+	if (user.global_position - target_position).length() > distance:
 		return target_position
-	return user.position
+	return user.global_position

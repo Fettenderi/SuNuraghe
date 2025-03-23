@@ -14,7 +14,12 @@ const ARRIVED_THRESHOLD = 0.01
 		is_open = value
 		_set_open(value or bake_override)
 
-@export var receiver_resource : ReceiverRes
+@export var is_locked := false
+
+@export var lock_receiver_resource : ReceiverRes
+@export var open_receiver_resource : ReceiverRes
+@export var close_receiver_resource : ReceiverRes
+
 @export var strattle_emitter_resource : EmitterRes
 
 @onready var _mesh: Node3D = %Mesh
@@ -32,10 +37,15 @@ func _ready() -> void:
 	_set_open(is_open or bake_override)
 	if Engine.is_editor_hint(): return
 	
-	if receiver_resource == null:
+	if not is_locked:
 		_interactable_box.state = is_open
-	else:
-		receiver_resource.received.connect((func(): is_open = not is_open).unbind(1))
+	
+	if lock_receiver_resource != null:
+		lock_receiver_resource.received.connect((func(): is_locked = not is_locked).unbind(1))
+	if open_receiver_resource != null:
+		open_receiver_resource.received.connect((func(): is_open = true).unbind(1))
+	if close_receiver_resource != null:
+		close_receiver_resource.received.connect((func(): is_open = false).unbind(1))
 
 func _set_open(value : bool):
 	if Engine.is_editor_hint():
@@ -58,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		_arrived = true
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
-	if receiver_resource != null:
+	if is_locked:
 		_vibrating_time = _max_vibrating_time
 		_arrived = false
 		if strattle_emitter_resource != null:

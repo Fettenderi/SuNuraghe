@@ -84,20 +84,19 @@ flip_faces = true
 size = Vector3(13, 6, 21.709)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 5.03777, 0)
 operation = 2
 use_collision = true
 flip_faces = true
 size = Vector3(13, 6, 0.505859)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.39091, -1.70898, -0.0219285)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -6.81791, -1.70898, -0.0219285)
 use_collision = true
 flip_faces = true
 size = Vector3(0.683594, 2.58203, 1.7998)
 
 [node name="Door" parent="NavigationRegion3D/CSGCombiner3D/CSGBox3D3" instance=ExtResource("12_t1niu")]
-bake_override = true
 
 [node name="Player" parent="." instance=ExtResource("1_ouckr")]
 transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -2.61628, -3, 4.53174)

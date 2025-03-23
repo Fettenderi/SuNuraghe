@@ -20,6 +20,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _read_schedule() -> bool:
+	if schedule == null: return false
+	
 	var task := schedule.progess_tasks()
 	if task == null: return false
 	
