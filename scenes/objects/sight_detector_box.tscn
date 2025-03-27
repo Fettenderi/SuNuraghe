@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cj01p3h4hvf3s" path="res://scripts/sight_detector_box.gd" id="1_twlus"]
 
 [node name="SightDetectorBox" type="Area3D"]
+collision_layer = 0
+collision_mask = 16
 script = ExtResource("1_twlus")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

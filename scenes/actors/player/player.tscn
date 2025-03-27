@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvdhqvacrttlw"]
+[gd_scene load_steps=23 format=3 uid="uid://cvdhqvacrttlw"]
 
 [ext_resource type="Script" uid="uid://g8atcph4wi6q" path="res://scripts/player.gd" id="1_x0hk6"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_oxbe4"]
 [ext_resource type="Script" uid="uid://040x4sow0hu2" path="res://scripts/shape_controller.gd" id="4_i174x"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
 [ext_resource type="Script" uid="uid://bf35frq3511vv" path="res://scenes/actors/player/movement_states/walk_state.gd" id="5_r05ns"]
+[ext_resource type="Script" uid="uid://ktcg3yaxj61e" path="res://scenes/actors/player/movement_states/disguised_state.gd" id="6_068wj"]
 [ext_resource type="Script" uid="uid://igk0i8afm1ku" path="res://scenes/actors/player/movement_states/noclip_state.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://cdi5fw2eujhkr" path="res://scenes/actors/player/movement_states/sprint_state.gd" id="6_x4bpx"]
 [ext_resource type="Script" uid="uid://cvsupjg0baixa" path="res://scenes/actors/player/movement_states/cover_state.gd" id="7_ijtw4"]
@@ -38,7 +39,10 @@ radius = 0.25
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
+platform_on_leave = 2
+platform_floor_layers = 4294967294
 script = ExtResource("1_x0hk6")
+acceleration = 10.0
 
 [node name="FmodListener3D" type="FmodListener3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -71,8 +75,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.662, 0)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.13584e-08, 0, 0.00521803)
 current = true
 
-[node name="InteractionBox" type="Area3D" parent="Head" groups=["Interaction"]]
+[node name="InteractionBox" type="Area3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.52451e-08, 0, 0.995846)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/InteractionBox"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -95,9 +101,11 @@ collision_mask = 0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.52301e-07, 0, -2.88599)
 shape = SubResource("BoxShape3D_4iwnj")
 
-[node name="SoundMaker" parent="." groups=["Sound"] instance=ExtResource("3_oxbe4")]
+[node name="SoundMaker" parent="." instance=ExtResource("3_oxbe4")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 128
+collision_mask = 0
 shape = SubResource("SphereShape3D_sd4yv")
 enabled = false
 
@@ -119,6 +127,16 @@ max_speed = 2.1
 head_bob_amplitude = 0.017
 head_bob_frequency = 0.15
 
+[node name="DisguisedState" type="Node" parent="MovementSM"]
+script = ExtResource("6_068wj")
+max_walk_speed = 1.1
+max_dance_speed = 0.5
+head_bob_amplitude = 0.007
+head_bob_frequency = 0.1
+little_jump_time = 0.7
+little_jump_speed = 300.0
+little_jump_factor = 0.25
+
 [node name="NoclipState" type="Node" parent="MovementSM"]
 script = ExtResource("6_qek5x")
 
@@ -137,8 +155,8 @@ head_bob_frequency = 0.13
 [node name="CrawlState" type="Node" parent="MovementSM"]
 script = ExtResource("9_5bhx7")
 max_speed = 0.82
-head_bob_amplitude = 0.007
-head_bob_frequency = 0.1
+head_bob_amplitude = 0.012
+head_bob_frequency = 0.07
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="DieState" type="Node" parent="MovementSM"]

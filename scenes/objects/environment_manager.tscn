@@ -13,7 +13,10 @@ sky_material = SubResource("ProceduralSkyMaterial_e6psu")
 [sub_resource type="Environment" id="Environment_yh7dg"]
 background_mode = 2
 sky = SubResource("Sky_xr3nu")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
+ssao_radius = 2.32
 glow_enabled = true
 
 [node name="EnvironmentManager" type="Node3D"]

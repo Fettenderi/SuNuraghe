@@ -12,7 +12,7 @@
 
 [node name="PuppetedMamuthones" instance=ExtResource("1_x6tgh")]
 script = ExtResource("2_7u4uq")
-verbose = null
+verbose = false
 schedule = null
 
 [node name="MovementSM" parent="." index="6" node_paths=PackedStringArray("starting_state")]

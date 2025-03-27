@@ -1,0 +1,213 @@
+[gd_scene load_steps=13 format=3 uid="uid://da65f6a2v0hjr"]
+
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_b2h6x"]
+[ext_resource type="PackedScene" uid="uid://b7fjdpsygtd80" path="res://prototypes/beta2/shera.tscn" id="2_kmaxy"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_np4y0"]
+[ext_resource type="PackedScene" uid="uid://byyw6jp2yacyy" path="res://prototypes/beta2/chair.tscn" id="4_mmwmf"]
+[ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="7_wehgn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_t8fxv"]
+sky_material = SubResource("ProceduralSkyMaterial_u4f27")
+
+[sub_resource type="Environment" id="Environment_o4fph"]
+background_mode = 2
+sky = SubResource("Sky_t8fxv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hwcem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmwmf"]
+albedo_texture = ExtResource("3_np4y0")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gvs4q"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o4fph")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c4voo")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.862073, 3.11432, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(4.90088, 12.2286, 4.73145)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13353, 7.91829, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(10.8921, 4.43802, 6.4353)
+
+[node name="Player" parent="." instance=ExtResource("2_b2h6x")]
+transform = Transform3D(0.317802, 0, -0.948158, 0, 1, 0, 0.948158, 0, 0.317802, 2.30694, 5.69928, -0.468884)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
+remote_path = NodePath("../../TopCam/SubViewportContainer/SubViewport/Camera3D")
+
+[node name="DynamicObjects" type="Node3D" parent="."]
+
+[node name="shera" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41298, -2.21298, -1.45022)
+metadata/_edit_group_ = true
+
+[node name="shera19" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41298, 1.0723, -1.45022)
+mass = 100.0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera19"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera19"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera20" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79145, 2.23072, -1.45022)
+mass = 100.0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera20"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera20"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera21" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.804325, 0.987676, -1.45022)
+mass = 100.0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera21"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera21"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera22" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86512, 1.13337)
+mass = 100.0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera22"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera22"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera23" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85988, 3.13392, 0.721336)
+mass = 100.0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera23"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera23"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera24" type="RigidBody3D" parent="DynamicObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.462411, 4.10886, 0.475282)
+mass = 100.0
+inertia = Vector3(5.5, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DynamicObjects/shera24"]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_mmwmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DynamicObjects/shera24"]
+shape = SubResource("SphereShape3D_gvs4q")
+
+[node name="shera2" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, -1.60865)
+
+[node name="shera3" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.133368, -2.21298, -1.66959)
+
+[node name="shera4" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.719704, -2.21298, -0.926194)
+
+[node name="shera5" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14487, -2.21298, -0.402163)
+
+[node name="shera6" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2173, -2.21298, 0.511843)
+
+[node name="shera7" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.31548, -2.21298, 1.38929)
+
+[node name="shera8" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218677, -2.21298, 0.804325)
+
+[node name="shera9" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.390662, -2.21298, 1.62084)
+
+[node name="shera10" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.95828, 7.06827, 0.438723)
+
+[node name="shera11" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0846205, -2.21298, -0.304669)
+
+[node name="shera12" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera13" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera14" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera15" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera16" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera17" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="shera18" parent="DynamicObjects" instance=ExtResource("2_kmaxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21799, -2.21298, 0.280295)
+
+[node name="RigidBody3D" parent="DynamicObjects" instance=ExtResource("4_mmwmf")]
+transform = Transform3D(-0.683236, 0, 0.730198, 0, 1, 0, -0.730198, 0, -0.683236, 5.51876, 6.19928, -2.14287)
+
+[node name="RigidBody3D2" parent="DynamicObjects" instance=ExtResource("4_mmwmf")]
+transform = Transform3D(-0.683236, 0, 0.730198, 0, 1, 0, -0.730198, 0, -0.683236, 6.24346, 6.19928, -0.460544)
+
+[node name="RigidBody3D3" parent="DynamicObjects" instance=ExtResource("4_mmwmf")]
+transform = Transform3D(0.718515, 0, -0.695512, 0, 1, 0, 0.695512, 0, 0.718515, 4.56167, 6.19928, 1.34816)
+
+[node name="RigidBody3D4" parent="DynamicObjects" instance=ExtResource("4_mmwmf")]
+transform = Transform3D(0.718515, 0, -0.695512, 0, 1, 0, 0.695512, 0, 0.718515, 2.78953, 6.19928, 1.26724)
+
+[node name="TopCam" parent="." instance=ExtResource("7_wehgn")]
+
+[node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(0.317802, 0.948158, 4.14453e-08, 0, -4.37114e-08, 1, 0.948158, -0.317802, -1.38916e-08, 2.30694, 20.4233, -0.468884)
+
+[editable path="TopCam"]

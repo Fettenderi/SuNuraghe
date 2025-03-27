@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event : InputEvent) -> void:
 	if not _active: return
-
+	
 	if Input.is_action_just_pressed(user.KEY_BIND_NOCLIP):
 		state_machine.change_state("NoclipState")
 		return

@@ -7,3 +7,4 @@ script = ExtResource("1_unxdg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
+debug_color = Color(0, 0.595, 0.7, 0.701961)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b70eht5rwb6nk"]
+
+[ext_resource type="Script" uid="uid://oyaprf6fpcmh" path="res://scripts/agent_interaction_box.gd" id="1_mwwi2"]
+
+[node name="AgentInteractionBox" type="Area3D"]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_mwwi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

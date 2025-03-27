@@ -9,7 +9,7 @@ extends Resource
 @export var receivers : Array[ReceiverRes]
 
 ## Emits a signal towards all its [member receivers].[br][br]
-func send_signal(value):
+func send_signal(value = null):
 	for _receiver : ReceiverRes in receivers:
 		_receiver.received.emit(value)
 		_receiver.send_signal(value)

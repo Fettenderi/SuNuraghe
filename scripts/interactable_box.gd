@@ -16,25 +16,23 @@ func _ready() -> void:
 	area_entered.connect(_interactable_entered)
 	area_exited.connect(_interactable_exited)
 
-func _interactable_entered(area: Area3D):
+func _interactable_entered(_area: Area3D):
 	if not is_active: return
 	
-	if area.is_in_group(&"Interaction"):
-		_in_range = true
-		Gui.append_interaction(gui_text)
+	_in_range = true
+	Gui.append_interaction(gui_text)
 
-func _interactable_exited(area: Area3D):
+func _interactable_exited(_area: Area3D):
 	if not is_active: return
 	
-	if area.is_in_group(&"Interaction"):
-		_in_range = false
-		Gui.remove_interaction(gui_text)
+	_in_range = false
+	Gui.remove_interaction(gui_text)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_active: return
 	if not _in_range: return
 	
-	if event.is_action_pressed(required_input, false, true):
+	if event.is_action_pressed(required_input, false, false):
 		state = not state
 		if emitter_resource != null:
 			emitter_resource.send_signal(state)

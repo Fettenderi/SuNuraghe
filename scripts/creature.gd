@@ -1,6 +1,7 @@
 class_name Creature
 extends CharacterBody3D
 
+const MASS = 80.0
 const TURNING_SPEED = 6.0
 
 @export var distance_threshold := 0.5
@@ -8,11 +9,15 @@ const TURNING_SPEED = 6.0
 @export var activation_receiver : ReceiverRes
 @export var deactivation_receiver : ReceiverRes
 
+@export var target : CharacterBody3D
+
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var movement_state_machine: StateMachine = %MovementSM
 
 @onready var _world_collision_shape: CollisionShape3D = %WorldCollisionShape
 @onready var _agents_collision_shape: CollisionShape3D = %AgentsCollisionShape
+
+@warning_ignore("unused_private_class_variable")
 @onready var _mesh: Node3D = %Mesh
 @onready var _eyes: Node3D = %Eyes
 @onready var _head: Node3D = %Head
@@ -37,8 +42,6 @@ var _on_arrived_cooldown := false:
 		_on_arrived_cooldown = value
 		if _on_arrived_cooldown: _arrived_cooldown.start()
 
-var target : CharacterBody3D
-
 func _ready() -> void:
 	if activation_receiver != null:
 		_is_active = false
@@ -61,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	if Vector2(_local_destination.x, _local_destination.z).length() > distance_threshold:
 		_direction = _local_destination.normalized()
 		
-		_mesh.global_rotation.y = lerp_angle(_mesh.global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+		global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 	elif not _on_arrived_cooldown:
 		_on_arrived_cooldown = true
 		_direction = Vector3.ZERO
@@ -69,7 +72,40 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = _direction * speed * delta
 	
+	_collide_with_rigidbodies()
+	
 	move_and_slide()
+
+func _collide_with_rigidbodies():
+	var _collision : KinematicCollision3D
+	var _push_direction : Vector3
+	var _push_force : float
+	var _velocity_difference : float
+	var _mass_ratio : float
+	
+	for _collision_index in get_slide_collision_count():
+		_collision = get_slide_collision(_collision_index)
+		if _collision.get_collider() is RigidBody3D:
+			_push_direction = -_collision.get_normal()
+			_velocity_difference = max(velocity.dot(_push_direction) - _collision.get_collider().linear_velocity.dot(_push_direction), 0.0)
+			_push_direction.y = 0.0
+			
+			_mass_ratio = min(MASS / _collision.get_collider().mass, 1.0)
+			_push_force = _mass_ratio * 0.9
+			
+			_collision.get_collider().apply_impulse(_push_direction * _velocity_difference * _push_force, _collision.get_position() - _collision.get_collider().global_position)
+		
+		#if _collision.get_collider() is CharacterBody3D:
+			#print("PING")
+			#_push_direction = -_collision.get_normal()
+			#_velocity_difference = max(velocity.dot(_push_direction) - _collision.get_collider().velocity.dot(_push_direction), 0.0)
+			#_push_direction.y = 0.0
+			#
+			#_push_force = -5.0
+			#
+			#_collision.get_collider().velocity += _push_direction * _velocity_difference * _push_force
+			##_collision.get_collider().apply_impulse(_push_direciton * _velocity_difference * _push_force, _collision.get_position() - _collision.get_collider().global_position)
+
 
 func _start_movement() -> void:
 	_is_active = true
@@ -82,7 +118,8 @@ func _end_movement() -> void:
 func _on_eyes_located(collider: Player) -> void:
 	if not _is_active: return
 	
-	target = collider
+	if target == null:
+		target = collider
 	
 	movement_state_machine.update({"located": collider.global_position, "is_disguised": collider.is_disguised()})
 
@@ -110,4 +147,4 @@ func look(target_position : Vector3, delta : float) -> void:
 	var _local_destination := target_position - global_position
 	var _local_direction := _local_destination.normalized()
 	
-	_mesh.global_rotation.y = lerp_angle(_mesh.global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+	global_rotation.y = lerp_angle(global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))

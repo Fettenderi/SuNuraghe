@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://buewliv6fc4na"]
+
+[ext_resource type="Script" uid="uid://dis0xtsd008ki" path="res://scripts/disguise.gd" id="1_ovhii"]
+[ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="2_p4xmy"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_71sye"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6c006"]
+size = Vector3(1.97, 0.705, 1.995)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovhii"]
+albedo_texture = ExtResource("2_p4xmy")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]
+size = Vector3(1.98218, 0.703125, 1.98438)
+
+[node name="Disguise" type="Node3D"]
+script = ExtResource("1_ovhii")
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348996, 0)
+mesh = SubResource("BoxMesh_6c006")
+surface_material_override/0 = SubResource("StandardMaterial3D_ovhii")
+
+[node name="InteractableBox" parent="." instance=ExtResource("3_71sye")]
+unique_name_in_owner = true
+required_input = &"interact"
+gui_text = "[ E ] Prendi"
+
+[node name="CollisionShape3D" parent="InteractableBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)
+visible = false
+shape = SubResource("BoxShape3D_q1uht")
+
+[connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="InteractableBox"]

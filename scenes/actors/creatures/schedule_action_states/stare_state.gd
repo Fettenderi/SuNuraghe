@@ -1,7 +1,6 @@
 extends State
 
 var _is_active := false
-var _stare_target : Vector3
 
 var _stare_timer : Timer
 
@@ -16,17 +15,14 @@ func start(info : Dictionary = {}) -> void:
 		
 		_stare_timer.start()
 
-func update(info : Dictionary = {}) -> void:
-	if info.has("located"):
-		_stare_target = info["located"]
-
 func end() -> void:
 	_is_active = false
+
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
-	user.look(_stare_target, delta)
+	user.look(user.target.global_position, delta)
 
 func _on_stare_timer_ended() -> void:
 	if not _is_active: return

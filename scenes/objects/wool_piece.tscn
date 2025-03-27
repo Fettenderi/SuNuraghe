@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="2_4h4wo"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_6fu0n"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1uht"]
-albedo_texture = ExtResource("2_4h4wo")
-
 [sub_resource type="BoxMesh" id="BoxMesh_q1uht"]
 size = Vector3(1.97, 0.705, 1.995)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1uht"]
+albedo_texture = ExtResource("2_4h4wo")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]
 size = Vector3(1.98218, 0.703125, 1.98438)
@@ -21,8 +21,8 @@ unique_name_in_owner = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348996, 0)
-material_override = SubResource("StandardMaterial3D_q1uht")
 mesh = SubResource("BoxMesh_q1uht")
+surface_material_override/0 = SubResource("StandardMaterial3D_q1uht")
 
 [node name="InteractableBox" parent="." instance=ExtResource("3_6fu0n")]
 unique_name_in_owner = true

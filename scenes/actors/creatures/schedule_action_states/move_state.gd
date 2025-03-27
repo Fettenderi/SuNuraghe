@@ -12,6 +12,9 @@ func start(info : Dictionary = {}) -> void:
 
 	if info.has("position"):
 		_navigation_agent_3d.target_position = info["position"]
+	
+	if info.has("speed"):
+		user.speed = info["speed"]
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("arrived"):

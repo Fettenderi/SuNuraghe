@@ -1,9 +1,6 @@
 @tool
 extends Node3D
 
-const PLAYER_COLLISION_LAYER = 2
-
-
 @export var rays_amount := 25:
 	set(value):
 		rays_amount = value
@@ -30,7 +27,6 @@ const PLAYER_COLLISION_LAYER = 2
 @export_flags_3d_physics var rays_collision_mask
 
 var _rays : Array[RayCast3D] = []
-#var _ray_weights : Array[float] = []
 var _editor_rays : Array[CSGCylinder3D] = []
 
 var _debug_material : StandardMaterial3D
@@ -71,7 +67,6 @@ func create_rays(excluded_collider):
 		if _i == 0: continue
 		
 		var angle = view_angle / (rays_amount + 1) * _i - view_angle / 2.0
-		#_ray_weights.append(_ease_function(_normalizing_function(angle, view_angle / 2.0)))
 		_ray_direction = Vector3(cos(angle), 0.0, sin(angle)) * ray_lenght
 		_ray_offset = Vector3(0.0, 0.0, lerp(0.0, _ray_direction.z, rays_paralellness))
 		_ray_direction.z -= _ray_offset.z
@@ -86,18 +81,10 @@ func create_rays(excluded_collider):
 		
 		add_child(_ray, true)
 
-# Non fa molto ma lo lascio perchè boh
-#func _normalizing_function(value: float, maxv: float) -> float:
-	#return abs(abs(value) - maxv)/maxv
-#
-#func _ease_function(value: float) -> float:
-	#return 1.0 - (1.0 - value)*(1.0 - value)
-
 func _reset_rays():
 	for _ray in get_children():
 		_ray.queue_free()
 	_rays.clear()
-	#_ray_weights.clear()
 
 
 func _create_debug_rays():

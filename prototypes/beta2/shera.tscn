@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7fjdpsygtd80"]
+
+[ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="1_0jr81"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hwcem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dufot"]
+albedo_texture = ExtResource("1_0jr81")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gvs4q"]
+
+[node name="shera" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hwcem")
+surface_material_override/0 = SubResource("StandardMaterial3D_dufot")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_gvs4q")

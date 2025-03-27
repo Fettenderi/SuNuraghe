@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://h23cy3moov7t"]
+
+[ext_resource type="Script" uid="uid://cbsh6fp2vmkpk" path="res://scripts/bell_trap.gd" id="1_mnoyg"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="2_53nx4"]
+[ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_53nx4"]
+[ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="4_wxysh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_53nx4"]
+height = 0.179199
+radius = 0.59668
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wxysh"]
+radius = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wxysh"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5vvy"]
+albedo_texture = ExtResource("4_wxysh")
+
+[node name="BellTrap" type="Node3D"]
+script = ExtResource("1_mnoyg")
+
+[node name="DefuseBox" parent="." instance=ExtResource("2_53nx4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0158216, 0)
+required_input = &"interact"
+gui_text = "[ E ] Disattiva"
+state = true
+
+[node name="CollisionShape3D" parent="DefuseBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.655525, 0)
+shape = SubResource("CylinderShape3D_53nx4")
+
+[node name="ActivationBox" parent="." instance=ExtResource("3_53nx4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870351, 0)
+collision_layer = 0
+collision_mask = 2
+shape = SubResource("CylinderShape3D_wxysh")
+
+[node name="SoundMaker" parent="." instance=ExtResource("3_53nx4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 128
+collision_mask = 0
+shape = SubResource("SphereShape3D_wxysh")
+enabled = false
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Mesh"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
+size = Vector3(0.634766, 0.274414, 0.667725)
+material = SubResource("StandardMaterial3D_j5vvy")
+
+[connection signal="signal_emitted" from="DefuseBox" to="." method="_on_defuse_box_signal_emitted"]
+[connection signal="body_entered" from="ActivationBox" to="." method="_on_activation_box_body_entered"]
+
+[editable path="DefuseBox"]

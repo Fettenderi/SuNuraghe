@@ -6,17 +6,24 @@ extends State
 
 @onready var _toggle_cooldown_timer : Timer
 
+var _leaving_state : String
 var _in_toggle_cooldown := false
 var _active := false
 var _speed : float
 
-func start(_info : Dictionary = {}) -> void:
+func start(info : Dictionary = {}) -> void:
 	_active = true
 	_in_toggle_cooldown = true
 	_toggle_cooldown_timer.start()
 
 	_speed = user._max_speed
 	user.shape_controller.set_active(false)
+
+	_leaving_state = "WalkState"
+
+	if info.has("leaving_state"):
+		_leaving_state = info["leaving_state"]
+
 
 func end() -> void:
 	_active = false
@@ -45,7 +52,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _in_toggle_cooldown: return
 	
 	if Input.is_action_just_released(user.KEY_BIND_NOCLIP):
-		state_machine.change_state("WalkState")
+		state_machine.change_state(_leaving_state)
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		_speed = lerp(_speed, max_speed, speed_sensitivity)
@@ -67,7 +74,7 @@ func _move_player(_delta : float) -> void:
 func _rotate_player(delta : float) -> void:
 	user.quaternion = user.quaternion.slerp(Quaternion(Vector3.UP, user._rotation_target_player), user.mouse_acceleration * delta)
 	
-	user._head.quaternion = user._head.quaternion.slerp(Quaternion(Vector3.RIGHT, user._rotation_target_head), user.mouse_acceleration * delta)
+	user._head.quaternion = user._head.quaternion.slerp(Quaternion(Vector3.LEFT, user._rotation_target_head), user.mouse_acceleration * delta)
 
 
 func _toggle_cooldown_ended() -> void:

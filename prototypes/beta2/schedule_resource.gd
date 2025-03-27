@@ -4,6 +4,10 @@ extends Resource
 @export var tasks : Array[ScheduleTaskRes]
 @export var receivers : Array[ReceiverRes]
 
+@export_subgroup("Trap Activated Response")
+@export var trap_activated_task : ScheduleTaskRes
+@export var trap_activated_receiver : ReceiverRes
+
 var _progress := 0
 
 func progess_tasks() -> ScheduleTaskRes:

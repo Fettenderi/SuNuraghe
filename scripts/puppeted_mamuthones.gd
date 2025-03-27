@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 func _read_schedule() -> bool:
 	if schedule == null: return false
 	
+	if schedule.trap_activated_receiver != null:
+		schedule.trap_activated_receiver.received.connect(_on_trap_activated.unbind(1))
+	
 	var task := schedule.progess_tasks()
 	if task == null: return false
 	
@@ -42,6 +45,12 @@ func progress() -> void:
 func _print_transform() -> void:
 	print("Position: " + str(position))
 
+func _on_trap_activated():
+	if schedule.trap_activated_task == null:
+		print("TRAP ACTIVATED TASK NON CONVIFURATA PER " + name)
+		return
+	
+	movement_state_machine.change_state(schedule.trap_activated_task.state, schedule.trap_activated_task.info, true)
 
 func get_schedule_receiver(index: int) -> ReceiverRes:
 	return schedule.get_receiver(index)

@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+const MASS = 80.0
 const TURNING_SPEED = 6.0
 
 const HEAD_ROTATION_MIN = -90.0
@@ -50,8 +51,6 @@ var _head_bob_tick := 0
 var _head_bob_frequency := 0.3
 var _head_bob_amplitude := 0.01
 
-var _disguised := false
-
 var _jump_buffered := false:
 	set(value):
 		_jump_buffered = value
@@ -65,6 +64,7 @@ func _ready() -> void:
 
 	_head_start_pos = _head.position
 	_rotation_target_player = quaternion.get_angle()
+	PlayerStats.disguised_changed.connect(set_disguised)
 
 func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
@@ -104,6 +104,8 @@ func _move_player(delta : float) -> void:
 	velocity.x = move_toward(velocity.x, _direction.x * _speed, _accel * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * _speed, _accel * delta)
 
+	_collide_with_rigidbodies()
+
 	move_and_slide()
 
 func _rotate_player(delta : float) -> void:
@@ -133,11 +135,34 @@ func _reset_head_bob(delta : float) -> void:
 func _on_jump_buffer_timeout() -> void:
 	_jump_buffered = false
 
+func _collide_with_rigidbodies():
+	var _collision : KinematicCollision3D
+	var _push_direciton : Vector3
+	var _push_force : float
+	var _velocity_difference : float
+	var _mass_ratio : float
+	
+	for _collision_index in get_slide_collision_count():
+		_collision = get_slide_collision(_collision_index)
+		if _collision.get_collider() is RigidBody3D:
+			_push_direciton = -_collision.get_normal()
+			_velocity_difference = max(velocity.dot(_push_direciton) - _collision.get_collider().linear_velocity.dot(_push_direciton), 0.0)
+			_push_direciton.y = 0.0
+			
+			_mass_ratio = min(MASS / _collision.get_collider().mass, 1.0)
+			_push_force = _mass_ratio * 0.9
+			
+			_collision.get_collider().apply_impulse(_push_direciton * _velocity_difference * _push_force, _collision.get_position() - _collision.get_collider().global_position)
+
 func start_dying(to_look : Vector3):
 	movement_sm.change_state("DieState", {"to_look": to_look})
 
-func is_disguised() -> float:
-	return _disguised
+func set_disguised(value : bool) -> void:
+	if value: movement_sm.change_state("DisguisedState")
+	else: movement_sm.change_state("WalkState")
+
+func is_disguised() -> bool:
+	return PlayerStats.disguised
 
 func look(target : Vector3, delta : float) -> void:
 	var _local_destination := target - global_position

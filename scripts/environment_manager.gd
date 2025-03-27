@@ -23,3 +23,4 @@ func _update_env() -> void:
 	if _environment != null:
 		_environment.background_energy_multiplier = 1.0 if _is_enabled else 0.0
 		_environment.ambient_light_energy = 1.0 if _is_enabled else 0.0
+		_environment.sdfgi_enabled = not _is_enabled

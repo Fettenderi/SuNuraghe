@@ -6,8 +6,6 @@ extends Area3D
 @export var receiver_resource : ReceiverRes
 @export var emitter_resource : EmitterRes
 
-var _state := false
-
 signal signal_emitted(value)
 
 func _ready() -> void:
@@ -17,9 +15,7 @@ func _ready() -> void:
 
 func _interactable_entered(_area: Area3D):
 	if not active: return
-	if _state: return
 	
-	_state = true
 	if emitter_resource != null:
-		emitter_resource.send_signal(_state)
-	signal_emitted.emit(_state)
+		emitter_resource.send_signal()
+	signal_emitted.emit(true)

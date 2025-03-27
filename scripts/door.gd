@@ -75,7 +75,7 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 		_vibrating_time = _max_vibrating_time
 		_arrived = false
 		if strattle_emitter_resource != null:
-			strattle_emitter_resource.send_signal(true)
+			strattle_emitter_resource.send_signal()
 		return
 	
 	is_open = not is_open

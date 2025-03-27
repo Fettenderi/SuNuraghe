@@ -1,10 +1,4 @@
-@tool
 extends Node3D
-
-@export var bake_override := false:
-	set(value):
-		bake_override = value
-		_set_bake_mode(value)
 
 @export var emitter_resource : EmitterRes
 
@@ -16,13 +10,8 @@ extends Node3D
 var _available := true
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
-	
 	if emitter_resource != null:
 		_interactable_box.emitter_resource = emitter_resource
-
-func _set_bake_mode(value : bool) -> void:
-	_mesh.position.y = -1.0 if value else 0.0
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if not _available: return

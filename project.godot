@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://3x3h6ncb5mvs"
+run/main_scene="uid://cuoims65677ck"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -51,10 +51,6 @@ window/vsync/vsync_mode=2
 
 project/assembly_name="ProjectNuraghe"
 
-[editor]
-
-movie_writer/movie_file="F:/RobaNerd/GitHub/ProjectNuraghe/prototypes/proto1.avi"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/fmod/plugin.cfg")
@@ -62,7 +58,6 @@ enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/f
 [global_group]
 
 Player=""
-Sound=""
 
 [input]
 
@@ -132,6 +127,8 @@ interact={
 3d_physics/layer_4="Crawl"
 3d_physics/layer_5="Sight"
 3d_physics/layer_6="Agents"
+3d_physics/layer_7="RigidBodies"
+3d_physics/layer_8="Sounds"
 
 [physics]
 

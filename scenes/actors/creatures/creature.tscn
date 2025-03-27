@@ -10,7 +10,7 @@
 radius = 0.330362
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_frv8s"]
-radius = 0.60672
+radius = 0.74474
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
@@ -34,6 +34,7 @@ script = ExtResource("1_688wq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 unique_name_in_owner = true
+radius = 0.75
 
 [node name="WorldCollisionShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -43,7 +44,6 @@ debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 
 [node name="AgentsCollisionShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
-visible = false
 shape = SubResource("CapsuleShape3D_frv8s")
 debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
 

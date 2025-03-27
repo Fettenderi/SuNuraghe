@@ -5,6 +5,8 @@ extends State
 
 var _is_active := false
 
+var _stare_timer : Timer
+
 var _target : CharacterBody3D
 var _navigation_agent_3d : NavigationAgent3D
 
@@ -16,20 +18,28 @@ func start(info : Dictionary = {}) -> void:
 	
 	user.speed = speed
 	
-	if info.has("located"):
-		if _target == null:
-			_target = user.target
+	_target = user.target
+	
+	if info.has("speed"):
+		user.speed = info["speed"]
+	
+	if info.has("time"):
+		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
+		
+		if not _stare_timer.is_inside_tree():
+			add_child(_stare_timer, true)
+		
+		_stare_timer.start()
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("end"):
 		user.end_buffered = true
 
-	if info.has("located"):
-		if _target == null:
-			_target = user.target
 
 func end() -> void:
 	_is_active = false
+	
+	_navigation_agent_3d.target_position = user.global_position
 
 
 func _physics_process(delta: float) -> void:
@@ -44,3 +54,10 @@ func _get_actual_target_position(target_position : Vector3) -> Vector3:
 	if (user.global_position - target_position).length() > distance:
 		return target_position
 	return user.global_position
+
+
+func _on_stare_timer_ended() -> void:
+	if not _is_active: return
+	
+	_stare_timer.stop()
+	user.progress()
