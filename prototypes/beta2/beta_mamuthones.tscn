@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="8_b3kva"]
 [ext_resource type="Script" uid="uid://c36wyajajwypx" path="res://scenes/actors/creatures/movement_states/wandering_state.gd" id="9_aenox"]
 [ext_resource type="Script" uid="uid://c7ubq7oc8fh0f" path="res://scenes/actors/creatures/movement_states/returning_state.gd" id="10_kbt5a"]
-[ext_resource type="Script" uid="uid://b4oyanx38u8op" path="res://scenes/actors/creatures/movement_states/killing_state.gd" id="11_b1383"]
+[ext_resource type="Script" uid="uid://chjrj1d1jdmrs" path="res://scenes/actors/creatures/movement_states/kill_state.gd" id="11_b1383"]
 
 [sub_resource type="Resource" id="Resource_nu7mx"]
 resource_local_to_scene = true

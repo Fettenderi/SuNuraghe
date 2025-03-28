@@ -32,13 +32,14 @@ radius = 0.920832
 size = Vector3(0.666016, 0.659912, 1.74609)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4iwnj"]
-size = Vector3(0.1, 0.1, 5.77979)
+size = Vector3(0.1, 0.1, 4.45825)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sd4yv"]
 radius = 0.25
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
+collision_mask = 65
 platform_on_leave = 2
 platform_floor_layers = 4294967294
 script = ExtResource("1_x0hk6")
@@ -50,22 +51,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="StandingShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_dig1p")
-debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
+debug_color = Color(0.86, 0.2752, 0.577347, 0)
 
 [node name="CrouchingShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_5bhx7")
 disabled = true
-debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
+debug_color = Color(0.86, 0.2752, 0.577347, 0)
 
 [node name="CrawlingShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_i174x")
 disabled = true
-debug_color = Color(0.864634, 0.275058, 0.582628, 0.42)
+debug_color = Color(0.86, 0.2752, 0.577347, 0)
 
 [node name="Head" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -83,6 +87,8 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/InteractionBox"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_n3p3a")
+debug_color = Color(0, 0.595, 0.7, 0)
+debug_fill = false
 
 [node name="CrawlDetectorBox" type="Area3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.74716e-08, -0.0560695, 0.906928)
@@ -91,6 +97,8 @@ collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/CrawlDetectorBox"]
 shape = SubResource("BoxShape3D_5bhx7")
+debug_color = Color(0, 0.595, 0.7, 0)
+debug_fill = false
 
 [node name="SightBox" type="Area3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.13584e-08, 0, 0.00521803)
@@ -98,12 +106,14 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head/SightBox"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.52301e-07, 0, -2.88599)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.94535e-07, 0, -2.22522)
 shape = SubResource("BoxShape3D_4iwnj")
+debug_fill = false
 
 [node name="SoundMaker" parent="." instance=ExtResource("3_oxbe4")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 collision_layer = 128
 collision_mask = 0
 shape = SubResource("SphereShape3D_sd4yv")
@@ -123,6 +133,7 @@ automatic = true
 
 [node name="WalkState" type="Node" parent="MovementSM"]
 script = ExtResource("5_r05ns")
+change_rate = 5.0
 max_speed = 2.1
 head_bob_amplitude = 0.017
 head_bob_frequency = 0.15
@@ -142,18 +153,21 @@ script = ExtResource("6_qek5x")
 
 [node name="SprintState" type="Node" parent="MovementSM"]
 script = ExtResource("6_x4bpx")
+change_rate = 0.7
 max_speed = 2.8
 head_bob_amplitude = 0.023
 head_bob_frequency = 0.25
 
 [node name="CoverState" type="Node" parent="MovementSM"]
 script = ExtResource("7_ijtw4")
+change_rate = 3.0
 max_speed = 0.95
 head_bob_amplitude = 0.012
 head_bob_frequency = 0.13
 
 [node name="CrawlState" type="Node" parent="MovementSM"]
 script = ExtResource("9_5bhx7")
+change_rate = 3.0
 max_speed = 0.82
 head_bob_amplitude = 0.012
 head_bob_frequency = 0.07

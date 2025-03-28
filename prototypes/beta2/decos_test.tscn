@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_b2h6x"]
 [ext_resource type="PackedScene" uid="uid://b7fjdpsygtd80" path="res://prototypes/beta2/shera.tscn" id="2_kmaxy"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_np4y0"]
-[ext_resource type="PackedScene" uid="uid://byyw6jp2yacyy" path="res://prototypes/beta2/chair.tscn" id="4_mmwmf"]
+[ext_resource type="PackedScene" uid="uid://byyw6jp2yacyy" path="res://scenes/objects/chair.tscn" id="4_mmwmf"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="7_wehgn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]

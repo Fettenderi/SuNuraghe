@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://h23cy3moov7t"]
 
 [ext_resource type="Script" uid="uid://cbsh6fp2vmkpk" path="res://scripts/bell_trap.gd" id="1_mnoyg"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="2_53nx4"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="2_53nx4"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_53nx4"]
 [ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="4_wxysh"]
 
@@ -25,7 +25,7 @@ script = ExtResource("1_mnoyg")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0158216, 0)
 required_input = &"interact"
-gui_text = "[ E ] Disattiva"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Disattiva"
 state = true
 
 [node name="CollisionShape3D" parent="DefuseBox" index="0"]

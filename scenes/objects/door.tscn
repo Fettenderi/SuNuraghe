@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
 [ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_uw3m6"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_xm0wp"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_xm0wp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm0wp"]
 albedo_texture = ExtResource("2_uw3m6")
@@ -12,7 +12,6 @@ size = Vector3(0.683594, 2.58203, 1.7998)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_5i02r")
-bake_override = true
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -33,7 +32,7 @@ material = SubResource("StandardMaterial3D_xm0wp")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -0.9)
 required_input = &"interact"
-gui_text = "[ E ] Apri "
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Apri "
 
 [node name="CollisionShape3D" parent="Mesh/InteractableBox" index="0"]
 shape = SubResource("BoxShape3D_aji8h")

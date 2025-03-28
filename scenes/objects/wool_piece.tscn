@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bev7kvmsk4xv0" path="res://scripts/wool_piece.gd" id="1_q1uht"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="2_4h4wo"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_6fu0n"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_6fu0n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q1uht"]
 size = Vector3(1.97, 0.705, 1.995)
@@ -27,7 +27,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_q1uht")
 [node name="InteractableBox" parent="." instance=ExtResource("3_6fu0n")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[ E ] Prendi"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Prendi"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)

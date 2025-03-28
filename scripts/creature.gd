@@ -4,6 +4,8 @@ extends CharacterBody3D
 const MASS = 80.0
 const TURNING_SPEED = 6.0
 
+@export var verbose := false
+
 @export var distance_threshold := 0.5
 
 @export var activation_receiver : ReceiverRes
@@ -14,8 +16,7 @@ const TURNING_SPEED = 6.0
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var movement_state_machine: StateMachine = %MovementSM
 
-@onready var _world_collision_shape: CollisionShape3D = %WorldCollisionShape
-@onready var _agents_collision_shape: CollisionShape3D = %AgentsCollisionShape
+@onready var _collision_shape: CollisionShape3D = %CollisionShape
 
 @warning_ignore("unused_private_class_variable")
 @onready var _mesh: Node3D = %Mesh
@@ -25,11 +26,12 @@ const TURNING_SPEED = 6.0
 var end_buffered := false
 var speed := 0.0
 
+var interrupted_state : StringName
+
 var _is_active := false:
 	set(value):
 		_is_active = value
-		_world_collision_shape.set_deferred("disabled", not value)
-		_agents_collision_shape.set_deferred("disabled", not value)
+		_collision_shape.set_deferred("disabled", not value)
 		visible = value
 
 var _direction : Vector3
@@ -54,12 +56,15 @@ func _ready() -> void:
 
 	_setup_arrived_cooldown()
 	_eyes.create_rays(self)
+	
+	movement_state_machine.verbose = verbose
 
 func _physics_process(delta: float) -> void:
 	#movement_state_machine.update()
 	
 	var _destination := navigation_agent_3d.get_next_path_position()
 	var _local_destination := _destination - global_position
+	_local_destination.y = 0.0
 	
 	if Vector2(_local_destination.x, _local_destination.z).length() > distance_threshold:
 		_direction = _local_destination.normalized()
@@ -70,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		_direction = Vector3.ZERO
 		movement_state_machine.update({"arrived" : true})
 	
-	velocity = _direction * speed * delta
+	velocity = velocity.move_toward(_direction * speed * delta, 0.25)
 	
 	_collide_with_rigidbodies()
 	
@@ -121,6 +126,7 @@ func _on_eyes_located(collider: Player) -> void:
 	if target == null:
 		target = collider
 	
+	interrupted_state = movement_state_machine.current_state.name
 	movement_state_machine.update({"located": collider.global_position, "is_disguised": collider.is_disguised()})
 
 func _on_kill_box_body_entered(body: Node3D) -> void:

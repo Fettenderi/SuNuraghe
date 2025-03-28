@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="2_c4voo"]
 [ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="3_luevv"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="6_7adat"]
-[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://prototypes/beta2/schedule_resource.gd" id="9_wv6uw"]
-[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://prototypes/beta2/schedule_task_resource.gd" id="10_8rfoc"]
+[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="9_wv6uw"]
+[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="10_8rfoc"]
 [ext_resource type="PackedScene" uid="uid://ccai0kd8mw23" path="res://scenes/objects/door.tscn" id="12_t1niu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]

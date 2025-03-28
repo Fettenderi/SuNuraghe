@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://blyk052kfi58i"]
 
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="1_0df5t"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="1_0df5t"]
 [ext_resource type="Script" uid="uid://d3ku7mx26x2jo" path="res://scripts/bell.gd" id="1_poxvm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0df5t"]

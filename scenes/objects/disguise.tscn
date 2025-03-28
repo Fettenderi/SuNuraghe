@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dis0xtsd008ki" path="res://scripts/disguise.gd" id="1_ovhii"]
 [ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="2_p4xmy"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="3_71sye"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_71sye"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6c006"]
 size = Vector3(1.97, 0.705, 1.995)
@@ -27,7 +27,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ovhii")
 [node name="InteractableBox" parent="." instance=ExtResource("3_71sye")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[ E ] Prendi"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Indossa"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)

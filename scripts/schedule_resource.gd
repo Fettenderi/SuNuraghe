@@ -2,7 +2,6 @@ class_name ScheduleRes
 extends Resource
 
 @export var tasks : Array[ScheduleTaskRes]
-@export var receivers : Array[ReceiverRes]
 
 @export_subgroup("Trap Activated Response")
 @export var trap_activated_task : ScheduleTaskRes
@@ -18,6 +17,3 @@ func progess_tasks() -> ScheduleTaskRes:
 	else: _progress += 1
 	
 	return task
-
-func get_receiver(index: int) -> ReceiverRes:
-	return receivers[index]

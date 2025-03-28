@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://k0jltjct40oa"]
 
 [ext_resource type="Script" uid="uid://btnwgudm65s0g" path="res://scripts/double_door.gd" id="1_hik7s"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="1_prbdi"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="1_prbdi"]
 [ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_hik7s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4hhpn"]
@@ -12,13 +12,12 @@ albedo_texture = ExtResource("2_hik7s")
 
 [node name="DoubleDoor" type="Node3D"]
 script = ExtResource("1_hik7s")
-bake_override = true
 
 [node name="InteractableBox" parent="." instance=ExtResource("1_prbdi")]
 unique_name_in_owner = true
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 required_input = &"interact"
-gui_text = "[ E ] Apri "
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Apri "
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -2.3167e-07, 2.65, 0.9)

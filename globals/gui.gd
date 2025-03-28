@@ -2,11 +2,17 @@ extends CanvasLayer
 
 @onready var _interaction_text : RichTextLabel = %InteractionText
 @onready var _stamina_bar: ProgressBar = %StaminaBar
+@onready var _wool_pieces_display: Label = %WoolPiecesDisplay
 
 var _interaction_array : Array[String]
 
+func _ready() -> void:
+	_wool_pieces_display.text = str(PlayerStats.wool_pieces)
+
 func update_wool_display(value: int) -> void:
-	print("IMPLEMENTARE GUI WOOL DISPLAY: " + str(value))
+	if _wool_pieces_display == null: return
+	
+	_wool_pieces_display.text = str(value)
 
 func append_interaction(text : String) -> void:
 	_interaction_array.append("[center]" + text)

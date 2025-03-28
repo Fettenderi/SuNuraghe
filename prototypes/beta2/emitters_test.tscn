@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="5_0yej0"]
 [ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="7_0yej0"]
 [ext_resource type="Texture2D" uid="uid://cmlmyoplmk7y8" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="8_8rc6k"]
-[ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/sight_detector_box.tscn" id="9_p8k42"]
+[ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/areas/sight_detector_box.tscn" id="9_p8k42"]
 [ext_resource type="Script" uid="uid://c1xtgk22mhvk4" path="res://prototypes/beta2/csg_sphere_3d.gd" id="9_pmdyk"]
-[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://prototypes/beta2/schedule_task_resource.gd" id="10_oh7sm"]
-[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://prototypes/beta2/schedule_resource.gd" id="11_dhxkt"]
+[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="10_oh7sm"]
+[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="11_dhxkt"]
 [ext_resource type="PackedScene" uid="uid://k0jltjct40oa" path="res://scenes/objects/double_door.tscn" id="13_dhxkt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]

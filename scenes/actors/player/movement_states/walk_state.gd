@@ -1,5 +1,7 @@
 extends State
 
+@export var change_rate := 1.0
+
 @export var max_speed := 3.0
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
@@ -8,13 +10,11 @@ var _active := false
 
 func start(_info : Dictionary = {}) -> void:
 	_active = true
-	
-	user._max_speed = max_speed
-	user._head_bob_amplitude = head_bob_amplitude
-	user._head_bob_frequency = head_bob_frequency
 
 func _physics_process(delta: float) -> void:
 	if not _active: return
+
+	Utils._update_movement_variables(user, self, delta)
 
 	user._usual_update(delta)
 	

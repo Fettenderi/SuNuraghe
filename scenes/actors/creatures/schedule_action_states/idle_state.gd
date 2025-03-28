@@ -9,7 +9,7 @@ func start(info : Dictionary = {}) -> void:
 	_is_active = true
 	
 	if info.has("await"):
-		_receiver = user.get_schedule_receiver(info["await"])
+		_receiver = info["await"]
 		_receiver.received.connect(_on_received_signal)
 	
 	if info.has("vigilant"):

@@ -6,6 +6,8 @@ enum {
 	CRAWLING
 }
 
+@export var change_rate := 1.0
+
 @export var max_speed := 1.0
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
@@ -18,10 +20,7 @@ func start(_info : Dictionary = {}) -> void:
 
 	user._head_start_pos.y -= 0.6
 	user.shape_controller.set_active_shape(CROUCHING)
-	user._max_speed = max_speed
-	user._head_bob_amplitude = head_bob_amplitude
-	user._head_bob_frequency = head_bob_frequency
-	
+
 	if _wants_crawl:
 		state_machine.change_state("CrawlState")
 
@@ -29,6 +28,8 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
+	Utils._update_movement_variables(user, self, delta)
+
 	user._usual_update(delta)
 	
 	if _wants_crawl:

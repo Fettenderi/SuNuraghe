@@ -5,6 +5,7 @@ extends State
 
 var _is_active := false
 
+var _receiver : ReceiverRes
 var _stare_timer : Timer
 
 var _target : CharacterBody3D
@@ -19,10 +20,15 @@ func start(info : Dictionary = {}) -> void:
 	user.speed = speed
 	
 	_target = user.target
-	
+		
 	if info.has("speed"):
 		user.speed = info["speed"]
 	
+	if info.has("await"):
+		_receiver = info["await"]
+		_receiver.received.connect(_on_received_signal)
+		return
+
 	if info.has("time"):
 		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
 		
@@ -60,4 +66,9 @@ func _on_stare_timer_ended() -> void:
 	if not _is_active: return
 	
 	_stare_timer.stop()
+	user.progress()
+
+func _on_received_signal(_value) -> void:
+	if not _is_active: return
+	
 	user.progress()

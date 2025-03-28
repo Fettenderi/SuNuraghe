@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cphm70vicseat"]
+[gd_scene load_steps=12 format=3 uid="uid://cphm70vicseat"]
 
 [ext_resource type="Script" uid="uid://or8hn6g2pihm" path="res://scripts/creature.gd" id="1_688wq"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="2_0natf"]
@@ -7,10 +7,7 @@
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
-radius = 0.330362
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_frv8s"]
-radius = 0.74474
+radius = 0.4
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
@@ -34,18 +31,12 @@ script = ExtResource("1_688wq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 unique_name_in_owner = true
-radius = 0.75
+path_max_distance = 50.01
 
-[node name="WorldCollisionShape" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
-visible = false
 shape = SubResource("CapsuleShape3D_uhukm")
-debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
-
-[node name="AgentsCollisionShape" type="CollisionShape3D" parent="."]
-unique_name_in_owner = true
-shape = SubResource("CapsuleShape3D_frv8s")
-debug_color = Color(0.702284, 0.490844, 1.92523e-07, 0.42)
+debug_color = Color(0.7, 0.49, 0, 0.847059)
 
 [node name="Head" type="Marker3D" parent="."]
 unique_name_in_owner = true

@@ -11,7 +11,8 @@ func start(info : Dictionary = {}) -> void:
 	user.speed = speed
 
 	if info.has("position"):
-		_navigation_agent_3d.target_position = info["position"]
+		var _target : Marker3D = info["position"]
+		_navigation_agent_3d.target_position = _target.global_position
 	
 	if info.has("speed"):
 		user.speed = info["speed"]

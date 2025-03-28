@@ -2,6 +2,7 @@ class_name SightDetectorBox
 extends Area3D
 
 @export var active := false
+@export var emit_watcher_position := false
 
 @export var receiver_resource : ReceiverRes
 @export var emitter_resource : EmitterRes
@@ -13,9 +14,15 @@ func _ready() -> void:
 		receiver_resource.received.connect((func(): active = not active).unbind(1))
 	area_entered.connect(_interactable_entered)
 
-func _interactable_entered(_area: Area3D):
+func _interactable_entered(area: Area3D):
 	if not active: return
 	
-	if emitter_resource != null:
-		emitter_resource.send_signal()
 	signal_emitted.emit(true)
+	
+	if emitter_resource == null: return
+	
+	if emit_watcher_position:
+		var _player_pos : Vector3 = area.get_parent().get_parent().global_position
+		emitter_resource.send_signal(_player_pos)
+	else:
+		emitter_resource.send_signal()

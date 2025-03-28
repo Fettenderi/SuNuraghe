@@ -1,5 +1,6 @@
 # Todo
+- Chiudere porta dopo che è rientrato nella stanza
+- Se disguised le campane non fanno nulla e non le puoi disattivare
+- "Decorare" stanza di preparazione e sistemare i segnali lì
 
-- Implementare task speciali per quando viene ricevuto un suono e quando viene avvistato qualcuno?
-- Provare tutta la sequenza e vedere cosa manca oltre alla danza
 - Creare la fase in cui bisogna fare la danza

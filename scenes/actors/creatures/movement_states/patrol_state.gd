@@ -33,7 +33,3 @@ func update(info : Dictionary = {}) -> void:
 	
 	if _patroling_resource.has_targets():
 		user.navigation_agent_3d.target_position = _patroling_resource.get_current_target()
-	
-
-func end() -> void:
-	%ReturningState.last_position = user.position

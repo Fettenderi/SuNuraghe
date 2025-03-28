@@ -23,6 +23,8 @@ size = Vector3(1, 0.627197, 1)
 size = Vector3(1, 0.686035, 0.308472)
 
 [node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 64
+collision_mask = 97
 mass = 2.0
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]

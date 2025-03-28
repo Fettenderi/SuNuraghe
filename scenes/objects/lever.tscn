@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvr7pgc0xlv51"]
 
 [ext_resource type="Script" uid="uid://dr4gg20me4inx" path="res://scripts/lever.gd" id="1_donkj"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="2_1gg2o"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="2_1gg2o"]
 [ext_resource type="Texture2D" uid="uid://bg2a3k4dm4sm6" path="res://addons/kenney_prototype_textures/red/texture_09.png" id="2_ru7jp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q11tp"]
@@ -24,7 +24,7 @@ material = SubResource("StandardMaterial3D_q11tp")
 [node name="InteractableBox" parent="." instance=ExtResource("2_1gg2o")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[ E ] Attiva"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Attiva"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 shape = SubResource("BoxShape3D_ru7jp")

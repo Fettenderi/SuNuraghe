@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cvtv8ik7vf8e2" path="res://prototypes/beta1/beta_creature.tscn" id="4_x74dq"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="5_05l1d"]
 [ext_resource type="PackedScene" path="res://assets/models/placeholder/truck-grey.glb" id="5_bpsud"]
-[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/interactable_box.tscn" id="6_wjf5t"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="6_wjf5t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yl7by"]
 

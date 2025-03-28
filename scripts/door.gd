@@ -6,6 +6,8 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var bake_override := false:
 	set(value):
+		if not Engine.is_editor_hint() or not is_inside_tree(): return
+		
 		bake_override = value
 		_set_bake_mode(value)
 
@@ -36,6 +38,8 @@ var _vibration_amount := 2
 func _ready() -> void:
 	_set_open(is_open or bake_override)
 	if Engine.is_editor_hint(): return
+	
+	_mesh.position.y = 0.0
 	
 	if not is_locked:
 		_interactable_box.state = is_open

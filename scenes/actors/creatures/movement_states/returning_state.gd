@@ -18,4 +18,4 @@ func update(info : Dictionary = {}) -> void:
 		return
 	
 	if info.has("arrived"):
-		state_machine.change_state("PatrolState")
+		state_machine.change_state(user.interrupted_state)
