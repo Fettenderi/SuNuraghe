@@ -1,5 +1,7 @@
 extends State
 
+@export var change_rate := 1.0
+
 var _receiver : ReceiverRes
 var _is_active := false
 
@@ -35,3 +37,8 @@ func _on_received_signal(_value) -> void:
 	if not _is_active: return
 	
 	user.progress()
+
+func _physics_process(delta: float) -> void:
+	if not _is_active: return
+		
+	Utils.update_just_speed(user, change_rate, 0.0, delta)

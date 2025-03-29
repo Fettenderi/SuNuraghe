@@ -1,5 +1,7 @@
 extends State
 
+@export var change_rate := 1.0
+
 var _is_active := false
 
 var _receiver : ReceiverRes
@@ -28,6 +30,8 @@ func end() -> void:
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
+	Utils.update_just_speed(user, change_rate, 0.0, delta)
+
 	user.look(user.target.global_position, delta)
 
 func _on_stare_timer_ended() -> void:

@@ -1,12 +1,15 @@
 extends State
 
-@export var speed := 300.0
+@export var change_rate := 1.0
+
+@export var max_speed := 300.0
 
 var _patroling_resource : PatrolingResource
 
+var _is_active := false
+
 func start(info : Dictionary = {}) -> void:
-	user.speed = speed
-	
+	_is_active = true
 	if user.end_buffered:
 		state_machine.stop()
 		user.queue_free()
@@ -16,6 +19,11 @@ func start(info : Dictionary = {}) -> void:
 
 	if _patroling_resource == null:
 		_patroling_resource = user.patroling_resource
+
+func _physics_process(delta: float) -> void:
+	if not _is_active: return
+	
+	Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("end"):
@@ -33,3 +41,6 @@ func update(info : Dictionary = {}) -> void:
 	
 	if _patroling_resource.has_targets():
 		user.navigation_agent_3d.target_position = _patroling_resource.get_current_target()
+
+func end() -> void:
+	_is_active = false

@@ -37,23 +37,21 @@ const KEY_BIND_NOCLIP = "noclip"
 
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var _max_speed : float
-var _speed : float
-var _accel := acceleration
-
+var max_speed : float
 var stamina : float
+var head_bob_frequency := 0.3
+var head_bob_amplitude := 0.01
+var head_start_pos : Vector3
+
+var _accel := acceleration
 
 var _rotation_target_player : float
 var _rotation_target_head : float
-var _head_start_pos : Vector3
 var _head_bob_tick := 0
 
-var _head_bob_frequency := 0.3
-var _head_bob_amplitude := 0.01
-
-var _jump_buffered := false:
+var jump_buffered := false:
 	set(value):
-		_jump_buffered = value
+		jump_buffered = value
 		
 		if value: %JumpBuffer.start()
 
@@ -62,7 +60,7 @@ func _ready() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	_head_start_pos = _head.position
+	head_start_pos = _head.position
 	_rotation_target_player = quaternion.get_angle()
 	PlayerStats.disguised_changed.connect(set_disguised)
 
@@ -72,7 +70,7 @@ func _usual_update(delta : float) -> void:
 	_head_bob_tick += 1
 	
 	_move_player(delta)
-	_rotate_player(delta)
+	rotate_player(delta)
 	
 	if velocity and is_on_floor():
 		_head_bob_update()
@@ -94,23 +92,21 @@ func _move_player(delta : float) -> void:
 	var _direction := transform.basis * Vector3(-_input_dir.x, 0.0, -_input_dir.y) * _backward_factor
 
 	if not is_on_floor():
-		_speed = _max_speed
 		_accel = in_air_acceleration
 		
 		velocity.y -= _gravity * delta
 	else:
-		_speed = _max_speed
 		_accel = acceleration
 		#_sound_maker.set_enabled(false)
-
-	velocity.x = move_toward(velocity.x, _direction.x * _speed, _accel * delta)
-	velocity.z = move_toward(velocity.z, _direction.z * _speed, _accel * delta)
+	
+	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _accel * delta)
+	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _accel * delta)
 
 	_collide_with_rigidbodies()
 
 	move_and_slide()
 
-func _rotate_player(delta : float) -> void:
+func rotate_player(delta : float) -> void:
 	quaternion = quaternion.slerp(Quaternion(Vector3.UP, _rotation_target_player), mouse_acceleration * delta)
 	
 	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, _rotation_target_head), mouse_acceleration * delta)
@@ -124,18 +120,18 @@ func _set_rotation_target(mouse_motion : Vector2) -> void:
 func _head_bob_update() -> void:
 	var _pos := Vector3.ZERO
 	
-	_pos.y += sin(_head_bob_tick * _head_bob_frequency) * _head_bob_amplitude
-	_pos.x += cos(_head_bob_tick * _head_bob_frequency / 2) * _head_bob_amplitude * 2
+	_pos.y += sin(_head_bob_tick * head_bob_frequency) * head_bob_amplitude
+	_pos.x += cos(_head_bob_tick * head_bob_frequency / 2) * head_bob_amplitude * 2
 	
 	_head.position += _pos
 
 func _reset_head_bob(delta : float) -> void:
-	if _head.position == _head_start_pos: return
+	if _head.position == head_start_pos: return
 	
-	_head.position = lerp(_head.position, _head_start_pos, 2 * (1 / _head_bob_frequency) * delta)
+	_head.position = lerp(_head.position, head_start_pos, 2 * (1 / head_bob_frequency) * delta)
 
 func _on_jump_buffer_timeout() -> void:
-	_jump_buffered = false
+	jump_buffered = false
 
 func _collide_with_rigidbodies():
 	var _collision : KinematicCollision3D

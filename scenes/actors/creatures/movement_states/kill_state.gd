@@ -1,5 +1,7 @@
 extends State
 
+@export var change_rate := 1.0
+
 var _is_active := false
 var _stare_target : Vector3
 
@@ -19,3 +21,5 @@ func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
 	user.look(_stare_target, delta)
+	
+	Utils.update_just_speed(user, change_rate, 0.0, delta)

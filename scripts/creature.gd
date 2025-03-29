@@ -16,16 +16,15 @@ const TURNING_SPEED = 6.0
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var movement_state_machine: StateMachine = %MovementSM
 @onready var kill_box: ExpandedHitBox = %KillBox
+@onready var mesh: Node3D = %Mesh
 
 @onready var _collision_shape: CollisionShape3D = %CollisionShape
-
-@warning_ignore("unused_private_class_variable")
-@onready var _mesh: Node3D = %Mesh
 @onready var _eyes: Node3D = %Eyes
 @onready var _head: Node3D = %Head
 
 var end_buffered := false
-var speed := 0.0
+var max_speed := 0.0
+var _speed := 0.0
 
 var interrupted_state : StringName
 
@@ -76,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		_direction = Vector3.ZERO
 		movement_state_machine.update({"arrived" : true})
 	
-	velocity = velocity.move_toward(_direction * speed * delta, 0.25)
+	velocity = velocity.move_toward(_direction * max_speed * delta, 0.25)
 	
 	_collide_with_rigidbodies()
 	

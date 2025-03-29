@@ -18,7 +18,7 @@ var _wants_crawl := false
 func start(_info : Dictionary = {}) -> void:
 	_active = true
 
-	user._head_start_pos.y -= 0.6
+	user.head_start_pos.y -= 0.6
 	user.shape_controller.set_active_shape(CROUCHING)
 
 	if _wants_crawl:
@@ -28,7 +28,7 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 	
-	Utils._update_movement_variables(user, self, delta)
+	Utils.update_movement_variables(user, self, delta)
 
 	user._usual_update(delta)
 	
@@ -43,7 +43,7 @@ func _unhandled_input(event : InputEvent) -> void:
 		return
 
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
-		user._jump_buffered = true
+		user.jump_buffered = true
 
 	if user.stamina > 0.0 and Input.is_action_pressed(user.KEY_BIND_SPRINT):
 		state_machine.change_state("SprintState")
@@ -55,7 +55,7 @@ func _unhandled_input(event : InputEvent) -> void:
 func end() -> void:
 	_active = false
 	
-	user._head_start_pos.y += 0.6
+	user.head_start_pos.y += 0.6
 	user.shape_controller.set_active_shape(STANDING)
 
 func _on_crawl_detector_box_area_entered(_area: Area3D) -> void:

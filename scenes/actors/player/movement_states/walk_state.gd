@@ -14,7 +14,7 @@ func start(_info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _active: return
 
-	Utils._update_movement_variables(user, self, delta)
+	Utils.update_movement_variables(user, self, delta)
 
 	user._usual_update(delta)
 	
@@ -28,12 +28,12 @@ func _unhandled_input(_event : InputEvent) -> void:
 		state_machine.change_state("NoclipState")
 		return
 
-	if (Input.is_action_just_pressed(user.KEY_BIND_JUMP) or user._jump_buffered) and user.is_on_floor():
+	if (Input.is_action_just_pressed(user.KEY_BIND_JUMP) or user.jump_buffered) and user.is_on_floor():
 		user.velocity.y = user.jump_velocity
 		user.sound_maker.set_enabled(true)
 
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
-		user._jump_buffered = true
+		user.jump_buffered = true
 
 	if not user.is_on_floor(): return
 	

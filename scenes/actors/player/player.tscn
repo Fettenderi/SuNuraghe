@@ -140,6 +140,7 @@ head_bob_frequency = 0.15
 
 [node name="DisguisedState" type="Node" parent="MovementSM"]
 script = ExtResource("6_068wj")
+change_rate = 6.0
 max_walk_speed = 1.1
 max_dance_speed = 0.5
 head_bob_amplitude = 0.007

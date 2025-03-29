@@ -1,6 +1,8 @@
 extends State
 
-@export var speed := 200.0
+@export var change_rate := 1.0
+
+@export var max_speed := 200.0
 @export var distance := 10.0
 
 var _is_active := false
@@ -17,12 +19,12 @@ func start(info : Dictionary = {}) -> void:
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
 	
-	user.speed = speed
+	user.max_speed = max_speed
 	
 	_target = user.target
 		
 	if info.has("speed"):
-		user.speed = info["speed"]
+		user.max_speed = info["speed"]
 	
 	if info.has("await"):
 		_receiver = info["await"]
@@ -53,8 +55,12 @@ func _physics_process(delta: float) -> void:
 	
 	if _target == null: return
 	
+	Utils.update_just_speed(user, change_rate, max_speed, delta)
+	
 	user.look(_target.global_position, delta)
 	_navigation_agent_3d.target_position = _get_actual_target_position(_target.global_position)
+	
+
 
 func _get_actual_target_position(target_position : Vector3) -> Vector3:
 	if (user.global_position - target_position).length() > distance:

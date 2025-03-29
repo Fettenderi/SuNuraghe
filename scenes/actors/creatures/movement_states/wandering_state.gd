@@ -1,6 +1,6 @@
 extends State
 
-@export var speed := 300.0
+@export var change_rate := 1.0
 
 @export_subgroup("Wandering")
 @export var wander_time := 10
@@ -14,11 +14,9 @@ var _starting_rotation : float
 var _next_state : String
 
 func start(info : Dictionary = {}) -> void:
-	user.speed = speed
-	
 	_is_active = true
 	_elapsed = 0.0
-	_starting_rotation = user._mesh.rotation.y
+	_starting_rotation = user.mesh.rotation.y
 	
 	if info.has("next_state"):
 		_next_state = info["next_state"]
@@ -38,7 +36,10 @@ func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
 	_elapsed += delta
-	user._mesh.rotation.y = (swing_angle / 2) * sin(swings * 2 * PI * _elapsed / wander_time) + _starting_rotation
+	user.mesh.rotation.y = (swing_angle / 2) * sin(swings * 2 * PI * _elapsed / wander_time) + _starting_rotation
 
+	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	
 	if _elapsed >= wander_time:
 		state_machine.change_state(_next_state)
+	

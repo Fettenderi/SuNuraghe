@@ -1,9 +1,16 @@
 extends State
 
+@export var change_rate := 1.0
+
 @export var max_walk_speed := 3.0
 @export var max_dance_speed := 3.0
 @export var head_bob_amplitude := 0.01
 @export var head_bob_frequency := 0.3
+
+@export_subgroup("Little Jump Configuration")
+@export var little_jump_time := 1.5
+@export var little_jump_speed := 4.0
+@export var little_jump_factor := 1.0
 
 var _active := false
 
@@ -11,17 +18,12 @@ var _starting_head_pos : float
 var _little_jumping := false
 var _little_jump_elapsed := 0.0
 
-@export var little_jump_time := 1.5
-@export var little_jump_speed := 4.0
-@export var little_jump_factor := 1.0
-
 func start(_info : Dictionary = {}) -> void:
 	_active = true
 	
-	_starting_head_pos = user._head_start_pos.y
-	user._max_speed = max_walk_speed
-	user._head_bob_amplitude = head_bob_amplitude
-	user._head_bob_frequency = head_bob_frequency
+	_starting_head_pos = user.head_start_pos.y
+	user.head_bob_amplitude = head_bob_amplitude
+	user.head_bob_frequency = head_bob_frequency
 	user.sound_maker.set_enabled(true)
 
 func _physics_process(delta: float) -> void:
@@ -43,23 +45,23 @@ func _unhandled_input(_event : InputEvent) -> void:
 
 func _handle_jumping(delta : float) -> void:
 	_little_jump_elapsed += delta
-	user._head_start_pos.y = lerp(user._head_start_pos.y, _starting_head_pos + little_jump_factor * _roof_function(_little_jump_elapsed, little_jump_time), 1.0 - exp(-delta * little_jump_speed))
+	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	user.head_start_pos.y = lerp(user.head_start_pos.y, _starting_head_pos + little_jump_factor * _roof_function(_little_jump_elapsed, little_jump_time), 1.0 - exp(-delta * little_jump_speed))
 	if _little_jump_elapsed >= little_jump_time:
 		_little_jumping = false
 
 func _handle_walking(delta : float) -> void:
-	user._head_start_pos.y = lerp(user._head_start_pos.y, _starting_head_pos, 1.0 - exp(-delta * little_jump_speed))
+	user.head_start_pos.y = lerp(user.head_start_pos.y, _starting_head_pos, 1.0 - exp(-delta * little_jump_speed))
 	
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
 		_little_jump_elapsed = 0.0
-		user._max_speed = 0.0
 		_little_jumping = true
 		return
 	
 	if Input.is_action_pressed(user.KEY_BIND_COVER):
-		user._max_speed = max_dance_speed
+		Utils.update_just_speed(user, change_rate, max_dance_speed, delta)
 	else:
-		user._max_speed = max_walk_speed
+		Utils.update_just_speed(user, change_rate, max_walk_speed, delta)
 
 
 func end() -> void:
