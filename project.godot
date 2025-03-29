@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://cuoims65677ck"
+run/main_scene="uid://8vyu2s1vt4u4"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -58,6 +58,7 @@ enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/f
 [global_group]
 
 Player=""
+Enemy=""
 
 [input]
 

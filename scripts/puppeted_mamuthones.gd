@@ -3,23 +3,27 @@ class_name PuppetedMamuthones
 extends Creature
 
 @export var schedule : ScheduleRes
-@warning_ignore("unused_private_class_variable")
-#@export_tool_button("PrintTransform") var _print_transform_button = _print_transform
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	
 	super()
-	
-	if schedule != null:
-		schedule.reset_progress()
-	
-	_read_schedule()
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
 	super(delta)
+
+
+func _start_movement() -> void:
+	_is_active = true
+	
+	if schedule != null:
+		schedule.reset_progress()
+	
+	movement_state_machine.start()
+
+	_read_schedule()
 
 
 func _read_schedule() -> bool:
@@ -39,10 +43,6 @@ func progress() -> void:
 	
 	if can_continue: return
 	movement_state_machine.update({"tasks_finished": true})
-
-
-#func _print_transform() -> void:
-	#print("Position: " + str(position))
 
 func _on_trap_activated(value : Variant):
 	if schedule.trap_activated_task == null:

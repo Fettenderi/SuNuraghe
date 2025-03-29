@@ -10,11 +10,16 @@ var last_position : Vector3
 func start(_info : Dictionary = {}) -> void:
 	_is_active = true
 	
-	user.max_speed = max_speed
-
 	user.navigation_agent_3d.target_position = last_position
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("touched"):
+		var _toucher : Player = info["touched"]
+		
+		_toucher.start_dying(user.get_eyes_location())
+		state_machine.change_state("KillState", {"to_look": _toucher.global_position})
+		return
+
 	if info.has("end"):
 		user.end_buffered = true
 	

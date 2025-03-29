@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://sb8y84p3ldh6"]
+
+[ext_resource type="Script" uid="uid://upstun4fc8bh" path="res://prototypes/beta3/test_creature.gd" id="2_1o1hx"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_3m1y2"]
+[ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_di8ao"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
+radius = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu7mx"]
+albedo_texture = ExtResource("3_3m1y2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4gf"]
+albedo_texture = ExtResource("4_di8ao")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vexqk"]
+albedo_texture = ExtResource("4_di8ao")
+
+[node name="TestCreature" type="CharacterBody3D"]
+collision_layer = 32
+collision_mask = 33
+script = ExtResource("2_1o1hx")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+unique_name_in_owner = true
+path_max_distance = 50.01
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uhukm")
+debug_color = Color(0.7, 0.49, 0, 0.847059)
+
+[node name="Head" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42367, 0)
+visible = false
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Mesh"]
+mesh = SubResource("CapsuleMesh_u7wol")
+material = SubResource("StandardMaterial3D_nu7mx")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178535, 0.498162, 0.497653)
+material_override = SubResource("StandardMaterial3D_dr4gf")
+radius = 0.1
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179, 0.498, 0.498)
+material_override = SubResource("StandardMaterial3D_vexqk")
+radius = 0.1

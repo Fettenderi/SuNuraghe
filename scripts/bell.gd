@@ -19,8 +19,10 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	_update_mesh()
 	
 	_is_active = false
-	emitter_resource.send_signal(true)
 	PlayerStats.wool_pieces -= wool_required
+	
+	if emitter_resource != null:
+		emitter_resource.send_signal(true)
 
 func _update_mesh():
 	mesh.visible = true

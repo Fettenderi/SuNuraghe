@@ -19,12 +19,10 @@ func start(info : Dictionary = {}) -> void:
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
 	
-	user.max_speed = max_speed
-	
 	_target = user.target
 		
 	if info.has("speed"):
-		user.max_speed = info["speed"]
+		max_speed = info["speed"]
 	
 	if info.has("await"):
 		_receiver = info["await"]
@@ -40,6 +38,10 @@ func start(info : Dictionary = {}) -> void:
 		_stare_timer.start()
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("touched"):
+		print("AOO ARRASSATI " + user.name + " " + name)
+		return
+
 	if info.has("end"):
 		user.end_buffered = true
 

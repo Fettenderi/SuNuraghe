@@ -7,6 +7,7 @@ extends Resource
 # "time": time_duration_of_task
 # "position": marker_position_to_reach
 # "vigilant" : looks_for_player
+# "waypoints" : node3d_wwith_markers_positions_to_reach
 
 enum PuppetStates {
 	IDLE_STATE,
@@ -17,7 +18,8 @@ enum PuppetStates {
 	CHASE_STATE,
 	KILL_STATE,
 	WANDERING_STATE,
-	RETURNING_STATE
+	RETURNING_STATE,
+	PATROL_STATE
 }
 
 @export var state : PuppetStates = PuppetStates.IDLE_STATE
@@ -41,4 +43,6 @@ func get_state() -> StringName:
 			return &"WanderingState"
 		PuppetStates.RETURNING_STATE:
 			return &"ReturningState"
+		PuppetStates.PATROL_STATE:
+			return &"PatrolState"
 	return &"IdleState"

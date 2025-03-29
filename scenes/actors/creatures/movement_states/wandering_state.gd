@@ -12,6 +12,7 @@ var _elapsed : float
 var _starting_rotation : float
 
 var _next_state : String
+var _next_info : Dictionary = {}
 
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
@@ -20,8 +21,20 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("next_state"):
 		_next_state = info["next_state"]
+	
+	if info.has("next_info"):
+		_next_info = info["next_info"]
+	else:
+		_next_info = {}
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("touched"):
+		var _toucher : Player = info["touched"]
+		
+		_toucher.start_dying(user.get_eyes_location())
+		state_machine.change_state("KillState", {"to_look": _toucher.global_position})
+		return
+
 	if info.has("end"):
 		user.end_buffered = true
 	
@@ -31,6 +44,7 @@ func update(info : Dictionary = {}) -> void:
 func end() -> void:
 	_is_active = false
 
+	user.mesh.rotation.y = _starting_rotation
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
@@ -41,5 +55,5 @@ func _physics_process(delta: float) -> void:
 	Utils.update_just_speed(user, change_rate, 0.0, delta)
 	
 	if _elapsed >= wander_time:
-		state_machine.change_state(_next_state)
+		state_machine.change_state(_next_state, _next_info)
 	

@@ -18,8 +18,10 @@ func start(info : Dictionary = {}) -> void:
 
 	_returning_state.last_position = user.global_position
 	
-	if info.has("located"):
-		_navigation_agent_3d.target_position = info["located"]
+	
+	if info.has("speed"):
+		max_speed = info["speed"]
+
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
@@ -27,6 +29,13 @@ func _physics_process(delta: float) -> void:
 	Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("touched"):
+		var _toucher : Player = info["touched"]
+		
+		_toucher.start_dying(user.get_eyes_location())
+		state_machine.change_state("KillState", {"to_look": _toucher.global_position})
+		return
+
 	if info.has("end"):
 		user.end_buffered = true
 

@@ -1,0 +1,186 @@
+[gd_scene load_steps=22 format=3 uid="uid://8vyu2s1vt4u4"]
+
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_nqaye"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_b8gr8"]
+[ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="4_bketw"]
+[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="5_u3k10"]
+[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="6_72msm"]
+[ext_resource type="PackedScene" uid="uid://buewliv6fc4na" path="res://scenes/objects/disguise.tscn" id="7_5cpvu"]
+[ext_resource type="Resource" uid="uid://dxl8co4ullhte" path="res://prototypes/beta2/only_receiver.tres" id="7_x6vv4"]
+[ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="8_aeqdd"]
+[ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="10_4oab2"]
+[ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="11_e34bc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_t8fxv"]
+sky_material = SubResource("ProceduralSkyMaterial_u4f27")
+
+[sub_resource type="Environment" id="Environment_o4fph"]
+background_mode = 2
+sky = SubResource("Sky_t8fxv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
+vertices = PackedVector3Array(11.6181, -2.5, -1.79861, 21.6181, -2.5, -1.79861, 21.6181, -2.5, -19.0486, 11.6181, -2.5, -19.0486, -6.88194, -2.5, -14.0486, -6.88194, -2.5, -1.29861, 7.61806, -2.5, -1.29861, 7.61806, -2.5, -14.0486, 11.3681, -2.5, 0.451389, 9.36806, -2.5, 0.451389, 9.36806, -2.5, 10.4514, 21.6181, -2.5, 10.4514, -2.63194, -2.5, 12.4514, 2.61806, -2.5, 12.4514, 2.86806, -2.5, 10.4514, -2.88194, -2.5, 10.4514, 4.86806, -2.5, 0.451389, -7.88194, -2.5, 0.451389, 4.86806, -2.5, 10.4514, -7.88194, -2.5, 10.4514, -2.63194, -2.5, 20.7014, 2.61806, -2.5, 20.7014)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 0, 1), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 1), PackedInt32Array(12, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(16, 15, 17), PackedInt32Array(16, 18, 14), PackedInt32Array(15, 19, 17), PackedInt32Array(16, 9, 18), PackedInt32Array(18, 9, 10), PackedInt32Array(21, 20, 13), PackedInt32Array(13, 20, 12)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3e5f"]
+albedo_texture = ExtResource("2_b8gr8")
+
+[sub_resource type="Resource" id="Resource_nqaye"]
+script = ExtResource("11_e34bc")
+receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_5cpvu"]
+script = ExtResource("6_72msm")
+state = 9
+info = Dictionary[String, Variant]({
+"jump": 0,
+"vigilant": true,
+"waypoints": NodePath("Waypoints")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_b8gr8"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_5cpvu")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_vafhi"]
+script = ExtResource("6_72msm")
+state = 0
+info = Dictionary[String, Variant]({
+"await": ExtResource("7_x6vv4")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_1lnc3"]
+script = ExtResource("6_72msm")
+state = 4
+info = Dictionary[String, Variant]({
+"waypoints": NodePath("Waypoints")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_q46mp"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o4fph")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0.0920563, 0, 11.4767)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_nqaye")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0510466, -2.99976, 16.5056)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
+remote_path = NodePath("../../TopCam/SubViewportContainer/SubViewport/Camera3D")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c4voo")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 0, 12.6973)
+use_collision = true
+flip_faces = true
+size = Vector3(6.3252, 6, 17.3749)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35612, 0, -7.69226)
+use_collision = true
+flip_faces = true
+size = Vector3(15.635, 6, 13.8936)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35612, 0, 0.0283933)
+use_collision = true
+size = Vector3(9.65137, 3.35522, 1.98145)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, 0, 5.43892)
+use_collision = true
+flip_faces = true
+size = Vector3(11.283, 6, 30.9033)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.6056, 0, -4.34696)
+use_collision = true
+flip_faces = true
+size = Vector3(11.283, 6, 30.9033)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="PosVisualizer" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -3.50747)
+
+[node name="Disguise" parent="." instance=ExtResource("7_5cpvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0054388, -2.99662, 13.7527)
+emitter_resource = SubResource("Resource_nqaye")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="PuppetedMamuthones2" parent="Enemies" instance=ExtResource("4_bketw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -12.0261)
+schedule = SubResource("Resource_b8gr8")
+verbose = true
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones2"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -3.50747)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.893, -2, -3.507)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.893, -2, -12.026)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.762, -2, -12.026)
+
+[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.762, -2, -12.026)
+
+[node name="PuppetedMamuthones" parent="Enemies" instance=ExtResource("4_bketw")]
+transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 1.93993, -2.00012, 13.6847)
+schedule = SubResource("Resource_q46mp")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 8.26254)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1804, -2.00012, 8.26254)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, 5.96833)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, -17.6986)
+
+[node name="TopCam" parent="." instance=ExtResource("8_aeqdd")]
+
+[node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, -0.0510466, 11.7242, 16.5056)
+
+[editable path="TopCam"]

@@ -133,7 +133,7 @@ automatic = true
 
 [node name="WalkState" type="Node" parent="MovementSM"]
 script = ExtResource("5_r05ns")
-change_rate = 5.0
+change_rate = 3.7
 max_speed = 2.1
 head_bob_amplitude = 0.017
 head_bob_frequency = 0.15
