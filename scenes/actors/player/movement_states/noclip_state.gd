@@ -84,6 +84,7 @@ func _handle_time_scale(event : InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		_time_scale = lerp(_time_scale, min_time_scale, time_scale_sensitivity)
 		Engine.time_scale = _time_scale
+	@warning_ignore("narrowing_conversion")
 	Gui.update_wool_display(Engine.time_scale * 100)
 
 func _move_player(_delta : float) -> void:

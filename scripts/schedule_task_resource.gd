@@ -8,5 +8,37 @@ extends Resource
 # "position": marker_position_to_reach
 # "vigilant" : looks_for_player
 
-@export var state : StringName
+enum PuppetStates {
+	IDLE_STATE,
+	MOVE_STATE,
+	STARE_STATE,
+	FOLLOW_STATE,
+	DANCE_STATE,
+	CHASE_STATE,
+	KILL_STATE,
+	WANDERING_STATE,
+	RETURNING_STATE
+}
+
+@export var state : PuppetStates = PuppetStates.IDLE_STATE
 @export var info : Dictionary[String, Variant]
+
+func get_state() -> StringName:
+	match state:
+		PuppetStates.MOVE_STATE:
+			return &"MoveState"
+		PuppetStates.STARE_STATE:
+			return &"StareState"
+		PuppetStates.FOLLOW_STATE:
+			return &"FollowState"
+		PuppetStates.DANCE_STATE:
+			return &"DanceState"
+		PuppetStates.CHASE_STATE:
+			return &"ChaseState"
+		PuppetStates.KILL_STATE:
+			return &"KillState"
+		PuppetStates.WANDERING_STATE:
+			return &"WanderingState"
+		PuppetStates.RETURNING_STATE:
+			return &"ReturningState"
+	return &"IdleState"

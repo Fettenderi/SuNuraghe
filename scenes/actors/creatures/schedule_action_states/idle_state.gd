@@ -10,7 +10,8 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("await"):
 		_receiver = info["await"]
-		_receiver.received.connect(_on_received_signal)
+		if not _receiver.received.is_connected(_on_received_signal):
+			_receiver.received.connect(_on_received_signal)
 	
 	if info.has("vigilant"):
 		_vigilant = info["vigilant"]

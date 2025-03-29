@@ -15,6 +15,7 @@ const TURNING_SPEED = 6.0
 
 @onready var navigation_agent_3d: NavigationAgent3D = %NavigationAgent3D
 @onready var movement_state_machine: StateMachine = %MovementSM
+@onready var kill_box: ExpandedHitBox = %KillBox
 
 @onready var _collision_shape: CollisionShape3D = %CollisionShape
 
@@ -127,10 +128,12 @@ func _on_eyes_located(collider: Player) -> void:
 		target = collider
 	
 	interrupted_state = movement_state_machine.current_state.name
+	
 	movement_state_machine.update({"located": collider.global_position, "is_disguised": collider.is_disguised()})
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return
+	if body is Player and body.is_disguised() and movement_state_machine.current_state.name == &"MoveState": return
 	
 	movement_state_machine.change_state("KillingState", {"to_look" : body.global_position})
 	

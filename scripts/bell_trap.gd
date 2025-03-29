@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func _on_activation_box_body_entered(body: Node3D) -> void:
 	if not body is Player: return
+	if PlayerStats.disguised: return
 	
 	_sound_maker.set_enabled(true)
 	

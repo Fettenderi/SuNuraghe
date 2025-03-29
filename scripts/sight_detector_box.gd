@@ -17,6 +17,7 @@ func _ready() -> void:
 func _interactable_entered(area: Area3D):
 	if not active: return
 	
+	active = false
 	signal_emitted.emit(true)
 	
 	if emitter_resource == null: return

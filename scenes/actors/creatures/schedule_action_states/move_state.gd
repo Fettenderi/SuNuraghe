@@ -11,7 +11,11 @@ func start(info : Dictionary = {}) -> void:
 	user.speed = speed
 
 	if info.has("position"):
-		var _target : Marker3D = info["position"]
+		var _target : Marker3D = user.get_node(info["position"])
+		
+		if _target == null:
+			print(user.name + " NON HA UN NODEPATH ASSOLUTO")
+			return
 		_navigation_agent_3d.target_position = _target.global_position
 	
 	if info.has("speed"):

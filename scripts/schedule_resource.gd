@@ -17,3 +17,6 @@ func progess_tasks() -> ScheduleTaskRes:
 	else: _progress += 1
 	
 	return task
+
+func reset_progress():
+	_progress = 0

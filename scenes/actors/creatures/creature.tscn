@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cphm70vicseat"]
+[gd_scene load_steps=13 format=3 uid="uid://cphm70vicseat"]
 
 [ext_resource type="Script" uid="uid://or8hn6g2pihm" path="res://scripts/creature.gd" id="1_688wq"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="2_0natf"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_brwgo"]
 [ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_p6e34"]
+[ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="5_5kibn"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
@@ -68,14 +69,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179, 0.498, 0.498)
 material_override = SubResource("StandardMaterial3D_vexqk")
 radius = 0.1
 
-[node name="KillBox" type="Area3D" parent="."]
+[node name="KillBox" parent="." instance=ExtResource("5_5kibn")]
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
-visible = false
 shape = SubResource("CylinderShape3D_5nnlu")
-debug_fill = false
 
 [node name="MovementSM" type="Node" parent="." node_paths=PackedStringArray("user")]
 unique_name_in_owner = true
