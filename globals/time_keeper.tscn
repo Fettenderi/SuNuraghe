@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkhvif6b51asg"]
+
+[ext_resource type="Script" uid="uid://desoy3obwpdvj" path="res://globals/time_keeper.gd" id="1_x15xj"]
+
+[node name="TimeKeeper" type="Node"]
+script = ExtResource("1_x15xj")
+is_active = true

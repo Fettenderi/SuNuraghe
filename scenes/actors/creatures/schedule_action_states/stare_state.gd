@@ -6,6 +6,8 @@ var _is_active := false
 
 var _receiver : ReceiverRes
 var _stare_timer : Timer
+var _next_state : String
+var _next_info : Dictionary = {}
 
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
@@ -14,6 +16,15 @@ func start(info : Dictionary = {}) -> void:
 		_receiver = info["await"]
 		_receiver.received.connect(_on_received_signal)
 		return
+	
+	_next_state = ""
+	
+	if info.has("next_state"):
+		_next_state = info["next_state"]
+	
+	if info.has("next_info"):
+		_next_info = info["next_info"]
+
 	
 	if info.has("time"):
 		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
@@ -46,9 +57,16 @@ func _on_stare_timer_ended() -> void:
 	if not _is_active: return
 	
 	_stare_timer.stop()
-	user.progress()
+	
+	if _next_state.is_empty():
+		user.progress()
+	else:
+		state_machine.change_state(_next_state, _next_info)
 
 func _on_received_signal(_value) -> void:
 	if not _is_active: return
 	
-	user.progress()
+	if _next_state != "":
+		user.progress()
+	else:
+		state_machine.change_state(_next_state, _next_info)

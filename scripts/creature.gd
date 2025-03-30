@@ -118,6 +118,10 @@ func _on_navigation_finished():
 func get_eyes_location() -> Vector3:
 	return _head.global_position
 
+func suspect_player() -> void:
+	#movement_state_machine.update({"suspect" : true})
+	pass
+
 func look(target_position : Vector3, delta : float) -> void:
 	var _local_destination := target_position - global_position
 	var _local_direction := _local_destination.normalized()

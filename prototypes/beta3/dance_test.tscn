@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://8vyu2s1vt4u4"]
+[gd_scene load_steps=31 format=3 uid="uid://8vyu2s1vt4u4"]
 
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_nqaye"]
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_b8gr8"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="8_aeqdd"]
 [ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="10_4oab2"]
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="11_e34bc"]
+[ext_resource type="Script" uid="uid://dtjmv1fcjf05d" path="res://prototypes/beta3/area_3d.gd" id="11_nqaye"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -26,31 +27,19 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
-vertices = PackedVector3Array(11.6181, -2.5, -1.79861, 21.6181, -2.5, -1.79861, 21.6181, -2.5, -19.0486, 11.6181, -2.5, -19.0486, -6.88194, -2.5, -14.0486, -6.88194, -2.5, -1.29861, 7.61806, -2.5, -1.29861, 7.61806, -2.5, -14.0486, 11.3681, -2.5, 0.451389, 9.36806, -2.5, 0.451389, 9.36806, -2.5, 10.4514, 21.6181, -2.5, 10.4514, -2.63194, -2.5, 12.4514, 2.61806, -2.5, 12.4514, 2.86806, -2.5, 10.4514, -2.88194, -2.5, 10.4514, 4.86806, -2.5, 0.451389, -7.88194, -2.5, 0.451389, 4.86806, -2.5, 10.4514, -7.88194, -2.5, 10.4514, -2.63194, -2.5, 20.7014, 2.61806, -2.5, 20.7014)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 0, 1), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 1), PackedInt32Array(12, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(16, 15, 17), PackedInt32Array(16, 18, 14), PackedInt32Array(15, 19, 17), PackedInt32Array(16, 9, 18), PackedInt32Array(18, 9, 10), PackedInt32Array(21, 20, 13), PackedInt32Array(13, 20, 12)]
+vertices = PackedVector3Array(11.6181, -2.50668, -1.79861, 21.6181, -2.50668, -1.79861, 21.6181, -2.50668, -19.0486, 11.6181, -2.50668, -19.0486, -2.63194, -2.50668, -1.54861, 2.61806, -2.50668, -1.54861, 2.61806, -2.50668, -14.5486, -2.63194, -2.50668, -14.5486, 11.3681, -2.50668, 0.451389, 9.36806, -2.50668, 0.451389, 9.36806, -2.50668, 10.4514, 21.6181, -2.50668, 10.4514, -2.88194, -2.50668, 10.4514, -2.63194, -2.50668, 12.4514, 2.61806, -2.50668, 12.4514, 2.86806, -2.50668, 10.4514, 2.86806, -2.50668, 0.451389, -2.88194, -2.50668, 0.451389, -7.88194, -2.50668, 0.451389, -7.88194, -2.50668, 10.4514, 4.86806, -2.50668, 10.4514, 4.86806, -2.50668, 0.451389, -2.63194, -2.50668, 26.9514, 2.61806, -2.50668, 26.9514)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 0, 1), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 1), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 17), PackedInt32Array(15, 17, 16), PackedInt32Array(12, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(5, 16, 4), PackedInt32Array(4, 16, 17), PackedInt32Array(16, 21, 15), PackedInt32Array(15, 21, 20), PackedInt32Array(21, 9, 20), PackedInt32Array(20, 9, 10), PackedInt32Array(23, 22, 14), PackedInt32Array(14, 22, 13)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3e5f"]
 albedo_texture = ExtResource("2_b8gr8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nqaye"]
+size = Vector3(16.7521, 1.11974, 1.46899)
 
 [sub_resource type="Resource" id="Resource_nqaye"]
 script = ExtResource("11_e34bc")
 receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4")])
 metadata/_custom_type_script = "uid://daqy62a65vloj"
-
-[sub_resource type="Resource" id="Resource_5cpvu"]
-script = ExtResource("6_72msm")
-state = 9
-info = Dictionary[String, Variant]({
-"jump": 0,
-"vigilant": true,
-"waypoints": NodePath("Waypoints")
-})
-metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
-
-[sub_resource type="Resource" id="Resource_b8gr8"]
-script = ExtResource("5_u3k10")
-tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_5cpvu")])
-metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
 [sub_resource type="Resource" id="Resource_vafhi"]
 script = ExtResource("6_72msm")
@@ -60,18 +49,72 @@ info = Dictionary[String, Variant]({
 })
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 
-[sub_resource type="Resource" id="Resource_1lnc3"]
+[sub_resource type="Resource" id="Resource_u3k10"]
 script = ExtResource("6_72msm")
 state = 4
 info = Dictionary[String, Variant]({
+"center": Vector3(-1, 0, 0),
+"leader": true,
 "waypoints": NodePath("Waypoints")
 })
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 
 [sub_resource type="Resource" id="Resource_q46mp"]
 script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_u3k10")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_1lnc3"]
+script = ExtResource("6_72msm")
+state = 4
+info = Dictionary[String, Variant]({
+"center": Vector3(-1, 0, 0),
+"leader": false,
+"waypoints": NodePath("Waypoints")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_bketw"]
+script = ExtResource("5_u3k10")
 tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_qivie"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_b8gr8"]
+script = ExtResource("6_72msm")
+state = 4
+info = Dictionary[String, Variant]({
+"leader": false,
+"waypoints": NodePath("Waypoints")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_72msm"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_b8gr8")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_x6vv4"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_aeqdd"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_b5nie"]
+script = ExtResource("5_u3k10")
+tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi"), SubResource("Resource_1lnc3")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cpvu"]
+size = Vector3(29.3678, 3.22461, 4.3418)
 
 [node name="Node3D" type="Node3D"]
 
@@ -96,23 +139,10 @@ navigation_mesh = SubResource("NavigationMesh_c4voo")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 0, 12.6973)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00928998, 0, 6.10368)
 use_collision = true
 flip_faces = true
-size = Vector3(6.3252, 6, 17.3749)
-material = SubResource("StandardMaterial3D_m3e5f")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35612, 0, -7.69226)
-use_collision = true
-flip_faces = true
-size = Vector3(15.635, 6, 13.8936)
-material = SubResource("StandardMaterial3D_m3e5f")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35612, 0, 0.0283933)
-use_collision = true
-size = Vector3(9.65137, 3.35522, 1.98145)
+size = Vector3(6.3252, 6, 42.7644)
 material = SubResource("StandardMaterial3D_m3e5f")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
@@ -129,8 +159,21 @@ flip_faces = true
 size = Vector3(11.283, 6, 30.9033)
 material = SubResource("StandardMaterial3D_m3e5f")
 
-[node name="PosVisualizer" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -3.50747)
+[node name="Tunnel" type="CSGCombiner3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5969, -2.44681, -1.97276)
+
+[node name="Tunnel2" type="Area3D" parent="NavigationRegion3D/CSGCombiner3D/Tunnel"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="NavigationRegion3D/CSGCombiner3D/Tunnel/Tunnel2"]
+transform = Transform3D(-1, 0, -8.64327e-08, 0, 1, 0, 8.64327e-08, 0, -1, 0, 0, 0)
+shape = SubResource("BoxShape3D_nqaye")
+
+[node name="RoomHole11" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D/Tunnel"]
+transform = Transform3D(-1, 0, -8.64327e-08, 0, 1, 0, 8.64327e-08, 0, -1, 0, 0, 0)
+flip_faces = true
+size = Vector3(16.9831, 1.11974, 1.46899)
 
 [node name="Disguise" parent="." instance=ExtResource("7_5cpvu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0054388, -2.99662, 13.7527)
@@ -138,31 +181,10 @@ emitter_resource = SubResource("Resource_nqaye")
 
 [node name="Enemies" type="Node3D" parent="."]
 
-[node name="PuppetedMamuthones2" parent="Enemies" instance=ExtResource("4_bketw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -12.0261)
-schedule = SubResource("Resource_b8gr8")
-verbose = true
-
-[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones2"]
-
-[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76167, -2, -3.50747)
-
-[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.893, -2, -3.507)
-
-[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.893, -2, -12.026)
-
-[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.762, -2, -12.026)
-
-[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.762, -2, -12.026)
-
-[node name="PuppetedMamuthones" parent="Enemies" instance=ExtResource("4_bketw")]
-transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 1.93993, -2.00012, 13.6847)
+[node name="PuppetedMamuthones" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 1.95438, -2.00012, 12.1846)
 schedule = SubResource("Resource_q46mp")
+target = NodePath("../../Player")
 
 [node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones"]
 
@@ -176,11 +198,148 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1804, -2.00012, 8.26254)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, 5.96833)
 
 [node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, -17.6986)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, -5.27298)
+
+[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6698, -2.00012, -5.27298)
+
+[node name="PuppetedMamuthones3" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 1.86116, -2.00012, 21.8602)
+schedule = SubResource("Resource_bketw")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones3"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 8.26254)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1804, -2.00012, 8.26254)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, 5.96833)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, 1.79426)
+
+[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones3/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6302, -2.00012, 1.79426)
+
+[node name="PuppetedMamuthones4" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 1.89259, -2.00012, 18.5983)
+schedule = SubResource("Resource_qivie")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones4"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones4/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 8.26254)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones4/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1804, -2.00012, 8.26254)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones4/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9334, -2.00012, 5.96833)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones4/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.933, -2, -0.794)
+
+[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones4/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6401, -2.00012, -0.793676)
+
+[node name="PuppetedMamuthones2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 1.85104, -2.00012, -1.45878)
+schedule = SubResource("Resource_72msm")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones2"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 2.10339)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0868, -2.00012, 2.10339)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -0.190822)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones2/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -17.6986)
+
+[node name="PuppetedMamuthones5" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 1.94426, -2.00012, -11.1344)
+schedule = SubResource("Resource_x6vv4")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones5"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones5/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 2.10339)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones5/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0868, -2.00012, 2.10339)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones5/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -0.190822)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones5/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -17.6986)
+
+[node name="PuppetedMamuthones6" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 1.91283, -2.00012, -7.87249)
+schedule = SubResource("Resource_aeqdd")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones6"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones6/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 2.10339)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones6/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0868, -2.00012, 2.10339)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones6/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -0.190822)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones6/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -17.6986)
+
+[node name="PuppetedMamuthones7" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
+transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 1.91283, -2.00012, -4.81241)
+schedule = SubResource("Resource_b5nie")
+target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones7"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones7/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.78901, -2.00012, 2.10339)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones7/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0868, -2.00012, 2.10339)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones7/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -0.190822)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones7/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8398, -2.00012, -17.6986)
 
 [node name="TopCam" parent="." instance=ExtResource("8_aeqdd")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, -0.0510466, 11.7242, 16.5056)
+
+[node name="Area3D" type="Area3D" parent="." groups=["ShiftDetector"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.901016, 0)
+collision_layer = 0
+collision_mask = 34
+script = ExtResource("11_nqaye")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.93363, 0, 8.05681)
+shape = SubResource("BoxShape3D_5cpvu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.39, 0, -4.42176)
+shape = SubResource("BoxShape3D_5cpvu")
 
 [editable path="TopCam"]

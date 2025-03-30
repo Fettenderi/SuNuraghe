@@ -1,4 +1,4 @@
-[gd_scene load_steps=162 format=3 uid="uid://diymi2h3f5cqq"]
+[gd_scene load_steps=167 format=3 uid="uid://diymi2h3f5cqq"]
 
 [ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="1_v4d4p"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_30hdq"]
@@ -575,10 +575,37 @@ trap_activated_task = SubResource("Resource_uffoy")
 trap_activated_receiver = ExtResource("39_ty36l")
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
+[sub_resource type="Resource" id="Resource_421lv"]
+script = ExtResource("53_w33q4")
+state = 0
+info = Dictionary[String, Variant]({
+"vigilant": true
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_oksur"]
+script = ExtResource("52_4a5sc")
+tasks = Array[ExtResource("53_w33q4")]([SubResource("Resource_421lv")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_jide8"]
+script = ExtResource("52_4a5sc")
+tasks = Array[ExtResource("53_w33q4")]([SubResource("Resource_421lv")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_4h8xp"]
+script = ExtResource("52_4a5sc")
+tasks = Array[ExtResource("53_w33q4")]([SubResource("Resource_421lv")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_ql8jr"]
+script = ExtResource("52_4a5sc")
+tasks = Array[ExtResource("53_w33q4")]([SubResource("Resource_421lv")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
 [node name="Level" type="Node3D"]
 
 [node name="EnvironmentManager" parent="." instance=ExtResource("1_v4d4p")]
-_is_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_30hdq")]
 transform = Transform3D(-0.575662, 0, -0.817687, 0, 1, 0, 0.817687, 0, -0.575662, -9.87833, -2.09425, 25.7532)
@@ -597,6 +624,7 @@ use_collision = true
 
 [node name="CentralBell" type="CSGCylinder3D" parent="NavigationRegion3D/Decos/Bells"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.2785, 0)
+visible = false
 radius = 10.0
 height = 36.425
 sides = 32
@@ -1184,6 +1212,7 @@ material = SubResource("StandardMaterial3D_3hc6s")
 
 [node name="CentralBellRoom" type="CSGCylinder3D" parent="NavigationRegion3D/Rooms"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.466, 0)
+visible = false
 flip_faces = true
 radius = 20.0
 height = 52.0356
@@ -1217,6 +1246,7 @@ sides = 32
 transform = Transform3D(0.246114, 0, 0, 0, 0.451863, 0, 0, 0, 0.395942, 0, -5.91077, 108.885)
 
 [node name="Layer0" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms"]
+visible = false
 
 [node name="Entrance" type="CSGCombiner3D" parent="NavigationRegion3D/Rooms/Layer0"]
 transform = Transform3D(0.246114, 0, 0, 0, 0.246114, 0, 0, 0, 0.395942, 0, -2.094, 39.9819)
@@ -2219,6 +2249,7 @@ shape = SubResource("BoxShape3D_375i7")
 [node name="Lights" type="Node3D" parent="Objects"]
 
 [node name="Layer0" type="Node3D" parent="Objects/Lights"]
+visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5114, 0, 40.6962)
@@ -3582,6 +3613,26 @@ target = NodePath("../../../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.5693, 6.5061, 2.91168)
 target = NodePath("../../../Player")
 
+[node name="PuppetedMamuthones8" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 54.7165, 6.5061, 73.3421)
+schedule = SubResource("Resource_oksur")
+target = NodePath("../../../Player")
+
+[node name="PuppetedMamuthones9" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 58.9356, 6.5061, 73.3421)
+schedule = SubResource("Resource_jide8")
+target = NodePath("../../../Player")
+
+[node name="PuppetedMamuthones10" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 63.9356, 6.5061, 73.3421)
+schedule = SubResource("Resource_4h8xp")
+target = NodePath("../../../Player")
+
+[node name="PuppetedMamuthones11" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 67.9356, 6.5061, 73.3421)
+schedule = SubResource("Resource_ql8jr")
+target = NodePath("../../../Player")
+
 [node name="PuppetedMamuthones5" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.7697, 6.5061, 3.22137)
 target = NodePath("../../../Player")
@@ -3597,10 +3648,11 @@ target = NodePath("../../../Player")
 [node name="TopCam" parent="." instance=ExtResource("54_s2ybf")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(-0.575662, 0.817687, -2.5163e-08, -4.37114e-08, 1.91068e-15, 1, 0.817687, 0.575662, 3.57423e-08, -9.87833, 12.6297, 25.7532)
+transform = Transform3D(-0.575662, 0.817687, -2.5163e-08, -4.37114e-08, 1.91068e-15, 1, 0.817687, 0.575662, 3.57422e-08, -9.87833, 12.6298, 25.7532)
 
 [node name="LayersManager" type="Node" parent="." node_paths=PackedStringArray("layer0", "layer1", "layer2", "layer3")]
 script = ExtResource("55_dk6qd")
+layer0_enabled = false
 layer1_enabled = false
 layer3_enabled = false
 layer0 = [NodePath("../Objects/Lights/Layer0"), NodePath("../NavigationRegion3D/Rooms/CentralBellRoom"), NodePath("../NavigationRegion3D/Decos/Bells/CentralBell"), NodePath("../NavigationRegion3D/Rooms/Layer0")]

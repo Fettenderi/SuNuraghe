@@ -14,6 +14,8 @@ extends State
 
 var _active := false
 
+var _is_shifted := false
+
 var _starting_head_pos : float
 var _little_jumping := false
 var _little_jump_elapsed := 0.0
@@ -42,6 +44,13 @@ func _unhandled_input(_event : InputEvent) -> void:
 	
 	if Input.is_action_just_pressed(user.KEY_BIND_NOCLIP):
 		state_machine.change_state("NoclipState", {"leaving_state": "DisguisedState"})
+	
+	if Input.is_action_just_pressed(user.KEY_BIND_COVER):
+		_is_shifted = true
+		get_tree().call_group(&"ShiftDetector", "player_shifted", true)
+	elif Input.is_action_just_released(user.KEY_BIND_COVER):
+		_is_shifted = false
+		get_tree().call_group(&"ShiftDetector", "player_shifted", false)
 
 func _handle_jumping(delta : float) -> void:
 	_little_jump_elapsed += delta
@@ -56,12 +65,10 @@ func _handle_walking(delta : float) -> void:
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
 		_little_jump_elapsed = 0.0
 		_little_jumping = true
+		TimeKeeper.player_input()
 		return
 	
-	if Input.is_action_pressed(user.KEY_BIND_COVER):
-		Utils.update_just_speed(user, change_rate, max_dance_speed, delta)
-	else:
-		Utils.update_just_speed(user, change_rate, max_walk_speed, delta)
+	Utils.update_just_speed(user, change_rate, max_dance_speed if _is_shifted else max_walk_speed, delta)
 
 
 func end() -> void:

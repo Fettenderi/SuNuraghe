@@ -43,3 +43,8 @@ static func update_just_speed(user : CharacterBody3D, change_rate : float, targe
 		user.max_speed = lerp(user.max_speed, target_speed, 1.0 - exp(-change_rate * delta))
 	else:
 		user.max_speed = target_speed
+	
+	if not user is Player: return
+	
+	@warning_ignore("narrowing_conversion")
+	Gui.update_wool_display(user.max_speed * 100)

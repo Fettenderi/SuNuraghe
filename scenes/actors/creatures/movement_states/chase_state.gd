@@ -21,6 +21,9 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("speed"):
 		max_speed = info["speed"]
+	
+	if info.has("located"):
+		_navigation_agent_3d.target_position = info["located"]
 
 
 func _physics_process(delta: float) -> void:
