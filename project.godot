@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://d30nrlbhq5ixs"
+run/main_scene="uid://diymi2h3f5cqq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

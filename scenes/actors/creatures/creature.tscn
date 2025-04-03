@@ -74,7 +74,7 @@ material_override = SubResource("StandardMaterial3D_vexqk")
 radius = 0.1
 
 [node name="test" parent="Mesh" instance=ExtResource("5_k2ell")]
-transform = Transform3D(0.170609, 0, 0, 0, 0.170609, 0, 0, 0, 0.170609, -0.026397, 0.495239, 0)
+transform = Transform3D(0.198, 0, 0, 0, 0.198, 0, 0, 0, 0.198, -0.026397, 0.76257, 0)
 
 [node name="KillBox" parent="." instance=ExtResource("5_5kibn")]
 unique_name_in_owner = true

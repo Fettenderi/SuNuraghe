@@ -8,6 +8,8 @@ var _is_active := false
 
 var _navigation_agent_3d : NavigationAgent3D
 
+var _emitter_resource : EmitterRes
+
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
 	
@@ -24,6 +26,11 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("speed"):
 		max_speed = info["speed"]
+	
+	if info.has("emitter"):
+		_emitter_resource = info["emitter"]
+	else:
+		_emitter_resource = null
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):
@@ -31,6 +38,8 @@ func update(info : Dictionary = {}) -> void:
 		return
 
 	if info.has("arrived"):
+		if _emitter_resource != null:
+			_emitter_resource.send_signal(true)
 		user.progress()
 
 func _physics_process(delta: float) -> void:

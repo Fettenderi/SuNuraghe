@@ -1,6 +1,6 @@
 # Todo
-- La danza deve essere fatta guardando tutti al centro o tutti fuori
 - Quelli dell'altro lato devono fermarsi all'angolo?
+- Fixare Gagnella che è onniscente (e forse anche altri)
 
 ?????????
 - Raggiunta la vent dovrebbe esserci un salto ma i mamuthones si fermano tutti e simultaneamente fanno dei passi verso il centro,
