@@ -14,6 +14,9 @@ func _ready() -> void:
 	
 	if _interactable_box != null:
 		_interactable_box.emitter_resource = emitter_resource
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if _is_active: return
@@ -21,3 +24,11 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	_is_active = true
 	_interactable_box.set_active(false)
 	_mesh.visible = false
+
+func _load_data(data : GStorage) -> void:
+	_is_active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
+	_interactable_box.set_active(not _is_active)
+	_mesh.visible = not _is_active
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"is_active", _is_active)

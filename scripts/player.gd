@@ -63,6 +63,9 @@ func _ready() -> void:
 	head_start_pos = _head.position
 	_rotation_target_player = quaternion.get_angle()
 	PlayerStats.disguised_changed.connect(set_disguised)
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
 
 func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
@@ -168,3 +171,21 @@ func look(target : Vector3, delta : float) -> void:
 	
 	quaternion = quaternion.slerp(Quaternion(Vector3.UP, atan2(_local_direction.x, _local_direction.z)), mouse_acceleration * delta)
 	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, atan2(_local_direction.z, _local_direction.y)), mouse_acceleration * delta)
+
+func _load_data(data : GStorage) -> void:
+	global_position = Utils.string_to_vector3(data.get_value(&"player_" + &"position"))
+	
+	var _rot_vector : Vector4 = Utils.string_to_vector4(data.get_value(&"player_" + &"rotation"))
+	_rotation_target_player = sign(_rot_vector.x) * Quaternion(0.0, _rot_vector.x, 0.0, _rot_vector.y).get_angle()
+	_rotation_target_head = - sign(_rot_vector.z) * Quaternion(_rot_vector.z, 0.0, 0.0, _rot_vector.w).get_angle()
+	
+	PlayerStats.wool_pieces = data.get_value(&"player_" + &"wool_pieces")
+	PlayerStats.disguised = data.get_value(&"player_" + &"disguised")
+
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(&"player_" + &"position", global_position)
+	data.set_value(&"player_" + &"rotation", Vector4(quaternion.y, quaternion.w, _head.quaternion.x, _head.quaternion.w))
+	
+	data.set_value(&"player_" + &"wool_pieces",PlayerStats.wool_pieces)
+	data.set_value(&"player_" + &"disguised", PlayerStats.disguised)

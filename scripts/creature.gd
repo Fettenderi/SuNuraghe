@@ -50,6 +50,10 @@ func _ready() -> void:
 	
 	movement_state_machine.verbose = verbose
 
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
+	
+
 func _physics_process(delta: float) -> void:
 	var _destination := navigation_agent_3d.get_next_path_position()
 	var _local_destination := _destination - global_position
@@ -58,7 +62,8 @@ func _physics_process(delta: float) -> void:
 	if not navigation_agent_3d.is_target_reached():
 		_direction = _local_destination.normalized()
 		
-		global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+		if _direction.length_squared() > 0.0:
+			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 	
 	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _acceleration * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _acceleration * delta)
@@ -93,6 +98,8 @@ func _start_movement() -> void:
 
 func _end_movement() -> void:
 	movement_state_machine.update({"end": true})
+	LevelStats.level_data.set_value(Utils.nhash(self) + &"ended", true)
+	
 	queue_free()
 
 func _on_eyes_located(collider: Player) -> void:
@@ -127,3 +134,15 @@ func look(target_position : Vector3, delta : float) -> void:
 	var _local_direction := _local_destination.normalized()
 	
 	global_rotation.y = lerp_angle(global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+
+func _load_data(data : GStorage) -> void:
+	if data.has_value(Utils.nhash(self) + &"ended"):
+		queue_free()
+		return
+	
+	global_position = Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"position"))
+	global_rotation.y = float(data.get_value(Utils.nhash(self) + &"rotation"))
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"position", global_position)
+	data.set_value(Utils.nhash(self) + &"rotation", global_rotation.y)

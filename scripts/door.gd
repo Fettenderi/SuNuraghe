@@ -38,7 +38,6 @@ var _vibration_amount := 2
 func _ready() -> void:
 	_set_open(is_open or bake_override)
 	if Engine.is_editor_hint(): return
-	
 	_mesh.position.y = 0.0
 	
 	if not is_locked:
@@ -50,6 +49,10 @@ func _ready() -> void:
 		open_receiver_resource.received.connect((func(): is_open = true).unbind(1))
 	if close_receiver_resource != null:
 		close_receiver_resource.received.connect((func(): is_open = false).unbind(1))
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
+
 
 func _set_open(value : bool) -> void:
 	if Engine.is_editor_hint():
@@ -83,3 +86,11 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 		return
 	
 	is_open = not is_open
+
+func _load_data(data : GStorage) -> void:
+	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
+	is_locked = bool(data.get_value(Utils.nhash(self) + &"is_locked"))
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"is_open", is_open)
+	data.set_value(Utils.nhash(self) + &"is_locked", is_locked)

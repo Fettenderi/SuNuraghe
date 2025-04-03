@@ -18,6 +18,9 @@ func _ready() -> void:
 	
 	if emitter_resource != null:
 		_interactable_box.emitter_resource = emitter_resource
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
 
 func _set_bake_mode(value : bool) -> void:
 	_mesh.position.y = -1.0 if value else 0.0
@@ -27,5 +30,13 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	
 	_available = false
 	_interactable_box.set_active(false)
-	PlayerStats.disguised = true
 	_mesh.visible = false
+	PlayerStats.disguised = true
+
+func _load_data(data : GStorage) -> void:
+	_available = data.get_value(Utils.nhash(self) + &"available")
+	_interactable_box.set_active(_available)
+	_mesh.visible = _available
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"available", _available)

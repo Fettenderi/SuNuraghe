@@ -1,12 +1,4 @@
 # Todo
-
-- Lavorare al sistema di salvataggio:
-	+ Poszione del player, se ha il costume addosso, quanta lana ha
-	+ Per ogni mamuthones la posizione e il progresso nella schedule
-	+ Per ogni oggetto interagibile lo stato
-
-- Main Menu : [New Game] [Continue] se c'è un salvataggio già [Quit]
-
 - La danza deve essere fatta guardando tutti al centro o tutti fuori
 - Quelli dell'altro lato devono fermarsi all'angolo?
 

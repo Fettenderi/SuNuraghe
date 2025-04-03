@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjd344gapgtxc"]
+
+[ext_resource type="Script" uid="uid://c2gya1t8g1n6q" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
+font_size = 50
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+level_scene = "uid://diymi2h3f5cqq"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Title"
+label_settings = SubResource("LabelSettings_vue75")
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

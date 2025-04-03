@@ -35,7 +35,6 @@ var _vibration_amount := 2
 func _ready() -> void:
 	_set_open(is_open)
 	if Engine.is_editor_hint(): return
-	
 	_mesh_right.position.y = 0.0
 	_mesh_left.position.y = 0.0
 	
@@ -43,6 +42,10 @@ func _ready() -> void:
 		_interactable_box.state = is_open
 	else:
 		receiver_resource.received.connect((func(): is_open = not is_open).unbind(1))
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
+
 
 func _set_open(value : bool):
 	if Engine.is_editor_hint():
@@ -87,3 +90,9 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 		return
 	
 	is_open = not is_open
+
+func _load_data(data : GStorage) -> void:
+	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"is_open", is_open)

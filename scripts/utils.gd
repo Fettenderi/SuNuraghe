@@ -48,3 +48,36 @@ static func update_just_speed(user : CharacterBody3D, change_rate : float, targe
 	
 	@warning_ignore("narrowing_conversion")
 	Gui.update_wool_display(user.max_speed * 100)
+
+static func string_to_vector2(string := "") -> Vector2:
+	if not string: return Vector2.ZERO
+	
+	var new_string: String = string.erase(0, 1)
+	new_string = new_string.erase(new_string.length() - 1, 1)
+	
+	var array: PackedStringArray = new_string.split(", ")
+
+	return Vector2(float(array[0]), float(array[1]))
+
+static func string_to_vector3(string := "") -> Vector3:
+	if not string: return Vector3.ZERO
+	
+	var new_string: String = string.erase(0, 1)
+	new_string = new_string.erase(new_string.length() - 1, 1)
+	
+	var array: PackedStringArray = new_string.split(", ")
+
+	return Vector3(float(array[0]), float(array[1]), float(array[2]))
+
+static func string_to_vector4(string := "") -> Vector4:
+	if not string: return Vector4.ZERO
+	
+	var new_string: String = string.erase(0, 1)
+	new_string = new_string.erase(new_string.length() - 1, 1)
+	
+	var array: PackedStringArray = new_string.split(", ")
+
+	return Vector4(float(array[0]), float(array[1]), float(array[2]), float(array[3]))
+
+static func nhash(node: Node) -> String:
+	return node.name + str(hash(node.name + str(node.get_path())))

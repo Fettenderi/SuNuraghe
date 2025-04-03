@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dehsj4ikl4u38"]
+
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="1_fl107"]
+[ext_resource type="Script" uid="uid://b5b62gj5s3scb" path="res://scripts/saving_station.gd" id="1_jgq0q"]
+[ext_resource type="Texture2D" uid="uid://b2lmn0png5vkb" path="res://addons/kenney_prototype_textures/green/texture_13.png" id="2_jgq0q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikpem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mh3xa"]
+albedo_texture = ExtResource("2_jgq0q")
+
+[node name="SavingStation" type="Node3D"]
+script = ExtResource("1_jgq0q")
+
+[node name="InteractableBox" parent="." instance=ExtResource("1_fl107")]
+required_input = &"interact"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Salva"
+
+[node name="CollisionShape3D" parent="InteractableBox" index="0"]
+shape = SubResource("BoxShape3D_ikpem")
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Mesh"]
+material = SubResource("StandardMaterial3D_mh3xa")
+
+[connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="InteractableBox"]

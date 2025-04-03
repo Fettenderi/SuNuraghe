@@ -10,4 +10,4 @@ var disguised := false:
 		disguised = value
 		disguised_changed.emit(value)
 
-signal disguised_changed(value)
+signal disguised_changed(value : bool)

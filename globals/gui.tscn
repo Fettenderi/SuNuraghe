@@ -6,6 +6,7 @@
 font_size = 30
 
 [node name="GUI" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_w8mk6")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]

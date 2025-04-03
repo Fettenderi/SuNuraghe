@@ -8,24 +8,24 @@
 albedo_texture = ExtResource("2_uw3m6")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_aji8h"]
-size = Vector3(0.683594, 2.58203, 1.7998)
+size = Vector3(0.683594, 2.58203, 1.25781)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_5i02r")
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65, 0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9)
 
 [node name="DoorFrame" type="CSGBox3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
 use_collision = true
-size = Vector3(0.13501, 2.59, 1.8)
+size = Vector3(0.13501, 2.59, 1.26758)
 material = SubResource("StandardMaterial3D_xm0wp")
 
 [node name="DoorFrame2" type="CSGBox3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.48076)
-size = Vector3(0.357422, 0.314453, 0.313477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00494336, -1.34234)
+size = Vector3(0.357422, 0.233398, 0.214844)
 material = SubResource("StandardMaterial3D_xm0wp")
 
 [node name="InteractableBox" parent="Mesh" instance=ExtResource("3_xm0wp")]

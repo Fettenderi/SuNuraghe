@@ -16,13 +16,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _start_movement() -> void:
-	_is_active = true
+	super()
 	
-	if schedule != null:
-		schedule.reset_progress()
-	
-	movement_state_machine.start()
-
 	_read_schedule()
 
 
@@ -59,3 +54,18 @@ func _on_trap_activated(value : Variant):
 	
 	interrupted_state = movement_state_machine.current_state.name
 	movement_state_machine.change_state(schedule.trap_activated_task.get_state(), _new_task_info, true)
+
+func _load_data(data : GStorage) -> void:
+	super(data)
+	
+	if schedule == null: return
+	
+	schedule.progress = int(data.get_value(Utils.nhash(self) + &"progress"))
+	_read_schedule()
+
+func _save_data(data : GStorage) -> void:
+	super(data)
+	
+	if schedule == null: return
+	
+	data.set_value(Utils.nhash(self) + &"progress", schedule.progress - 1)

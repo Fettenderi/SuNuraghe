@@ -13,11 +13,14 @@ func _ready() -> void:
 	if receiver_resource != null:
 		receiver_resource.received.connect((func(): active = not active).unbind(1))
 	area_entered.connect(_interactable_entered)
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
 
 func _interactable_entered(area: Area3D):
 	if not active: return
 	
-	active = false
+	active = false   
 	signal_emitted.emit(true)
 	
 	if emitter_resource == null: return
@@ -27,3 +30,9 @@ func _interactable_entered(area: Area3D):
 		emitter_resource.send_signal(_player_pos)
 	else:
 		emitter_resource.send_signal()
+
+func _load_data(data : GStorage) -> void:
+	active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"is_active", active)

@@ -20,16 +20,16 @@ required_input = &"interact"
 gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Apri "
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, -2.3167e-07, 2.65, 0.9)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0.9)
 shape = SubResource("BoxShape3D_4hhpn")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractableBox"]
-transform = Transform3D(1, 8.74228e-08, 8.74228e-08, 8.74228e-08, -1, 7.64274e-15, 8.74228e-08, 0, -1, -3.10351e-07, 2.65, -0.9)
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, 8.74228e-08, -1, 7.64274e-15, 8.74228e-08, 0, -1, -7.86805e-08, -6.87847e-15, -0.9)
 shape = SubResource("BoxShape3D_4hhpn")
 
 [node name="MeshRight" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.42109e-14, -2.65, -1.8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.42109e-14, 0, -1.8)
 
 [node name="DoorFrame" type="CSGBox3D" parent="MeshRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
@@ -48,7 +48,7 @@ remote_path = NodePath("../../InteractableBox/CollisionShape3D2")
 
 [node name="MeshLeft" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.65, 1.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
 
 [node name="DoorFrame" type="CSGBox3D" parent="MeshLeft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)

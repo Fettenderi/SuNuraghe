@@ -1,5 +1,6 @@
-[gd_scene load_steps=167 format=3 uid="uid://diymi2h3f5cqq"]
+[gd_scene load_steps=169 format=3 uid="uid://diymi2h3f5cqq"]
 
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_30hdq"]
 [ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="1_v4d4p"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_30hdq"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_3fqns"]
@@ -51,6 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="51_xrpag"]
 [ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="52_4a5sc"]
 [ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="53_w33q4"]
+[ext_resource type="PackedScene" uid="uid://dehsj4ikl4u38" path="res://scenes/objects/saving_station.tscn" id="54_7iqcu"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="54_s2ybf"]
 [ext_resource type="Script" uid="uid://buaunp4xkr8mo" path="res://scripts/layers_manager.gd" id="55_dk6qd"]
 
@@ -604,11 +606,13 @@ tasks = Array[ExtResource("53_w33q4")]([SubResource("Resource_421lv")])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_30hdq")
 
 [node name="EnvironmentManager" parent="." instance=ExtResource("1_v4d4p")]
+_is_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_30hdq")]
-transform = Transform3D(-0.575662, 0, -0.817687, 0, 1, 0, 0.817687, 0, -0.575662, -9.87833, -2.09425, 25.7532)
+transform = Transform3D(-0.575662, 0, -0.817687, 0, 1, 0, 0.817687, 0, -0.575662, 59.8916, 5.50574, -61.9169)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 4.37114e-08, -4.37114e-08, 1.91068e-15, 1, 0, -1, 1.91069e-15, 0, 14.724, 0)
@@ -3516,7 +3520,7 @@ transform = Transform3D(-0.832264, 0, -0.55438, 0, 1, 0, 0.55438, 0, -0.832264, 
 [node name="Layer2" type="Node3D" parent="Enemies"]
 
 [node name="Parrego" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
-transform = Transform3D(0.722352, 0, 0.691526, 0, 1, 0, -0.691526, 0, 0.722352, 46.103, 6.505, -63.856)
+transform = Transform3D(1.28319, 0, 1.22843, 0, 1.77641, 0, -1.22843, 0, 1.28319, 46.103, 7.18069, -63.856)
 schedule = SubResource("Resource_0pbcp")
 target = NodePath("../../../Player")
 
@@ -3546,7 +3550,7 @@ transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 55.2796,
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 32.2478, 6.505, 74.1583)
 
 [node name="Nagasella" parent="Enemies/Layer2" node_paths=PackedStringArray("target") instance=ExtResource("51_xrpag")]
-transform = Transform3D(-0.703767, 0, -0.710431, 0, 1, 0, 0.710431, 0, -0.703767, 49.869, 6.507, -60.721)
+transform = Transform3D(-1.30494, 0, -1.3173, 0, 1.85422, 0, 1.3173, 0, -1.30494, 49.869, 7.2588, -60.721)
 schedule = SubResource("Resource_5mhay")
 target = NodePath("../../../Player")
 
@@ -3648,7 +3652,7 @@ target = NodePath("../../../Player")
 [node name="TopCam" parent="." instance=ExtResource("54_s2ybf")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(-0.575662, 0.817687, -2.5163e-08, -4.37114e-08, 1.91068e-15, 1, 0.817687, 0.575662, 3.57422e-08, -9.87833, 12.6298, 25.7532)
+transform = Transform3D(-0.575662, 0.817687, -2.5163e-08, -4.37114e-08, 1.91068e-15, 1, 0.817687, 0.575662, 3.57422e-08, 59.8916, 20.2297, -61.9169)
 
 [node name="LayersManager" type="Node" parent="." node_paths=PackedStringArray("layer0", "layer1", "layer2", "layer3")]
 script = ExtResource("55_dk6qd")
@@ -3659,6 +3663,9 @@ layer0 = [NodePath("../Objects/Lights/Layer0"), NodePath("../NavigationRegion3D/
 layer1 = [NodePath("../Objects/Lights/Layer1"), NodePath("../Enemies/Layer1"), NodePath("../NavigationRegion3D/Rooms/Layer1"), NodePath("../Objects/Static/Layer1"), NodePath("../NavigationRegion3D/Rooms/BellRoom1"), NodePath("../NavigationRegion3D/Decos/Layer1")]
 layer2 = [NodePath("../NavigationRegion3D/Rooms/BellRoom2"), NodePath("../NavigationRegion3D/Rooms/Layer2/CircularHallway2"), NodePath("../NavigationRegion3D/Decos/Bells/Bell2"), NodePath("../Objects/Lights/Layer2"), NodePath("../Enemies/Layer2"), NodePath("../Objects/Static/Layer2"), NodePath("../NavigationRegion3D/Rooms/Layer2"), NodePath("../NavigationRegion3D/Decos/Layer2")]
 layer3 = [NodePath("../NavigationRegion3D/Rooms/BellRoom3"), NodePath("../NavigationRegion3D/Decos/Bells/Bell3"), NodePath("../NavigationRegion3D/Rooms/CircularHallway3")]
+
+[node name="SavingStation" parent="." instance=ExtResource("54_7iqcu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.9309, 6.00574, -66.0053)
 
 [editable path="Objects/Static/Layer2/Signal0"]
 [editable path="Objects/Static/Layer2/Signal1A"]

@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://8vyu2s1vt4u4"
+run/main_scene="uid://d30nrlbhq5ixs"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -39,6 +39,7 @@ FmodManager="*res://addons/fmod/FmodManager.gd"
 Gui="*res://globals/gui.tscn"
 PlayerStats="*res://globals/player_stats.tscn"
 TimeKeeper="*res://globals/time_keeper.tscn"
+LevelStats="*res://globals/level_stats.tscn"
 
 [display]
 
@@ -54,7 +55,7 @@ project/assembly_name="ProjectNuraghe"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/fmod/plugin.cfg")
+enabled=PackedStringArray("res://addons/fettemplate/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/gstorage/plugin.cfg")
 
 [global_group]
 

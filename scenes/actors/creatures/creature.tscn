@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cphm70vicseat"]
+[gd_scene load_steps=14 format=3 uid="uid://cphm70vicseat"]
 
 [ext_resource type="Script" uid="uid://or8hn6g2pihm" path="res://scripts/creature.gd" id="1_688wq"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="2_0natf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_p6e34"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="5_5kibn"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
+[ext_resource type="PackedScene" uid="uid://qicskvtygx5y" path="res://assets/models/characters/test.blend" id="5_k2ell"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 radius = 0.4
@@ -56,18 +57,24 @@ view_angle = 1.65806
 tooltip_visible = false
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Mesh"]
+visible = false
 mesh = SubResource("CapsuleMesh_u7wol")
 material = SubResource("StandardMaterial3D_nu7mx")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.178535, 0.498162, 0.497653)
+visible = false
 material_override = SubResource("StandardMaterial3D_dr4gf")
 radius = 0.1
 
 [node name="CSGSphere3D2" type="CSGSphere3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.179, 0.498, 0.498)
+visible = false
 material_override = SubResource("StandardMaterial3D_vexqk")
 radius = 0.1
+
+[node name="test" parent="Mesh" instance=ExtResource("5_k2ell")]
+transform = Transform3D(0.170609, 0, 0, 0, 0.170609, 0, 0, 0, 0.170609, -0.026397, 0.495239, 0)
 
 [node name="KillBox" parent="." instance=ExtResource("5_5kibn")]
 unique_name_in_owner = true

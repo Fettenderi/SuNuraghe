@@ -78,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.662, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.13584e-08, 0, 0.00521803)
 current = true
+fov = 65.0
 
 [node name="InteractionBox" type="Area3D" parent="Head"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.52451e-08, 0, 0.995846)
