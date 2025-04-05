@@ -1,5 +1,4 @@
 # Todo
-- Mettere le porte
 - Mettere qualche texture
 
 - Mettere particellari alle luci

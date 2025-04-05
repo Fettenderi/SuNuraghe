@@ -24,8 +24,8 @@ const ARRIVED_THRESHOLD = 0.01
 @onready var _mesh_left: Node3D = %MeshLeft
 @onready var _interactable_box: InteractableBox = %InteractableBox
 
-var _right_target_rotation := 0.0
-var _left_target_rotation := PI / 2
+var _right_target_rotation := PI / 2
+var _left_target_rotation := 0.0
 var _arrived := true
 
 var _max_vibrating_time := 0.4
@@ -51,13 +51,13 @@ func _ready() -> void:
 func _set_open(value : bool):
 	if Engine.is_editor_hint():
 		if _mesh_right != null:
-			_mesh_right.rotation.y = - PI / 2 if value else PI
+			_mesh_right.rotation.y = 0.0 if value else - PI / 2
 		if _mesh_left != null:
-			_mesh_left.rotation.y = - PI / 2 if value else 0.0
+			_mesh_left.rotation.y = PI if value else - PI / 2
 	else:
 		_arrived = false
-		_right_target_rotation = - PI / 2 if value else PI
-		_left_target_rotation = - PI / 2 if value else 0.0
+		_right_target_rotation = 0.0 if value else - PI / 2
+		_left_target_rotation = PI if value else - PI / 2
 
 func _set_bake_mode(value : bool) -> void:
 	_mesh_right.position.y = -2.65 if value else 0.0
