@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ccai0kd8mw23" path="res://scenes/objects/door.tscn" id="8_6cisc"]
 [ext_resource type="Resource" uid="uid://dyy4v7b8cram8" path="res://assets/receivers/layer1/lay1-1.tres" id="9_ttms0"]
 [ext_resource type="Resource" uid="uid://bigbiteu2054j" path="res://assets/receivers/layer1/lay1-door1-close.tres" id="10_3a2fu"]
-[ext_resource type="Resource" uid="uid://cwuquitghdc48" path="res://assets/receivers/layer1/lay1-2.tres" id="11_w0cdv"]
+[ext_resource type="Resource" uid="uid://cwuquitghdc48" path="res://assets/receivers/layer1/lay1-door-f-l.tres" id="11_w0cdv"]
 [ext_resource type="Texture2D" uid="uid://bg2a3k4dm4sm6" path="res://addons/kenney_prototype_textures/red/texture_09.png" id="12_l2avq"]
 [ext_resource type="Resource" uid="uid://r5365ox3yf42" path="res://assets/receivers/layer1/lay1-door1-lock.tres" id="13_g6dlm"]
 [ext_resource type="Resource" uid="uid://b1nb2nuxw6abr" path="res://assets/receivers/layer1/lay1-door1-open.tres" id="14_8cuft"]

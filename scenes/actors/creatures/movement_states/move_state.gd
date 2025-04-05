@@ -8,7 +8,8 @@ var _is_active := false
 
 var _navigation_agent_3d : NavigationAgent3D
 
-var _emitter_resource : EmitterRes
+var _emitter : EmitterRes
+var _receiver : ReceiverRes
 
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
@@ -28,18 +29,29 @@ func start(info : Dictionary = {}) -> void:
 		max_speed = info["speed"]
 	
 	if info.has("emitter"):
-		_emitter_resource = info["emitter"]
+		_emitter = info["emitter"]
 	else:
-		_emitter_resource = null
+		_emitter = null
+	
+	if info.has("await"):
+		_receiver = info["await"]
+		if not _receiver.received.is_connected(_on_received_signal):
+			_receiver.received.connect(_on_received_signal)
+	else:
+		_receiver = null
+
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):
-		print("OH SCUS TI SONO VENUTO ADDOSSO " + user.name + " " + name)
+		#print("OH SCUS TI SONO VENUTO ADDOSSO " + user.name + " " + name)
 		return
 
 	if info.has("arrived"):
-		if _emitter_resource != null:
-			_emitter_resource.send_signal(true)
+		if _emitter != null:
+			_emitter.send_signal(true)
+
+		if _receiver != null: return
+		
 		user.progress()
 
 func _physics_process(delta: float) -> void:
@@ -49,3 +61,11 @@ func _physics_process(delta: float) -> void:
 
 func end() -> void:
 	_is_active = false
+
+
+func _on_received_signal(_value) -> void:
+	if not _is_active: return
+	
+	_receiver.received.disconnect(_on_received_signal)
+	
+	user.progress()

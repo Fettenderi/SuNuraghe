@@ -23,6 +23,7 @@ func start(info : Dictionary = {}) -> void:
 	_toggle_cooldown_timer.start()
 
 	_speed = user.max_speed
+	user.footsteps_player.set_period(1000.0)
 	user.shape_controller.set_active(false)
 
 	_leaving_state = "WalkState"

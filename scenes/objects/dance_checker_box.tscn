@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1xqcv8t0506s"]
+
+[ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="1_sc2l1"]
+[ext_resource type="Script" uid="uid://dtjmv1fcjf05d" path="res://prototypes/beta3/dance_checker_box.gd" id="2_xdgra"]
+
+[node name="DanceCheckerBox" instance=ExtResource("1_sc2l1")]
+script = ExtResource("2_xdgra")
+receiver_resource = null

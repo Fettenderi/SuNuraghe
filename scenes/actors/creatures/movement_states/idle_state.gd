@@ -14,6 +14,8 @@ func start(info : Dictionary = {}) -> void:
 		_receiver = info["await"]
 		if not _receiver.received.is_connected(_on_received_signal):
 			_receiver.received.connect(_on_received_signal)
+	else:
+		_receiver = null
 	
 	if info.has("vigilant"):
 		_vigilant = info["vigilant"]
@@ -43,6 +45,8 @@ func end() -> void:
 func _on_received_signal(_value) -> void:
 	if not _is_active: return
 	
+	_receiver.received.disconnect(_on_received_signal)
+
 	user.progress()
 
 func _physics_process(delta: float) -> void:

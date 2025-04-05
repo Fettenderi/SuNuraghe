@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="8_aeqdd"]
 [ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="10_4oab2"]
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="11_e34bc"]
-[ext_resource type="Script" uid="uid://dtjmv1fcjf05d" path="res://prototypes/beta3/area_3d.gd" id="11_nqaye"]
+[ext_resource type="Script" uid="uid://dtjmv1fcjf05d" path="res://prototypes/beta3/dance_checker_box.gd" id="11_nqaye"]
 [ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/areas/sight_detector_box.tscn" id="12_b8gr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]

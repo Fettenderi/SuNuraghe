@@ -12,11 +12,6 @@ var _next_info : Dictionary = {}
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
 	
-	if info.has("await"):
-		_receiver = info["await"]
-		_receiver.received.connect(_on_received_signal)
-		return
-	
 	_next_state = ""
 	
 	if info.has("next_state"):
@@ -24,6 +19,14 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("next_info"):
 		_next_info = info["next_info"]
+
+	
+	if info.has("await"):
+		_receiver = info["await"]
+		_receiver.received.connect(_on_received_signal)
+		return
+	else:
+		_receiver = null
 
 	
 	if info.has("time"):
@@ -66,7 +69,7 @@ func _on_stare_timer_ended() -> void:
 func _on_received_signal(_value) -> void:
 	if not _is_active: return
 	
-	if _next_state != "":
+	if _next_state != null:
 		user.progress()
 	else:
 		state_machine.change_state(_next_state, _next_info)

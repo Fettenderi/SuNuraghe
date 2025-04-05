@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o5gn5opycty6"]
+
+[ext_resource type="Script" uid="uid://b7xka2opn4gfx" path="res://scripts/lights_controller.gd" id="1_v4gmu"]
+
+[node name="LightsController" type="Node"]
+script = ExtResource("1_v4gmu")

@@ -15,6 +15,7 @@ const TURNING_SPEED = 6.0
 @onready var movement_state_machine: StateMachine = %MovementSM
 @onready var kill_box: ExpandedHitBox = %KillBox
 @onready var mesh: Node3D = %Mesh
+@onready var footsteps_player: AdvancedSoundPlayer = %FootstepsPlayer
 
 @onready var _collision_shape: CollisionShape3D = %CollisionShape
 @onready var _eyes: Node3D = %Eyes
@@ -25,7 +26,7 @@ var max_speed := 0.0
 
 var interrupted_state : StringName
 
-var _acceleration := 10.0
+var _acceleration := 12.0
 
 var _is_active := false:
 	set(value):
@@ -57,6 +58,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var _destination := navigation_agent_3d.get_next_path_position()
 	var _local_destination := _destination - global_position
+	
 	_local_destination.y = 0.0
 	
 	if not navigation_agent_3d.is_target_reached():
@@ -64,6 +66,8 @@ func _physics_process(delta: float) -> void:
 		
 		if _direction.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+			footsteps_player.request_playing()
+			print("DOVREBBE AVCERE SUONO UNICO PIù DURO" + name)
 	
 	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _acceleration * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _acceleration * delta)
@@ -98,7 +102,7 @@ func _start_movement() -> void:
 
 func _end_movement() -> void:
 	movement_state_machine.update({"end": true})
-	LevelStats.level_data.set_value(Utils.nhash(self) + &"ended", true)
+	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
 	
 	queue_free()
 
@@ -136,13 +140,16 @@ func look(target_position : Vector3, delta : float) -> void:
 	global_rotation.y = lerp_angle(global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 
 func _load_data(data : GStorage) -> void:
-	if data.has_value(Utils.nhash(self) + &"ended"):
-		queue_free()
-		return
+	if data.has_value(Utils.nhash(self) + &"active"):
+		if data.get_value(Utils.nhash(self) + &"active"): _start_movement()
+		else: queue_free()
 	
 	global_position = Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"position"))
 	global_rotation.y = float(data.get_value(Utils.nhash(self) + &"rotation"))
 
 func _save_data(data : GStorage) -> void:
+	if _is_active:
+		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
+	
 	data.set_value(Utils.nhash(self) + &"position", global_position)
 	data.set_value(Utils.nhash(self) + &"rotation", global_rotation.y)

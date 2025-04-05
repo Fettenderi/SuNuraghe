@@ -1,0 +1,10 @@
+extends NavigationRegion3D
+
+@export var receiver_resource : ReceiverRes
+
+func _ready() -> void:
+	if receiver_resource != null:
+		receiver_resource.received.connect(_on_received.unbind(1))
+
+func _on_received() -> void:
+	bake_navigation_mesh()

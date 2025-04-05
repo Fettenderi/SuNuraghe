@@ -32,8 +32,6 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	_interactable_box.set_active(false)
 	_mesh.visible = false
 	PlayerStats.disguised = true
-	
-	LevelStats.save_data()
 
 func _load_data(data : GStorage) -> void:
 	_available = data.get_value(Utils.nhash(self) + &"available")

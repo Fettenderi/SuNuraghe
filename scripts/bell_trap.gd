@@ -15,10 +15,6 @@ func _ready() -> void:
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
 
-	if emitter_resource != null: return
-	
-	print("TRAPPOLA NON CONFIGURATA " + name)
-
 
 func _on_activation_box_body_entered(body: Node3D) -> void:
 	if not body is Player: return

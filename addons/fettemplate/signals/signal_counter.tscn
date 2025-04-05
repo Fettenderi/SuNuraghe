@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw4ifxvx8hfkb"]
+
+[ext_resource type="Script" uid="uid://psj2gxuswfi" path="res://addons/fettemplate/signals/signal_counter.gd" id="1_oda50"]
+
+[node name="SignalCounter" type="Node"]
+script = ExtResource("1_oda50")

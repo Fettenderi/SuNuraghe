@@ -12,6 +12,7 @@ extends State
 @export var swing_angle := PI / 2
 
 @export_subgroup("Dance Configuration")
+@export var max_suspects := 3
 @export var normal_jump_cooldown := 1.4
 @export var normal_jumps := 7
 @export var short_jump_cooldown := 0.5
@@ -32,6 +33,9 @@ var _starting_rotation : float
 var _navigation_agent_3d : NavigationAgent3D
 var _waypoints : Array[Marker3D]
 var _waypoint_progress := 0
+
+var _receiver : ReceiverRes
+var _emitter : EmitterRes
 
 var _suspect_level := 0
 
@@ -60,6 +64,20 @@ func start(info : Dictionary = {}) -> void:
 			
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 	
+	if info.has("await"):
+		_receiver = info["await"]
+		if not _receiver.received.is_connected(_on_received_signal):
+			_receiver.received.connect(_on_received_signal)
+	else:
+		_receiver = null
+	
+	if info.has("emitter"):
+		_emitter = info["emitter"]
+	else:
+		_emitter = null
+
+
+	
 	if info.has("leader"):
 		_leader = info["leader"]
 	
@@ -76,7 +94,7 @@ func update(info : Dictionary = {}) -> void:
 
 	if info.has("suspect"):
 		_suspect_level += 1
-		if _suspect_level >= 3:
+		if _suspect_level >= max_suspects:
 			state_machine.change_state("ChaseState", {"located": user.target.global_position})
 		else:
 			state_machine.change_state("StareState", {"next_state": "DanceState", "time": 2.0})
@@ -89,6 +107,11 @@ func update(info : Dictionary = {}) -> void:
 		if _waypoint_progress < len(_waypoints):
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 		else:
+			if _emitter != null:
+				_emitter.send_signal(true)
+		
+			if _receiver != null: return
+			
 			user.progress()
 
 func _physics_process(delta: float) -> void:
@@ -133,7 +156,6 @@ func _on_little_jump_cooldown_timeout():
 		_dance_progress = 0
 		
 
-
 func end() -> void:
 	_is_active = false
 	_little_jumping = false
@@ -141,3 +163,10 @@ func end() -> void:
 	user.mesh.rotation.y = _starting_rotation
 	user.mesh.position.y = 0.0
 	_little_jump_elapsed = 0.0
+
+func _on_received_signal(_value) -> void:
+	if not _is_active: return
+	
+	_receiver.received.disconnect(_on_received_signal)
+	
+	user.progress()

@@ -18,6 +18,7 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var receiver_resource : ReceiverRes
 @export var strattle_emitter_resource : EmitterRes
+@export var opened_emitter_resource : EmitterRes
 
 @onready var _mesh_right: Node3D = %MeshRight
 @onready var _mesh_left: Node3D = %MeshLeft
@@ -78,6 +79,8 @@ func _physics_process(delta: float) -> void:
 	
 	if _vibrating_time <= 0.0 and abs(_mesh_right.rotation.y - _right_target_rotation) <= ARRIVED_THRESHOLD:
 		_arrived = true
+		if opened_emitter_resource != null:
+			opened_emitter_resource.send_signal()
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if Engine.is_editor_hint(): return

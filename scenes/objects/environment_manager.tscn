@@ -12,9 +12,9 @@ sky_material = SubResource("ProceduralSkyMaterial_e6psu")
 
 [sub_resource type="Environment" id="Environment_yh7dg"]
 background_mode = 2
-background_energy_multiplier = 0.0
+background_energy_multiplier = 0.1
 sky = SubResource("Sky_xr3nu")
-ambient_light_source = 3
+ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.0
 tonemap_mode = 2
@@ -31,7 +31,6 @@ _is_enabled = false
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_energy = 0.0
-shadow_enabled = true
 
 [node name="Environment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true

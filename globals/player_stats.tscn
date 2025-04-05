@@ -4,4 +4,3 @@
 
 [node name="PlayerStats" type="Node"]
 script = ExtResource("1_vcfsb")
-wool_pieces = 5

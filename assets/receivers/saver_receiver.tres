@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ReceiverRes" load_steps=2 format=3 uid="uid://cl8pa1vy7i7fr"]
+
+[ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="1_hd1m8"]
+
+[resource]
+script = ExtResource("1_hd1m8")
+receivers = Array[ExtResource("1_hd1m8")]([])
+metadata/_custom_type_script = "uid://bf63sx3umnijy"

@@ -34,6 +34,7 @@ const KEY_BIND_NOCLIP = "noclip"
 @onready var movement_sm: StateMachine = %MovementSM
 @onready var stamina_sm: StateMachine = %StaminaSM
 @onready var shape_controller: ShapeController = %ShapeController
+@onready var footsteps_player: AdvancedSoundPlayer = %FootstepsPlayer
 
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -101,6 +102,9 @@ func _move_player(delta : float) -> void:
 	else:
 		_accel = acceleration
 		#_sound_maker.set_enabled(false)
+	
+	if _input_dir != Vector2.ZERO:
+		footsteps_player.request_playing()
 	
 	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _accel * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _accel * delta)

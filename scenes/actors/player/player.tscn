@@ -1,16 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://cvdhqvacrttlw"]
+[gd_scene load_steps=34 format=3 uid="uid://cvdhqvacrttlw"]
 
 [ext_resource type="Script" uid="uid://g8atcph4wi6q" path="res://scripts/player.gd" id="1_x0hk6"]
+[ext_resource type="AudioStream" uid="uid://4ci7i1fh1rrf" path="res://assets/sfx/footsteps/CHAR_FS_TEST-001.wav" id="3_1a0p2"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_oxbe4"]
+[ext_resource type="AudioStream" uid="uid://c64g51efc4ymr" path="res://assets/sfx/footsteps/CHAR_FS_TEST-002.wav" id="4_0w3ce"]
 [ext_resource type="Script" uid="uid://040x4sow0hu2" path="res://scripts/shape_controller.gd" id="4_i174x"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="4_ou5my"]
+[ext_resource type="AudioStream" uid="uid://ct1vj7p1b48cb" path="res://assets/sfx/footsteps/CHAR_FS_TEST-003.wav" id="5_ffoq6"]
 [ext_resource type="Script" uid="uid://bf35frq3511vv" path="res://scenes/actors/player/movement_states/walk_state.gd" id="5_r05ns"]
 [ext_resource type="Script" uid="uid://ktcg3yaxj61e" path="res://scenes/actors/player/movement_states/disguised_state.gd" id="6_068wj"]
+[ext_resource type="AudioStream" uid="uid://cj4tx87nakksl" path="res://assets/sfx/footsteps/CHAR_FS_TEST-004.wav" id="6_cat03"]
 [ext_resource type="Script" uid="uid://igk0i8afm1ku" path="res://scenes/actors/player/movement_states/noclip_state.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://cdi5fw2eujhkr" path="res://scenes/actors/player/movement_states/sprint_state.gd" id="6_x4bpx"]
+[ext_resource type="AudioStream" uid="uid://cg1t1em027hgg" path="res://assets/sfx/footsteps/CHAR_FS_TEST-005.wav" id="7_7i6t6"]
 [ext_resource type="Script" uid="uid://cvsupjg0baixa" path="res://scenes/actors/player/movement_states/cover_state.gd" id="7_ijtw4"]
+[ext_resource type="AudioStream" uid="uid://dk6alasfu5fwd" path="res://assets/sfx/footsteps/CHAR_FS_TEST-006.wav" id="8_e5w6i"]
 [ext_resource type="Script" uid="uid://q5tb2ywxc423" path="res://scenes/actors/player/movement_states/crawling_state.gd" id="9_5bhx7"]
+[ext_resource type="AudioStream" uid="uid://c4ahilojv4gcp" path="res://assets/sfx/footsteps/CHAR_FS_TEST-007.wav" id="9_t1vny"]
+[ext_resource type="AudioStream" uid="uid://csjbckpw1t7u8" path="res://assets/sfx/footsteps/CHAR_FS_TEST-008.wav" id="10_0e3lr"]
 [ext_resource type="Script" uid="uid://bm4cbg27bim4v" path="res://scenes/actors/player/movement_states/die_state.gd" id="11_8bj4u"]
+[ext_resource type="AudioStream" uid="uid://c4hci7vc5n0f6" path="res://assets/sfx/footsteps/CHAR_FS_TEST-009.wav" id="11_llrf1"]
+[ext_resource type="Script" uid="uid://cjaiesjwhtfsk" path="res://scripts/advanced_sound_player.gd" id="12_0w3ce"]
 [ext_resource type="Script" uid="uid://bivlkne1wk8su" path="res://scenes/actors/player/stamina_states/consuming_state.gd" id="12_4iwnj"]
 [ext_resource type="Script" uid="uid://clwphi1y23rhx" path="res://scenes/actors/player/stamina_states/idle_state.gd" id="12_068wj"]
 [ext_resource type="Script" uid="uid://cfi5dv50vvsad" path="res://scenes/actors/player/stamina_states/fatigued_state.gd" id="13_068wj"]
@@ -36,6 +46,18 @@ size = Vector3(0.1, 0.1, 4.45825)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sd4yv"]
 radius = 0.25
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_owjsm"]
+streams_count = 9
+stream_0/stream = ExtResource("3_1a0p2")
+stream_1/stream = ExtResource("4_0w3ce")
+stream_2/stream = ExtResource("5_ffoq6")
+stream_3/stream = ExtResource("6_cat03")
+stream_4/stream = ExtResource("7_7i6t6")
+stream_5/stream = ExtResource("8_e5w6i")
+stream_6/stream = ExtResource("9_t1vny")
+stream_7/stream = ExtResource("10_0e3lr")
+stream_8/stream = ExtResource("11_llrf1")
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
@@ -120,6 +142,12 @@ collision_mask = 0
 shape = SubResource("SphereShape3D_sd4yv")
 enabled = false
 
+[node name="FootstepsPlayer" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_owjsm")
+script = ExtResource("12_0w3ce")
+playing_period = 0.5
+
 [node name="ShapeController" type="Node" parent="." node_paths=PackedStringArray("shapes")]
 unique_name_in_owner = true
 script = ExtResource("4_i174x")
@@ -138,6 +166,7 @@ change_rate = 3.7
 max_speed = 2.1
 head_bob_amplitude = 0.017
 head_bob_frequency = 0.15
+footsteps_period = 0.5
 
 [node name="DisguisedState" type="Node" parent="MovementSM"]
 script = ExtResource("6_068wj")
@@ -159,6 +188,7 @@ change_rate = 0.7
 max_speed = 2.8
 head_bob_amplitude = 0.023
 head_bob_frequency = 0.25
+footsteps_period = 0.4
 
 [node name="CoverState" type="Node" parent="MovementSM"]
 script = ExtResource("7_ijtw4")
@@ -173,6 +203,7 @@ change_rate = 3.0
 max_speed = 0.82
 head_bob_amplitude = 0.012
 head_bob_frequency = 0.07
+footsteps_period = 1.1
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="DieState" type="Node" parent="MovementSM"]

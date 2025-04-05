@@ -3,17 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://cphm70vicseat" path="res://scenes/actors/creatures/creature.tscn" id="1_x6tgh"]
 [ext_resource type="Script" uid="uid://7pj4wuotv7pe" path="res://scripts/puppeted_mamuthones.gd" id="2_7u4uq"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_d13am"]
-[ext_resource type="Script" uid="uid://bs4g6atbv1vr0" path="res://scenes/actors/creatures/schedule_action_states/idle_state.gd" id="3_od26v"]
-[ext_resource type="Script" uid="uid://bhrqsfsyii1gh" path="res://scenes/actors/creatures/schedule_action_states/move_state.gd" id="4_4lurq"]
+[ext_resource type="Script" uid="uid://bs4g6atbv1vr0" path="res://scenes/actors/creatures/movement_states/idle_state.gd" id="3_od26v"]
+[ext_resource type="Script" uid="uid://bhrqsfsyii1gh" path="res://scenes/actors/creatures/movement_states/move_state.gd" id="4_4lurq"]
 [ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_f5tf7"]
-[ext_resource type="Script" uid="uid://btanmiboxbf8p" path="res://scenes/actors/creatures/schedule_action_states/stare_state.gd" id="5_4rfy8"]
-[ext_resource type="Script" uid="uid://6ghcjfnrbjv2" path="res://scenes/actors/creatures/schedule_action_states/follow_state.gd" id="6_vu6r7"]
-[ext_resource type="Script" uid="uid://cgwnta6j3makj" path="res://scenes/actors/creatures/schedule_action_states/dance_state.gd" id="7_hgbyh"]
+[ext_resource type="Script" uid="uid://btanmiboxbf8p" path="res://scenes/actors/creatures/movement_states/stare_state.gd" id="5_4rfy8"]
+[ext_resource type="Script" uid="uid://6ghcjfnrbjv2" path="res://scenes/actors/creatures/movement_states/follow_state.gd" id="6_vu6r7"]
+[ext_resource type="Script" uid="uid://cgwnta6j3makj" path="res://scenes/actors/creatures/movement_states/dance_state.gd" id="7_hgbyh"]
 [ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="8_vu6r7"]
 [ext_resource type="Script" uid="uid://chjrj1d1jdmrs" path="res://scenes/actors/creatures/movement_states/kill_state.gd" id="9_vu6r7"]
 [ext_resource type="Script" uid="uid://c36wyajajwypx" path="res://scenes/actors/creatures/movement_states/wandering_state.gd" id="10_i14n5"]
 [ext_resource type="Script" uid="uid://c7ubq7oc8fh0f" path="res://scenes/actors/creatures/movement_states/returning_state.gd" id="11_wnws7"]
-[ext_resource type="Script" uid="uid://drreay5j7tk33" path="res://scenes/actors/creatures/schedule_action_states/new_patrol_state.gd" id="14_f5tf7"]
+[ext_resource type="Script" uid="uid://drreay5j7tk33" path="res://scenes/actors/creatures/movement_states/new_patrol_state.gd" id="14_f5tf7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 radius = 0.4
@@ -47,7 +47,7 @@ material_override = SubResource("StandardMaterial3D_dr4gf")
 [node name="CSGSphere3D2" parent="Mesh" index="3"]
 material_override = SubResource("StandardMaterial3D_vexqk")
 
-[node name="MovementSM" parent="." index="5" node_paths=PackedStringArray("starting_state")]
+[node name="MovementSM" parent="." index="6" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="MovementSM" index="0"]
@@ -81,6 +81,7 @@ little_jump_time = 0.8
 little_jump_speed = 300.0
 little_jump_factor = 0.25
 swings = 0.5
+max_suspects = 4
 normal_jump_cooldown = 2.5
 normal_jumps = 5
 short_jump_cooldown = 0.9
@@ -112,5 +113,5 @@ metadata/_custom_type_script = "uid://tl3irb7fk41e"
 [node name="PatrolState" type="Node" parent="MovementSM" index="9"]
 script = ExtResource("14_f5tf7")
 change_rate = 4.0
-max_speed = 2.1
+max_speed = 1.8
 metadata/_custom_type_script = "uid://tl3irb7fk41e"

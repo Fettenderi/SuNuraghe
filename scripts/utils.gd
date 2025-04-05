@@ -81,3 +81,6 @@ static func string_to_vector4(string := "") -> Vector4:
 
 static func nhash(node: Node) -> String:
 	return node.name + str(hash(node.name + str(node.get_path())))
+
+static func clremap(ivalue, imin, imax, fmin, fmax):
+	return clamp(remap(ivalue, imin, imax, fmin, fmax), fmin, fmax)

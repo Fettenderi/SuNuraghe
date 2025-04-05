@@ -27,7 +27,8 @@ func start(info : Dictionary = {}) -> void:
 	if info.has("await"):
 		_receiver = info["await"]
 		_receiver.received.connect(_on_received_signal)
-		return
+	else:
+		_receiver = null
 
 	if info.has("time"):
 		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
@@ -39,7 +40,7 @@ func start(info : Dictionary = {}) -> void:
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):
-		print("AOO ARRASSATI " + user.name + " " + name)
+		#print("AOO ARRASSATI " + user.name + " " + name)
 		return
 
 	if info.has("end"):
@@ -78,5 +79,7 @@ func _on_stare_timer_ended() -> void:
 
 func _on_received_signal(_value) -> void:
 	if not _is_active: return
+	
+	_receiver.received.disconnect(_on_received_signal)
 	
 	user.progress()

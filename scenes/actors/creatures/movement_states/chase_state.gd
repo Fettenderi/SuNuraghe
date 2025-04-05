@@ -18,7 +18,6 @@ func start(info : Dictionary = {}) -> void:
 
 	_returning_state.last_position = user.global_position
 	
-	
 	if info.has("speed"):
 		max_speed = info["speed"]
 	
