@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://cjybpdswhk4bb"
+path="res://.godot/imported/downscaler.glsl-0e53c26b0176790d858c6fe1eac75916.res"
+
+[deps]
+
+source_file="res://assets/post_processing/downscaler.glsl"
+dest_files=["res://.godot/imported/downscaler.glsl-0e53c26b0176790d858c6fe1eac75916.res"]
+
+[params]
+

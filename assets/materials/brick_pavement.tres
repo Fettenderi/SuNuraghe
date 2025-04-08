@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bl7ni1g7gxuu3"]
+
+[ext_resource type="Texture2D" uid="uid://bchtxpffd1cvj" path="res://assets/textures/brick_pavement/output-onlinepngtools.png" id="1_u0msr"]
+[ext_resource type="Texture2D" uid="uid://dk312jonuyel0" path="res://assets/textures/brick_pavement/brick_pavement_02_nor_gl_2k.png" id="2_u0msr"]
+
+[resource]
+albedo_texture = ExtResource("1_u0msr")
+normal_texture = ExtResource("2_u0msr")
+uv1_scale = Vector3(0.13, 0.13, 0.13)
+uv1_triplanar = true
+texture_filter = 0

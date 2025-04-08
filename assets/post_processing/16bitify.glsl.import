@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bcqyfbfro20q1"
+path="res://.godot/imported/16bitify.glsl-3cd4a02f04a4b4d4322bee7bbe0d9b90.res"
+
+[deps]
+
+source_file="res://assets/post_processing/16bitify.glsl"
+dest_files=["res://.godot/imported/16bitify.glsl-3cd4a02f04a4b4d4322bee7bbe0d9b90.res"]
+
+[params]
+

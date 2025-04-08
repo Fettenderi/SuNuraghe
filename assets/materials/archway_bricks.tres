@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cygxs8bploe8p"]
+
+[ext_resource type="Texture2D" uid="uid://byak5jpld5lrw" path="res://assets/textures/archway_bricks/archway_bricks.png" id="1_ot2y0"]
+
+[resource]
+albedo_texture = ExtResource("1_ot2y0")
+uv1_scale = Vector3(-0.185, -0.185, -0.185)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 0.0156249
+uv1_world_triplanar = true
+texture_filter = 0

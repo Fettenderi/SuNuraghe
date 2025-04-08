@@ -20,18 +20,37 @@ size = Vector3(0.079834, 1.12, 1.469)
 material = SubResource("StandardMaterial3D_xm0wp")
 
 [node name="DoorFrame2" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0518418, 0)
 operation = 2
 size = Vector3(0.079834, 0.0959473, 1.34082)
 material = SubResource("StandardMaterial3D_xm0wp")
 
 [node name="DoorFrame3" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217663, 0)
+operation = 2
+size = Vector3(0.079834, 0.0959473, 1.34082)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame5" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.379288, 0)
 operation = 2
 size = Vector3(0.079834, 0.0959473, 1.34082)
 material = SubResource("StandardMaterial3D_xm0wp")
 
 [node name="DoorFrame4" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.126177, 0)
+operation = 2
+size = Vector3(0.079834, 0.0959473, 1.34082)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame6" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.284752, 0)
+operation = 2
+size = Vector3(0.079834, 0.0959473, 1.34082)
+material = SubResource("StandardMaterial3D_xm0wp")
+
+[node name="DoorFrame7" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.434179, 0)
 operation = 2
 size = Vector3(0.079834, 0.0959473, 1.34082)
 material = SubResource("StandardMaterial3D_xm0wp")

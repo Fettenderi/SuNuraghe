@@ -3,9 +3,9 @@
 [node name="DoorCarver" type="CSGCombiner3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1.55175, 0, 0, 0, 1, 0, -7.10543e-15, 0, 1, -9.64988e-11, -0.187241, -0.667377)
+transform = Transform3D(1.55175, 0, 0, 0, 1, 0, -7.10543e-15, 0, 1, -9.64988e-11, -0.197484, -0.667377)
 flip_faces = true
-size = Vector3(1, 2.23804, 1.53564)
+size = Vector3(1, 2.25853, 1.53564)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1.55175, 0, 1.77636e-15, 0, 0.800407, 0.599457, -7.10543e-15, -0.599457, 0.800407, -1.07862e-08, 0.986444, -0.112176)

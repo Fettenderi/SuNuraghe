@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl7hhvhi8nb37"]
+[gd_scene load_steps=9 format=3 uid="uid://dl7hhvhi8nb37"]
 
 [ext_resource type="Script" uid="uid://4eeat58m4xx1" path="res://scripts/environment_manager.gd" id="1_y0sbe"]
+[ext_resource type="Script" uid="uid://cwxvrf1hsspg5" path="res://assets/post_processing/simple_effect.gd" id="2_fj2dm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e6psu"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+sky_top_color = Color(0.0396, 0.0513, 0.18, 1)
+sky_horizon_color = Color(0.0418167, 0.0338, 0.13, 1)
+ground_bottom_color = Color(0.04446, 0.0306, 0.09, 1)
+ground_horizon_color = Color(0.0418167, 0.0338, 0.13, 1)
+sun_angle_max = 350.76
 energy_multiplier = 2.95
 
 [sub_resource type="Sky" id="Sky_xr3nu"]
@@ -22,6 +26,33 @@ ssao_radius = 2.32
 sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.05
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_fj2dm"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_fj2dm")
+glsl_file = "uid://bcqyfbfro20q1"
+metadata/_custom_type_script = "uid://cwxvrf1hsspg5"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_vkt7p"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_fj2dm")
+glsl_file = "uid://cjybpdswhk4bb"
+metadata/_custom_type_script = "uid://cwxvrf1hsspg5"
+
+[sub_resource type="Compositor" id="Compositor_y0sbe"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_fj2dm"), SubResource("CompositorEffect_vkt7p")])
 
 [node name="EnvironmentManager" type="Node3D"]
 script = ExtResource("1_y0sbe")
@@ -35,3 +66,4 @@ light_energy = 0.0
 [node name="Environment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
 environment = SubResource("Environment_yh7dg")
+compositor = SubResource("Compositor_y0sbe")

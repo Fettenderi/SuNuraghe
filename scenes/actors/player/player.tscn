@@ -64,7 +64,6 @@ stream_8/stream = ExtResource("11_llrf1")
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 collision_mask = 65
-floor_stop_on_slope = false
 platform_on_leave = 2
 platform_floor_layers = 4294967294
 script = ExtResource("1_x0hk6")
@@ -187,9 +186,9 @@ script = ExtResource("6_qek5x")
 
 [node name="SprintState" type="Node" parent="MovementSM"]
 script = ExtResource("6_x4bpx")
-change_rate = 0.7
+change_rate = 1.5
 max_speed = 2.8
-head_bob_amplitude = 0.023
+head_bob_amplitude = 0.027
 head_bob_frequency = 0.25
 footsteps_period = 0.4
 

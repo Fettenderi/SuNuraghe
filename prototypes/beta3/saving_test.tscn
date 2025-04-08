@@ -1,15 +1,16 @@
-[gd_scene load_steps=31 format=3 uid="uid://d30nrlbhq5ixs"]
+[gd_scene load_steps=30 format=3 uid="uid://d30nrlbhq5ixs"]
 
 [ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_ov7qo"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_rfpfy"]
-[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_rytcs"]
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="2_l16ux"]
 [ext_resource type="PackedScene" uid="uid://buewliv6fc4na" path="res://scenes/objects/disguise.tscn" id="3_gkpk1"]
 [ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="4_pqoob"]
+[ext_resource type="Material" uid="uid://bl7ni1g7gxuu3" path="res://assets/materials/brick_pavement.tres" id="4_v0fgs"]
 [ext_resource type="Resource" uid="uid://dxl8co4ullhte" path="res://prototypes/beta2/only_receiver.tres" id="5_am762"]
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="6_ov7qo"]
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="7_0qpe0"]
 [ext_resource type="PackedScene" uid="uid://h23cy3moov7t" path="res://scenes/objects/bell_trap.tscn" id="9_rytcs"]
-[ext_resource type="PackedScene" uid="uid://ccai0kd8mw23" path="res://scenes/objects/door.tscn" id="10_gkpk1"]
+[ext_resource type="PackedScene" uid="uid://dqa4w4pn6ls1x" path="res://scenes/objects/door.tscn" id="10_gkpk1"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="10_v0fgs"]
 [ext_resource type="PackedScene" uid="uid://k0jltjct40oa" path="res://scenes/objects/double_door.tscn" id="11_pqoob"]
 [ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/areas/sight_detector_box.tscn" id="12_2adag"]
@@ -19,27 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://cp04shreg2nl5" path="res://scenes/objects/conduct_door.tscn" id="13_eb274"]
 [ext_resource type="PackedScene" uid="uid://dehsj4ikl4u38" path="res://scenes/objects/saving_station.tscn" id="13_gkpk1"]
 [ext_resource type="PackedScene" uid="uid://dvr7pgc0xlv51" path="res://scenes/objects/lever.tscn" id="14_eb274"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-energy_multiplier = 2.95
-
-[sub_resource type="Sky" id="Sky_t8fxv"]
-sky_material = SubResource("ProceduralSkyMaterial_u4f27")
-
-[sub_resource type="Environment" id="Environment_o4fph"]
-background_mode = 2
-sky = SubResource("Sky_t8fxv")
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="Script" uid="uid://c0xg8ote2osqq" path="res://scripts/flickering_light.gd" id="21_t8aka"]
+[ext_resource type="PackedScene" uid="uid://bn25b0q3e1ol4" path="res://scenes/objects/torch_mesh.tscn" id="22_t8aka"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
 vertices = PackedVector3Array(-5.2163, -2.5, -4.08452, -5.2163, -2.5, 15.1655, 19.0337, -2.5, 15.1655, 19.0337, -2.5, -4.08452)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3e5f"]
-albedo_texture = ExtResource("2_rytcs")
 
 [sub_resource type="Resource" id="Resource_nqaye"]
 script = ExtResource("6_ov7qo")
@@ -78,12 +64,7 @@ metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ov7qo")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_o4fph")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.269226, -0.83405, 0.481537, -2.7806e-08, 0.499998, 0.866026, -0.963077, -0.233156, 0.134612, -0.678088, 0, 3.01156)
-shadow_enabled = true
+[node name="EnvironmentManager" parent="." instance=ExtResource("2_l16ux")]
 
 [node name="Player" parent="." instance=ExtResource("1_rfpfy")]
 transform = Transform3D(-0.248386, 0, 0.968661, 0, 1, 0, -0.968661, 0, -0.248386, 6.80517, -3, 5.1007)
@@ -103,7 +84,13 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.8197
 use_collision = true
 flip_faces = true
 size = Vector3(20.5469, 6, 25.572)
-material = SubResource("StandardMaterial3D_m3e5f")
+material = ExtResource("4_v0fgs")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, -1.65503, 31.266)
+use_collision = true
+size = Vector3(3.38574, 2.68994, 2.76392)
+material = ExtResource("4_v0fgs")
 
 [node name="Objects" type="Node3D" parent="."]
 
@@ -154,7 +141,7 @@ schedule = SubResource("Resource_v0fgs")
 target = NodePath("../../Player")
 
 [node name="PuppetedMamuthones2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("7_0qpe0")]
-transform = Transform3D(0.964498, 0, 0.264093, 0, 1, 0, -0.264093, 0, 0.964498, 9.88409, -1.98709, 4.95499)
+transform = Transform3D(0.964498, 0, 0.264093, 0, 1, 0, -0.264093, 0, 0.964498, -4.54086, -1.93391, -3.0044)
 schedule = SubResource("Resource_am762")
 target = NodePath("../../Player")
 
@@ -170,5 +157,17 @@ transform = Transform3D(-0.248386, -0.968661, -4.23415e-08, 0, -4.37114e-08, 1, 
 
 [node name="SavingStation" parent="." instance=ExtResource("13_gkpk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2288, -2.5, 13.9232)
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45841, -0.0599362, -4.30555)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.7
+light_size = 0.2
+shadow_enabled = true
+omni_range = 7.79772
+script = ExtResource("21_t8aka")
+actual_max_energy = 0.7
+
+[node name="TorchMesh" parent="OmniLight3D12" instance=ExtResource("22_t8aka")]
 
 [editable path="TopCam"]

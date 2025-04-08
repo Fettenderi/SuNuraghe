@@ -1,10 +1,11 @@
 @tool
+class_name FlickeringLight
 extends OmniLight3D
 
 @export var receiver_resource : ReceiverRes
 
 @export var lerp_speed := 3.0
-@export var actual_max_energy := 1.0:
+@export var actual_max_energy := 0.5:
 	set(value):
 		actual_max_energy = value
 		_update_preview()

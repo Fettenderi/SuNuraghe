@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bp1yqc6kvtq1s"]
+
+[ext_resource type="Texture2D" uid="uid://7y7ancf1d6c4" path="res://assets/textures/patterned_slate/downscaled_patterned_slate.png" id="1_sdcoj"]
+[ext_resource type="Texture2D" uid="uid://d3ouyecee8eyo" path="res://assets/textures/patterned_slate/patterned_slate_tiles_nor_gl_2k.png" id="2_hr56f"]
+
+[resource]
+albedo_texture = ExtResource("1_sdcoj")
+normal_scale = 5.3
+normal_texture = ExtResource("2_hr56f")
+uv1_scale = Vector3(14.055, 14.055, 14.055)
+uv1_triplanar = true
+texture_filter = 0
