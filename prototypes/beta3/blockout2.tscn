@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="5_8gul1"]
 [ext_resource type="Texture2D" uid="uid://caffsu7lhe38y" path="res://addons/kenney_prototype_textures/dark/texture_09.png" id="6_mww5m"]
 [ext_resource type="Texture2D" uid="uid://dbf7mb2tef75f" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="7_pxb3b"]
-[ext_resource type="PackedScene" uid="uid://ccai0kd8mw23" path="res://scenes/objects/door.tscn" id="8_6cisc"]
+[ext_resource type="PackedScene" uid="uid://dqa4w4pn6ls1x" path="res://scenes/objects/door.tscn" id="8_6cisc"]
 [ext_resource type="Resource" uid="uid://dyy4v7b8cram8" path="res://assets/receivers/layer1/lay1-1.tres" id="9_ttms0"]
 [ext_resource type="Resource" uid="uid://bigbiteu2054j" path="res://assets/receivers/layer1/lay1-door1-close.tres" id="10_3a2fu"]
 [ext_resource type="Resource" uid="uid://cwuquitghdc48" path="res://assets/receivers/layer1/lay1-door-f-l.tres" id="11_w0cdv"]
@@ -561,7 +561,6 @@ metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 [node name="Level" type="Node3D"]
 
 [node name="EnvironmentManager" parent="." instance=ExtResource("1_ojvuo")]
-_is_enabled = false
 
 [node name="Player" parent="." instance=ExtResource("2_bk33f")]
 transform = Transform3D(0.444291, 0, 0.895882, 0, 1, 0, -0.895882, 0, 0.444291, 30.2431, 5.50586, -36.3977)
@@ -2210,7 +2209,6 @@ shadow_blur = 6.442
 omni_range = 4.025
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.14658, 0.653041, 32.4691)
@@ -2223,7 +2221,6 @@ shadow_blur = 6.442
 omni_range = 5.024
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D40" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2143, -4.21794, 2.82745)
@@ -2236,7 +2233,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D41" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3929, -4.21794, -15.1857)
@@ -2249,7 +2245,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D42" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2321, -4.21794, -13.009)
@@ -2262,7 +2257,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D43" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9777, -4.21794, 14.6215)
@@ -2275,7 +2269,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D44" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.06033, -4.21794, 16.7455)
@@ -2288,7 +2281,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D45" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2143, 13.112, 2.82745)
@@ -2301,7 +2293,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D46" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3929, 13.112, -15.1857)
@@ -2314,7 +2305,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D47" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2321, 13.112, -13.009)
@@ -2327,7 +2317,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D48" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9777, 13.112, 14.6215)
@@ -2340,7 +2329,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D49" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.06033, 13.112, 16.7455)
@@ -2353,7 +2341,6 @@ shadow_blur = 6.442
 omni_range = 23.49
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5177, 0, 40.974)
@@ -2366,7 +2353,6 @@ shadow_blur = 6.442
 omni_range = 4.025
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.65973, 0.653041, 32.1638)
@@ -2379,7 +2365,6 @@ shadow_blur = 6.442
 omni_range = 5.024
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14868, 1.65092, 23.7141)
@@ -2392,7 +2377,6 @@ shadow_blur = 6.442
 omni_range = 5.63
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="Objects/Lights/Layer0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77547, 1.63418, 23.8351)
@@ -2405,7 +2389,6 @@ shadow_blur = 6.442
 omni_range = 5.63
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="Layer1" type="Node3D" parent="Objects/Lights"]
 
@@ -2420,7 +2403,6 @@ shadow_blur = 6.442
 omni_range = 6.849
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="Objects/Lights/Layer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9983, 0.558201, 22.3884)
@@ -2433,7 +2415,6 @@ shadow_blur = 6.442
 omni_range = 6.32864
 script = ExtResource("48_2wejo")
 lerp_speed = 2.0
-actual_max_energy = 0.5
 
 [node name="OmniLight3D10" type="OmniLight3D" parent="Objects/Lights/Layer1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.641, 2.02359, 10.5561)

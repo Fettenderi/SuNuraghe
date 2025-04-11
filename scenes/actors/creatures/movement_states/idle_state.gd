@@ -24,8 +24,8 @@ func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):
 		var _toucher : Player = info["touched"]
 		
-		_toucher.start_dying(user.get_eyes_location())
-		state_machine.change_state("KillState", {"to_look": _toucher.global_position})
+		_toucher.start_dying(user.get_eyes_reference())
+		state_machine.change_state("KillState", {"to_look": _toucher})
 		return
 
 	if _vigilant and info.has("located"):

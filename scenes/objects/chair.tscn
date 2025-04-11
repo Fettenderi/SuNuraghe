@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://byyw6jp2yacyy"]
 
-[ext_resource type="PackedScene" uid="uid://cqrxech07wyjn" path="res://assets/models/environment/features/stool.fbx" id="2_r1c1s"]
+[ext_resource type="PackedScene" uid="uid://cqrxech07wyjn" path="res://assets/models/props/stool.fbx" id="2_r1c1s"]
 
 [node name="Chair" type="Node3D"]
 

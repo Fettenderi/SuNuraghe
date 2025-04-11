@@ -37,17 +37,17 @@ schedule = null
 [node name="CollisionShape" parent="." index="1"]
 shape = SubResource("CapsuleShape3D_uhukm")
 
-[node name="CSGMesh3D" parent="Mesh" index="1"]
+[node name="CSGMesh3D" parent="Mesh" index="3"]
 mesh = SubResource("CapsuleMesh_u7wol")
 material = SubResource("StandardMaterial3D_nu7mx")
 
-[node name="CSGSphere3D" parent="Mesh" index="2"]
+[node name="CSGSphere3D" parent="Mesh" index="4"]
 material_override = SubResource("StandardMaterial3D_dr4gf")
 
-[node name="CSGSphere3D2" parent="Mesh" index="3"]
+[node name="CSGSphere3D2" parent="Mesh" index="5"]
 material_override = SubResource("StandardMaterial3D_vexqk")
 
-[node name="MovementSM" parent="." index="6" node_paths=PackedStringArray("starting_state")]
+[node name="MovementSM" parent="." index="5" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="MovementSM" index="0"]
@@ -115,3 +115,5 @@ script = ExtResource("14_f5tf7")
 change_rate = 4.0
 max_speed = 1.8
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[editable path="Mesh/Mamuthon"]

@@ -1,0 +1,153 @@
+[gd_scene load_steps=14 format=3 uid="uid://1e47i1fkq3jq"]
+
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_c7f4t"]
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="2_7arbf"]
+[ext_resource type="Material" uid="uid://bl7ni1g7gxuu3" path="res://assets/materials/brick_pavement.tres" id="4_0glpc"]
+[ext_resource type="Material" uid="uid://cix1r8mvgp8e2" path="res://assets/materials/patterned_slate.tres" id="4_i1vr2"]
+[ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="5_duhlt"]
+[ext_resource type="PackedScene" uid="uid://cr317sxtuplj2" path="res://assets/models/props/crate.fbx" id="11_duhlt"]
+[ext_resource type="PackedScene" uid="uid://dp00x7kq6idas" path="res://assets/models/props/barrel.fbx" id="12_m0fqb"]
+[ext_resource type="PackedScene" uid="uid://cm70cqrjiihl5" path="res://assets/models/objects/bell_trap.blend" id="13_m0fqb"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="14_twsow"]
+[ext_resource type="PackedScene" uid="uid://cl86cno8ln87c" path="res://scenes/objects/lights_placer.tscn" id="15_i1vr2"]
+[ext_resource type="Script" uid="uid://c0xg8ote2osqq" path="res://scripts/flickering_light.gd" id="21_0gbxw"]
+[ext_resource type="PackedScene" uid="uid://bn25b0q3e1ol4" path="res://scenes/objects/torch_mesh.tscn" id="22_4lls1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxh5a"]
+albedo_texture = ExtResource("14_twsow")
+
+[node name="MenuBG" type="Node3D"]
+script = ExtResource("1_c7f4t")
+
+[node name="EnvironmentManager" parent="." instance=ExtResource("2_7arbf")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.261431, 0, -0.965222, 0, 1, 0, 0.965222, 0, 0.261431, 1.61177, -0.154653, 5.06451)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, 0, 5.43892)
+use_collision = true
+flip_faces = true
+size = Vector3(7.29395, 6, 25.572)
+material = ExtResource("4_0glpc")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 29.8558, 0, 5.43892)
+use_collision = true
+flip_faces = true
+size = Vector3(10.7568, 6, 19.0469)
+material = ExtResource("4_0glpc")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 29.8558, -0.255798, -5.3016)
+use_collision = true
+flip_faces = true
+size = Vector3(6.13477, 5.4884, 19.0469)
+material = ExtResource("4_0glpc")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 16.3834, 0, 5.43892)
+use_collision = true
+flip_faces = true
+size = Vector3(7.29395, 6, 25.572)
+material = ExtResource("4_0glpc")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 20.1112, 0, 5.43892)
+use_collision = true
+size = Vector3(1.02148, 4.50879, 6.97852)
+material = ExtResource("4_0glpc")
+
+[node name="BellRoom1" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 50.5754, 14.5129, 5.38897)
+flip_faces = true
+radius = 12.8862
+height = 33.25
+sides = 32
+material = ExtResource("4_i1vr2")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="mamuthones" parent="Enemies" instance=ExtResource("5_duhlt")]
+transform = Transform3D(-0.875072, 0.219475, -0.431369, 0.216081, 0.974677, 0.057564, 0.43308, -0.0428379, -0.900337, 3.26069, -0.958659, 5.94897)
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41526, -0.376096, 3.00294)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.3
+light_size = 0.2
+shadow_enabled = true
+omni_range = 9.51981
+script = ExtResource("21_0gbxw")
+actual_max_energy = 0.3
+actual_min_energy = 0.05
+
+[node name="TorchMesh" parent="Objects/OmniLight3D12" instance=ExtResource("22_4lls1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.770136)
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="Objects"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.0855, -0.376096, 7.7831)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.3
+light_size = 0.2
+shadow_enabled = true
+omni_range = 5.78751
+script = ExtResource("21_0gbxw")
+actual_max_energy = 0.3
+
+[node name="TorchMesh" parent="Objects/OmniLight3D13" instance=ExtResource("22_4lls1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.770136)
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="Objects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14.0281, -0.376096, -1.9066)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.5
+light_size = 0.2
+shadow_enabled = true
+omni_range = 15.0
+script = ExtResource("21_0gbxw")
+
+[node name="TorchMesh" parent="Objects/OmniLight3D14" instance=ExtResource("22_4lls1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.770136)
+
+[node name="crate" parent="Objects" instance=ExtResource("11_duhlt")]
+transform = Transform3D(0.82599, 0, 0.563685, 0, 1, 0, -0.563685, 0, 0.82599, 14.1628, -1.57918, 8.50007)
+
+[node name="crate2" parent="Objects" instance=ExtResource("11_duhlt")]
+transform = Transform3D(0.999855, 0, -0.0170161, 0, 1, 0, 0.0170161, 0, 0.999855, 17.8622, -1.57918, 7.32192)
+
+[node name="crate3" parent="Objects" instance=ExtResource("11_duhlt")]
+transform = Transform3D(0.607722, 0, 0.79415, 0, 1, 0, -0.79415, 0, 0.607722, 16.2128, 1.20109, 9.13627)
+
+[node name="barrel" parent="Objects" instance=ExtResource("12_m0fqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6029, -1.56687, 1.47355)
+
+[node name="barrel2" parent="Objects" instance=ExtResource("12_m0fqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9423, -1.56711, 7.77133)
+
+[node name="bell_trap" parent="Objects" instance=ExtResource("13_m0fqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0259, 1.83153, 7.72373)
+
+[node name="trap_bottom" parent="Objects/bell_trap" index="1"]
+transform = Transform3D(0.0108743, 0, 0.0357454, 0, 0.0614103, 0, -0.0357454, 0, 0.0108743, -0.296552, 0.997915, -0.0121312)
+
+[node name="Bell1" type="CSGCylinder3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.5754, 16.8554, 5.38897)
+radius = 6.443
+height = 28.5852
+sides = 32
+material = SubResource("StandardMaterial3D_jxh5a")
+
+[node name="LightsPlacer2" parent="Objects/Bell1" instance=ExtResource("15_i1vr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.1521, 0)
+amount = 8
+distance = 8.5
+omni_range = 4.96
+actual_max_energy = 0.5
+
+[editable path="Objects/bell_trap"]

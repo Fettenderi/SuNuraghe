@@ -1,11 +1,11 @@
 extends State
 
-const STARE_TIME = 3.0
+const STARE_TIME = 1.75
 
 var _stare_timer : Timer
 
 var _is_active := false
-var _stare_target : Vector3
+var _stare_target : Node3D
 
 func start(info : Dictionary = {}) -> void:
 	_is_active = true

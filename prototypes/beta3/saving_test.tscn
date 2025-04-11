@@ -65,6 +65,7 @@ metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 script = ExtResource("1_ov7qo")
 
 [node name="EnvironmentManager" parent="." instance=ExtResource("2_l16ux")]
+_is_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_rfpfy")]
 transform = Transform3D(-0.248386, 0, 0.968661, 0, 1, 0, -0.968661, 0, -0.248386, 6.80517, -3, 5.1007)

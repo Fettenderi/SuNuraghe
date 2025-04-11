@@ -159,7 +159,7 @@ func _collide_with_rigidbodies():
 			
 			_collision.get_collider().apply_impulse(_push_direciton * _velocity_difference * _push_force, _collision.get_position() - _collision.get_collider().global_position)
 
-func start_dying(to_look : Vector3):
+func start_dying(to_look : Node3D):
 	movement_sm.change_state("DieState", {"to_look": to_look})
 
 func set_disguised(value : bool) -> void:
@@ -169,12 +169,19 @@ func set_disguised(value : bool) -> void:
 func is_disguised() -> bool:
 	return PlayerStats.disguised
 
-func look(target : Vector3, delta : float) -> void:
-	var _local_destination := target - global_position
-	var _local_direction := _local_destination.normalized()
+func look(target : Node3D, delta : float) -> void:
+	var _local_destination := target.global_position - _head.global_position
+	var mouse_delta := mouse_acceleration * delta
 	
-	quaternion = quaternion.slerp(Quaternion(Vector3.UP, atan2(_local_direction.x, _local_direction.z)), mouse_acceleration * delta)
-	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, atan2(_local_direction.z, _local_direction.y)), mouse_acceleration * delta)
+	var x := _local_destination.dot(Vector3.RIGHT)
+	var y := _local_destination.dot(Vector3.UP)
+	var z := _local_destination.dot(Vector3.FORWARD)
+	
+	var up_angle := atan2(x, -z)
+	var right_angle : float = -atan2(y, sqrt(z * z + x * x))
+	
+	quaternion = quaternion.slerp(Quaternion(Vector3.UP, up_angle), mouse_delta).normalized()
+	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.RIGHT, right_angle), mouse_delta).normalized()
 
 func _load_data(data : GStorage) -> void:
 	global_position = Utils.string_to_vector3(data.get_value(&"player_" + &"position"))

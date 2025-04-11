@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dqa4w4pn6ls1x" path="res://scenes/objects/door.tscn" id="8_4h8xp"]
 [ext_resource type="Resource" uid="uid://dyy4v7b8cram8" path="res://assets/receivers/layer1/lay1-1.tres" id="9_ql8jr"]
 [ext_resource type="Resource" uid="uid://bigbiteu2054j" path="res://assets/receivers/layer1/lay1-door1-close.tres" id="10_5ga6x"]
-[ext_resource type="PackedScene" uid="uid://dlka0ns72a7ao" path="res://assets/models/environment/features/scale.fbx" id="10_bdomq"]
+[ext_resource type="PackedScene" uid="uid://dlka0ns72a7ao" path="res://assets/models/environment/scale.fbx" id="10_bdomq"]
 [ext_resource type="Material" uid="uid://bl7ni1g7gxuu3" path="res://assets/materials/brick_pavement.tres" id="11_7ujeh"]
 [ext_resource type="Resource" uid="uid://cwuquitghdc48" path="res://assets/receivers/layer1/lay1-door-f-l.tres" id="11_nj2gj"]
 [ext_resource type="Resource" uid="uid://csenwpuuynnli" path="res://assets/receivers/layer2/doors/lay2-door-alpha-l.tres" id="12_k1glb"]
@@ -29,12 +29,12 @@
 [ext_resource type="Material" uid="uid://tmoiaonbvjfk" path="res://assets/materials/wine.tres" id="16_ty36l"]
 [ext_resource type="PackedScene" uid="uid://c3jb34bef37y2" path="res://scenes/objects/door_carver.tscn" id="17_1sbqr"]
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="17_ltwek"]
-[ext_resource type="PackedScene" uid="uid://dp00x7kq6idas" path="res://assets/models/environment/features/barrel.fbx" id="17_speit"]
+[ext_resource type="PackedScene" uid="uid://dp00x7kq6idas" path="res://assets/models/props/barrel.fbx" id="17_speit"]
 [ext_resource type="Resource" uid="uid://ckv6d3t3iijxn" path="res://assets/receivers/layer1/lay1-door-f-c.tres" id="18_7kuto"]
 [ext_resource type="PackedScene" uid="uid://bjlwucmw8bt06" path="res://scenes/objects/double_door_carver.tscn" id="18_tvrmj"]
 [ext_resource type="Resource" uid="uid://b74h6oov74nkf" path="res://assets/receivers/layer1/lay1-6.tres" id="19_idnaj"]
 [ext_resource type="Texture2D" uid="uid://c7oknv866wqmj" path="res://assets/textures/worn_planks/worn_planks_side.png" id="19_ovgnb"]
-[ext_resource type="PackedScene" uid="uid://b0k3wh6wa4rld" path="res://assets/models/environment/features/small_table.fbx" id="19_sy37w"]
+[ext_resource type="PackedScene" uid="uid://b0k3wh6wa4rld" path="res://assets/models/props/small_table.fbx" id="19_sy37w"]
 [ext_resource type="Resource" uid="uid://r785g0nli37l" path="res://assets/receivers/layer2/doors/lay2-door-a-o.tres" id="20_vwqyp"]
 [ext_resource type="Resource" uid="uid://c2lksoh6intyf" path="res://assets/receivers/layer2/doors/lay2-door-b-l.tres" id="21_smfc2"]
 [ext_resource type="Resource" uid="uid://f6cv2quxkrkx" path="res://assets/receivers/layer2/doors/lay2-door-b-o.tres" id="22_s1acf"]
@@ -59,22 +59,22 @@
 [ext_resource type="PackedScene" uid="uid://cp04shreg2nl5" path="res://scenes/objects/conduct_door.tscn" id="36_tvrmj"]
 [ext_resource type="PackedScene" uid="uid://h23cy3moov7t" path="res://scenes/objects/bell_trap.tscn" id="37_7ujeh"]
 [ext_resource type="Resource" uid="uid://hl1dtq8bw4u2" path="res://assets/receivers/layer2/traps/lay2-t1.tres" id="38_5bunc"]
-[ext_resource type="PackedScene" uid="uid://c7puo3suli4x5" path="res://assets/models/environment/features/goat/testa_pecora.fbx" id="38_w33q4"]
+[ext_resource type="PackedScene" uid="uid://c7puo3suli4x5" path="res://assets/models/goat/testa_pecora.fbx" id="38_w33q4"]
 [ext_resource type="PackedScene" uid="uid://cw4ifxvx8hfkb" path="res://addons/fettemplate/signals/signal_counter.tscn" id="39_jydfl"]
-[ext_resource type="PackedScene" uid="uid://btqchbceo086n" path="res://assets/models/environment/features/goat/culo_pecora.fbx" id="39_s2ybf"]
+[ext_resource type="PackedScene" uid="uid://btqchbceo086n" path="res://assets/models/goat/culo_pecora.fbx" id="39_s2ybf"]
 [ext_resource type="Resource" uid="uid://blyme8ymbnsfi" path="res://assets/receivers/layer2/traps/lay2-t2.tres" id="39_ty36l"]
-[ext_resource type="PackedScene" uid="uid://f7vei5gllrcd" path="res://assets/models/environment/features/goat/gamba_pecora.fbx" id="40_dk6qd"]
+[ext_resource type="PackedScene" uid="uid://f7vei5gllrcd" path="res://assets/models/goat/gamba_pecora.fbx" id="40_dk6qd"]
 [ext_resource type="Resource" uid="uid://djdr5y1gtqxjv" path="res://assets/receivers/layer2/traps/lay2-t3.tres" id="40_speit"]
 [ext_resource type="Resource" uid="uid://shoj4w850toj" path="res://assets/receivers/layer2/counters/lay2-counter0.tres" id="40_u0n8q"]
 [ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/areas/sight_detector_box.tscn" id="41_wb1uj"]
-[ext_resource type="PackedScene" uid="uid://qm6prehy1mef" path="res://assets/models/environment/features/goat/busto_pecora.fbx" id="42_jptc6"]
+[ext_resource type="PackedScene" uid="uid://qm6prehy1mef" path="res://assets/models/goat/busto_pecora.fbx" id="42_jptc6"]
 [ext_resource type="PackedScene" uid="uid://buewliv6fc4na" path="res://scenes/objects/disguise.tscn" id="42_sy37w"]
 [ext_resource type="Resource" uid="uid://ddm7isyslluke" path="res://assets/receivers/layer2/counters/lay2-counter1.tres" id="42_u0n8q"]
 [ext_resource type="Resource" uid="uid://2fxx8b8rkg4g" path="res://assets/receivers/layer2/delayers/lay2-delayer1.tres" id="43_5ga6x"]
 [ext_resource type="Resource" uid="uid://c5lluey550md0" path="res://assets/receivers/layer2/agents/lay2-parrego.tres" id="43_f55ft"]
 [ext_resource type="Resource" uid="uid://ddsuuj0bpv2bv" path="res://assets/receivers/layer2/delayers/lay2-delayer2.tres" id="44_nj2gj"]
 [ext_resource type="Resource" uid="uid://bgv7mg0n54nwm" path="res://assets/receivers/layer2/agents/lay2-nagasella.tres" id="44_ovgnb"]
-[ext_resource type="PackedScene" uid="uid://c7o66gcfq45bo" path="res://assets/models/environment/features/goat/pecora.fbx" id="45_5fap2"]
+[ext_resource type="PackedScene" uid="uid://c7o66gcfq45bo" path="res://assets/models/goat/pecora.fbx" id="45_5fap2"]
 [ext_resource type="Resource" uid="uid://dea2xkgs07al0" path="res://assets/receivers/layer2/lay2-follow_setup.tres" id="45_kwu62"]
 [ext_resource type="Resource" uid="uid://c8wlowl8fkkrv" path="res://assets/receivers/layer2/delayers/lay2-delayer3.tres" id="45_msn66"]
 [ext_resource type="Resource" uid="uid://dqkyx3qr3vpc1" path="res://assets/receivers/layer2/counters/lay2-counter2.tres" id="46_idnaj"]
@@ -100,7 +100,7 @@
 [ext_resource type="Script" uid="uid://cspvwrjqrmx5b" path="res://scripts/waypoints_tooltip.gd" id="71_vwqyp"]
 [ext_resource type="Resource" uid="uid://bmccgend6iqhp" path="res://assets/receivers/layer2/counters/lay2-counter3.tres" id="73_om2me"]
 [ext_resource type="Resource" uid="uid://ct5cywgktb8o2" path="res://assets/receivers/layer2/lay2-dance-encapsulation-progress.tres" id="74_iij8i"]
-[ext_resource type="PackedScene" uid="uid://dkjrdamotaycm" path="res://assets/models/environment/features/goat/filo.fbx" id="75_5fap2"]
+[ext_resource type="PackedScene" uid="uid://dkjrdamotaycm" path="res://assets/models/goat/filo.fbx" id="75_5fap2"]
 [ext_resource type="PackedScene" uid="uid://bn25b0q3e1ol4" path="res://scenes/objects/torch_mesh.tscn" id="83_tvrmj"]
 [ext_resource type="PackedScene" uid="uid://dk77ujbcun3wg" path="res://scenes/objects/teleporter.tscn" id="84_236yy"]
 [ext_resource type="PackedScene" uid="uid://5huc81np8ptp" path="res://scenes/objects/concept_art_piece.tscn" id="85_i7b3e"]
@@ -109,8 +109,8 @@
 [ext_resource type="Texture2D" uid="uid://bdpu2i15fvp7x" path="res://assets/textures/concept_arts/model.png" id="87_1ep04"]
 [ext_resource type="PackedScene" uid="uid://cl86cno8ln87c" path="res://scenes/objects/lights_placer.tscn" id="87_speit"]
 [ext_resource type="Texture2D" uid="uid://c4yu4pfs6drjv" path="res://assets/textures/concept_arts/illustration.png" id="87_vfkgb"]
-[ext_resource type="PackedScene" uid="uid://bg2jffq6efwr4" path="res://assets/models/environment/features/table.fbx" id="97_f55ft"]
-[ext_resource type="PackedScene" uid="uid://cr317sxtuplj2" path="res://assets/models/environment/features/crate.fbx" id="98_ovgnb"]
+[ext_resource type="PackedScene" uid="uid://bg2jffq6efwr4" path="res://assets/models/props/table.fbx" id="97_f55ft"]
+[ext_resource type="PackedScene" uid="uid://cr317sxtuplj2" path="res://assets/models/props/crate.fbx" id="98_ovgnb"]
 [ext_resource type="PackedScene" uid="uid://djukask8iwqx2" path="res://assets/models/environment/outside.blend" id="99_kwu62"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tvrmj"]
@@ -3120,27 +3120,9 @@ wool_needed = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.5731, 5.93422, -52.267)
 emitter_resource = SubResource("Resource_chfn7")
 
-[node name="lana" parent="Objects/Static/Layer2/BellTrap1-3/Mesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0339736, -0.116103, 0.299149)
-
-[node name="lana2" parent="Objects/Static/Layer2/BellTrap1-3/Mesh" index="1"]
-transform = Transform3D(-0.761047, 0.119122, -0.637666, 0.154641, 0.987971, 0, 0.629995, -0.0986096, -0.770313, 0.602401, -0.116103, 0.0162079)
-
-[node name="lana3" parent="Objects/Static/Layer2/BellTrap1-3/Mesh" index="2"]
-transform = Transform3D(0.190492, 0.207109, -0.959593, -0.040327, 0.978318, 0.203145, 0.98086, 0, 0.194714, -0.0330435, -0.188358, -0.244679)
-
 [node name="BellTrap2-1" parent="Objects/Static/Layer2" instance=ExtResource("37_7ujeh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.9172, 5.64318, -45.1064)
 emitter_resource = SubResource("Resource_abg2s")
-
-[node name="lana" parent="Objects/Static/Layer2/BellTrap2-1/Mesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0339736, -0.116103, 0.299149)
-
-[node name="lana2" parent="Objects/Static/Layer2/BellTrap2-1/Mesh" index="1"]
-transform = Transform3D(-0.761047, 0.119122, -0.637666, 0.154641, 0.987971, 0, 0.629995, -0.0986096, -0.770313, 0.602401, -0.116103, 0.0162079)
-
-[node name="lana3" parent="Objects/Static/Layer2/BellTrap2-1/Mesh" index="2"]
-transform = Transform3D(0.190492, 0.207109, -0.959593, -0.040327, 0.978318, 0.203145, 0.98086, 0, 0.194714, -0.0330435, -0.188358, -0.244679)
 
 [node name="BellTrap2-2" parent="Objects/Static/Layer2" instance=ExtResource("37_7ujeh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.4618, 5.64318, -33.4938)

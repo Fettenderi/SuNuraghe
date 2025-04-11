@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cbsh6fp2vmkpk" path="res://scripts/bell_trap.gd" id="1_mnoyg"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="2_53nx4"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_53nx4"]
-[ext_resource type="PackedScene" uid="uid://cm70cqrjiihl5" path="res://assets/models/environment/features/bell_trap.blend" id="4_j5vvy"]
+[ext_resource type="PackedScene" uid="uid://cm70cqrjiihl5" path="res://assets/models/objects/bell_trap.blend" id="4_j5vvy"]
 [ext_resource type="Texture2D" uid="uid://bjiwnxdw5dfc" path="res://assets/textures/stone_brick_wall/downscaled_stone_brick_wall.png" id="5_20a4k"]
 [ext_resource type="Texture2D" uid="uid://dngc8sdygvo4n" path="res://assets/textures/stone_brick_wall/stone_brick_wall_001_nor_gl_2k.png" id="6_t4cpg"]
-[ext_resource type="PackedScene" uid="uid://cm3fxlcsbfbwh" path="res://assets/models/environment/features/goat/lana.fbx" id="7_t4cpg"]
+[ext_resource type="PackedScene" uid="uid://cm3fxlcsbfbwh" path="res://assets/models/goat/lana.fbx" id="7_t4cpg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_53nx4"]
 height = 0.179199

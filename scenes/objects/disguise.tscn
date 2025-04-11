@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://buewliv6fc4na"]
 
 [ext_resource type="Script" uid="uid://dis0xtsd008ki" path="res://scripts/disguise.gd" id="1_ovhii"]
-[ext_resource type="PackedScene" uid="uid://dqpsq32kgwfbu" path="res://assets/models/environment/features/mamuthones_costume.blend" id="2_ovhii"]
+[ext_resource type="PackedScene" uid="uid://dqpsq32kgwfbu" path="res://assets/models/objects/mamuthones_costume.blend" id="2_ovhii"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_71sye"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]

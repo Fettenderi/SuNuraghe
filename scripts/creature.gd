@@ -20,6 +20,10 @@ const TURNING_SPEED = 6.0
 @onready var _collision_shape: CollisionShape3D = %CollisionShape
 @onready var _eyes: Node3D = %Eyes
 @onready var _head: Node3D = %Head
+@onready var jumpscare_position: Marker3D = %JumpscarePosition
+
+@onready var _mamuthon: Node3D = %Mamuthon
+@onready var _mamuthon_animator: AnimationPlayer = _mamuthon.get_node("AnimationPlayer")
 
 var end_buffered := false
 var max_speed := 0.0
@@ -120,24 +124,31 @@ func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return
 	
 	movement_state_machine.update({"touched" : body})
+	
+	target = body
 
 
 func _on_navigation_finished():
 	_direction = Vector3.ZERO
 	movement_state_machine.update({"arrived" : true})
 
-func get_eyes_location() -> Vector3:
-	return _head.global_position
+func get_eyes_reference() -> Node3D:
+	return _head
 
 func suspect_player() -> void:
 	#movement_state_machine.update({"suspect" : true})
 	pass
 
-func look(target_position : Vector3, delta : float) -> void:
-	var _local_destination := target_position - global_position
+func look(target_position : Node3D, delta : float) -> void:
+	var _local_destination := target_position.global_position - global_position
 	var _local_direction := _local_destination.normalized()
 	
 	global_rotation.y = lerp_angle(global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
+
+func do_kill_animation() -> void:
+	if not target is Player: return
+	
+	_mamuthon_animator.play("FaceAction")
 
 func _load_data(data : GStorage) -> void:
 	if data.has_value(Utils.nhash(self) + &"active"):

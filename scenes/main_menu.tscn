@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjd344gapgtxc"]
+[gd_scene load_steps=4 format=3 uid="uid://bjd344gapgtxc"]
 
 [ext_resource type="Script" uid="uid://c2gya1t8g1n6q" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://1e47i1fkq3jq" path="res://prototypes/beta3/menu_bg_test.tscn" id="2_ekxnf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font_size = 50
@@ -15,11 +16,28 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 level_scene = "uid://diymi2h3f5cqq"
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="MenuBG" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_ekxnf")]
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -331.0
 grow_horizontal = 2
 grow_vertical = 2
 
