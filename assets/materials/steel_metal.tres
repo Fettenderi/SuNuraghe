@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://beckynk5vribw"]
+
+[ext_resource type="Texture2D" uid="uid://ctt31t1y7uunf" path="res://assets/textures/metal/metal.jpg" id="1_hvw4v"]
+
+[resource]
+albedo_color = Color(0.14, 0.14, 0.14, 1)
+albedo_texture = ExtResource("1_hvw4v")
+metallic = 0.59
+roughness = 0.26
+roughness_texture = ExtResource("1_hvw4v")
+roughness_texture_channel = 4
+refraction_scale = -1.0
+uv1_scale = Vector3(1.065, 1.065, 1.065)
+uv1_triplanar = true
+texture_filter = 0

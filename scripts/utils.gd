@@ -79,6 +79,16 @@ static func string_to_vector4(string := "") -> Vector4:
 
 	return Vector4(float(array[0]), float(array[1]), float(array[2]), float(array[3]))
 
+static func string_to_string_array(string := "") -> Array[String]:
+	if not string: return []
+	
+	var new_string: String = string.erase(0, 1)
+	new_string = new_string.erase(new_string.length() - 1, 1)
+	
+	var array: PackedStringArray = new_string.split(", ")
+
+	return array
+
 static func nhash(node: Node) -> String:
 	return node.name + str(hash(node.name + str(node.get_path())))
 

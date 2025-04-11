@@ -141,7 +141,7 @@ schedule = SubResource("Resource_v0fgs")
 target = NodePath("../../Player")
 
 [node name="PuppetedMamuthones2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("7_0qpe0")]
-transform = Transform3D(0.964498, 0, 0.264093, 0, 1, 0, -0.264093, 0, 0.964498, -4.54086, -1.93391, -3.0044)
+transform = Transform3D(0.564664, 0, 0.825322, 0, 1, 0, -0.825322, 0, 0.564664, -2.71009, -1.93391, -1.62543)
 schedule = SubResource("Resource_am762")
 target = NodePath("../../Player")
 
@@ -159,15 +159,25 @@ transform = Transform3D(-0.248386, -0.968661, -4.23415e-08, 0, -4.37114e-08, 1, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2288, -2.5, 13.9232)
 
 [node name="OmniLight3D12" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45841, -0.0599362, -4.30555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45841, -0.376096, -4.06946)
 light_color = Color(1, 0.948667, 0.86, 1)
-light_energy = 0.7
 light_size = 0.2
 shadow_enabled = true
-omni_range = 7.79772
+omni_range = 15.0
 script = ExtResource("21_t8aka")
-actual_max_energy = 0.7
+actual_max_energy = 1.0
 
 [node name="TorchMesh" parent="OmniLight3D12" instance=ExtResource("22_t8aka")]
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.45841, -0.231963, 0.536129)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_size = 0.2
+shadow_enabled = true
+omni_range = 15.0
+script = ExtResource("21_t8aka")
+actual_max_energy = 1.0
+
+[node name="TorchMesh" parent="OmniLight3D13" instance=ExtResource("22_t8aka")]
 
 [editable path="TopCam"]

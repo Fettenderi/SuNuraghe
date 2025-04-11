@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://5huc81np8ptp"]
+
+[ext_resource type="Script" uid="uid://twydvuwrjmgp" path="res://scripts/concept_art_piece.gd" id="1_gclxu"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_ji2rq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]
+size = Vector3(1.98218, 0.703125, 1.98438)
+
+[node name="ConceptArtPiece" type="Node3D"]
+script = ExtResource("1_gclxu")
+
+[node name="InteractableBox" parent="." instance=ExtResource("3_ji2rq")]
+unique_name_in_owner = true
+required_input = &"interact"
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Prendi Concept Art"
+
+[node name="CollisionShape3D" parent="InteractableBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)
+visible = false
+shape = SubResource("BoxShape3D_q1uht")
+
+[connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+
+[editable path="InteractableBox"]

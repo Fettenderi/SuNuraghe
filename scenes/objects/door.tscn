@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://dqa4w4pn6ls1x"]
+[gd_scene load_steps=17 format=4 uid="uid://dqa4w4pn6ls1x"]
 
 [ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
 [ext_resource type="Material" uid="uid://cygxs8bploe8p" path="res://assets/materials/archway_bricks.tres" id="2_aji8h"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_xm0wp"]
-[ext_resource type="Material" uid="uid://dg4n7oiwvtitq" path="res://assets/materials/worn_planks_side.tres" id="4_aji8h"]
+[ext_resource type="Texture2D" uid="uid://c7oknv866wqmj" path="res://assets/textures/worn_planks/worn_planks_side.png" id="4_aji8h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dshfn"]
 
@@ -84,6 +84,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jn6qi")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0irj"]
+albedo_texture = ExtResource("4_aji8h")
+uv1_scale = Vector3(0.755, 0.755, 0.755)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aji8h"]
+points = PackedVector3Array(-0.000806541, 1.83487e-05, -0.00566761, -0.000806541, 1.83487e-05, 0.00535723, -0.000806541, 0.673276, -0.00566761, 0.451825, 1.83487e-05, -0.00566761, 0.451825, 1.83487e-05, 0.00535723, 0.209692, 0.81026, 0.00535615, 0.158696, 0.79979, 0.00535615, 0.114301, 0.782022, 0.00535615, 0.060912, 0.755133, 0.00535615, 0.0168716, 0.714601, 0.00535615, -0.000806541, 0.673276, 0.00535615, 0.0168716, 0.714601, -0.00566761, 0.451825, 0.673276, -0.00566761, 0.451825, 0.673276, 0.00535615, 0.434103, 0.714601, 0.00535615, 0.390063, 0.755133, 0.00535615, 0.336674, 0.782022, 0.00535615, 0.292279, 0.79979, 0.00535615, 0.241282, 0.81026, 0.00535615, 0.209692, 0.810339, -0.00566761, 0.158696, 0.79979, -0.00566761, 0.114301, 0.782022, -0.00566761, 0.060912, 0.755133, -0.00566761, 0.434103, 0.714601, -0.00566761, 0.390063, 0.755133, -0.00566761, 0.336674, 0.782022, -0.00566761, 0.292279, 0.79979, -0.00566761, 0.241282, 0.81026, -0.00566761)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lknjl"]
 resource_name = "Metal"
 vertex_color_use_as_albedo = true
@@ -156,7 +165,12 @@ shape = SubResource("BoxShape3D_aji8h")
 transform = Transform3D(3.30791, 0, 0, 0, 3.30791, 8.52726e-07, 0, -2.4974e-07, 11.2947, -0.0780301, -1.29648, 0.00259206)
 mesh = SubResource("ArrayMesh_0v5s1")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("4_aji8h")
+surface_material_override/0 = SubResource("StandardMaterial3D_w0irj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mesh/Wood"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Wood/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_aji8h")
 
 [node name="Handle" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(3.30791, 0, 0, 0, 3.30791, 8.52726e-07, 0, -2.4974e-07, 11.2947, -0.218144, -1.29648, 0.00259206)

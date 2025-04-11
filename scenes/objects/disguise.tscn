@@ -1,14 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://buewliv6fc4na"]
+[gd_scene load_steps=5 format=3 uid="uid://buewliv6fc4na"]
 
 [ext_resource type="Script" uid="uid://dis0xtsd008ki" path="res://scripts/disguise.gd" id="1_ovhii"]
-[ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="2_p4xmy"]
+[ext_resource type="PackedScene" uid="uid://dqpsq32kgwfbu" path="res://assets/models/environment/features/mamuthones_costume.blend" id="2_ovhii"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_71sye"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_6c006"]
-size = Vector3(1.97, 0.705, 1.995)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovhii"]
-albedo_texture = ExtResource("2_p4xmy")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]
 size = Vector3(1.98218, 0.703125, 1.98438)
@@ -19,10 +13,8 @@ script = ExtResource("1_ovhii")
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348996, 0)
-mesh = SubResource("BoxMesh_6c006")
-surface_material_override/0 = SubResource("StandardMaterial3D_ovhii")
+[node name="mamuthones_costume" parent="Mesh" instance=ExtResource("2_ovhii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293982, 0.201174, 0.0521698)
 
 [node name="InteractableBox" parent="." instance=ExtResource("3_71sye")]
 unique_name_in_owner = true

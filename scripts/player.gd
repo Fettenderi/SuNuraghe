@@ -183,6 +183,8 @@ func _load_data(data : GStorage) -> void:
 	_rotation_target_player = sign(_rot_vector.x) * Quaternion(0.0, _rot_vector.x, 0.0, _rot_vector.y).get_angle()
 	_rotation_target_head = - sign(_rot_vector.z) * Quaternion(_rot_vector.z, 0.0, 0.0, _rot_vector.w).get_angle()
 	
+	var temp : Array = data.get_value(&"player_" + &"concept_art_pieces")
+	PlayerStats.concept_art_pieces = temp
 	PlayerStats.wool_pieces = data.get_value(&"player_" + &"wool_pieces")
 	PlayerStats.disguised = data.get_value(&"player_" + &"disguised")
 
@@ -191,5 +193,6 @@ func _save_data(data : GStorage) -> void:
 	data.set_value(&"player_" + &"position", global_position)
 	data.set_value(&"player_" + &"rotation", Vector4(quaternion.y, quaternion.w, _head.quaternion.x, _head.quaternion.w))
 	
+	data.set_value(&"player_" + &"concept_art_pieces", PlayerStats.concept_art_pieces)
 	data.set_value(&"player_" + &"wool_pieces",PlayerStats.wool_pieces)
 	data.set_value(&"player_" + &"disguised", PlayerStats.disguised)

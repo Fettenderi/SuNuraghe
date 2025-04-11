@@ -35,7 +35,7 @@ func _on_defuse_box_signal_emitted(_value: Variant) -> void:
 	_defuse()
 
 func _defuse():
-	_mesh.visible = false
+	_mesh.visible = true
 	_defuse_box.set_active(false)
 	_activation_box.set_enabled(false)
 	_fused = false
@@ -44,7 +44,7 @@ func _load_data(data : GStorage) -> void:
 	_fused = bool(data.get_value(Utils.nhash(self) + &"fused"))
 	_activation_box.set_enabled(_fused)
 	_defuse_box.set_active(_fused)
-	_mesh.visible = _fused
+	_mesh.visible = not _fused
 
 func _save_data(data : GStorage) -> void:
 	data.set_value(Utils.nhash(self) + &"fused", _fused)

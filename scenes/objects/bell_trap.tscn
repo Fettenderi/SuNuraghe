@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://h23cy3moov7t"]
+[gd_scene load_steps=12 format=3 uid="uid://h23cy3moov7t"]
 
 [ext_resource type="Script" uid="uid://cbsh6fp2vmkpk" path="res://scripts/bell_trap.gd" id="1_mnoyg"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="2_53nx4"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="3_53nx4"]
-[ext_resource type="Texture2D" uid="uid://4gibg2lxwsv3" path="res://addons/kenney_prototype_textures/purple/texture_09.png" id="4_wxysh"]
+[ext_resource type="PackedScene" uid="uid://cm70cqrjiihl5" path="res://assets/models/environment/features/bell_trap.blend" id="4_j5vvy"]
+[ext_resource type="Texture2D" uid="uid://bjiwnxdw5dfc" path="res://assets/textures/stone_brick_wall/downscaled_stone_brick_wall.png" id="5_20a4k"]
+[ext_resource type="Texture2D" uid="uid://dngc8sdygvo4n" path="res://assets/textures/stone_brick_wall/stone_brick_wall_001_nor_gl_2k.png" id="6_t4cpg"]
+[ext_resource type="PackedScene" uid="uid://cm3fxlcsbfbwh" path="res://assets/models/environment/features/goat/lana.fbx" id="7_t4cpg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_53nx4"]
 height = 0.179199
@@ -15,11 +18,17 @@ radius = 0.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_wxysh"]
 radius = 0.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5vvy"]
-albedo_texture = ExtResource("4_wxysh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tucfn"]
+albedo_texture = ExtResource("5_20a4k")
+normal_scale = 3.01
+normal_texture = ExtResource("6_t4cpg")
+uv1_scale = Vector3(0.03, 0.03, 0.03)
+uv1_triplanar = true
+texture_filter = 0
 
 [node name="BellTrap" type="Node3D"]
 script = ExtResource("1_mnoyg")
+wool_needed = 2
 
 [node name="DefuseBox" parent="." instance=ExtResource("2_53nx4")]
 unique_name_in_owner = true
@@ -47,16 +56,30 @@ collision_mask = 0
 shape = SubResource("SphereShape3D_wxysh")
 enabled = false
 
+[node name="Trap" type="Node3D" parent="."]
+
+[node name="bell_trap" parent="Trap" instance=ExtResource("4_j5vvy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.52675, 0)
+
+[node name="trap_bottom" parent="Trap/bell_trap" index="1"]
+transform = Transform3D(0.0108743, 0, 0.0357454, 0, 0.0614103, 0, -0.0357454, 0, 0.0108743, -0.296551, 1.1127, -0.0121313)
+surface_material_override/1 = SubResource("StandardMaterial3D_tucfn")
+
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Mesh"]
+[node name="lana" parent="Mesh" instance=ExtResource("7_t4cpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0339736, -0.116103, 0.299149)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Mesh/CSGCombiner3D"]
-size = Vector3(0.634766, 0.274414, 0.667725)
-material = SubResource("StandardMaterial3D_j5vvy")
+[node name="lana2" parent="Mesh" instance=ExtResource("7_t4cpg")]
+transform = Transform3D(-0.761047, 0.119122, -0.637666, 0.154641, 0.987971, 0, 0.629995, -0.0986096, -0.770313, 0.602401, -0.116103, 0.0162079)
+
+[node name="lana3" parent="Mesh" instance=ExtResource("7_t4cpg")]
+transform = Transform3D(0.190492, 0.207109, -0.959593, -0.040327, 0.978318, 0.203145, 0.98086, 0, 0.194714, -0.0330435, -0.188358, -0.244679)
 
 [connection signal="signal_emitted" from="DefuseBox" to="." method="_on_defuse_box_signal_emitted"]
 [connection signal="body_entered" from="ActivationBox" to="." method="_on_activation_box_body_entered"]
 
 [editable path="DefuseBox"]
+[editable path="Trap/bell_trap"]

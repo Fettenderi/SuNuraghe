@@ -5,7 +5,7 @@ extends Node3D
 @export var amount := 1
 
 @onready var _interactable_box: InteractableBox = %InteractableBox
-@onready var _mesh: Node3D = %Mesh
+@onready var _mesh: Node3D = $Mesh
 
 var _available := true
 

@@ -1,28 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://2mf2pma5xj2h"]
+[gd_scene load_steps=4 format=3 uid="uid://2mf2pma5xj2h"]
 
 [ext_resource type="Script" uid="uid://bev7kvmsk4xv0" path="res://scripts/wool_piece.gd" id="1_q1uht"]
-[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="2_4h4wo"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_6fu0n"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_q1uht"]
-size = Vector3(1.97, 0.705, 1.995)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1uht"]
-albedo_texture = ExtResource("2_4h4wo")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q1uht"]
 size = Vector3(1.98218, 0.703125, 1.98438)
 
 [node name="WoolPiece" type="Node3D"]
 script = ExtResource("1_q1uht")
-
-[node name="Mesh" type="Node3D" parent="."]
-unique_name_in_owner = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348996, 0)
-mesh = SubResource("BoxMesh_q1uht")
-surface_material_override/0 = SubResource("StandardMaterial3D_q1uht")
 
 [node name="InteractableBox" parent="." instance=ExtResource("3_6fu0n")]
 unique_name_in_owner = true
@@ -31,7 +16,6 @@ gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Prendi"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)
-visible = false
 shape = SubResource("BoxShape3D_q1uht")
 
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]

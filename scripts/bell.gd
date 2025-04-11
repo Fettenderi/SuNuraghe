@@ -27,8 +27,8 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 		emitter_resource.send_signal(true)
 
 func _load_data(data : GStorage) -> void:
-	_is_active = bool(data.get_value(str(self) + &"is_active"))
+	_is_active = data.get_value(Utils.nhash(self) + &"is_active")
 	mesh.visible = not _is_active
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(str(self) + &"is_active", _is_active)
+	data.set_value(Utils.nhash(self) + &"is_active", _is_active)

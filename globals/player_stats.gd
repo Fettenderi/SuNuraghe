@@ -10,4 +10,6 @@ var disguised := false:
 		disguised = value
 		disguised_changed.emit(value)
 
+var concept_art_pieces : Array = []
+
 signal disguised_changed(value : bool)

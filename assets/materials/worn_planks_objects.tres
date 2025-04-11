@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dehjfbtydlqin"]
+
+[ext_resource type="Texture2D" uid="uid://dkdoba6lx0ma6" path="res://assets/textures/worn_planks/worn_planks.png" id="1_6ot55"]
+
+[resource]
+albedo_texture = ExtResource("1_6ot55")
+uv1_scale = Vector3(163.155, 163.155, 163.155)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+texture_filter = 0

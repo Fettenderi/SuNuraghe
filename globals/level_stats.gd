@@ -19,3 +19,5 @@ func save_data() -> void:
 	if not save_saves: return
 	
 	saving.emit(level_data)
+	
+	level_data.save_data()

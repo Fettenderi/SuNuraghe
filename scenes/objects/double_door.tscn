@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://k0jltjct40oa"]
+[gd_scene load_steps=25 format=4 uid="uid://k0jltjct40oa"]
 
 [ext_resource type="Script" uid="uid://btnwgudm65s0g" path="res://scripts/double_door.gd" id="1_hik7s"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="1_prbdi"]
-[ext_resource type="Material" uid="uid://dg4n7oiwvtitq" path="res://assets/materials/worn_planks_side.tres" id="2_hik7s"]
+[ext_resource type="Texture2D" uid="uid://c7oknv866wqmj" path="res://assets/textures/worn_planks/worn_planks_side.png" id="2_4hhpn"]
 [ext_resource type="Material" uid="uid://cygxs8bploe8p" path="res://assets/materials/archway_bricks.tres" id="3_4hhpn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2caqw"]
@@ -38,6 +38,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b3gih")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yq3un"]
+albedo_texture = ExtResource("2_4hhpn")
+uv1_scale = Vector3(6.635, 6.635, 6.635)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yq3un"]
+points = PackedVector3Array(8.38935e-05, 0.00328967, 0.12662, -0.00325455, 0.00328967, 0.134389, 8.38935e-05, -0.00378737, 0.12662, 8.38935e-05, 0.00328967, 3.45421e-05, -0.00325455, -0.00378737, 0.134389, -0.011524, 0.00328967, 0.14201, 8.38935e-05, -0.00378737, 3.45421e-05, -0.08692, 0.00328967, 3.45421e-05, -0.011524, -0.00378737, 0.14201, -0.0215649, 0.00328967, 0.147066, -0.08692, -0.00378737, 3.45421e-05, -0.08692, 0.00328967, 0.15239, -0.0215649, -0.00378737, 0.147066, -0.029911, 0.00328967, 0.150407, -0.08692, -0.00378737, 0.15239, -0.0395005, 0.00328967, 0.15239, -0.029911, -0.00378737, 0.150407, -0.0395005, -0.00378737, 0.15239)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_km0gy"]
 
@@ -106,6 +115,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wbvdb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn0jb"]
+albedo_texture = ExtResource("2_4hhpn")
+uv1_scale = Vector3(6.635, 6.635, 6.635)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4hhpn"]
+points = PackedVector3Array(0.0869518, 0.00350325, 0.152384, 0.0395238, 0.00350325, 0.152399, 0.0869518, -0.00357379, 0.152384, 0.0869518, 0.00350325, 4.39358e-05, 0.0299343, 0.00350325, 0.150416, 0.0299343, -0.00357379, 0.150416, 0.0395238, -0.00357379, 0.152384, 0.0869518, -0.00357379, 4.39358e-05, -5.21088e-05, 0.00350325, 4.39358e-05, 0.0215882, 0.00350325, 0.147075, 0.0215882, -0.00357379, 0.147075, -5.21088e-05, -0.00357379, 4.39358e-05, -5.21088e-05, 0.00350325, 0.126629, 0.0115473, 0.00350325, 0.14202, 0.0115473, -0.00357379, 0.14202, -5.21088e-05, -0.00357379, 0.126629, 0.00327782, 0.00350325, 0.134399, 0.00327782, -0.00357379, 0.134399)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12k0n"]
 
@@ -189,7 +207,12 @@ transform = Transform3D(-5.1798e-08, 0, -1.185, 0, 1.185, 0, 1.185, 0, -5.1798e-
 transform = Transform3D(19.6105, 0, 0, 0, -8.57202e-07, 19.6105, 0, -19.6105, -8.57202e-07, 0, -1.301, 0)
 mesh = SubResource("ArrayMesh_rrg7r")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_hik7s")
+surface_material_override/0 = SubResource("StandardMaterial3D_yq3un")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshRight/Wood"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshRight/Wood/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_yq3un")
 
 [node name="Handle" type="MeshInstance3D" parent="MeshRight"]
 transform = Transform3D(19.6105, 5.68434e-14, 0, 0, -8.57202e-07, 19.6105, 5.68434e-14, -19.6105, -8.57202e-07, 0.127568, -1.301, -5.57618e-09)
@@ -209,7 +232,12 @@ transform = Transform3D(-5.1798e-08, 0, -1.185, 0, 1.185, 0, 1.185, 0, -5.1798e-
 transform = Transform3D(19.6105, 0, 0, 0, -8.57202e-07, 19.6105, 0, -19.6105, -8.57202e-07, 0, -1.301, 0)
 mesh = SubResource("ArrayMesh_n41yb")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_hik7s")
+surface_material_override/0 = SubResource("StandardMaterial3D_cn0jb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshLeft/Wood"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshLeft/Wood/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_4hhpn")
 
 [node name="Handle" type="MeshInstance3D" parent="MeshLeft"]
 transform = Transform3D(19.6105, 5.68434e-14, 0, 0, -8.57202e-07, 19.6105, 5.68434e-14, -19.6105, -8.57202e-07, -0.128, -1.301, 0)

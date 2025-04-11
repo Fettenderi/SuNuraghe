@@ -1,33 +1,47 @@
-[gd_scene format=3 uid="uid://c3jb34bef37y2"]
+[gd_scene load_steps=2 format=3 uid="uid://c3jb34bef37y2"]
+
+[ext_resource type="Material" uid="uid://bc6ci331ex2i6" path="res://assets/materials/stone_brick_wall.tres" id="1_5n3lq"]
 
 [node name="DoorCarver" type="CSGCombiner3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1.55175, 0, 0, 0, 1, 0, -7.10543e-15, 0, 1, -9.64988e-11, -0.197484, -0.667377)
+transform = Transform3D(0.901569, 0, 0, 0, 1, 0, -4.12826e-15, 0, 1, 0, 1.129, -0.667)
 flip_faces = true
 size = Vector3(1, 2.25853, 1.53564)
+material = ExtResource("1_5n3lq")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(0.901569, 0, 0, 0, 1, 0, -4.12826e-15, 0, 1, 0, 1.129, -0.667)
+flip_faces = true
+size = Vector3(1, 2.25853, 1.53564)
+material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1.55175, 0, 1.77636e-15, 0, 0.800407, 0.599457, -7.10543e-15, -0.599457, 0.800407, -1.07862e-08, 0.986444, -0.112176)
+transform = Transform3D(0.901569, 0, 1.77636e-15, 0, 0.800407, 0.599457, -4.12826e-15, -0.599457, 0.800407, 0, 2.312, -0.112)
 flip_faces = true
 size = Vector3(1, 0.367798, 0.334717)
+material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1.55175, -3.55271e-15, 8.88178e-16, 0, 0.364162, 0.931336, -7.10543e-15, -0.931336, 0.364162, -6.02015e-09, 1.06386, -0.359716)
+transform = Transform3D(0.901569, -3.55271e-15, 8.88178e-16, 0, 0.364162, 0.931336, -4.12826e-15, -0.931336, 0.364162, 0, 2.39, -0.36)
 flip_faces = true
 size = Vector3(1, 0.367798, 0.508667)
+material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(-1.55175, -5.24062e-08, 6.99738e-08, 0, 0.800407, 0.599457, -1.35659e-07, 0.599457, -0.800407, 2.76265e-08, 0.986444, -1.23519)
+transform = Transform3D(-0.901569, -5.24062e-08, 6.99738e-08, 0, 0.800407, 0.599457, -7.8818e-08, 0.599457, -0.800407, 0, 2.312, -1.235)
 flip_faces = true
 size = Vector3(1, 0.367798, 0.334717)
+material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(-1.55175, -8.142e-08, 3.1836e-08, 0, 0.364162, 0.931336, -1.35659e-07, 0.931336, -0.364162, -1.07205e-08, 1.06386, -0.987649)
+transform = Transform3D(-0.901569, -8.142e-08, 3.1836e-08, 0, 0.364162, 0.931336, -7.8818e-08, 0.931336, -0.364162, 0, 2.39, -0.988)
 flip_faces = true
 size = Vector3(1, 0.367798, 0.508667)
+material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1.55175, 0, -2.11758e-22, 0, -4.37114e-08, 1, -7.10543e-15, -1, -4.37114e-08, -3.15659e-12, 1.14899, -0.672225)
+transform = Transform3D(0.901569, 0, -2.11758e-22, 0, -4.37114e-08, 1, -4.12826e-15, -1, -4.37114e-08, 0, 2.475, -0.672)
 flip_faces = true
 size = Vector3(1, 0.555206, 0.46994)
+material = ExtResource("1_5n3lq")

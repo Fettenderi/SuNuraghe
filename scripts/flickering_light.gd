@@ -42,7 +42,6 @@ func _ready() -> void:
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
 
-	
 
 func _flicker() -> void:
 	_flicker_cooldown_timer.start(max(randfn(0.9, 0.5), 0.0))
@@ -67,6 +66,8 @@ func _on_received(value : Variant):
 		omni_range = max(omni_range - value.z, 0.0)
 
 func _load_data(data : GStorage) -> void:
+	print("LUCI GENERATE DOPO DA SISTEMARE")
+	return
 	var _parameters := Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"parameters"))
 	
 	actual_max_energy = _parameters.x

@@ -10,13 +10,13 @@
 [ext_resource type="AudioStream" uid="uid://cj4tx87nakksl" path="res://assets/sfx/footsteps/CHAR_FS_TEST-004.wav" id="5_3cgp0"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="5_5kibn"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
-[ext_resource type="PackedScene" uid="uid://qicskvtygx5y" path="res://assets/models/characters/test.blend" id="5_k2ell"]
 [ext_resource type="AudioStream" uid="uid://cg1t1em027hgg" path="res://assets/sfx/footsteps/CHAR_FS_TEST-005.wav" id="6_jq3mj"]
 [ext_resource type="AudioStream" uid="uid://dk6alasfu5fwd" path="res://assets/sfx/footsteps/CHAR_FS_TEST-006.wav" id="7_e7dtq"]
 [ext_resource type="AudioStream" uid="uid://c4ahilojv4gcp" path="res://assets/sfx/footsteps/CHAR_FS_TEST-007.wav" id="8_qfh2q"]
 [ext_resource type="AudioStream" uid="uid://csjbckpw1t7u8" path="res://assets/sfx/footsteps/CHAR_FS_TEST-008.wav" id="9_kr2ds"]
 [ext_resource type="AudioStream" uid="uid://c4hci7vc5n0f6" path="res://assets/sfx/footsteps/CHAR_FS_TEST-009.wav" id="10_u8bbw"]
 [ext_resource type="Script" uid="uid://cjaiesjwhtfsk" path="res://scripts/advanced_sound_player.gd" id="11_foxdh"]
+[ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="15_udeof"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 radius = 0.4
@@ -102,8 +102,8 @@ visible = false
 material_override = SubResource("StandardMaterial3D_vexqk")
 radius = 0.1
 
-[node name="test" parent="Mesh" instance=ExtResource("5_k2ell")]
-transform = Transform3D(0.198, 0, 0, 0, 0.198, 0, 0, 0, 0.198, -0.026397, 0.76257, 0)
+[node name="mamuthones" parent="Mesh" instance=ExtResource("15_udeof")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026397, 0.76257, 0)
 
 [node name="KillBox" parent="." instance=ExtResource("5_5kibn")]
 unique_name_in_owner = true

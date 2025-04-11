@@ -19,7 +19,6 @@ func init_container(container_name: String):
 # Установить значение
 func set_value(key: String, value):
 	data[key] = value
-	save_data()
 
 # Получить значение
 func get_value(key: String, default_value = null):
