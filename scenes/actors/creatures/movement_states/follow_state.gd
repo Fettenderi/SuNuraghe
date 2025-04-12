@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	
 	Utils.update_just_speed(user, change_rate, max_speed, delta)
 	
-	user.look(_target.global_position, delta)
+	user.look(_target, delta)
 	_navigation_agent_3d.target_position = _get_actual_target_position(_target.global_position)
 	
 

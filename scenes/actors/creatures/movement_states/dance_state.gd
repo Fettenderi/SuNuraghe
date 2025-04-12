@@ -93,6 +93,10 @@ func update(info : Dictionary = {}) -> void:
 		return
 
 	if info.has("suspect"):
+		if info.has("final") and info["final"]:
+			state_machine.change_state("StareState")
+			return
+		
 		_suspect_level += 1
 		if _suspect_level >= max_suspects:
 			state_machine.change_state("ChaseState", {"located": user.target.global_position})

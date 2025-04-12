@@ -12,13 +12,16 @@ func start(info : Dictionary = {}) -> void:
 	#state_machine.change_state("WalkState")
 	state_machine.stop()
 	
+	if info.has("to_look"):
+		_stare_target = info["to_look"]
+	
+	if info.has("bypass_timer"): return
+	
 	_stare_timer = Utils.timer(STARE_TIME, _on_stare_timer_ended, _stare_timer)
 	add_child(_stare_timer, true)
 	
 	_stare_timer.start()
 
-	if info.has("to_look"):
-		_stare_target = info["to_look"]
 
 func end() -> void:
 	_is_active = false

@@ -40,6 +40,8 @@ var _is_active := false:
 
 var _direction : Vector3
 
+var can_kill := true
+
 func _ready() -> void:
 	if activation_receiver != null:
 		_is_active = false
@@ -71,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		if _direction.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 			footsteps_player.request_playing()
-			print("DOVREBBE AVCERE SUONO UNICO PIù DURO" + name)
+			#print("DOVREBBE AVCERE SUONO UNICO PIù DURO" + name)
 	
 	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _acceleration * delta)
 	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _acceleration * delta)
@@ -123,7 +125,7 @@ func _on_eyes_located(collider: Player) -> void:
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return
 	
-	movement_state_machine.update({"touched" : body})
+	movement_state_machine.update({"touched" : body, "can_kill" : can_kill})
 	
 	target = body
 
@@ -135,9 +137,8 @@ func _on_navigation_finished():
 func get_eyes_reference() -> Node3D:
 	return _head
 
-func suspect_player() -> void:
-	#movement_state_machine.update({"suspect" : true})
-	pass
+func suspect_player(final := false) -> void:
+	movement_state_machine.update({"suspect" : true, "final" : final})
 
 func look(target_position : Node3D, delta : float) -> void:
 	var _local_destination := target_position.global_position - global_position
@@ -146,7 +147,7 @@ func look(target_position : Node3D, delta : float) -> void:
 	global_rotation.y = lerp_angle(global_rotation.y, atan2(_local_direction.x, _local_direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 
 func do_kill_animation() -> void:
-	if not target is Player: return
+	if not target is Player or not can_kill: return
 	
 	_mamuthon_animator.play("FaceAction")
 

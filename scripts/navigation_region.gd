@@ -7,4 +7,6 @@ func _ready() -> void:
 		receiver_resource.received.connect(_on_received.unbind(1))
 
 func _on_received() -> void:
+	if is_baking(): return
+	
 	bake_navigation_mesh()

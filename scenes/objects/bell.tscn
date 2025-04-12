@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://blyk052kfi58i"]
+[gd_scene load_steps=6 format=3 uid="uid://blyk052kfi58i"]
 
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="1_0df5t"]
 [ext_resource type="Script" uid="uid://d3ku7mx26x2jo" path="res://scripts/bell.gd" id="1_poxvm"]
+[ext_resource type="PackedScene" uid="uid://d3iy2n7njow7" path="res://assets/models/environment/microfono.blend" id="2_7jw41"]
+[ext_resource type="PackedScene" uid="uid://cm3fxlcsbfbwh" path="res://assets/models/goat/lana.fbx" id="4_7i7ps"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0df5t"]
 height = 2.89746
@@ -10,13 +12,40 @@ radius = 4.26318
 [node name="Bell" type="Node3D"]
 script = ExtResource("1_poxvm")
 
+[node name="microfono" parent="." instance=ExtResource("2_7jw41")]
+
 [node name="InteractableBox" parent="." instance=ExtResource("1_0df5t")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[ E ] Silenzia "
+gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Silenzia "
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 shape = SubResource("CylinderShape3D_0df5t")
+
+[node name="Mesh" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="lana" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(2.855, 0, 0, 0, 2.78166, 0.642964, 0, -0.642964, 2.78166, 0, 0.120215, -2.69921)
+
+[node name="lana2" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(2.30892, 2.98023e-08, -1.67926, 0.378179, 2.78166, 0.519984, 1.63612, -0.642964, 2.24961, 2.00802, 0.350074, -1.70507)
+
+[node name="lana3" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(0.0695697, 0.509386, -2.80833, -0.216798, 2.80199, 0.502865, 2.84591, 0.201001, 0.106959, 2.72669, 0.31884, 0.460974)
+
+[node name="lana4" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(-2.84304, -0.0587986, 0.254381, 0, 2.78166, 0.642964, -0.261088, 0.640269, -2.77, 0.156875, 0.131993, 2.7077)
+
+[node name="lana5" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(-2.14963, -0.0587986, 1.87794, 0.378179, 2.78166, 0.519984, -1.84041, 0.640269, -2.08662, -1.75182, 0.361852, 1.5341)
+
+[node name="lana7" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(-2.20682, 0.288447, 1.78823, 0.00694874, 2.8199, -0.446281, -1.81133, -0.340608, -2.18039, -0.457023, 1.13271, 0.53944)
+
+[node name="lana6" parent="Mesh" instance=ExtResource("4_7i7ps")]
+transform = Transform3D(0.190978, -0.48887, 2.80634, -0.216798, 2.80199, 0.502865, -2.84034, -0.246742, 0.150309, -2.26939, 0.330618, -0.688598)
 
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
 

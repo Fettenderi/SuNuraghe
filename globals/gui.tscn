@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2vdei1iobb7m"]
+[gd_scene load_steps=4 format=3 uid="uid://b2vdei1iobb7m"]
 
 [ext_resource type="Script" uid="uid://dqb8qmgyq0mfq" path="res://globals/gui.gd" id="1_w8mk6"]
+[ext_resource type="Theme" uid="uid://nts6ppuasqgx" path="res://assets/ui/theme.tres" id="2_nprld"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cpyeq"]
 font_size = 30
 
 [node name="GUI" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_w8mk6")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -16,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("2_nprld")
 
 [node name="InteractionText" type="RichTextLabel" parent="CenterContainer"]
 unique_name_in_owner = true
@@ -23,6 +24,7 @@ clip_contents = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 mouse_filter = 2
+theme = ExtResource("2_nprld")
 bbcode_enabled = true
 fit_content = true
 
@@ -35,17 +37,50 @@ anchor_top = 0.973611
 anchor_right = 0.8875
 anchor_bottom = 0.986111
 size_flags_vertical = 1
+theme = ExtResource("2_nprld")
 max_value = 1.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="WoolPiecesDisplay" type="Label" parent="."]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.0664063
 anchor_top = 0.0847222
 anchor_right = 0.125781
 anchor_bottom = 0.143056
+theme = ExtResource("2_nprld")
 text = "0"
 label_settings = SubResource("LabelSettings_cpyeq")
 metadata/_edit_use_anchors_ = true
+
+[node name="KidnapScreen" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_nprld")
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer2" type="CenterContainer" parent="KidnapScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ToBeContinuedText" type="RichTextLabel" parent="KidnapScreen/CenterContainer2"]
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center]Continua nel secondo capitolo..."
+fit_content = true

@@ -31,8 +31,8 @@ static func update_movement_variables(user : Player, state : State, delta : floa
 		user.head_bob_amplitude = state.head_bob_amplitude
 		user.head_bob_frequency = state.head_bob_frequency
 	
-	@warning_ignore("narrowing_conversion")
-	Gui.update_wool_display(user.max_speed * 100)
+	#@warning_ignore("narrowing_conversion")
+	#Gui.update_wool_display(user.max_speed * 100)
 
 static func update_just_speed(user : CharacterBody3D, change_rate : float, target_speed : float, delta : float) -> void:
 	if not user is Player and not user is Creature:
@@ -46,8 +46,8 @@ static func update_just_speed(user : CharacterBody3D, change_rate : float, targe
 	
 	if not user is Player: return
 	
-	@warning_ignore("narrowing_conversion")
-	Gui.update_wool_display(user.max_speed * 100)
+	#@warning_ignore("narrowing_conversion")
+	#Gui.update_wool_display(user.max_speed * 100)
 
 static func string_to_vector2(string := "") -> Vector2:
 	if not string: return Vector2.ZERO

@@ -29,12 +29,10 @@ extends Node3D
 @export var actual_max_energy := 1.0:
 	set(value):
 		actual_max_energy = value
+		actual_min_energy = max(actual_max_energy - 0.25,0.0)
 		_update_parameters()
 
-@export var actual_min_energy := 0.2:
-	set(value):
-		actual_min_energy = value
-		_update_parameters()
+var actual_min_energy := 0.2
 
 var _lights : Array[FlickeringLight] = []
 

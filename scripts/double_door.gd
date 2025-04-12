@@ -4,12 +4,12 @@ extends Node3D
 
 const ARRIVED_THRESHOLD = 0.01
 
-@export var bake_override := false:
-	set(value):
-		if not Engine.is_editor_hint() or not is_inside_tree(): return
-
-		bake_override = value
-		_set_bake_mode(value)
+#@export var bake_override := false:
+	#set(value):
+		#if not Engine.is_editor_hint() or not is_inside_tree(): return
+#
+		#bake_override = value
+		#_set_bake_mode(value)
 
 @export var is_open := false:
 	set(value):
@@ -34,7 +34,7 @@ var _vibration_angle := PI / 16
 var _vibration_amount := 2
 
 func _ready() -> void:
-	_set_open(is_open)
+	_set_open(is_open, true)
 	if Engine.is_editor_hint(): return
 	_mesh_right.position.y = 0.0
 	_mesh_left.position.y = 0.0
@@ -48,8 +48,8 @@ func _ready() -> void:
 	LevelStats.loading.connect(_load_data)
 
 
-func _set_open(value : bool):
-	if Engine.is_editor_hint():
+func _set_open(value : bool, bypass := false):
+	if Engine.is_editor_hint() or bypass:
 		if _mesh_right != null:
 			_mesh_right.rotation.y = 0.0 if value else - PI / 2
 		if _mesh_left != null:

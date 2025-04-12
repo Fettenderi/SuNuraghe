@@ -65,9 +65,7 @@ func _reset_buffers():
 
 func _correct_input():
 	_reset_buffers()
-	#print("OK")
 
 func _wrong_input():
 	_reset_buffers()
 	get_tree().call_group(&"Enemy", "suspect_player")
-	#print("NOT OK")

@@ -1,16 +1,9 @@
 # Todo
 
-- Fare trasduttore
-- Fare evento scriptato del rapimento
+- Far si che la velocità dei suoni dei passi dei mamuthones dipenda dalla loro velocità
 
-- Aggiungere prop campanacci
-- Mettere suoni
-
-# Milestone 1
+- Mettere campanaccio di Achi
+- Mettere suoni di Ferro
 
 - Provare il gioco in modo completo
-
-- Decorare fondo dei campanacci
 - Fixare salvataggio luci
-
-# Milestone 2

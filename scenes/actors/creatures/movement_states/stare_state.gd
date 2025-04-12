@@ -38,11 +38,11 @@ func start(info : Dictionary = {}) -> void:
 		_stare_timer.start()
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
+	if info.has("touched") and info.has("can_kill") and info["can_kill"]:
 		var _toucher : Player = info["touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher.global_position})
+		state_machine.change_state("KillState", {"to_look": _toucher})
 
 
 func end() -> void:
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	
 	Utils.update_just_speed(user, change_rate, 0.0, delta)
 
-	user.look(user.target.global_position, delta)
+	user.look(user.target, delta)
 
 func _on_stare_timer_ended() -> void:
 	if not _is_active: return

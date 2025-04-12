@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cvdhqvacrttlw"]
+[gd_scene load_steps=36 format=3 uid="uid://cvdhqvacrttlw"]
 
 [ext_resource type="Script" uid="uid://g8atcph4wi6q" path="res://scripts/player.gd" id="1_x0hk6"]
 [ext_resource type="AudioStream" uid="uid://4ci7i1fh1rrf" path="res://assets/sfx/footsteps/CHAR_FS_TEST-001.wav" id="3_1a0p2"]
@@ -46,6 +46,10 @@ size = Vector3(0.1, 0.1, 4.45825)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sd4yv"]
 radius = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0w3ce"]
+height = 2.28369
+radius = 8.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_owjsm"]
 streams_count = 9
@@ -143,6 +147,15 @@ collision_layer = 128
 collision_mask = 0
 shape = SubResource("SphereShape3D_sd4yv")
 enabled = false
+
+[node name="FearBox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FearBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14282, 0)
+shape = SubResource("CylinderShape3D_0w3ce")
 
 [node name="FootstepsPlayer" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
@@ -250,4 +263,6 @@ shape = SubResource("SeparationRayShape3D_0w3ce")
 [connection signal="area_entered" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_entered"]
 [connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CoverState" method="_on_crawl_detector_box_area_exited"]
 [connection signal="area_exited" from="Head/CrawlDetectorBox" to="MovementSM/CrawlState" method="_on_crawl_detector_box_area_exited"]
+[connection signal="body_entered" from="FearBox" to="." method="_on_fear_box_body_entered"]
+[connection signal="body_exited" from="FearBox" to="." method="_on_fear_box_body_exited"]
 [connection signal="timeout" from="JumpBuffer" to="." method="_on_jump_buffer_timeout"]

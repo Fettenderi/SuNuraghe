@@ -1,7 +1,8 @@
 extends Node3D
 
 @export var emitter_resource : EmitterRes
-@export var mesh : Node3D
+
+@onready var mesh: Node3D = %Mesh
 
 @export var wool_required := 6
 

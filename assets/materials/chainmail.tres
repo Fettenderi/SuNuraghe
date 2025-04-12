@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b2quur4bflvfc"]
+
+[ext_resource type="Texture2D" uid="uid://da185l2sk7xy5" path="res://assets/textures/metal/chainmail.png" id="1_4s8gq"]
+
+[resource]
+albedo_texture = ExtResource("1_4s8gq")
+roughness = 0.82
+normal_texture = ExtResource("1_4s8gq")
+uv1_scale = Vector3(0.225, 0.225, 0.225)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 5.77091
+uv1_world_triplanar = true
+texture_filter = 0
