@@ -43,6 +43,7 @@ var _vibration_amount := 2
 
 var _open_angle := PI / 2 + PI / 8
 
+var _player_near := false
 
 func _ready() -> void:
 	_set_open(is_open or bake_override, true)
@@ -129,5 +130,13 @@ func _on_opener_box_signal_emitted() -> void:
 
 func _on_closer_box_signal_emitted() -> void:
 	if not has_pressures: return
+	if _player_near: return
 	
 	is_open = false
+
+
+func _on_player_detector_body_entered(_body: Node3D) -> void:
+	_player_near = true
+
+func _on_player_detector_body_exited(_body: Node3D) -> void:
+	_player_near = false

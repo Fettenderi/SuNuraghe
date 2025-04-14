@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 		
 		if _direction.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
-			_footsteps_player.playing_period = max_speed * 1.5
+			set_jump_delay(max_speed * 1.5)
 			_footsteps_player.request_playing()
 	
 	Utils.update_just_speed(self, change_rate, max_speed + speed_debufs, delta)
@@ -174,6 +174,9 @@ func do_kill_animation() -> void:
 	_mamuthon_animator.play("FaceAction")
 	_sfx_jumpscare.play() #(1.1666)
 
+func set_jump_delay(delay : float) -> void:
+	_footsteps_player.playing_period = delay
+
 func _emit_voice() -> void:
 	_sfx_voice.play()
 	_voices_timer.start(max(randfn(15.0, 2.0), 0.0))
@@ -194,11 +197,13 @@ func _save_data(data : GStorage) -> void:
 func _on_sfx_footsteps_plays() -> void:
 	var tween := create_tween()
 	
-	tween.tween_method(_little_dance, 0.0, 0.8, 0.8)
+	var lenght := 0.8
+	
+	tween.tween_method(_little_dance.bind(lenght), 0.0, lenght, lenght)
 
-func _little_dance(elapsed):
-	mesh.position.y = 0.25 * _roof_function(elapsed)
-	speed_debufs = - 0.6 * _roof_function(elapsed) * max_speed
+func _little_dance(elapsed : float, lenght : float):
+	mesh.position.y = 0.25 * _roof_function(elapsed, lenght)
+	speed_debufs = - 0.6 * _roof_function(elapsed, lenght) * max_speed
 
-func _roof_function(value : float):
-	return max(2.0 * (0.8 - abs((value - 0.8) * (value - 0.8) * 2.5 - 0.8)), 0.0)
+func _roof_function(value : float, lenght : float):
+	return max(2.0 * (lenght - abs((value - lenght) * (value - lenght) * (2.0 / lenght) - lenght)), 0.0)

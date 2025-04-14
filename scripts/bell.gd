@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var emitter_resource : EmitterRes
-@export var bell_mesh : Node3D
+@export var campanas : Campanas
 
 @onready var mesh: Node3D = %Mesh
 @onready var _sfx_emitter: FmodEventEmitter3D = %SFXEmitter
@@ -26,6 +26,7 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	_is_active = false
 	_interactable_box.is_active = false
 	mesh.visible = true
+	campanas.stop()
 	_sfx_emitter.play()
 	PlayerStats.wool_pieces -= wool_required
 	Gui.remove_requirements(str(PlayerStats.wool_pieces) + " / " + str(wool_required))
@@ -38,6 +39,8 @@ func _load_data(data : GStorage) -> void:
 
 	_is_active = data.get_value(Utils.nhash(self) + &"is_active")
 	mesh.visible = not _is_active
+	if not _is_active:
+		campanas.stop()
 	_interactable_box.is_active = _is_active
 
 func _save_data(data : GStorage) -> void:

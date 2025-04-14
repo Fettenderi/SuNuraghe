@@ -133,6 +133,8 @@ func update(info : Dictionary = {}) -> void:
 	if info.has("end"):
 		user.end_buffered = true
 
+#user.set_jump_delay(little_jump_time)
+
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	

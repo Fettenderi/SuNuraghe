@@ -1,4 +1,4 @@
-[gd_scene load_steps=271 format=4 uid="uid://diymi2h3f5cqq"]
+[gd_scene load_steps=270 format=4 uid="uid://diymi2h3f5cqq"]
 
 [ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_30hdq"]
 [ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="1_v4d4p"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="5_421lv"]
 [ext_resource type="Resource" uid="uid://dvc7adtvn6sv2" path="res://assets/receivers/layer2/lay2-nav_rebake.tres" id="5_ltwek"]
 [ext_resource type="Texture2D" uid="uid://caffsu7lhe38y" path="res://addons/kenney_prototype_textures/dark/texture_09.png" id="6_oksur"]
-[ext_resource type="PackedScene" uid="uid://cy7h8de8b2jpf" path="res://assets/models/objects/campanas.fbx" id="6_tmks3"]
 [ext_resource type="PackedScene" uid="uid://dqa4w4pn6ls1x" path="res://scenes/objects/door.tscn" id="8_4h8xp"]
 [ext_resource type="Resource" uid="uid://dyy4v7b8cram8" path="res://assets/receivers/layer1/lay1-1.tres" id="9_ql8jr"]
 [ext_resource type="Resource" uid="uid://bigbiteu2054j" path="res://assets/receivers/layer1/lay1-door1-close.tres" id="10_5ga6x"]
@@ -117,7 +116,7 @@
 [ext_resource type="Resource" uid="uid://chqdhdocxqxru" path="res://assets/receivers/layer2/lay2-kidnap.tres" id="100_hgjl6"]
 [ext_resource type="Script" uid="uid://cdk2h8fna8l77" path="res://scripts/suspect_reset.gd" id="101_fkalo"]
 [ext_resource type="Texture2D" uid="uid://c8iweiw4hbm68" path="res://assets/textures/concept_arts/fmod.png" id="107_pmw43"]
-[ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="108_tmks3"]
+[ext_resource type="PackedScene" uid="uid://bnopm6tokh052" path="res://scenes/objects/campanas.tscn" id="109_appgx"]
 [ext_resource type="PackedScene" uid="uid://dhbpgrq77vmpj" path="res://assets/models/environment/railways.fbx" id="119_appgx"]
 [ext_resource type="Script" uid="uid://c01wgyvocfg5f" path="res://scripts/chill_box.gd" id="120_0g86u"]
 
@@ -3114,9 +3113,10 @@ distance = 6.26
 omni_range = 14.77
 actual_max_energy = 0.6
 
-[node name="Bell3" parent="Objects/Static/Layer0" instance=ExtResource("4_sc620")]
+[node name="Bell" parent="Objects/Static/Layer0" node_paths=PackedStringArray("campanas") instance=ExtResource("4_sc620")]
 transform = Transform3D(-1.25, 0, 2.16506, 0, 1.2, 0, -2.16506, 0, -1.25, 0, -6.8678, 0)
 emitter_resource = SubResource("Resource_1d5u2")
+campanas = NodePath("../../Bells/campanas")
 wool_required = 15
 
 [node name="SavingStation" parent="Objects/Static/Layer0" instance=ExtResource("64_msn66")]
@@ -3290,12 +3290,13 @@ transform = Transform3D(0.826098, 0, 0.563526, 0, 1, 0, -0.563526, 0, 0.826098, 
 is_open = true
 receiver_resource = ExtResource("34_1sbqr")
 
-[node name="Bell" parent="Objects/Static/Layer1" instance=ExtResource("4_sc620")]
+[node name="Bell1" parent="Objects/Static/Layer1" node_paths=PackedStringArray("campanas") instance=ExtResource("4_sc620")]
 transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -3.11061, -0.0922838, -28.4573)
 emitter_resource = SubResource("Resource_1d5u2")
+campanas = NodePath("../../Bells/campanas1")
 wool_required = 15
 
-[node name="LightsPlacer3" parent="Objects/Static/Layer1/Bell" instance=ExtResource("87_speit")]
+[node name="LightsPlacer3" parent="Objects/Static/Layer1/Bell1" instance=ExtResource("87_speit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.46223, 0)
 amount = 6
 distance = 5.155
@@ -3682,9 +3683,10 @@ distance = 3.5
 omni_range = 10.0
 actual_max_energy = 0.4
 
-[node name="Bell2" parent="Objects/Static/Layer2" instance=ExtResource("4_sc620")]
+[node name="Bell2" parent="Objects/Static/Layer2" node_paths=PackedStringArray("campanas") instance=ExtResource("4_sc620")]
 transform = Transform3D(-1, 0, 1.73205, 0, 1.2, 0, -1.73205, 0, -1, 31.9581, 8.18835, 10.3727)
 emitter_resource = SubResource("Resource_1d5u2")
+campanas = NodePath("../../Bells/campanas2")
 wool_required = 15
 
 [node name="KidnappingSequence" type="Node" parent="Objects/Static/Layer2" node_paths=PackedStringArray("sheep_mesh", "player", "kidnapper")]
@@ -3743,88 +3745,25 @@ distance = 5.0
 omni_range = 15.0
 actual_max_energy = 0.4
 
-[node name="Bell3" parent="Objects/Static/Layer3" instance=ExtResource("4_sc620")]
+[node name="Bell3" parent="Objects/Static/Layer3" node_paths=PackedStringArray("campanas") instance=ExtResource("4_sc620")]
 transform = Transform3D(-1.25, 0, 2.16506, 0, 1.2, 0, -2.16506, 0, -1.25, -31.5436, 15.8191, -9.38544)
 emitter_resource = SubResource("Resource_1d5u2")
+campanas = NodePath("../../Bells/campanas3")
 wool_required = 15
 
 [node name="Bells" type="Node3D" parent="Objects/Static"]
 
-[node name="campanas" parent="Objects/Static/Bells" instance=ExtResource("6_tmks3")]
+[node name="campanas" parent="Objects/Static/Bells" instance=ExtResource("109_appgx")]
 transform = Transform3D(-0.885353, 0, 0.464919, 0, 1, 0, -0.464919, 0, -0.885353, 0, 15.4302, 0)
 
-[node name="Campana_001" parent="Objects/Static/Bells/campanas" index="0"]
-transform = Transform3D(100, -3.01544e-07, 2.27628e-06, -2.27627e-06, -26.0376, 96.5508, 3.01544e-07, -96.5508, -26.0376, -0.0261412, 18.1056, 0.0204489)
-
-[node name="Pendolo_001" parent="Objects/Static/Bells/campanas/Campana_001" index="0"]
-transform = Transform3D(1, 9.92195e-18, -6.56337e-17, 9.92193e-18, 0.955316, 0.295588, 6.56337e-17, -0.295588, 0.955316, 0.000163888, -0.00019783, -0.120572)
-
-[node name="AnimationPlayer" parent="Objects/Static/Bells/campanas" index="1"]
-autoplay = "Scene"
-speed_scale = 0.25
-
-[node name="mamuthones" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(0.970595, 0, -0.24072, 0, 1, 0, 0.24072, 0, 0.970595, 2.9818, -22.9511, -12.6259)
-
-[node name="mamuthones2" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(-0.970595, 0, 0.24072, 0, 1, 0, -0.24072, 0, -0.970595, -3.40114, -22.9511, 13.1105)
-
-[node name="mamuthones3" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(0.880676, 0, 0.473719, 0, 1, 0, -0.473719, 0, 0.880676, -6.49026, -22.9511, -11.4338)
-
-[node name="mamuthones4" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(-0.880676, 0, -0.473719, 0, 1, 0, 0.473719, 0, -0.880676, 6.07091, -22.9511, 11.9183)
-
-[node name="mamuthones5" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(0.240719, 0, 0.970595, 0, 1, 0, -0.970595, 0, 0.240719, -13.0779, -22.9511, -2.9492)
-
-[node name="mamuthones6" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(-0.24072, 0, -0.970595, 0, 1, 0, 0.970595, 0, -0.24072, 12.6585, -22.9511, 3.43374)
-
-[node name="mamuthones7" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(-0.473719, 0, 0.880676, 0, 1, 0, -0.880676, 0, -0.473719, -11.8857, -22.9511, 6.52286)
-
-[node name="mamuthones8" parent="Objects/Static/Bells/campanas" instance=ExtResource("108_tmks3")]
-transform = Transform3D(0.473719, 0, -0.880676, 0, 1, 0, 0.880676, 0, 0.473719, 11.4664, -22.9511, -6.03831)
-
-[node name="campanas2" parent="Objects/Static/Bells" instance=ExtResource("6_tmks3")]
-transform = Transform3D(0.896842, 0, -0.442351, 0, 1, 0, 0.442351, 0, 0.896842, 31.9581, 27.1198, 10.3727)
-
-[node name="Campana_001" parent="Objects/Static/Bells/campanas2" index="0"]
-transform = Transform3D(100, -3.01544e-07, 2.27627e-06, -2.27627e-06, -26.0375, 96.5508, 3.01544e-07, -96.5508, -26.0375, -0.0261412, 18.1056, 0.0204489)
-
-[node name="Pendolo_001" parent="Objects/Static/Bells/campanas2/Campana_001" index="0"]
-transform = Transform3D(1, 9.92194e-18, -6.56337e-17, 9.92193e-18, 0.955316, 0.295588, 6.56337e-17, -0.295588, 0.955316, 0.000163888, -0.00019783, -0.120572)
-
-[node name="AnimationPlayer" parent="Objects/Static/Bells/campanas2" index="1"]
-autoplay = "Scene"
-speed_scale = 0.25
-
-[node name="campanas4" parent="Objects/Static/Bells" instance=ExtResource("6_tmks3")]
+[node name="campanas1" parent="Objects/Static/Bells" instance=ExtResource("109_appgx")]
 transform = Transform3D(0.387826, 0, 0.361236, 0, 0.53, 0, -0.361236, 0, 0.387826, -3.11061, 10.2563, -28.4573)
 
-[node name="Campana_001" parent="Objects/Static/Bells/campanas4" index="0"]
-transform = Transform3D(100, -3.01544e-07, 2.27627e-06, -2.27627e-06, -26.0376, 96.5508, 3.01544e-07, -96.5508, -26.0376, -0.0261412, 18.1056, 0.0204489)
+[node name="campanas2" parent="Objects/Static/Bells" instance=ExtResource("109_appgx")]
+transform = Transform3D(0.896842, 0, -0.442351, 0, 1, 0, 0.442351, 0, 0.896842, 31.9581, 27.1198, 10.3727)
 
-[node name="Pendolo_001" parent="Objects/Static/Bells/campanas4/Campana_001" index="0"]
-transform = Transform3D(1, 9.92195e-18, -6.56337e-17, 9.92193e-18, 0.955316, 0.295588, 6.56337e-17, -0.295588, 0.955316, 0.000163888, -0.00019783, -0.120572)
-
-[node name="AnimationPlayer" parent="Objects/Static/Bells/campanas4" index="1"]
-autoplay = "Scene"
-speed_scale = 0.25
-
-[node name="campanas3" parent="Objects/Static/Bells" instance=ExtResource("6_tmks3")]
+[node name="campanas3" parent="Objects/Static/Bells" instance=ExtResource("109_appgx")]
 transform = Transform3D(-0.589077, 0, 0.472243, 0, 0.755, 0, -0.472243, 0, -0.589077, -31.5436, 34.9968, -9.38544)
-
-[node name="Campana_001" parent="Objects/Static/Bells/campanas3" index="0"]
-transform = Transform3D(100, -3.01544e-07, 2.27627e-06, -2.27627e-06, -26.0375, 96.5508, 3.01544e-07, -96.5508, -26.0375, -0.0261412, 18.1056, 0.0204489)
-
-[node name="Pendolo_001" parent="Objects/Static/Bells/campanas3/Campana_001" index="0"]
-transform = Transform3D(1, 9.92194e-18, -6.56337e-17, 9.92193e-18, 0.955316, 0.295588, 6.56337e-17, -0.295588, 0.955316, 0.000163888, -0.00019783, -0.120572)
-
-[node name="AnimationPlayer" parent="Objects/Static/Bells/campanas3" index="1"]
-autoplay = "Scene"
-speed_scale = 0.25
 
 [node name="ReLights" type="Node3D" parent="Objects"]
 
@@ -5236,8 +5175,4 @@ layer3 = [NodePath("../NavigationRegion3D/Rooms/BellRoom3"), NodePath("../Naviga
 [editable path="Objects/Static/Layer2/Signal2"]
 [editable path="Objects/Static/Layer2/Signal3"]
 [editable path="Objects/Static/Layer2/SignalAlpha"]
-[editable path="Objects/Static/Bells/campanas"]
-[editable path="Objects/Static/Bells/campanas2"]
-[editable path="Objects/Static/Bells/campanas4"]
-[editable path="Objects/Static/Bells/campanas3"]
 [editable path="TopCam"]
