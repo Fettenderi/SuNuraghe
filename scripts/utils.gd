@@ -35,19 +35,25 @@ static func update_movement_variables(user : Player, state : State, delta : floa
 	#Gui.update_wool_display(user.max_speed * 100)
 
 static func update_just_speed(user : CharacterBody3D, change_rate : float, target_speed : float, delta : float) -> void:
-	if not user is Player and not user is Creature:
+	if not user is Creature:
 		print("update_just_speed CHIAMATO DA CHI NON DOVREBBE" + user.name)
+		return
+
+	if abs(user.speed - target_speed) >= 0.01:
+		user.speed = lerp(user.speed, target_speed, 1.0 - exp(-change_rate * delta))
+	else:
+		user.speed = target_speed
+
+static func update_just_max_speed(user : CharacterBody3D, change_rate : float, target_speed : float, delta : float) -> void:
+	if not user is Player:
+		print("update_just_max_speed CHIAMATO DA CHI NON DOVREBBE" + user.name)
 		return
 
 	if abs(user.max_speed - target_speed) >= 0.01:
 		user.max_speed = lerp(user.max_speed, target_speed, 1.0 - exp(-change_rate * delta))
 	else:
 		user.max_speed = target_speed
-	
-	if not user is Player: return
-	
-	#@warning_ignore("narrowing_conversion")
-	#Gui.update_wool_display(user.max_speed * 100)
+
 
 static func string_to_vector2(string := "") -> Vector2:
 	if not string: return Vector2.ZERO

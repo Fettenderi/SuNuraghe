@@ -24,6 +24,9 @@ func start(info : Dictionary = {}) -> void:
 	if info.has("speed"):
 		max_speed = info["speed"]
 	
+	user.max_speed = max_speed
+	user.change_rate = change_rate
+
 	if info.has("await"):
 		_receiver = info["await"]
 		_receiver.received.connect(_on_received_signal)
@@ -58,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	
 	if _target == null: return
 	
-	Utils.update_just_speed(user, change_rate, max_speed, delta)
+	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 	
 	user.look(_target, delta)
 	_navigation_agent_3d.target_position = _get_actual_target_position(_target.global_position)

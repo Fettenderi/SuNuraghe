@@ -32,6 +32,8 @@ func _set_open(value):
 				_child.use_collision = not value
 
 func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self) + &"is_open"): return
+
 	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
 
 func _save_data(data : GStorage) -> void:

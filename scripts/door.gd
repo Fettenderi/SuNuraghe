@@ -24,8 +24,14 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var strattle_emitter_resource : EmitterRes
 
+@export var rebake_emitter : EmitterRes
+
+@export var has_pressures := true
+
 @onready var _mesh: Node3D = %Mesh
+@onready var _collisions: StaticBody3D = %Collisions
 @onready var _interactable_box: InteractableBox = %InteractableBox
+@onready var _sfx_emitter: FmodEventEmitter3D = %SFXEmitter
 
 var _target_rotation := 0.0
 var _arrived := true
@@ -35,8 +41,11 @@ var _vibrating_time := 0.0
 var _vibration_angle := PI / 16
 var _vibration_amount := 2
 
+var _open_angle := PI / 2 + PI / 8
+
+
 func _ready() -> void:
-	_set_open(is_open or bake_override)
+	_set_open(is_open or bake_override, true)
 	if Engine.is_editor_hint(): return
 	_mesh.position.y = 0.0
 	
@@ -54,16 +63,26 @@ func _ready() -> void:
 	LevelStats.loading.connect(_load_data)
 
 
-func _set_open(value : bool) -> void:
-	if Engine.is_editor_hint():
+func _set_open(value : bool, bypass : bool = false) -> void:
+	if Engine.is_editor_hint() or bypass:
 		if _mesh != null:
-			_mesh.rotation.y = PI / 2 if value else 0.0
+			_mesh.rotation.y = _open_angle if value else 0.0
+		if _collisions != null:
+			_collisions.rotation.y = _open_angle if value else 0.0
+		if not Engine.is_editor_hint() and rebake_emitter != null:
+				rebake_emitter.send_signal()
 	else:
+		if _sfx_emitter != null:
+			_sfx_emitter.play(0.2)
 		_arrived = false
-		_target_rotation = PI / 2 if value else 0.0
+		_target_rotation = _open_angle if value else 0.0
+		if _collisions != null:
+			_collisions.rotation.y = _target_rotation
+		if rebake_emitter != null:
+			rebake_emitter.send_signal()
 
 func _set_bake_mode(value : bool) -> void:
-	_mesh.position.y = -2.65 if value else 0.0
+	_mesh.rotation.y = _open_angle if value else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -72,7 +91,7 @@ func _physics_process(delta: float) -> void:
 	if _vibrating_time > 0.0:
 		_vibrating_time -= delta
 	
-	_mesh.rotation.y = lerp_angle(_mesh.rotation.y, _target_rotation +  _vibration_angle * sin(_vibration_amount * TAU * _vibrating_time / _max_vibrating_time), 1 - exp(-2.0 * delta))
+	_mesh.rotation.y = lerp_angle(_mesh.rotation.y, _target_rotation +  _vibration_angle * sin(_vibration_amount * TAU * _vibrating_time / _max_vibrating_time), 1 - exp(-1.2 * delta))
 	
 	if _vibrating_time <= 0.0 and abs(_mesh.rotation.y - _target_rotation) <= ARRIVED_THRESHOLD:
 		_arrived = true
@@ -81,6 +100,11 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if is_locked:
 		_vibrating_time = _max_vibrating_time
 		_arrived = false
+		if _sfx_emitter != null:
+			_sfx_emitter.play()
+			await get_tree().create_timer(0.3).timeout
+			_sfx_emitter.stop()
+
 		if strattle_emitter_resource != null:
 			strattle_emitter_resource.send_signal()
 		return
@@ -88,9 +112,22 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	is_open = not is_open
 
 func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self) + &"is_open"): return
+
 	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
 	is_locked = bool(data.get_value(Utils.nhash(self) + &"is_locked"))
 
 func _save_data(data : GStorage) -> void:
 	data.set_value(Utils.nhash(self) + &"is_open", is_open)
 	data.set_value(Utils.nhash(self) + &"is_locked", is_locked)
+
+
+func _on_opener_box_signal_emitted() -> void:
+	if not has_pressures: return
+	
+	is_open = true
+
+func _on_closer_box_signal_emitted() -> void:
+	if not has_pressures: return
+	
+	is_open = false

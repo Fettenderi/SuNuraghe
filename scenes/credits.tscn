@@ -1,0 +1,193 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2eb8d25tqca3"]
+
+[ext_resource type="Script" uid="uid://t068hwpjvhis" path="res://scripts/credits.gd" id="1_2fbfq"]
+[ext_resource type="Texture2D" uid="uid://m5jgbglodk38" path="res://assets/ui/logo_large_monochrome_dark.png" id="3_2fbfq"]
+[ext_resource type="Theme" uid="uid://nts6ppuasqgx" path="res://assets/ui/theme.tres" id="3_8gwij"]
+[ext_resource type="Texture2D" uid="uid://cl2qg4i6a8b6e" path="res://assets/ui/spaghetti_invasion.png" id="4_8gwij"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2fbfq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = 741.0
+offset_right = 89.0
+offset_bottom = 2258.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Text"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="Text/VBox"]
+custom_minimum_size = Vector2(700, 200)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[color=#ffffff]Su Nuraghe"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Text/VBox"]
+custom_minimum_size = Vector2(53.505, 50.625)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "
+
+
+
+
+[color=#ffffff]Realizzato in un mese e mezzo, tra lavoro, 
+studio e peripezie varie, da queste belle persone:
+
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Text/VBox"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Text/VBox/HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "[color=#ffffff]
+Andrea Ferretti (BatFerro)
+
+Achille Ferrari (coca.cola)
+
+Vittoria Vignolini (Vivi)
+
+Marco Manganaro (Fettenderi)
+
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Text/VBox/HBoxContainer"]
+custom_minimum_size = Vector2(50.065, 0)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "[color=#ffffff]
+-
+
+-
+
+-
+
+-
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Text/VBox/HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "[color=#ffffff]
+SFX Designer
+
+3D Modeller
+
+Illustratrice Concept Artist
+
+Programmer & Designer
+
+"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Text/VBox"]
+custom_minimum_size = Vector2(53.505, 50.625)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "
+
+
+
+
+[color=#ffffff]Da un'idea nata grazie a Davide e la sua passione per la cultura del suo paese.
+
+
+
+
+
+Realizzato con:
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Text/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Text/VBox/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("3_2fbfq")
+stretch_mode = 2
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Text/VBox"]
+custom_minimum_size = Vector2(53.505, 50.625)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "
+
+[color=#ffffff]Grazie a Yotobi e Soloumido per questa bellissima occasione.
+
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Text/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Text/VBox/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("4_8gwij")
+stretch_mode = 2
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Text/VBox"]
+custom_minimum_size = Vector2(53.505, 50.625)
+layout_mode = 2
+theme = ExtResource("3_8gwij")
+bbcode_enabled = true
+text = "
+
+
+
+[color=#ffffff]Continua . . .
+
+"
+fit_content = true
+horizontal_alignment = 1

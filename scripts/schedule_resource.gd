@@ -13,6 +13,8 @@ func progess_tasks() -> ScheduleTaskRes:
 	if progress >= len(tasks): return null
 	
 	var task := tasks[progress]
+	if task == null: return null
+	
 	if task.info.has("jump"): progress = task.info["jump"]
 	else: progress += 1
 	

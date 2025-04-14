@@ -32,6 +32,8 @@ func _interactable_entered(area: Area3D):
 		emitter_resource.send_signal()
 
 func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self) + &"is_active"): return
+
 	active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
 
 func _save_data(data : GStorage) -> void:

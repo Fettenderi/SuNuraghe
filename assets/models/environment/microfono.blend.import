@@ -34,10 +34,6 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"@MATERIAL:3": {
-"use_external/enabled": true,
-"use_external/path": "uid://visvnx42yq5c"
-},
 "Black": {
 "use_external/enabled": true,
 "use_external/path": "uid://beckynk5vribw"
@@ -49,6 +45,14 @@ _subresources={
 "ChainMail": {
 "use_external/enabled": true,
 "use_external/path": "uid://b2quur4bflvfc"
+}
+},
+"nodes": {
+"PATH:Cylinder": {
+"generate/physics": true
+},
+"PATH:Cylinder_001": {
+"generate/physics": true
 }
 }
 }

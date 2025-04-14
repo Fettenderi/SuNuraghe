@@ -19,6 +19,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)
 visible = false
 shape = SubResource("BoxShape3D_q1uht")
 
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Pick_Up_OBJ"
+event_guid = "{2fa31f71-c352-47c0-a264-803df23226cf}"
+unique_name_in_owner = true
+
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
 
 [editable path="InteractableBox"]

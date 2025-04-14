@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8mlw5pcj4057"]
+
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_l4sxq"]
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="2_4tvuf"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="3_upnr2"]
+[ext_resource type="Material" uid="uid://bl7ni1g7gxuu3" path="res://assets/materials/brick_pavement.tres" id="4_hbc6p"]
+[ext_resource type="Script" uid="uid://bf5awpg76yvic" path="res://prototypes/beta3/fmod_event_emitter_3d.gd" id="5_khn1k"]
+[ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="5_ox00r"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
+vertices = PackedVector3Array(-5.2163, -2.5, -4.08452, -5.2163, -2.5, 15.1655, 19.0337, -2.5, 15.1655, 19.0337, -2.5, -4.08452)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_khn1k"]
+radius = 1.20998
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_l4sxq")
+
+[node name="EnvironmentManager" parent="." instance=ExtResource("2_4tvuf")]
+_is_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_upnr2")]
+transform = Transform3D(0.0107855, 0, 0.999942, 0, 1, 0, -0.999942, 0, 0.0107855, -4.08742, -3.00012, -0.0389579)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c4voo")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(9.09082, 6, 14.0662)
+material = ExtResource("4_hbc6p")
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/CHAR/ENEMY/Enemy_Bells"
+event_guid = "{f8f71881-47fc-4b4d-91c8-642e9420a7fd}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75879, -1.52621, 0)
+script = ExtResource("5_khn1k")
+
+[node name="InteractableBox" parent="." instance=ExtResource("5_ox00r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.576694, -2.2207, 0.129511)
+required_input = &"interact"
+gui_text = "Suona"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractableBox"]
+shape = SubResource("SphereShape3D_khn1k")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="InteractableBox"]
+radius = 1.04051
+
+[connection signal="signal_emitted" from="InteractableBox" to="FmodEventEmitter3D" method="_on_interactable_box_signal_emitted"]

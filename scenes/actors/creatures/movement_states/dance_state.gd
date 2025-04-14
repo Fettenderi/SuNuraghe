@@ -39,6 +39,9 @@ var _emitter : EmitterRes
 
 var _suspect_level := 0
 
+var _on_delay := false 
+var _delay_timer : Timer 
+
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
 	
@@ -66,16 +69,20 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("await"):
 		_receiver = info["await"]
+		
+		_delay_timer = Utils.timer(1.0, _delay_ended, _delay_timer)
+		
+		if not _delay_timer.is_inside_tree():
+			add_child(_delay_timer, true)
+		
+		_delay_timer.start()
+		_on_delay = true
+
 		if not _receiver.received.is_connected(_on_received_signal):
 			_receiver.received.connect(_on_received_signal)
-	else:
-		_receiver = null
 	
 	if info.has("emitter"):
 		_emitter = info["emitter"]
-	else:
-		_emitter = null
-
 
 	
 	if info.has("leader"):
@@ -83,6 +90,9 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("speed"):
 		max_speed = info["speed"]
+
+	user.max_speed = max_speed
+	user.change_rate = change_rate
 
 	if info.has("center"):
 		_center_direction = info["center"]
@@ -97,12 +107,13 @@ func update(info : Dictionary = {}) -> void:
 			state_machine.change_state("StareState")
 			return
 		
+		if not user.can_suspect: return
+			
 		_suspect_level += 1
 		if _suspect_level >= max_suspects:
 			state_machine.change_state("ChaseState", {"located": user.target.global_position})
 		else:
 			state_machine.change_state("StareState", {"next_state": "DanceState", "time": 2.0})
-		return
 
 
 	if info.has("arrived"):
@@ -113,10 +124,14 @@ func update(info : Dictionary = {}) -> void:
 		else:
 			if _emitter != null:
 				_emitter.send_signal(true)
+				_emitter = null
 		
 			if _receiver != null: return
 			
 			user.progress()
+
+	if info.has("end"):
+		user.end_buffered = true
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
@@ -127,7 +142,8 @@ func _physics_process(delta: float) -> void:
 
 func _handle_jumping(delta : float) -> void:
 	_little_jump_elapsed += delta
-	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	user.max_speed = 0.0
+	#Utils.update_just_speed(user, change_rate, 0.0, delta)
 	user.mesh.rotation.y = (swing_angle / 2) * sin((1.0 if _dance_progress % 2 == 0 else -1.0) * swings * 2 * PI * _little_jump_elapsed / little_jump_time) + _starting_rotation
 	user.mesh.position.y = lerp(user.mesh.position.y, little_jump_factor * _roof_function(_little_jump_elapsed, little_jump_time), 1.0 - exp(-delta * little_jump_speed))
 	if _little_jump_elapsed >= little_jump_time:
@@ -136,7 +152,8 @@ func _handle_jumping(delta : float) -> void:
 
 func _handle_walking(delta : float) -> void:
 	user.mesh.position.y = lerp(user.mesh.position.y, 0.0, 1.0 - exp(-delta * little_jump_speed))
-	Utils.update_just_speed(user, change_rate, max_speed, delta)
+	user.max_speed = max_speed
+	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func _roof_function(value : float, center : float):
 	return max(2.0 * (center - abs(value * 2.0 - center)), 0.0)
@@ -167,10 +184,16 @@ func end() -> void:
 	user.mesh.rotation.y = _starting_rotation
 	user.mesh.position.y = 0.0
 	_little_jump_elapsed = 0.0
+	if _delay_timer != null:
+		_delay_timer.stop()
 
 func _on_received_signal(_value) -> void:
-	if not _is_active: return
+	if not _is_active or _on_delay: return
 	
 	_receiver.received.disconnect(_on_received_signal)
+	_receiver = null
 	
 	user.progress()
+
+func _delay_ended() -> void:
+	_on_delay = false

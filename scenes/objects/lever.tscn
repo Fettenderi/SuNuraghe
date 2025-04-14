@@ -162,6 +162,11 @@ gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Attiva"
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 shape = SubResource("BoxShape3D_ru7jp")
 
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Obj_Interactive/LEVA"
+event_guid = "{b7cabcd8-0d28-4657-97b0-992b6b32e96d}"
+unique_name_in_owner = true
+
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
 
 [editable path="InteractableBox"]

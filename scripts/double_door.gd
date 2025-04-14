@@ -23,6 +23,7 @@ const ARRIVED_THRESHOLD = 0.01
 @onready var _mesh_right: Node3D = %MeshRight
 @onready var _mesh_left: Node3D = %MeshLeft
 @onready var _interactable_box: InteractableBox = %InteractableBox
+@onready var _sfx_emitter: FmodEventEmitter3D = %SFXEmitter
 
 var _right_target_rotation := PI / 2
 var _left_target_rotation := 0.0
@@ -32,6 +33,9 @@ var _max_vibrating_time := 0.4
 var _vibrating_time := 0.0
 var _vibration_angle := PI / 16
 var _vibration_amount := 2
+
+var _rebake_delay : Timer 
+var _on_rebake_delay := true 
 
 func _ready() -> void:
 	_set_open(is_open, true)
@@ -44,6 +48,9 @@ func _ready() -> void:
 	else:
 		receiver_resource.received.connect((func(): is_open = not is_open).unbind(1))
 	
+	_rebake_delay = Utils.timer(0.4, _on_rebake_delay_ended)
+	add_child(_rebake_delay, true)
+	
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
 
@@ -55,6 +62,8 @@ func _set_open(value : bool, bypass := false):
 		if _mesh_left != null:
 			_mesh_left.rotation.y = PI if value else - PI / 2
 	else:
+		if _sfx_emitter != null:
+			_sfx_emitter.play()
 		_arrived = false
 		_right_target_rotation = 0.0 if value else - PI / 2
 		_left_target_rotation = PI if value else - PI / 2
@@ -79,6 +88,8 @@ func _physics_process(delta: float) -> void:
 	
 	if _vibrating_time <= 0.0 and abs(_mesh_right.rotation.y - _right_target_rotation) <= ARRIVED_THRESHOLD:
 		_arrived = true
+		if _on_rebake_delay: return
+		
 		if opened_emitter_resource != null:
 			opened_emitter_resource.send_signal()
 
@@ -88,6 +99,11 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if receiver_resource != null:
 		_vibrating_time = _max_vibrating_time
 		_arrived = false
+		if _sfx_emitter != null:
+			_sfx_emitter.play()
+			await get_tree().create_timer(0.3).timeout
+			_sfx_emitter.stop()
+
 		if strattle_emitter_resource != null:
 			strattle_emitter_resource.send_signal()
 		return
@@ -95,7 +111,12 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	is_open = not is_open
 
 func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self) + &"is_open"): return
+	
 	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
 
 func _save_data(data : GStorage) -> void:
 	data.set_value(Utils.nhash(self) + &"is_open", is_open)
+
+func _on_rebake_delay_ended():
+	_on_rebake_delay = false

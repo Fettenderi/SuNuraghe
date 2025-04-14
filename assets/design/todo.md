@@ -1,9 +1,11 @@
 # Todo
 
-- Far si che la velocità dei suoni dei passi dei mamuthones dipenda dalla loro velocità
+- Unificare modo di fare delle velocità max_speed e speed per player, speed_debufs per il saltino
+- Se player vicino a porta non si può chiudere da enemy
 
-- Mettere campanaccio di Achi
-- Mettere suoni di Ferro
+- Campane con variazione di pitch
+- Campane si sentono anche da range più ampio
+- Sincronizzare suono jumpscare
+- Far fermare e suonare campane rituali
 
-- Provare il gioco in modo completo
-- Fixare salvataggio luci
+- Provare sequenza finale 

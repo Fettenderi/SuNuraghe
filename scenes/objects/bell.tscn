@@ -47,6 +47,13 @@ transform = Transform3D(-2.20682, 0.288447, 1.78823, 0.00694874, 2.8199, -0.4462
 [node name="lana6" parent="Mesh" instance=ExtResource("4_7i7ps")]
 transform = Transform3D(0.190978, -0.48887, 2.80634, -0.216798, 2.80199, 0.502865, -2.84034, -0.246742, 0.150309, -2.26939, 0.330618, -0.688598)
 
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Pick_Up_OBJ"
+event_guid = "{2fa31f71-c352-47c0-a264-803df23226cf}"
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="InteractableBox" to="." method="_on_interactable_box_area_entered"]
+[connection signal="area_exited" from="InteractableBox" to="." method="_on_interactable_box_area_exited"]
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
 
 [editable path="InteractableBox"]

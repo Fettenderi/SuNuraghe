@@ -92,3 +92,8 @@ transform = Transform3D(19.5, 0, 0, 0, -2.32458e-06, 19.5, 0, -19.5, -2.32458e-0
 mesh = SubResource("ArrayMesh_ibnbb")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("1_4arir")
+
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/FIRE_LOOP"
+event_guid = "{81eba78a-b380-4294-b2c0-4d459ac29f57}"
+autoplay = true

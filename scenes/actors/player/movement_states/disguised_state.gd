@@ -12,6 +12,8 @@ extends State
 @export var little_jump_speed := 4.0
 @export var little_jump_factor := 1.0
 
+@onready var _sfx_bells: FmodEventEmitter3D = %SFXBells
+
 var _active := false
 
 var _is_shifted := false
@@ -54,7 +56,7 @@ func _unhandled_input(_event : InputEvent) -> void:
 
 func _handle_jumping(delta : float) -> void:
 	_little_jump_elapsed += delta
-	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	Utils.update_just_max_speed(user, change_rate, 0.0, delta)
 	user.head_start_pos.y = lerp(user.head_start_pos.y, _starting_head_pos + little_jump_factor * _roof_function(_little_jump_elapsed, little_jump_time), 1.0 - exp(-delta * little_jump_speed))
 	if _little_jump_elapsed >= little_jump_time:
 		_little_jumping = false
@@ -65,10 +67,11 @@ func _handle_walking(delta : float) -> void:
 	if Input.is_action_just_pressed(user.KEY_BIND_JUMP):
 		_little_jump_elapsed = 0.0
 		_little_jumping = true
+		_sfx_bells.play()
 		TimeKeeper.player_input()
 		return
 	
-	Utils.update_just_speed(user, change_rate, max_dance_speed if _is_shifted else max_walk_speed, delta)
+	Utils.update_just_max_speed(user, change_rate, max_dance_speed if _is_shifted else max_walk_speed, delta)
 
 
 func end() -> void:

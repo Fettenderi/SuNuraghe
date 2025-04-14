@@ -31,10 +31,11 @@ func start(info : Dictionary = {}) -> void:
 	if info.has("speed"):
 		max_speed = info["speed"]
 	
+	user.max_speed = max_speed
+	user.change_rate = change_rate
+	
 	if info.has("emitter"):
 		_emitter = info["emitter"]
-	else:
-		_emitter = null
 	
 	if info.has("await"):
 		_receiver = info["await"]
@@ -49,8 +50,6 @@ func start(info : Dictionary = {}) -> void:
 		
 		if not _receiver.received.is_connected(_on_received_signal):
 			_receiver.received.connect(_on_received_signal)
-	else:
-		_receiver = null
 
 
 func update(info : Dictionary = {}) -> void:
@@ -61,15 +60,19 @@ func update(info : Dictionary = {}) -> void:
 	if info.has("arrived"):
 		if _emitter != null:
 			_emitter.send_signal(true)
+			_emitter = null
 
 		if _receiver != null: return
 		
 		user.progress()
 
-func _physics_process(delta: float) -> void:
-	if not _is_active: return
-	
-	Utils.update_just_speed(user, change_rate, max_speed, delta)
+	if info.has("end"):
+		user.end_buffered = true
+
+#func _physics_process(delta: float) -> void:
+	#if not _is_active: return
+	#
+	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func end() -> void:
 	_is_active = false
@@ -81,6 +84,7 @@ func _on_received_signal(_value) -> void:
 	if not _is_active or _on_delay: return
 	
 	_receiver.received.disconnect(_on_received_signal)
+	_receiver = null
 	
 	user.progress()
 

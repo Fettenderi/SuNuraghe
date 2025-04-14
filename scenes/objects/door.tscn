@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://dqa4w4pn6ls1x"]
+[gd_scene load_steps=20 format=4 uid="uid://dqa4w4pn6ls1x"]
 
 [ext_resource type="Script" uid="uid://cysodb458jvgv" path="res://scripts/door.gd" id="1_5i02r"]
 [ext_resource type="Material" uid="uid://cygxs8bploe8p" path="res://assets/materials/archway_bricks.tres" id="2_aji8h"]
 [ext_resource type="PackedScene" uid="uid://c8iu5ixe4rwgk" path="res://scenes/objects/areas/interactable_box.tscn" id="3_xm0wp"]
 [ext_resource type="Texture2D" uid="uid://c7oknv866wqmj" path="res://assets/textures/worn_planks/worn_planks_side.png" id="4_aji8h"]
+[ext_resource type="Script" uid="uid://oyaprf6fpcmh" path="res://scripts/agent_interaction_box.gd" id="6_vedx6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dshfn"]
 
@@ -39,8 +40,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_5dhva")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aji8h"]
+points = PackedVector3Array(-0.000806541, 1.83487e-05, -0.00566761, -0.000806541, 1.83487e-05, 0.00535723, -0.000806541, 0.673276, -0.00566761, 0.451825, 1.83487e-05, -0.00566761, 0.451825, 1.83487e-05, 0.00535723, 0.209692, 0.81026, 0.00535615, 0.158696, 0.79979, 0.00535615, 0.114301, 0.782022, 0.00535615, 0.060912, 0.755133, 0.00535615, 0.0168716, 0.714601, 0.00535615, -0.000806541, 0.673276, 0.00535615, 0.0168716, 0.714601, -0.00566761, 0.451825, 0.673276, -0.00566761, 0.451825, 0.673276, 0.00535615, 0.434103, 0.714601, 0.00535615, 0.390063, 0.755133, 0.00535615, 0.336674, 0.782022, 0.00535615, 0.292279, 0.79979, 0.00535615, 0.241282, 0.81026, 0.00535615, 0.209692, 0.810339, -0.00566761, 0.158696, 0.79979, -0.00566761, 0.114301, 0.782022, -0.00566761, 0.060912, 0.755133, -0.00566761, 0.434103, 0.714601, -0.00566761, 0.390063, 0.755133, -0.00566761, 0.336674, 0.782022, -0.00566761, 0.292279, 0.79979, -0.00566761, 0.241282, 0.81026, -0.00566761)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_aji8h"]
-size = Vector3(0.683594, 2.58203, 1.58765)
+size = Vector3(0.310303, 2.58203, 1.58765)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pn0uv"]
 resource_name = "Material"
@@ -90,9 +94,6 @@ uv1_scale = Vector3(0.755, 0.755, 0.755)
 uv1_triplanar = true
 texture_filter = 0
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aji8h"]
-points = PackedVector3Array(-0.000806541, 1.83487e-05, -0.00566761, -0.000806541, 1.83487e-05, 0.00535723, -0.000806541, 0.673276, -0.00566761, 0.451825, 1.83487e-05, -0.00566761, 0.451825, 1.83487e-05, 0.00535723, 0.209692, 0.81026, 0.00535615, 0.158696, 0.79979, 0.00535615, 0.114301, 0.782022, 0.00535615, 0.060912, 0.755133, 0.00535615, 0.0168716, 0.714601, 0.00535615, -0.000806541, 0.673276, 0.00535615, 0.0168716, 0.714601, -0.00566761, 0.451825, 0.673276, -0.00566761, 0.451825, 0.673276, 0.00535615, 0.434103, 0.714601, 0.00535615, 0.390063, 0.755133, 0.00535615, 0.336674, 0.782022, 0.00535615, 0.292279, 0.79979, 0.00535615, 0.241282, 0.81026, 0.00535615, 0.209692, 0.810339, -0.00566761, 0.158696, 0.79979, -0.00566761, 0.114301, 0.782022, -0.00566761, 0.060912, 0.755133, -0.00566761, 0.434103, 0.714601, -0.00566761, 0.390063, 0.755133, -0.00566761, 0.336674, 0.782022, -0.00566761, 0.292279, 0.79979, -0.00566761, 0.241282, 0.81026, -0.00566761)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lknjl"]
 resource_name = "Metal"
 vertex_color_use_as_albedo = true
@@ -135,6 +136,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ly4q1")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vedx6"]
+height = 0.578125
+radius = 2.76318
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qifey"]
+size = Vector3(3.88867, 0.628906, 1.13477)
+
 [node name="Door" type="Node3D"]
 script = ExtResource("1_5i02r")
 
@@ -147,6 +155,14 @@ mesh = SubResource("ArrayMesh_qcd68")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_aji8h")
 
+[node name="Collisions" type="StaticBody3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(3.91987, 0, 0, 0, 3.91987, 1.01048e-06, 0, -2.95942e-07, 13.3842, -0.0924657, -1.53633, 0.00307159)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collisions"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-14, 0, 0, 0.867871, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_aji8h")
+
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1.185, 0, 0, 0, 1.185, 0, 0, 0, 1.185, 0, 0, 0)
@@ -158,7 +174,7 @@ required_input = &"interact"
 gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Apri "
 
 [node name="CollisionShape3D" parent="Mesh/InteractableBox" index="0"]
-transform = Transform3D(1, 0, 0, -2.03288e-19, 1, 0, 0, 6.05845e-27, 1, 0, 0, 0)
+transform = Transform3D(1, 2.71051e-20, -3.55271e-15, -2.03288e-19, 0.999998, -1.21169e-27, -1.35003e-13, 2.3426e-26, 0.999998, 0, 0, 0)
 shape = SubResource("BoxShape3D_aji8h")
 
 [node name="Wood" type="MeshInstance3D" parent="Mesh"]
@@ -167,17 +183,62 @@ mesh = SubResource("ArrayMesh_0v5s1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_w0irj")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Mesh/Wood"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Wood/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_aji8h")
-
 [node name="Handle" type="MeshInstance3D" parent="Mesh"]
 transform = Transform3D(3.30791, 0, 0, 0, 3.30791, 8.52726e-07, 0, -2.4974e-07, 11.2947, -0.218144, -1.29648, 0.00259206)
 mesh = SubResource("ArrayMesh_sjr1h")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_aji8h")
 
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Obj_Interactive/DOOR"
+event_guid = "{cfd45609-3490-4a4d-bed0-d56e021aeb5c}"
+unique_name_in_owner = true
+
+[node name="OpenerBox" type="Area3D" parent="." node_paths=PackedStringArray("inibiting")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846265, 0, 0)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("6_vedx6")
+inibiting = NodePath("../CloserBox")
+metadata/_custom_type_script = "uid://oyaprf6fpcmh"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenerBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.18966, 0)
+shape = SubResource("CylinderShape3D_vedx6")
+
+[node name="CloserBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846265, 0, 0)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("6_vedx6")
+metadata/_custom_type_script = "uid://oyaprf6fpcmh"
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.5348, -1.19, 0)
+shape = SubResource("BoxShape3D_qifey")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.52621, -1.19, 0)
+shape = SubResource("BoxShape3D_qifey")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(0.858298, 0, -0.513152, 0, 1, 0, 0.513152, 0, 0.858298, -1.81598, -1.19, 3.03022)
+shape = SubResource("BoxShape3D_qifey")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(0.858298, 0, -0.513152, 0, 1, 0, 0.513152, 0, 0.858298, 1.80739, -1.19, -3.03022)
+shape = SubResource("BoxShape3D_qifey")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(0.867271, 0, 0.497837, 0, 1, 0, -0.497837, 0, 0.867271, 1.75332, -1.19, 3.0619)
+shape = SubResource("BoxShape3D_qifey")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="CloserBox"]
+transform = Transform3D(0.867271, 0, 0.497837, 0, 1, 0, -0.497837, 0, 0.867271, -1.76191, -1.19, -3.0619)
+shape = SubResource("BoxShape3D_qifey")
+
 [connection signal="signal_emitted" from="Mesh/InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
+[connection signal="signal_emitted" from="OpenerBox" to="." method="_on_opener_box_signal_emitted"]
+[connection signal="signal_emitted" from="CloserBox" to="." method="_on_closer_box_signal_emitted"]
 
 [editable path="Mesh/InteractableBox"]

@@ -27,6 +27,8 @@ var _is_active := true:
 			_target_light = 0.0
 			_flicker_cooldown_timer.stop()
 
+var saves_individually := true
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	
@@ -68,8 +70,9 @@ func _on_received(value : Variant):
 		omni_range = max(omni_range - value.z, 0.0)
 
 func _load_data(data : GStorage) -> void:
-	print("LUCI GENERATE DOPO DA SISTEMARE")
-	return
+	if not saves_individually: return
+	if not data.has_value(Utils.nhash(self) + &"parameters"): return
+	
 	var _parameters := Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"parameters"))
 	
 	actual_max_energy = _parameters.x
@@ -79,5 +82,7 @@ func _load_data(data : GStorage) -> void:
 	_is_active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
 
 func _save_data(data : GStorage) -> void:
+	if not saves_individually: return
+	
 	data.set_value(Utils.nhash(self) + &"is_active", _is_active)
 	data.set_value(Utils.nhash(self) + &"parameters", Vector3(actual_max_energy, actual_min_energy, omni_range))

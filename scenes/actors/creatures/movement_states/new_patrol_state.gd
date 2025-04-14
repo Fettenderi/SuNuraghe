@@ -13,11 +13,12 @@ var _waypoints : Array[Marker3D]
 var _waypoint_progress := 0
 
 func start(info : Dictionary = {}) -> void:
-	_is_active = true
-	
 	if user.end_buffered:
 		state_machine.stop()
 		user.queue_free()
+		return
+	
+	_is_active = true
 
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
@@ -46,14 +47,20 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has("speed"):
 		max_speed = info["speed"]
-
-
-func _physics_process(delta: float) -> void:
-	if not _is_active: return
 	
-	Utils.update_just_speed(user, change_rate, max_speed, delta)
+	user.max_speed = max_speed
+	user.change_rate = change_rate
+
+
+#func _physics_process(delta: float) -> void:
+	#if not _is_active: return
+	#
+	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func update(info : Dictionary = {}) -> void:
+	if info.has("rebaked"):
+		_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
+
 	if info.has("touched"):
 		var _toucher : Player = info["touched"]
 		

@@ -1,37 +1,25 @@
-[gd_scene load_steps=25 format=3 uid="uid://cphm70vicseat"]
+[gd_scene load_steps=19 format=3 uid="uid://cphm70vicseat"]
 
 [ext_resource type="Script" uid="uid://or8hn6g2pihm" path="res://scripts/creature.gd" id="1_688wq"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="2_0natf"]
-[ext_resource type="AudioStream" uid="uid://4ci7i1fh1rrf" path="res://assets/sfx/footsteps/CHAR_FS_TEST-001.wav" id="2_udeof"]
 [ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_brwgo"]
-[ext_resource type="AudioStream" uid="uid://c64g51efc4ymr" path="res://assets/sfx/footsteps/CHAR_FS_TEST-002.wav" id="3_nanoa"]
-[ext_resource type="AudioStream" uid="uid://ct1vj7p1b48cb" path="res://assets/sfx/footsteps/CHAR_FS_TEST-003.wav" id="4_jiytq"]
 [ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_p6e34"]
-[ext_resource type="AudioStream" uid="uid://cj4tx87nakksl" path="res://assets/sfx/footsteps/CHAR_FS_TEST-004.wav" id="5_3cgp0"]
 [ext_resource type="PackedScene" uid="uid://d32uq4w4m6gbb" path="res://scenes/components/expanded_hit_box.tscn" id="5_5kibn"]
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
-[ext_resource type="AudioStream" uid="uid://cg1t1em027hgg" path="res://assets/sfx/footsteps/CHAR_FS_TEST-005.wav" id="6_jq3mj"]
-[ext_resource type="AudioStream" uid="uid://dk6alasfu5fwd" path="res://assets/sfx/footsteps/CHAR_FS_TEST-006.wav" id="7_e7dtq"]
-[ext_resource type="AudioStream" uid="uid://c4ahilojv4gcp" path="res://assets/sfx/footsteps/CHAR_FS_TEST-007.wav" id="8_qfh2q"]
-[ext_resource type="AudioStream" uid="uid://csjbckpw1t7u8" path="res://assets/sfx/footsteps/CHAR_FS_TEST-008.wav" id="9_kr2ds"]
-[ext_resource type="AudioStream" uid="uid://c4hci7vc5n0f6" path="res://assets/sfx/footsteps/CHAR_FS_TEST-009.wav" id="10_u8bbw"]
 [ext_resource type="Script" uid="uid://cjaiesjwhtfsk" path="res://scripts/advanced_sound_player.gd" id="11_foxdh"]
 [ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="15_udeof"]
+[ext_resource type="AudioStream" uid="uid://d057r0aqgdqdv" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-001.wav" id="18_3cgp0"]
+[ext_resource type="AudioStream" uid="uid://b412dn8xn8esr" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-002.wav" id="19_jq3mj"]
+[ext_resource type="AudioStream" uid="uid://do65ydpygwj17" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-003.wav" id="20_e7dtq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 radius = 0.4
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qjcin"]
-streams_count = 9
-stream_0/stream = ExtResource("2_udeof")
-stream_1/stream = ExtResource("3_nanoa")
-stream_2/stream = ExtResource("4_jiytq")
-stream_3/stream = ExtResource("5_3cgp0")
-stream_4/stream = ExtResource("6_jq3mj")
-stream_5/stream = ExtResource("7_e7dtq")
-stream_6/stream = ExtResource("8_qfh2q")
-stream_7/stream = ExtResource("9_kr2ds")
-stream_8/stream = ExtResource("10_u8bbw")
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qfh2q"]
+streams_count = 3
+stream_0/stream = ExtResource("18_3cgp0")
+stream_1/stream = ExtResource("19_jq3mj")
+stream_2/stream = ExtResource("20_e7dtq")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
@@ -50,7 +38,7 @@ radius = 0.8
 
 [node name="Creature" type="CharacterBody3D" groups=["Enemy"]]
 collision_layer = 32
-collision_mask = 33
+collision_mask = 289
 script = ExtResource("1_688wq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -62,12 +50,9 @@ unique_name_in_owner = true
 shape = SubResource("CapsuleShape3D_uhukm")
 debug_color = Color(0.7, 0.49, 0, 0.847059)
 
-[node name="FootstepsPlayer" type="AudioStreamPlayer3D" parent="."]
+[node name="SFXVoice" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.883729, 0)
-stream = SubResource("AudioStreamRandomizer_qjcin")
-script = ExtResource("11_foxdh")
-playing_period = 0.5
+stream = SubResource("AudioStreamRandomizer_qfh2q")
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -80,11 +65,19 @@ visible = false
 [node name="JumpscarePosition" type="Marker3D" parent="Mesh"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11576, 1.58401)
+
+[node name="JumpscareLight" type="OmniLight3D" parent="Mesh/JumpscarePosition"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.621255, 0.132093)
 visible = false
+light_color = Color(1, 0.94902, 0.858824, 1)
+light_energy = 0.7
+omni_range = 4.0
 
 [node name="Eyes" parent="Mesh" instance=ExtResource("2_0natf")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.475663, -0.272783)
+rays_amount = 50
 ray_lenght = 20.0
 rays_paralellness = 0.02
 view_angle = 1.65806
@@ -126,7 +119,25 @@ script = ExtResource("5_e36fh")
 user = NodePath("..")
 metadata/_custom_type_script = "uid://cy2neyq5e26g4"
 
+[node name="SFXJumpscare" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/JUMP_SCARE"
+event_guid = "{6548bace-0ea9-483b-9b8c-98d1c04c801b}"
+unique_name_in_owner = true
+
+[node name="SFXFootsteps" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/CHAR/ENEMY/Enemy_Bells"
+event_guid = "{f8f71881-47fc-4b4d-91c8-642e9420a7fd}"
+unique_name_in_owner = true
+script = ExtResource("11_foxdh")
+
+[node name="SFXVoices" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/CHAR/ENEMY/Enemy_VO"
+event_guid = "{6a3c6a64-00d2-46d7-8e16-069661378fa9}"
+unique_name_in_owner = true
+script = ExtResource("11_foxdh")
+
 [connection signal="located" from="Mesh/Eyes" to="." method="_on_eyes_located"]
 [connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]
+[connection signal="plays" from="SFXFootsteps" to="." method="_on_sfx_footsteps_plays"]
 
 [editable path="Mesh/Mamuthon"]

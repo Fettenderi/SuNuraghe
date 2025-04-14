@@ -37,7 +37,13 @@ var actual_min_energy := 0.2
 var _lights : Array[FlickeringLight] = []
 
 func _ready() -> void:
-	_update_tooltip()
+	if Engine.is_editor_hint():
+		_update_tooltip()
+		return
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
+
 
 func _update_tooltip() -> void:
 	_clear_tooltip()
@@ -62,6 +68,7 @@ func _update_parameters() -> void:
 		_light.lerp_speed = lerp_speed
 		_light.actual_max_energy = actual_max_energy
 		_light.actual_min_energy = actual_min_energy
+		_light.saves_individually = false
 
 func _clear_tooltip() -> void:
 	for _light in _lights:
@@ -83,3 +90,15 @@ func _create_light(pos : Vector3) -> void:
 	add_child(_light, true)
 	
 	_light.position = pos
+
+func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self) + &"parameters"): return
+	
+	var _parameters := Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"parameters"))
+	
+	actual_max_energy = _parameters.x
+	actual_min_energy = _parameters.y
+	omni_range = _parameters.z
+
+func _save_data(data : GStorage) -> void:
+	data.set_value(Utils.nhash(self) + &"parameters", Vector3(actual_max_energy, actual_min_energy, omni_range))

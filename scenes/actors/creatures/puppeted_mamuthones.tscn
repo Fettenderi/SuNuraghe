@@ -81,7 +81,7 @@ little_jump_time = 0.8
 little_jump_speed = 300.0
 little_jump_factor = 0.25
 swings = 0.5
-max_suspects = 4
+max_suspects = 6
 normal_jump_cooldown = 2.5
 normal_jumps = 5
 short_jump_cooldown = 0.9
@@ -90,7 +90,7 @@ metadata/_custom_type_script = "uid://tl3irb7fk41e"
 [node name="ChaseState" type="Node" parent="MovementSM" index="5"]
 script = ExtResource("8_vu6r7")
 change_rate = 4.0
-max_speed = 3.2
+max_speed = 3.5
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="KillState" type="Node" parent="MovementSM" index="6"]
@@ -113,7 +113,7 @@ metadata/_custom_type_script = "uid://tl3irb7fk41e"
 [node name="PatrolState" type="Node" parent="MovementSM" index="9"]
 script = ExtResource("14_f5tf7")
 change_rate = 4.0
-max_speed = 1.8
+max_speed = 1.5
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [editable path="Mesh/Mamuthon"]

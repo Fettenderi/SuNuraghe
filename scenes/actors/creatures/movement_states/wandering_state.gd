@@ -19,6 +19,9 @@ func start(info : Dictionary = {}) -> void:
 	_elapsed = 0.0
 	_starting_rotation = user.mesh.rotation.y
 	
+	user.max_speed = 0.0
+	user.change_rate = change_rate
+	
 	if info.has("next_state"):
 		_next_state = info["next_state"]
 	
@@ -52,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	_elapsed += delta
 	user.mesh.rotation.y = (swing_angle / 2) * sin(swings * 2 * PI * _elapsed / wander_time) + _starting_rotation
 
-	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	#Utils.update_just_speed(user, change_rate, 0.0, delta)
 	
 	if _elapsed >= wander_time:
 		state_machine.change_state(_next_state, _next_info)

@@ -198,7 +198,6 @@ size = Vector3(0.684, 3.08885, 1.8)
 
 [node name="DoubleDoor" type="Node3D"]
 script = ExtResource("1_hik7s")
-bake_override = false
 
 [node name="MeshRight" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -272,6 +271,11 @@ shape = SubResource("BoxShape3D_4hhpn")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractableBox"]
 transform = Transform3D(-1.185, 2.44859e-07, 1.02053e-13, -2.44859e-07, -1.185, 5.1798e-08, 1.06581e-13, 5.1798e-08, 1.185, 0.00473998, -0.259515, 1.06808)
 shape = SubResource("BoxShape3D_4hhpn")
+
+[node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Obj_Interactive/DOOR"
+event_guid = "{cfd45609-3490-4a4d-bed0-d56e021aeb5c}"
+unique_name_in_owner = true
 
 [connection signal="signal_emitted" from="InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
 

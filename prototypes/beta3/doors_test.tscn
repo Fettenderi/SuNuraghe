@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://buy2gip7aomtq"]
+[gd_scene load_steps=26 format=3 uid="uid://buy2gip7aomtq"]
 
 [ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_miojp"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_b8ifb"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://dqa4w4pn6ls1x" path="res://scenes/objects/door.tscn" id="9_m6lud"]
 [ext_resource type="PackedScene" uid="uid://k0jltjct40oa" path="res://scenes/objects/double_door.tscn" id="10_dqqtt"]
 [ext_resource type="PackedScene" uid="uid://bs2txkuxjrcs2" path="res://scenes/objects/areas/sight_detector_box.tscn" id="12_vdtt2"]
+[ext_resource type="PackedScene" uid="uid://cy7h8de8b2jpf" path="res://assets/models/objects/campanas.fbx" id="14_f31yt"]
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="15_4a8tj"]
+[ext_resource type="PackedScene" uid="uid://blyk052kfi58i" path="res://scenes/objects/bell.tscn" id="15_pyhxd"]
+[ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="16_hbfhg"]
 [ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="16_ilru0"]
+[ext_resource type="PackedScene" uid="uid://c7o66gcfq45bo" path="res://assets/models/goat/pecora.fbx" id="17_0uwsi"]
 [ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="17_kkvvj"]
 [ext_resource type="PackedScene" uid="uid://nm1sp5my8fpp" path="res://scenes/objects/top_cam.tscn" id="18_j85oe"]
 
@@ -65,7 +69,7 @@ transform = Transform3D(0.269226, -0.83405, 0.481537, -2.7806e-08, 0.499998, 0.8
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_b8ifb")]
-transform = Transform3D(-0.248386, 0, 0.968661, 0, 1, 0, -0.968661, 0, -0.248386, -2.17207, -3.00012, 1.26912)
+transform = Transform3D(0.995181, 0, 0.0980523, 0, 1, 0, -0.0980523, 0, 0.995181, -2.07335, -2.99999, -1.14676)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
@@ -86,10 +90,17 @@ size = Vector3(20.5469, 6, 11.182)
 material = SubResource("StandardMaterial3D_m3e5f")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.04079, 0, 5.43892)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.04079, 8.71674, 5.43892)
 use_collision = true
 flip_faces = true
-size = Vector3(20.5469, 6, 14.0142)
+size = Vector3(20.5469, 23.4335, 21.2598)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.0574, 11.8561, 31.2348)
+use_collision = true
+flip_faces = true
+size = Vector3(37.6045, 41.7504, 35.0176)
 material = SubResource("StandardMaterial3D_m3e5f")
 
 [node name="DoorCarver" parent="NavigationRegion3D/CSGCombiner3D" instance=ExtResource("4_f5kxq")]
@@ -119,6 +130,30 @@ target = NodePath("../../Player")
 [node name="TopCam" parent="." instance=ExtResource("18_j85oe")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(-0.248386, -0.968661, -4.23415e-08, 0, -4.37114e-08, 1, -0.968661, 0.248386, 1.08573e-08, -2.17207, 11.7239, 1.26912)
+transform = Transform3D(0.995181, -0.0980523, -4.286e-09, 0, -4.37114e-08, 1, -0.0980523, -0.995181, -4.35008e-08, -2.07335, 11.724, -1.14676)
+
+[node name="campanas" parent="." instance=ExtResource("14_f31yt")]
+transform = Transform3D(0.0881468, 0, -0.996108, 0, 1, 0, 0.996108, 0, 0.0881468, 2.60779, 8.91936, 33.5487)
+
+[node name="Campana_001" parent="campanas" index="0"]
+transform = Transform3D(100, -3.01544e-07, 2.27627e-06, -2.27627e-06, -26.0375, 96.5507, 3.01544e-07, -96.5507, -26.0375, -0.0261412, 18.1056, 0.0204489)
+
+[node name="Pendolo_001" parent="campanas/Campana_001" index="0"]
+transform = Transform3D(1, 9.92194e-18, -6.56337e-17, 9.92193e-18, 0.955315, 0.295588, 6.56337e-17, -0.295588, 0.955315, 0.000163888, -0.000197833, -0.120572)
+
+[node name="AnimationPlayer" parent="campanas" index="1"]
+autoplay = "Campana_001|Campana_001|Scene"
+speed_scale = 0.25
+
+[node name="Bell" parent="." node_paths=PackedStringArray("bell_mesh") instance=ExtResource("15_pyhxd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17994, -0.903451, 6.27455)
+bell_mesh = NodePath("../campanas")
+
+[node name="WoolPiece" parent="." instance=ExtResource("16_hbfhg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.813792, -2.99999, 0.918684)
+amount = 6
+
+[node name="Mesh" parent="WoolPiece" instance=ExtResource("17_0uwsi")]
 
 [editable path="TopCam"]
+[editable path="campanas"]

@@ -21,14 +21,17 @@ func start(info : Dictionary = {}) -> void:
 	if info.has("speed"):
 		max_speed = info["speed"]
 	
+	user.max_speed = max_speed
+	user.change_rate = change_rate
+
 	if info.has("located"):
 		_navigation_agent_3d.target_position = info["located"]
 
 
-func _physics_process(delta: float) -> void:
-	if not _is_active: return
-	
-	Utils.update_just_speed(user, change_rate, max_speed, delta)
+#func _physics_process(delta: float) -> void:
+	#if not _is_active: return
+	#
+	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):

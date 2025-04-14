@@ -4,3 +4,5 @@
 
 [node name="LevelStats" type="Node"]
 script = ExtResource("1_4hvpu")
+save_saves = true
+load_saves = true

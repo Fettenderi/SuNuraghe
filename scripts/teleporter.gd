@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var player : Player
+@export var barrier : CollisionShape3D
 
 @export var receiver_resource : ReceiverRes
 
@@ -9,3 +10,4 @@ func _ready() -> void:
 
 func _teleport() -> void:
 	player.position = global_position
+	barrier.set_deferred("disabled", false)

@@ -56,16 +56,19 @@ func _on_trap_activated(value : Variant):
 	movement_state_machine.change_state(schedule.trap_activated_task.get_state(), _new_task_info, true)
 
 func _load_data(data : GStorage) -> void:
-	super(data)
-	
-	if schedule == null: return
-	
-	schedule.progress = int(data.get_value(Utils.nhash(self) + &"progress"))
-	_read_schedule()
+	if data.has_value(Utils.nhash(self) + &"active"):
+		if data.get_value(Utils.nhash(self) + &"active"):
+			if schedule != null:
+				schedule.progress = int(data.get_value(Utils.nhash(self) + &"progress"))
+			_start_movement()
+		else: queue_free()
+	else:
+		if _can_start_movement:
+			_start_movement()
+
 
 func _save_data(data : GStorage) -> void:
 	super(data)
 	
 	if schedule == null: return
-	
 	data.set_value(Utils.nhash(self) + &"progress", schedule.progress - 1)

@@ -34,4 +34,5 @@ func _physics_process(delta: float) -> void:
 func _on_stare_timer_ended() -> void:
 	if not _is_active: return
 	
-	get_tree().call_deferred("reload_current_scene")
+	Gui.start_transition()
+	

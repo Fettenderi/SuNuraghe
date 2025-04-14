@@ -78,6 +78,18 @@ transform = Transform3D(-0.761047, 0.119122, -0.637666, 0.154641, 0.987971, 0, 0
 [node name="lana3" parent="Mesh" instance=ExtResource("7_t4cpg")]
 transform = Transform3D(0.190492, 0.207109, -0.959593, -0.040327, 0.978318, 0.203145, 0.98086, 0, 0.194714, -0.0330435, -0.188358, -0.244679)
 
+[node name="SFXDefuse" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/Pick_Up_OBJ"
+event_guid = "{2fa31f71-c352-47c0-a264-803df23226cf}"
+unique_name_in_owner = true
+
+[node name="SFXTrip" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/CHAR/ENEMY/Enemy_Bells"
+event_guid = "{f8f71881-47fc-4b4d-91c8-642e9420a7fd}"
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="DefuseBox" to="." method="_on_defuse_box_area_entered"]
+[connection signal="area_exited" from="DefuseBox" to="." method="_on_defuse_box_area_exited"]
 [connection signal="signal_emitted" from="DefuseBox" to="." method="_on_defuse_box_signal_emitted"]
 [connection signal="body_entered" from="ActivationBox" to="." method="_on_activation_box_body_entered"]
 

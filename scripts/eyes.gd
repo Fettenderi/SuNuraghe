@@ -42,14 +42,17 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	var _seen := false
+	var _seens := 0
+	var _player : Player
 	for _i in range(len(_rays)):
-		if not _seen and _rays[_i].is_colliding() and _rays[_i].get_collider() is Player:
-			located.emit(_rays[_i].get_collider())
-			_seen = true
+		if _rays[_i].is_colliding() and _rays[_i].get_collider() is Player:
+			_player = _rays[_i].get_collider()
+			_seens += 1
 	
-	if not _seen:
+	if _seens <= 2:
 		not_visible.emit()
+	else:
+		located.emit(_player)
 
 func _update_rays():
 	_reset_rays()

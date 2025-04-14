@@ -1,21 +1,24 @@
 class_name PressurePlateBox
 extends Area3D
 
-@export var active := false
+@export var inibiting : PressurePlateBox
 
-@export var receiver_resource : ReceiverRes
-@export var emitter_resource : EmitterRes
+var is_active := true
 
-signal signal_emitted(value)
+signal signal_emitted()
 
 func _ready() -> void:
-	if receiver_resource != null:
-		receiver_resource.received.connect((func(): active = not active).unbind(1))
 	body_entered.connect(_interactable_entered)
+	if inibiting != null:
+		body_exited.connect(_interactable_exited)
+		inibiting.is_active = false
 
 func _interactable_entered(_body: Node3D):
-	if not active: return
+	if not is_active: return
 	
-	if emitter_resource != null:
-		emitter_resource.send_signal()
-	signal_emitted.emit(true)
+	signal_emitted.emit()
+	if inibiting != null:
+		inibiting.is_active = true
+
+func _interactable_exited(_body: Node3D):
+	inibiting.is_active = false

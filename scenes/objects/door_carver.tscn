@@ -13,7 +13,7 @@ material = ExtResource("1_5n3lq")
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
 transform = Transform3D(0.901569, 0, 0, 0, 1, 0, -4.12826e-15, 0, 1, 0, 1.129, -0.667)
 flip_faces = true
-size = Vector3(1, 2.25853, 1.53564)
+size = Vector3(1, 2.25853, 1.69336)
 material = ExtResource("1_5n3lq")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]

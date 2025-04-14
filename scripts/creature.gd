@@ -15,7 +15,7 @@ const TURNING_SPEED = 6.0
 @onready var movement_state_machine: StateMachine = %MovementSM
 @onready var kill_box: ExpandedHitBox = %KillBox
 @onready var mesh: Node3D = %Mesh
-@onready var footsteps_player: AdvancedSoundPlayer = %FootstepsPlayer
+@onready var _footsteps_player: AdvancedSoundPlayer = %SFXFootsteps
 
 @onready var _collision_shape: CollisionShape3D = %CollisionShape
 @onready var _eyes: Node3D = %Eyes
@@ -24,9 +24,15 @@ const TURNING_SPEED = 6.0
 
 @onready var _mamuthon: Node3D = %Mamuthon
 @onready var _mamuthon_animator: AnimationPlayer = _mamuthon.get_node("AnimationPlayer")
+@onready var _sfx_voice: FmodEventEmitter3D = %SFXVoices
+@onready var _sfx_jumpscare: FmodEventEmitter3D = %SFXJumpscare
+@onready var _jumpscare_light: OmniLight3D = %JumpscareLight
 
 var end_buffered := false
 var max_speed := 0.0
+var speed_debufs := 0.0
+var speed := 0.0
+var change_rate := 1.0
 
 var interrupted_state : StringName
 
@@ -36,21 +42,31 @@ var _is_active := false:
 	set(value):
 		_is_active = value
 		_collision_shape.set_deferred("disabled", not value)
+		if value:
+			_voices_timer.start(max(randfn(15.0, 2.0), 0.0))
 		visible = value
 
 var _direction : Vector3
 
 var can_kill := true
+var can_suspect := true
+
+var _can_start_movement := false
+
+var _voices_timer : Timer
 
 func _ready() -> void:
 	if activation_receiver != null:
 		_is_active = false
 		activation_receiver.received.connect(_start_movement.unbind(1))
 	else:
-		_start_movement()
+		_can_start_movement = true
 	
 	if deactivation_receiver != null:
 		deactivation_receiver.received.connect(_end_movement.unbind(1))
+
+	_voices_timer = Utils.timer(1.0, _emit_voice)
+	add_child(_voices_timer, true)
 
 	navigation_agent_3d.navigation_finished.connect(_on_navigation_finished)
 	_eyes.create_rays(self)
@@ -59,9 +75,11 @@ func _ready() -> void:
 
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
-	
+
 
 func _physics_process(delta: float) -> void:
+	if not _is_active: return
+	
 	var _destination := navigation_agent_3d.get_next_path_position()
 	var _local_destination := _destination - global_position
 	
@@ -72,11 +90,13 @@ func _physics_process(delta: float) -> void:
 		
 		if _direction.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
-			footsteps_player.request_playing()
-			#print("DOVREBBE AVCERE SUONO UNICO PIù DURO" + name)
+			_footsteps_player.playing_period = max_speed * 1.5
+			_footsteps_player.request_playing()
 	
-	velocity.x = move_toward(velocity.x, _direction.x * max_speed, _acceleration * delta)
-	velocity.z = move_toward(velocity.z, _direction.z * max_speed, _acceleration * delta)
+	Utils.update_just_speed(self, change_rate, max_speed + speed_debufs, delta)
+	
+	velocity.x = move_toward(velocity.x, _direction.x * speed, _acceleration * delta)
+	velocity.z = move_toward(velocity.z, _direction.z * speed, _acceleration * delta)
 	
 	_collide_with_rigidbodies()
 	
@@ -105,12 +125,13 @@ func _collide_with_rigidbodies():
 func _start_movement() -> void:
 	_is_active = true
 	movement_state_machine.start()
+	
+	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
 
 func _end_movement() -> void:
 	movement_state_machine.update({"end": true})
-	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
 	
-	queue_free()
+	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
 
 func _on_eyes_located(collider: Player) -> void:
 	if not _is_active: return
@@ -149,19 +170,35 @@ func look(target_position : Node3D, delta : float) -> void:
 func do_kill_animation() -> void:
 	if not target is Player or not can_kill: return
 	
+	_jumpscare_light.visible = true
 	_mamuthon_animator.play("FaceAction")
+	_sfx_jumpscare.play() #(1.1666)
+
+func _emit_voice() -> void:
+	_sfx_voice.play()
+	_voices_timer.start(max(randfn(15.0, 2.0), 0.0))
 
 func _load_data(data : GStorage) -> void:
 	if data.has_value(Utils.nhash(self) + &"active"):
 		if data.get_value(Utils.nhash(self) + &"active"): _start_movement()
 		else: queue_free()
-	
-	global_position = Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"position"))
-	global_rotation.y = float(data.get_value(Utils.nhash(self) + &"rotation"))
+	else:
+		if _can_start_movement:
+			_start_movement()
 
 func _save_data(data : GStorage) -> void:
 	if _is_active:
-		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
+		data.set_value(Utils.nhash(self) + &"active", true)
+
+
+func _on_sfx_footsteps_plays() -> void:
+	var tween := create_tween()
 	
-	data.set_value(Utils.nhash(self) + &"position", global_position)
-	data.set_value(Utils.nhash(self) + &"rotation", global_rotation.y)
+	tween.tween_method(_little_dance, 0.0, 0.8, 0.8)
+
+func _little_dance(elapsed):
+	mesh.position.y = 0.25 * _roof_function(elapsed)
+	speed_debufs = - 0.6 * _roof_function(elapsed) * max_speed
+
+func _roof_function(value : float):
+	return max(2.0 * (0.8 - abs((value - 0.8) * (value - 0.8) * 2.5 - 0.8)), 0.0)

@@ -8,7 +8,15 @@ var _is_active := false
 var _vigilant := false
 
 func start(info : Dictionary = {}) -> void:
+	if user.end_buffered:
+		state_machine.stop()
+		user.queue_free()
+		return
+	
 	_is_active = true
+	
+	user.max_speed = 0.0
+	user.change_rate = change_rate
 	
 	if info.has("await"):
 		_receiver = info["await"]
@@ -49,7 +57,7 @@ func _on_received_signal(_value) -> void:
 
 	user.progress()
 
-func _physics_process(delta: float) -> void:
-	if not _is_active: return
-		
-	Utils.update_just_speed(user, change_rate, 0.0, delta)
+#func _physics_process(delta: float) -> void:
+	#if not _is_active: return
+		#
+	#Utils.update_just_speed(user, change_rate, 0.0, delta)

@@ -12,6 +12,9 @@ var _next_info : Dictionary = {}
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
 	
+	user.max_speed = 0.0
+	user.change_rate = change_rate
+
 	_next_state = ""
 	
 	if info.has("next_state"):
@@ -24,9 +27,6 @@ func start(info : Dictionary = {}) -> void:
 	if info.has("await"):
 		_receiver = info["await"]
 		_receiver.received.connect(_on_received_signal)
-		return
-	else:
-		_receiver = null
 
 	
 	if info.has("time"):
@@ -44,6 +44,9 @@ func update(info : Dictionary = {}) -> void:
 		_toucher.start_dying(user.get_eyes_reference())
 		state_machine.change_state("KillState", {"to_look": _toucher})
 
+	if info.has("end"):
+		user.end_buffered = true
+
 
 func end() -> void:
 	_is_active = false
@@ -52,7 +55,7 @@ func end() -> void:
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
-	Utils.update_just_speed(user, change_rate, 0.0, delta)
+	#Utils.update_just_speed(user, change_rate, 0.0, delta)
 
 	user.look(user.target, delta)
 
@@ -68,6 +71,9 @@ func _on_stare_timer_ended() -> void:
 
 func _on_received_signal(_value) -> void:
 	if not _is_active: return
+	
+	_receiver.received.disconnect(_on_received_signal)
+	_receiver = null
 	
 	if _next_state != null:
 		user.progress()

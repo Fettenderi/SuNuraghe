@@ -18,7 +18,20 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_nprld")
 
-[node name="InteractionText" type="RichTextLabel" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="InteractionText" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("2_nprld")
+bbcode_enabled = true
+fit_content = true
+
+[node name="RequirementText" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 custom_minimum_size = Vector2(500, 0)
@@ -55,7 +68,36 @@ text = "0"
 label_settings = SubResource("LabelSettings_cpyeq")
 metadata/_edit_use_anchors_ = true
 
-[node name="KidnapScreen" type="ColorRect" parent="."]
+[node name="Pausa" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_nprld")
+color = Color(0, 0, 0, 0.431373)
+
+[node name="InteractionText" type="RichTextLabel" parent="Pausa"]
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_nprld")
+bbcode_enabled = true
+text = "Pausa"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TransitionScreen" type="ColorRect" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -66,21 +108,3 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_nprld")
 color = Color(0, 0, 0, 1)
-
-[node name="CenterContainer2" type="CenterContainer" parent="KidnapScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ToBeContinuedText" type="RichTextLabel" parent="KidnapScreen/CenterContainer2"]
-clip_contents = false
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "[center]Continua nel secondo capitolo..."
-fit_content = true

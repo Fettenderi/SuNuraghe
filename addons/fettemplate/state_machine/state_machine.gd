@@ -56,8 +56,8 @@ func update(info : Dictionary = {}):
 	if _is_active:
 		if not current_state.state_machine:
 			current_state.state_machine = self
-		if verbose:
-			print(current_state.name + " Updated with info: " + str(info))
+		#if verbose:
+			#print(current_state.name + " Updated with info: " + str(info))
 		current_state.update(info)
 
 ## Transitions [member current_state] into [param state_name].
@@ -65,8 +65,8 @@ func update(info : Dictionary = {}):
 ## You can provide additional informations to the new [State] using [param info]
 func change_state(state_name : String, info : Dictionary = {}, force_stop := false):
 	if not force_stop and (state_name == current_state.name or not _is_active): 
-		if verbose:
-			print(current_state.name + " Updated with info: " + str(info))
+		#if verbose:
+			#print(current_state.name + " Updated with info: " + str(info))
 		current_state.update(info)
 		return
 	
