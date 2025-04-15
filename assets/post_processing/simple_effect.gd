@@ -23,11 +23,10 @@ func _render_callback(_effect_callback_type: int, render_data: RenderData) -> vo
 	push_constants.append(0.0)
 	push_constants.append(0.0)
 	
-	
 	for view in scene_buffers.get_view_count():
 		var screen_texture : RID = scene_buffers.get_color_layer(view)
-		
 		var uniform : RDUniform = RDUniform.new()
+		
 		uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_IMAGE
 		uniform.binding = 0
 		uniform.add_id(screen_texture)

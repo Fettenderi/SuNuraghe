@@ -240,6 +240,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="Listener" type="FmodListener3D" parent="."]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="SFXFootsteps" type="FmodEventEmitter3D" parent="."]

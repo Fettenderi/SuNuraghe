@@ -83,6 +83,7 @@ func _handle_time_scale(event : InputEvent) -> void:
 		Engine.time_scale = _time_scale
 	
 	#@warning_ignore("narrowing_conversion")
+	print(Engine.time_scale * 100)
 	#Gui.update_wool_display(Engine.time_scale * 100)
 
 func _move_player(_delta : float) -> void:

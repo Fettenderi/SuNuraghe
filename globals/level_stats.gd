@@ -5,10 +5,13 @@ extends Node
 
 var level_data : GStorage
 
+signal sig_level_ready
 signal loading(data : GStorage)
 signal saving(data : GStorage)
 
 func level_ready() -> void:
+	sig_level_ready.emit()
+	
 	level_data = GStorage.create(&"saves")
 	
 	if not load_saves or not level_data.has_data(): return

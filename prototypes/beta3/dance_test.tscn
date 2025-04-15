@@ -38,14 +38,14 @@ size = Vector3(16.7521, 1.11974, 1.46899)
 
 [sub_resource type="Resource" id="Resource_nqaye"]
 script = ExtResource("11_e34bc")
-receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4"), ExtResource("13_bketw")])
+receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4")])
 metadata/_custom_type_script = "uid://daqy62a65vloj"
 
 [sub_resource type="Resource" id="Resource_vafhi"]
 script = ExtResource("6_72msm")
 state = 4
 info = Dictionary[String, Variant]({
-"await": ExtResource("7_x6vv4")
+"waypoints": NodePath("Waypoints")
 })
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 
@@ -132,7 +132,29 @@ size = Vector3(2.11426, 1.36762, 4.03809)
 [node name="PuppetedMamuthones" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
 transform = Transform3D(-0.999954, 0, 0.00963402, 0, 1, 0, -0.00963402, 0, -0.999954, 6.83064, -1.9436, 7.921)
 schedule = SubResource("Resource_q46mp")
+verbose = true
+activation_receiver = ExtResource("7_x6vv4")
 target = NodePath("../../Player")
+
+[node name="Waypoints" type="Node" parent="Enemies/PuppetedMamuthones"]
+
+[node name="Marker3D" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83064, -1.9436, 7.921)
+
+[node name="Marker3D2" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4232, -1.9436, 7.921)
+
+[node name="Marker3D3" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4232, -1.9436, 3.21377)
+
+[node name="Marker3D4" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.92173, -1.9436, 3.21377)
+
+[node name="Marker3D5" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.92173, -1.9436, 8.11497)
+
+[node name="Marker3D6" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4944, -1.9436, 8.11497)
 
 [node name="PuppetedMamuthones2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
 transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 6.83463, -2.00012, 3.32001)

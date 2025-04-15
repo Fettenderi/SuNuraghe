@@ -198,11 +198,12 @@ event_name = "event:/OBJECT/Obj_Interactive/DOOR"
 event_guid = "{cfd45609-3490-4a4d-bed0-d56e021aeb5c}"
 unique_name_in_owner = true
 
-[node name="OpenerBox" type="Area3D" parent="."]
+[node name="OpenerBox" type="Area3D" parent="." node_paths=PackedStringArray("inibiting")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846265, 0, 0)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("6_vedx6")
+inibiting = NodePath("../CloserBox")
 metadata/_custom_type_script = "uid://oyaprf6fpcmh"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="OpenerBox"]
@@ -240,17 +241,19 @@ shape = SubResource("BoxShape3D_qifey")
 transform = Transform3D(0.867271, 0, 0.497837, 0, 1, 0, -0.497837, 0, 0.867271, -1.76191, -1.19, -3.0619)
 shape = SubResource("BoxShape3D_qifey")
 
-[node name="PlayerDetector" type="Area3D" parent="."]
+[node name="OtherDetector" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846265, 0, 0)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OtherDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.18966, 0)
 shape = SubResource("CylinderShape3D_w0irj")
 
 [connection signal="signal_emitted" from="Mesh/InteractableBox" to="." method="_on_interactable_box_signal_emitted"]
-[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
-[connection signal="body_exited" from="PlayerDetector" to="." method="_on_player_detector_body_exited"]
+[connection signal="signal_emitted" from="OpenerBox" to="." method="_on_opener_box_signal_emitted"]
+[connection signal="signal_emitted" from="CloserBox" to="." method="_on_closer_box_signal_emitted"]
+[connection signal="body_entered" from="OtherDetector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="OtherDetector" to="." method="_on_player_detector_body_exited"]
 
 [editable path="Mesh/InteractableBox"]

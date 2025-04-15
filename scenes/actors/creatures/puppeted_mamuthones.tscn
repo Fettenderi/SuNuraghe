@@ -50,7 +50,7 @@ material_override = SubResource("StandardMaterial3D_dr4gf")
 [node name="CSGSphere3D2" parent="Mesh" index="5"]
 material_override = SubResource("StandardMaterial3D_vexqk")
 
-[node name="MovementSM" parent="." index="5" node_paths=PackedStringArray("starting_state")]
+[node name="MovementSM" parent="." index="4" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="MovementSM" index="0"]

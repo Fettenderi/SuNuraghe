@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cphm70vicseat"]
+[gd_scene load_steps=15 format=3 uid="uid://cphm70vicseat"]
 
 [ext_resource type="Script" uid="uid://or8hn6g2pihm" path="res://scripts/creature.gd" id="1_688wq"]
 [ext_resource type="PackedScene" uid="uid://bwdbp47madk0o" path="res://scenes/components/eyes.tscn" id="2_0natf"]
@@ -8,18 +8,9 @@
 [ext_resource type="Script" uid="uid://cy2neyq5e26g4" path="res://addons/fettemplate/state_machine/state_machine.gd" id="5_e36fh"]
 [ext_resource type="Script" uid="uid://cjaiesjwhtfsk" path="res://scripts/advanced_sound_player.gd" id="11_foxdh"]
 [ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="15_udeof"]
-[ext_resource type="AudioStream" uid="uid://d057r0aqgdqdv" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-001.wav" id="18_3cgp0"]
-[ext_resource type="AudioStream" uid="uid://b412dn8xn8esr" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-002.wav" id="19_jq3mj"]
-[ext_resource type="AudioStream" uid="uid://do65ydpygwj17" path="res://assets/sfx/enemy/Project_Nuraghe_Enemy_VO-003.wav" id="20_e7dtq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
 radius = 0.4
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qfh2q"]
-streams_count = 3
-stream_0/stream = ExtResource("18_3cgp0")
-stream_1/stream = ExtResource("19_jq3mj")
-stream_2/stream = ExtResource("20_e7dtq")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
 radial_segments = 16
@@ -49,10 +40,6 @@ path_max_distance = 50.01
 unique_name_in_owner = true
 shape = SubResource("CapsuleShape3D_uhukm")
 debug_color = Color(0.7, 0.49, 0, 0.847059)
-
-[node name="SFXVoice" type="AudioStreamPlayer3D" parent="."]
-unique_name_in_owner = true
-stream = SubResource("AudioStreamRandomizer_qfh2q")
 
 [node name="Mesh" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -120,7 +107,7 @@ user = NodePath("..")
 metadata/_custom_type_script = "uid://cy2neyq5e26g4"
 
 [node name="SFXJumpscare" type="FmodEventEmitter3D" parent="."]
-event_name = "event:/JUMP_SCARE"
+event_name = "event:/CHAR/ENEMY/JUMP_SCARE"
 event_guid = "{6548bace-0ea9-483b-9b8c-98d1c04c801b}"
 unique_name_in_owner = true
 

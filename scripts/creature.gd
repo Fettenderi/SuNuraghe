@@ -55,6 +55,8 @@ var _can_start_movement := false
 
 var _voices_timer : Timer
 
+var is_manual_jumping := false
+
 func _ready() -> void:
 	if activation_receiver != null:
 		_is_active = false
@@ -75,6 +77,7 @@ func _ready() -> void:
 
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
+	LevelStats.sig_level_ready.connect(_on_level_ready)
 
 
 func _physics_process(delta: float) -> void:
@@ -88,10 +91,15 @@ func _physics_process(delta: float) -> void:
 	if not navigation_agent_3d.is_target_reached():
 		_direction = _local_destination.normalized()
 		
+		#if _local_destination.length() <= 0.001:
+			#global_position = navigation_agent_3d.target_position
+		
 		if _direction.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
-			set_jump_delay(max_speed * 1.5)
-			_footsteps_player.request_playing()
+			if not is_manual_jumping:
+				set_jump_delay(max_speed * 1.5)
+				request_jump()
+				
 	
 	Utils.update_just_speed(self, change_rate, max_speed + speed_debufs, delta)
 	
@@ -126,12 +134,14 @@ func _start_movement() -> void:
 	_is_active = true
 	movement_state_machine.start()
 	
-	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
+	if LevelStats.level_data != null:
+		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
 
 func _end_movement() -> void:
 	movement_state_machine.update({"end": true})
 	
-	LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
+	if LevelStats.level_data != null:
+		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
 
 func _on_eyes_located(collider: Player) -> void:
 	if not _is_active: return
@@ -159,7 +169,8 @@ func get_eyes_reference() -> Node3D:
 	return _head
 
 func suspect_player(final := false) -> void:
-	movement_state_machine.update({"suspect" : true, "final" : final})
+	#movement_state_machine.update({"suspect" : true, "final" : final})
+	pass
 
 func look(target_position : Node3D, delta : float) -> void:
 	var _local_destination := target_position.global_position - global_position
@@ -172,31 +183,24 @@ func do_kill_animation() -> void:
 	
 	_jumpscare_light.visible = true
 	_mamuthon_animator.play("FaceAction")
-	_sfx_jumpscare.play() #(1.1666)
+	_sfx_jumpscare.play()
 
 func set_jump_delay(delay : float) -> void:
 	_footsteps_player.playing_period = delay
+
+func request_jump() -> void:
+	_footsteps_player.request_playing()
+
+func make_jump() -> void:
+	_footsteps_player.do_play()
 
 func _emit_voice() -> void:
 	_sfx_voice.play()
 	_voices_timer.start(max(randfn(15.0, 2.0), 0.0))
 
-func _load_data(data : GStorage) -> void:
-	if data.has_value(Utils.nhash(self) + &"active"):
-		if data.get_value(Utils.nhash(self) + &"active"): _start_movement()
-		else: queue_free()
-	else:
-		if _can_start_movement:
-			_start_movement()
-
-func _save_data(data : GStorage) -> void:
-	if _is_active:
-		data.set_value(Utils.nhash(self) + &"active", true)
-
 
 func _on_sfx_footsteps_plays() -> void:
 	var tween := create_tween()
-	
 	var lenght := 0.8
 	
 	tween.tween_method(_little_dance.bind(lenght), 0.0, lenght, lenght)
@@ -207,3 +211,17 @@ func _little_dance(elapsed : float, lenght : float):
 
 func _roof_function(value : float, lenght : float):
 	return max(2.0 * (lenght - abs((value - lenght) * (value - lenght) * (2.0 / lenght) - lenght)), 0.0)
+
+
+func _on_level_ready():
+	if _can_start_movement:
+		_start_movement()
+
+func _load_data(data : GStorage) -> void:
+	if data.has_value(Utils.nhash(self) + &"active"):
+		if data.get_value(Utils.nhash(self) + &"active"): _start_movement()
+		else: queue_free()
+
+func _save_data(data : GStorage) -> void:
+	if _is_active:
+		data.set_value(Utils.nhash(self) + &"active", true)

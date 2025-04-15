@@ -96,9 +96,15 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1.33333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.58, 1.2, 1.33333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [],
+"method": &"play_sound"
+}, {
+"args": [],
+"method": &"play_sound"
+}, {
 "args": [],
 "method": &"_actually_stop"
 }]
@@ -132,12 +138,12 @@ _data = {
 script = ExtResource("1_vmbpi")
 
 [node name="Campana_001" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, -25.975, 96.5675, 0, -96.5675, -25.975, -0.0261412, 18.1056, 0.0204489)
+transform = Transform3D(100, 0, 0, 0, -26.0376, 96.5507, 0, -96.5507, -26.0376, -0.0261412, 18.1056, 0.0204489)
 mesh = SubResource("ArrayMesh_hesct")
 skeleton = NodePath("")
 
 [node name="Pendolo_001" type="MeshInstance3D" parent="Campana_001"]
-transform = Transform3D(1, 0, 0, 0, 0.955428, 0.29522, 0, -0.29522, 0.955428, 0.000163888, -0.000197829, -0.120572)
+transform = Transform3D(1, 0, 0, 0, 0.955314, 0.295587, 0, -0.295587, 0.955314, 0.000163888, -0.000197829, -0.120572)
 mesh = SubResource("ArrayMesh_5jcm4")
 skeleton = NodePath("")
 
@@ -146,5 +152,19 @@ unique_name_in_owner = true
 libraries = {
 &"custom": SubResource("AnimationLibrary_f0kst")
 }
-autoplay = "custom/looping"
-speed_scale = 0.25
+speed_scale = 0.1
+
+[node name="SFXCampanas0" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/MAIN_BELL"
+event_guid = "{48f011ae-37d5-48bb-8390-bdc74e9b9ec5}"
+fmod_parameters/Grandezza/id = 6255738360672026172
+fmod_parameters/Grandezza = 1
+fmod_parameters/Grandezza/variant_type = 2
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.61784, -12.6643)
+
+[node name="SFXCampanas1" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/OBJECT/MAIN_BELL"
+event_guid = "{48f011ae-37d5-48bb-8390-bdc74e9b9ec5}"
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.61784, 12.9241)

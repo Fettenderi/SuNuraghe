@@ -74,6 +74,10 @@ func start_kidnap_screen():
 	
 	await get_tree().create_timer(1).timeout
 	
+	tween = create_tween()
+	
+	tween.tween_property(_transition_screen, "modulate", Color("#ffffff00"), 1.5).from(Color("#ffffff")).set_delay(0.5)
+	
 	get_tree().change_scene_to_file("res://scenes/credits.tscn")
 
 func start_transition():

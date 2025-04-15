@@ -84,8 +84,8 @@ event_guid = "{2fa31f71-c352-47c0-a264-803df23226cf}"
 unique_name_in_owner = true
 
 [node name="SFXTrip" type="FmodEventEmitter3D" parent="."]
-event_name = "event:/CHAR/ENEMY/Enemy_Bells"
-event_guid = "{f8f71881-47fc-4b4d-91c8-642e9420a7fd}"
+event_name = "event:/OBJECT/BELLS_TRAP"
+event_guid = "{acd4e6e0-fcc7-4d7e-9344-4712f524594a}"
 unique_name_in_owner = true
 
 [connection signal="area_entered" from="DefuseBox" to="." method="_on_defuse_box_area_entered"]

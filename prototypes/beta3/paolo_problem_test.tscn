@@ -1,0 +1,166 @@
+[gd_scene load_steps=30 format=3 uid="uid://b2st53y2kbnus"]
+
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_2hil6"]
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="2_0msg2"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="3_ibcrc"]
+[ext_resource type="Material" uid="uid://bl7ni1g7gxuu3" path="res://assets/materials/brick_pavement.tres" id="4_aiast"]
+[ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="5_0msg2"]
+[ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="6_ibcrc"]
+[ext_resource type="Script" uid="uid://cqmpp7cvquw6e" path="res://scripts/schedule_task_resource.gd" id="7_aiast"]
+[ext_resource type="Resource" uid="uid://bsisyp5c46wuk" path="res://assets/receivers/layer2/lay2-dance-progress.tres" id="8_ibcrc"]
+[ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="9_htk4w"]
+[ext_resource type="Resource" uid="uid://dqkyx3qr3vpc1" path="res://assets/receivers/layer2/counters/lay2-counter2.tres" id="10_bqlq0"]
+[ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="11_g8vwy"]
+[ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="12_p4ncf"]
+[ext_resource type="Resource" uid="uid://b32hxce5os8kp" path="res://assets/receivers/layer2/agents/lay2-paolo.tres" id="13_tdmxo"]
+[ext_resource type="PackedScene" uid="uid://c7puo3suli4x5" path="res://assets/models/goat/testa_pecora.fbx" id="14_xl5hx"]
+[ext_resource type="Resource" uid="uid://ddm7isyslluke" path="res://assets/receivers/layer2/counters/lay2-counter1.tres" id="15_tu86x"]
+[ext_resource type="PackedScene" uid="uid://cw4ifxvx8hfkb" path="res://addons/fettemplate/signals/signal_counter.tscn" id="17_tu86x"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
+vertices = PackedVector3Array(-9.47314, -2.5, -8.50293, -9.47314, -2.5, 8.74707, 6.52686, -2.5, 8.74707, 6.52686, -2.5, -8.50293)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="Resource" id="Resource_0msg2"]
+script = ExtResource("7_aiast")
+state = 0
+info = Dictionary[String, Variant]({
+"await": ExtResource("13_tdmxo")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_n46d8"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("15_tu86x")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_aiast"]
+script = ExtResource("7_aiast")
+state = 1
+info = Dictionary[String, Variant]({
+"await": ExtResource("8_ibcrc"),
+"emitter": SubResource("Resource_n46d8"),
+"position": NodePath("Node/Pos1")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_p4ncf"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("10_bqlq0")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_ibcrc"]
+script = ExtResource("7_aiast")
+state = 4
+info = Dictionary[String, Variant]({
+"await": ExtResource("8_ibcrc"),
+"emitter": SubResource("Resource_p4ncf"),
+"waypoints": NodePath("Node2")
+})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_tdmxo"]
+script = ExtResource("7_aiast")
+state = 4
+info = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
+
+[sub_resource type="Resource" id="Resource_h66x7"]
+script = ExtResource("6_ibcrc")
+tasks = Array[ExtResource("7_aiast")]([SubResource("Resource_0msg2"), SubResource("Resource_aiast"), SubResource("Resource_ibcrc"), SubResource("Resource_tdmxo")])
+metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+
+[sub_resource type="Resource" id="Resource_tu86x"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("13_tdmxo")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_ry67d"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("15_tu86x")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_on2c4"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("10_bqlq0")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_xl5hx"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("8_ibcrc")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_gydts"]
+script = ExtResource("11_g8vwy")
+receivers = Array[ExtResource("9_htk4w")]([ExtResource("8_ibcrc")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_2hil6")
+
+[node name="EnvironmentManager" parent="." instance=ExtResource("2_0msg2")]
+_is_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_ibcrc")]
+transform = Transform3D(0.0107855, 0, 0.999942, 0, 1, 0, -0.999942, 0, 0.0107855, -4.08742, -3.00012, -0.0389579)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c4voo")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.59502, 0, 6.97206e-08)
+use_collision = true
+flip_faces = true
+size = Vector3(18.5059, 6, 17.2562)
+material = ExtResource("4_aiast")
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="PaoloSimulator" parent="Objects" instance=ExtResource("5_0msg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43713, -1.79258, -3.29401)
+schedule = SubResource("Resource_h66x7")
+verbose = true
+
+[node name="Node" type="Node" parent="Objects/PaoloSimulator"]
+
+[node name="Pos1" type="Marker3D" parent="Objects/PaoloSimulator/Node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43713, -1.79258, 2.49258)
+
+[node name="Node2" type="Node" parent="Objects/PaoloSimulator"]
+
+[node name="Pos1" type="Marker3D" parent="Objects/PaoloSimulator/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43713, -1.79258, 2.49258)
+
+[node name="Pos2" type="Marker3D" parent="Objects/PaoloSimulator/Node2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66685, -1.79258, 2.49258)
+
+[node name="WoolPiece0" parent="Objects" instance=ExtResource("12_p4ncf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.772903, -3, -1.26529)
+emitter_resource = SubResource("Resource_tu86x")
+
+[node name="Mesh" parent="Objects/WoolPiece0" instance=ExtResource("14_xl5hx")]
+
+[node name="WoolPiece1" parent="Objects" instance=ExtResource("12_p4ncf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.772903, -3, -3.37681)
+emitter_resource = SubResource("Resource_ry67d")
+
+[node name="Mesh" parent="Objects/WoolPiece1" instance=ExtResource("14_xl5hx")]
+
+[node name="WoolPiece2" parent="Objects" instance=ExtResource("12_p4ncf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.772903, -3, -5.49226)
+emitter_resource = SubResource("Resource_on2c4")
+
+[node name="Mesh" parent="Objects/WoolPiece2" instance=ExtResource("14_xl5hx")]
+
+[node name="SignalCounter1" parent="Objects" instance=ExtResource("17_tu86x")]
+receiver_resource = ExtResource("15_tu86x")
+emitter_resource = SubResource("Resource_xl5hx")
+signals_count = 2
+
+[node name="SignalCounter2" parent="Objects" instance=ExtResource("17_tu86x")]
+receiver_resource = ExtResource("10_bqlq0")
+emitter_resource = SubResource("Resource_gydts")
+signals_count = 2

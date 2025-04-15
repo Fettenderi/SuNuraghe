@@ -18,7 +18,7 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var receiver_resource : ReceiverRes
 @export var strattle_emitter_resource : EmitterRes
-@export var opened_emitter_resource : EmitterRes
+@export var rebake_emitter : EmitterRes
 
 @onready var _mesh_right: Node3D = %MeshRight
 @onready var _mesh_left: Node3D = %MeshLeft
@@ -34,9 +34,6 @@ var _vibrating_time := 0.0
 var _vibration_angle := PI / 16
 var _vibration_amount := 2
 
-var _rebake_delay : Timer 
-var _on_rebake_delay := true 
-
 func _ready() -> void:
 	_set_open(is_open, true)
 	if Engine.is_editor_hint(): return
@@ -47,9 +44,6 @@ func _ready() -> void:
 		_interactable_box.state = is_open
 	else:
 		receiver_resource.received.connect((func(): is_open = not is_open).unbind(1))
-	
-	_rebake_delay = Utils.timer(0.4, _on_rebake_delay_ended)
-	add_child(_rebake_delay, true)
 	
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
@@ -88,10 +82,9 @@ func _physics_process(delta: float) -> void:
 	
 	if _vibrating_time <= 0.0 and abs(_mesh_right.rotation.y - _right_target_rotation) <= ARRIVED_THRESHOLD:
 		_arrived = true
-		if _on_rebake_delay: return
 		
-		if opened_emitter_resource != null:
-			opened_emitter_resource.send_signal()
+		if rebake_emitter != null:
+			rebake_emitter.send_signal()
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if Engine.is_editor_hint(): return
@@ -117,6 +110,3 @@ func _load_data(data : GStorage) -> void:
 
 func _save_data(data : GStorage) -> void:
 	data.set_value(Utils.nhash(self) + &"is_open", is_open)
-
-func _on_rebake_delay_ended():
-	_on_rebake_delay = false

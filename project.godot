@@ -29,7 +29,7 @@ General/banks_path="res://assets/banks/Desktop"
 [application]
 
 config/name="ProjectNuraghe"
-run/main_scene="uid://cfecundvhrh31"
+run/main_scene="uid://diymi2h3f5cqq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

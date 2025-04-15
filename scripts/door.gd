@@ -13,6 +13,8 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var is_open := false:
 	set(value):
+		if is_open == value: return
+			
 		is_open = value
 		_set_open(value)
 
@@ -27,6 +29,8 @@ const ARRIVED_THRESHOLD = 0.01
 @export var rebake_emitter : EmitterRes
 
 @export var has_pressures := true
+
+@export_flags_3d_physics var door_collision = 1
 
 @onready var _mesh: Node3D = %Mesh
 @onready var _collisions: StaticBody3D = %Collisions
@@ -60,6 +64,9 @@ func _ready() -> void:
 	if close_receiver_resource != null:
 		close_receiver_resource.received.connect((func(): is_open = false).unbind(1))
 	
+	if _collisions != null:
+		_collisions.collision_layer = door_collision
+	
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
 
@@ -71,7 +78,7 @@ func _set_open(value : bool, bypass : bool = false) -> void:
 		if _collisions != null:
 			_collisions.rotation.y = _open_angle if value else 0.0
 		if not Engine.is_editor_hint() and rebake_emitter != null:
-				rebake_emitter.send_signal()
+			rebake_emitter.send_signal()
 	else:
 		if _sfx_emitter != null:
 			_sfx_emitter.play(0.2)

@@ -18,7 +18,7 @@ func initialize_compute_shader() -> void:
 	rd = RenderingServer.get_rendering_device()
 	if not rd: return
 	
-	#_check_shader()
+	_check_shader()
 	
 func _check_shader() -> bool:
 	if shader.is_valid():

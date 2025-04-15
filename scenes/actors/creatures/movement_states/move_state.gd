@@ -61,6 +61,8 @@ func update(info : Dictionary = {}) -> void:
 		if _emitter != null:
 			_emitter.send_signal(true)
 			_emitter = null
+		
+		if not _is_active: return
 
 		if _receiver != null: return
 		
@@ -78,6 +80,8 @@ func end() -> void:
 	_is_active = false
 	if _delay_timer != null:
 		_delay_timer.stop()
+	_emitter = null
+	_receiver = null
 
 
 func _on_received_signal(_value) -> void:

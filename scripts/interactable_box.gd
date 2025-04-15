@@ -37,6 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if emitter_resource != null:
 			emitter_resource.send_signal(state)
 		signal_emitted.emit(state)
+		Gui.remove_interaction(gui_text)
 
 func set_active(active : bool) -> void:
 	is_active = active

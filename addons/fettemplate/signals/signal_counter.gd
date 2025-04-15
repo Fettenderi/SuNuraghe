@@ -16,4 +16,3 @@ func _on_received():
 	if _counted >= signals_count:
 		_counted = 0
 		emitter_resource.send_signal()
-		print("ARRIVATI TUTTIS")
