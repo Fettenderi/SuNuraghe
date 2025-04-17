@@ -175,7 +175,7 @@ transform = Transform3D(1.185, 0, 0, 0, 1.185, 0, 0, 0, 1.185, 0, 0, 0)
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 1.53655e-21, -0.999998, 1.01934e-13, 0.999998, -8.93495e-22, 1, -1.97873e-13, -4.37114e-08, 0.705653, -0.000139731, 2.86888e-08)
 required_input = &"interact"
-gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Apri "
+gui_text = "[center][img=40]res://assets/ui/key_e.png[/img] Apri "
 
 [node name="CollisionShape3D" parent="Mesh/InteractableBox" index="0"]
 transform = Transform3D(1, 2.71051e-20, -3.55271e-15, -2.03288e-19, 0.999998, -1.21169e-27, -1.35003e-13, 2.3426e-26, 0.999998, 0, 0, 0)

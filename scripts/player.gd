@@ -66,6 +66,8 @@ var jump_buffered := false:
 
 var _on_stairs := false
 
+var _was_jumping := false
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
@@ -111,11 +113,16 @@ func _move_player(delta : float) -> void:
 
 	if not is_on_floor() and not _on_stairs:
 		_accel = in_air_acceleration
+		_was_jumping = true
 		
 		velocity.y -= _gravity * delta
 	else:
 		_accel = acceleration
 		#_sound_maker.set_enabled(false)
+	
+	if _was_jumping and is_on_floor():
+		footsteps_player.request_playing()
+		_was_jumping = false
 	
 	if _input_dir != Vector2.ZERO and is_on_floor():
 		footsteps_player.request_playing()

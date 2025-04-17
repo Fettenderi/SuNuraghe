@@ -28,9 +28,10 @@ General/banks_path="res://assets/banks/Desktop"
 
 [application]
 
-config/name="ProjectNuraghe"
+config/name="SuNuraghe"
 run/main_scene="uid://n5unkxx8n0hd"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]

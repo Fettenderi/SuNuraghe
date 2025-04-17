@@ -17,7 +17,7 @@ script = ExtResource("1_poxvm")
 [node name="InteractableBox" parent="." instance=ExtResource("1_0df5t")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Silenzia "
+gui_text = "[center][img=40]res://assets/ui/key_e.png[/img] Silenzia e Ferma Campana"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 shape = SubResource("CylinderShape3D_0df5t")

@@ -1,6 +1,8 @@
 @tool
 class_name SimpleEffect extends AbstractEffect
 
+var image_uniform_set : RID
+
 func _render_callback(_effect_callback_type: int, render_data: RenderData) -> void:
 	if not rd or not _check_shader(): return
 
@@ -23,6 +25,9 @@ func _render_callback(_effect_callback_type: int, render_data: RenderData) -> vo
 	push_constants.append(0.0)
 	push_constants.append(0.0)
 	
+	if image_uniform_set.is_valid():
+		rd.free_rid(image_uniform_set)
+	
 	for view in scene_buffers.get_view_count():
 		var screen_texture : RID = scene_buffers.get_color_layer(view)
 		var uniform : RDUniform = RDUniform.new()
@@ -31,7 +36,7 @@ func _render_callback(_effect_callback_type: int, render_data: RenderData) -> vo
 		uniform.binding = 0
 		uniform.add_id(screen_texture)
 		
-		var image_uniform_set : RID = UniformSetCacheRD.get_cache(shader, 0, [uniform])
+		image_uniform_set = UniformSetCacheRD.get_cache(shader, 0, [uniform])
 		
 		var compute_list : int = rd.compute_list_begin()
 		rd.compute_list_bind_compute_pipeline(compute_list, pipeline)

@@ -19,7 +19,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293982, 0.201174, 0.052169
 [node name="InteractableBox" parent="." instance=ExtResource("3_71sye")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[center][img=30]res://assets/ui/key_e.png[/img] Indossa"
+gui_text = "[center][img=40]res://assets/ui/key_e.png[/img] Indossa"
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.348633, 0)

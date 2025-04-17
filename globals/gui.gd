@@ -29,20 +29,20 @@ func update_wool_display(value: int) -> void:
 	_wool_tween.tween_property(_wool_pieces_display, "modulate", Color("#ffffff00"), 1).set_delay(4)
 
 func append_interaction(text : String) -> void:
-	_interaction_array.append("[center]" + text)
-	_interaction_text.text += "[center]" + text
+	_interaction_array.append(text)
+	_interaction_text.text += text
 
 func remove_interaction(text : String) -> void:
-	_interaction_array.erase("[center]" + text)
+	_interaction_array.erase(text)
 	_interaction_text.text = ""
 
 
 func append_requirements(text : String) -> void:
-	_requirement_array.append("[center]" + text)
-	_requirement_text.text += "[center]" + text
+	_requirement_array.append(text)
+	_requirement_text.text += text
 
 func remove_requirements(text : String) -> void:
-	_requirement_array.erase("[center]" + text)
+	_requirement_array.erase(text)
 	_requirement_text.text = ""
 
 

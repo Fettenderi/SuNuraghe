@@ -3189,12 +3189,12 @@ shape = SubResource("BoxShape3D_plen7")
 
 [node name="TensionController" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("34_d3p7y")
-arrival_time = 2.0
+arrival_time = 5.0
 
 [node name="TensionController2" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("37_d3p7y")
 desired_tension = 0.0
-arrival_time = 0.5
+arrival_time = 8.0
 
 [node name="Lever" parent="Objects/Static/Layer1" instance=ExtResource("31_iobf8")]
 transform = Transform3D(0.521903, 0, -0.853005, 0, 1, 0, 0.853005, 0, 0.521903, -8.8232, -1.32825, -38.0992)
@@ -3233,11 +3233,13 @@ shape = SubResource("BoxShape3D_epb10")
 
 [node name="TensionController5" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("71_ss5me")
+desired_tension = 0.5
+arrival_time = 5.0
 
 [node name="TensionController6" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("70_5ndhr")
 desired_tension = 0.0
-arrival_time = 2.0
+arrival_time = 8.0
 
 [node name="WoolPiece8" parent="Objects/Static/Layer1" instance=ExtResource("33_p1qlp")]
 transform = Transform3D(0.33951, 0, 0.940602, 0, 1, 0, -0.940602, 0, 0.33951, -26.1032, -2.09973, -36.9544)
@@ -3296,11 +3298,12 @@ shape = SubResource("BoxShape3D_epb10")
 
 [node name="TensionController3" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("71_plen7")
+arrival_time = 5.0
 
 [node name="TensionController4" parent="Objects/Static/Layer1" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("73_epb10")
 desired_tension = 0.0
-arrival_time = 2.0
+arrival_time = 8.0
 
 [node name="WoolPiece3" parent="Objects/Static/Layer1" instance=ExtResource("33_p1qlp")]
 transform = Transform3D(0.301737, 0, 0.953391, 0, 1, 0, -0.953391, 0, 0.301737, -46.6935, -2.09998, -2.26889)
@@ -3857,12 +3860,12 @@ shape = SubResource("BoxShape3D_n5gcj")
 
 [node name="TensionController3" parent="Objects/Static/Layer2" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("118_54w2y")
-arrival_time = 0.2
+arrival_time = 0.5
 
 [node name="TensionController4" parent="Objects/Static/Layer2" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("117_cv87a")
 desired_tension = 0.0
-arrival_time = 5.0
+arrival_time = 8.0
 
 [node name="SightDetectorBox3" parent="Objects/Static/Layer2" instance=ExtResource("41_wb1uj")]
 transform = Transform3D(-0.502281, 0, -0.864705, 0, 1, 0, 0.864705, 0, -0.502281, 92.1728, 5.50598, -33.35)
@@ -3875,12 +3878,12 @@ shape = SubResource("BoxShape3D_n5gcj")
 
 [node name="TensionController5" parent="Objects/Static/Layer2" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("120_s7enw")
-arrival_time = 0.4
+arrival_time = 0.5
 
 [node name="TensionController6" parent="Objects/Static/Layer2" instance=ExtResource("33_pmw43")]
 receiver_resource = ExtResource("119_54w2y")
 desired_tension = 0.0
-arrival_time = 5.0
+arrival_time = 8.0
 
 [node name="Layer3" type="Node3D" parent="Objects/Static"]
 
