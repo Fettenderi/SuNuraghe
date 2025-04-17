@@ -13,19 +13,21 @@ extends State
 
 @export_subgroup("Dance Configuration")
 @export var max_suspects := 3
-@export var normal_jump_cooldown := 1.4
-@export var normal_jumps := 7
-@export var short_jump_cooldown := 0.5
-@export var short_jumps := 3
+
+#@export var normal_jump_cooldown := 1.4
+#@export var normal_jumps := 7
+#@export var short_jump_cooldown := 0.5
+#@export var short_jumps := 3
+#@export var short_jumps := 3
 
 var _is_active := false
 
 var _leader := false
 
-var _dance_progress := 0
-var _center_direction := Vector3.LEFT
+var _left_look := true
+var _right_handed := true
 
-var _little_jump_cooldown : Timer
+#var _little_jump_cooldown : Timer
 var _starting_rotation : float
 
 var _navigation_agent_3d : NavigationAgent3D
@@ -33,7 +35,9 @@ var _waypoints : Array[Marker3D]
 var _waypoint_progress := 0
 
 var _receiver : ReceiverRes
-var _emitter : EmitterRes
+var _emitter : EmitterRes:
+	set(value):
+		_emitter = value
 
 var _suspect_level := 0
 
@@ -45,13 +49,6 @@ func start(info : Dictionary = {}) -> void:
 	
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
-	
-	_little_jump_cooldown = Utils.timer(1.0, _on_little_jump_cooldown_timeout, _little_jump_cooldown)
-	
-	if not _little_jump_cooldown.is_inside_tree():
-		add_child(_little_jump_cooldown, true)
-		
-	_little_jump_cooldown.start(normal_jump_cooldown)
 
 	user.is_manual_jumping = true
 	user.set_jump_delay(0.1)
@@ -95,13 +92,18 @@ func start(info : Dictionary = {}) -> void:
 	user.max_speed = max_speed
 	user.change_rate = change_rate
 
-	if info.has("center"):
-		_center_direction = info["center"]
+	if info.has("right_handed"):
+		_right_handed = info["right_handed"]
 
 func update(info : Dictionary = {}) -> void:
 	if info.has("touched"):
 		get_tree().call_group(&"Enemy", "suspect_player")
 		return
+
+	if info.has("bell_note"):
+		_starting_rotation = user.mesh.rotation.y
+		user.make_jump()
+		_tween_rotation()
 
 	if info.has("suspect"):
 		if info.has("final") and info["final"]:
@@ -124,8 +126,10 @@ func update(info : Dictionary = {}) -> void:
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 		else:
 			if _emitter != null:
+				var _prev_emitter := _emitter
 				_emitter.send_signal(true)
-				_emitter = null
+				if _prev_emitter == _emitter:
+					_emitter = null
 		
 			if not _is_active: return
 		
@@ -137,35 +141,16 @@ func update(info : Dictionary = {}) -> void:
 		user.end_buffered = true
 
 
-func _on_little_jump_cooldown_timeout():
-	_starting_rotation = user.mesh.rotation.y
-	user.make_jump()
-	_tween_rotation()
-	
-	_dance_progress += 1
-	
-	if _leader:
-		TimeKeeper.dance_input()
-	
-	if _dance_progress <= normal_jumps:
-		_little_jump_cooldown.start(normal_jump_cooldown)
-	elif _dance_progress <= normal_jumps + short_jumps - 1:
-		_little_jump_cooldown.start(short_jump_cooldown)
-	else:
-		_little_jump_cooldown.start(normal_jump_cooldown)
-		_dance_progress = 0
-
-
 func _tween_rotation():
 	var tween := create_tween()
 	tween.tween_method(_rotation_function, 0.0, little_jump_time, little_jump_time)
+	_left_look = not _left_look
 
 func _rotation_function(elapsed : float):
-	user.mesh.rotation.y = (swing_angle / 2) * sin((1.0 if _dance_progress % 2 == 0 else -1.0) * swings * 2 * PI * elapsed / little_jump_time) + _starting_rotation
+	user.mesh.rotation.y = (swing_angle / 2) * sin(-(1.0 if _left_look == _right_handed else -1.0) * swings * 2 * PI * elapsed / little_jump_time) + _starting_rotation
 
 func end() -> void:
 	_is_active = false
-	_little_jump_cooldown.stop()
 	user.mesh.rotation.y = _starting_rotation
 	if _delay_timer != null:
 		_delay_timer.stop()

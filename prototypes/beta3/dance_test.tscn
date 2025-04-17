@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://8vyu2s1vt4u4"]
+[gd_scene load_steps=26 format=3 uid="uid://8vyu2s1vt4u4"]
 
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_nqaye"]
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_qivie"]
 [ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="2_b8gr8"]
 [ext_resource type="PackedScene" uid="uid://do0jmvfn61cxu" path="res://scenes/actors/creatures/puppeted_mamuthones.tscn" id="4_bketw"]
 [ext_resource type="Script" uid="uid://camnm8j6mo7nn" path="res://scripts/schedule_resource.gd" id="5_u3k10"]
@@ -9,8 +10,11 @@
 [ext_resource type="Resource" uid="uid://dxl8co4ullhte" path="res://prototypes/beta2/only_receiver.tres" id="7_x6vv4"]
 [ext_resource type="Script" uid="uid://bf63sx3umnijy" path="res://addons/fettemplate/signals/receiver_resource.gd" id="10_4oab2"]
 [ext_resource type="Script" uid="uid://daqy62a65vloj" path="res://addons/fettemplate/signals/emitter_resource.gd" id="11_e34bc"]
+[ext_resource type="PackedScene" uid="uid://bnopm6tokh052" path="res://scenes/objects/campanas.tscn" id="12_b8gr8"]
 [ext_resource type="Script" uid="uid://ytrt3kbsjras" path="res://scripts/kidnapping_sequence.gd" id="12_qivie"]
 [ext_resource type="Resource" uid="uid://chqdhdocxqxru" path="res://assets/receivers/layer2/lay2-kidnap.tres" id="13_bketw"]
+[ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="14_u3k10"]
+[ext_resource type="PackedScene" uid="uid://c7puo3suli4x5" path="res://assets/models/goat/testa_pecora.fbx" id="15_72msm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -36,17 +40,10 @@ albedo_texture = ExtResource("2_b8gr8")
 [sub_resource type="BoxShape3D" id="BoxShape3D_nqaye"]
 size = Vector3(16.7521, 1.11974, 1.46899)
 
-[sub_resource type="Resource" id="Resource_nqaye"]
-script = ExtResource("11_e34bc")
-receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4")])
-metadata/_custom_type_script = "uid://daqy62a65vloj"
-
 [sub_resource type="Resource" id="Resource_vafhi"]
 script = ExtResource("6_72msm")
 state = 4
-info = Dictionary[String, Variant]({
-"waypoints": NodePath("Waypoints")
-})
+info = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 
 [sub_resource type="Resource" id="Resource_q46mp"]
@@ -54,12 +51,18 @@ script = ExtResource("5_u3k10")
 tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi")])
 metadata/_custom_type_script = "uid://camnm8j6mo7nn"
 
-[sub_resource type="Resource" id="Resource_72msm"]
-script = ExtResource("5_u3k10")
-tasks = Array[ExtResource("6_72msm")]([SubResource("Resource_vafhi")])
-metadata/_custom_type_script = "uid://camnm8j6mo7nn"
+[sub_resource type="Resource" id="Resource_nqaye"]
+script = ExtResource("11_e34bc")
+receivers = Array[ExtResource("10_4oab2")]([ExtResource("7_x6vv4")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="Resource" id="Resource_x6vv4"]
+script = ExtResource("11_e34bc")
+receivers = Array[ExtResource("10_4oab2")]([ExtResource("13_bketw")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_qivie")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_o4fph")
@@ -67,15 +70,21 @@ environment = SubResource("Environment_o4fph")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0.0920563, 0, 11.4767)
 shadow_enabled = true
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_nqaye")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.79481, -2.99976, 8.28109)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_c4voo")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 use_collision = true
@@ -88,17 +97,10 @@ size = Vector3(6.3252, 3.34375, 42.7644)
 material = SubResource("StandardMaterial3D_m3e5f")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, -1.32819, 5.43892)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.02161, 12.3037, -14.692)
 use_collision = true
 flip_faces = true
-size = Vector3(11.283, 3.34363, 30.9033)
-material = SubResource("StandardMaterial3D_m3e5f")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.6056, -1.34863, -4.34696)
-use_collision = true
-flip_faces = true
-size = Vector3(11.283, 3.30273, 30.9033)
+size = Vector3(51.5448, 30.6075, 38.4995)
 material = SubResource("StandardMaterial3D_m3e5f")
 
 [node name="Tunnel" type="CSGCombiner3D" parent="NavigationRegion3D/CSGCombiner3D"]
@@ -116,16 +118,6 @@ shape = SubResource("BoxShape3D_nqaye")
 transform = Transform3D(-1, 0, -8.64327e-08, 0, 1, 0, 8.64327e-08, 0, -1, 0, 0, 0)
 flip_faces = true
 size = Vector3(16.9831, 1.11974, 1.46899)
-
-[node name="Disguise" parent="." instance=ExtResource("7_5cpvu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19003, -2.99662, 5.52636)
-emitter_resource = SubResource("Resource_nqaye")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, -2.3162, 5.43892)
-visible = false
-use_collision = true
-size = Vector3(2.11426, 1.36762, 4.03809)
 
 [node name="Enemies" type="Node3D" parent="."]
 
@@ -156,14 +148,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.92173, -1.9436, 8.11497)
 [node name="Marker3D6" type="Marker3D" parent="Enemies/PuppetedMamuthones/Waypoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4944, -1.9436, 8.11497)
 
-[node name="PuppetedMamuthones2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("4_bketw")]
-transform = Transform3D(0.999954, 0, -0.00963411, 0, 1, 0, 0.00963411, 0, 0.999954, 6.83463, -2.00012, 3.32001)
-schedule = SubResource("Resource_72msm")
-target = NodePath("../../Player")
+[node name="Objects" type="Node3D" parent="."]
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("sheep_mesh", "player", "kidnapper")]
+[node name="KidnappingSequence" type="Node" parent="Objects" node_paths=PackedStringArray("sheep_mesh", "player", "cry_emitter", "kidnapper")]
 script = ExtResource("12_qivie")
 receiver_resource = ExtResource("13_bketw")
-sheep_mesh = NodePath("../CSGBox3D4")
-player = NodePath("../Player")
-kidnapper = NodePath("../Enemies/PuppetedMamuthones")
+sheep_mesh = NodePath("../Pecora")
+player = NodePath("../../Player")
+cry_emitter = NodePath("../SFXCry")
+kidnapper = NodePath("../../Enemies/PuppetedMamuthones")
+
+[node name="campanas" parent="Objects" instance=ExtResource("12_b8gr8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.63572, 11.6968, -31.5423)
+starting_offset = 0.57
+
+[node name="campanas2" parent="Objects" instance=ExtResource("12_b8gr8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.40913, 11.6968, -32.8135)
+starting_offset = 1.71
+
+[node name="campanas3" parent="Objects" instance=ExtResource("12_b8gr8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9.29233, 11.6968, -15.2934)
+starting_offset = 5.13
+
+[node name="campanas4" parent="Objects" instance=ExtResource("12_b8gr8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.90944, 11.6968, -14.5985)
+starting_offset = 3.99
+
+[node name="Disguise" parent="Objects" instance=ExtResource("7_5cpvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27629, -2.99662, 5.52636)
+emitter_resource = SubResource("Resource_nqaye")
+
+[node name="Pecora" type="CSGBox3D" parent="Objects"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.81971, -2.3162, 5.43892)
+visible = false
+use_collision = true
+size = Vector3(2.11426, 1.36762, 4.03809)
+
+[node name="SFXCry" type="FmodEventEmitter3D" parent="Objects"]
+event_name = "event:/CHAR/MAIN_CHAR/CHAR_Cry"
+event_guid = "{8d1938a3-96e2-40f4-b175-ea5eee518842}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.35787, -2.20022, 7.73613)
+
+[node name="WoolPiece" parent="Objects" instance=ExtResource("14_u3k10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19063, -3.00005, 4.84846)
+emitter_resource = SubResource("Resource_x6vv4")
+
+[node name="Mesh" parent="Objects/WoolPiece" instance=ExtResource("15_72msm")]

@@ -201,6 +201,7 @@ func _load_data(data : GStorage) -> void:
 	if not data.has_value(&"player_" + &"position"): return
 	
 	global_position = Utils.string_to_vector3(data.get_value(&"player_" + &"position"))
+	FmodServer.set_global_parameter_by_name("Tension", data.get_value(&"player_" + &"tension"))
 	
 	var _rot_vector : Vector4 = Utils.string_to_vector4(data.get_value(&"player_" + &"rotation"))
 	_rotation_target_player = sign(_rot_vector.x) * Quaternion(0.0, _rot_vector.x, 0.0, _rot_vector.y).get_angle()
@@ -214,6 +215,7 @@ func _load_data(data : GStorage) -> void:
 
 func _save_data(data : GStorage) -> void:
 	data.set_value(&"player_" + &"position", global_position)
+	data.set_value(&"player_" + &"tension", FmodServer.get_global_parameter_by_name("Tension"))
 	data.set_value(&"player_" + &"rotation", Vector4(quaternion.y, quaternion.w, _head.quaternion.x, _head.quaternion.w))
 	
 	data.set_value(&"player_" + &"concept_art_pieces", PlayerStats.concept_art_pieces)

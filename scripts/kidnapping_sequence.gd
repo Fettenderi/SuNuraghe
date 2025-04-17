@@ -11,6 +11,7 @@ enum KNState {
 
 @export var sheep_mesh : Node3D
 @export var player : Player
+@export var cry_emitter : FmodEventEmitter3D
 @export var kidnapper : Creature
 
 var _state : KNState = KNState.START
@@ -25,22 +26,28 @@ func _ready() -> void:
 	receiver_resource.received.connect(_start.unbind(1))
 
 func _start() -> void:
+	await get_tree().create_timer(0.5).timeout
+	
 	sheep_mesh.visible = true
 	
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(0.3).timeout
+	
+	cry_emitter.play()
+	
+	await get_tree().create_timer(1.5).timeout
 	
 	get_tree().call_group(&"Enemy", "suspect_player", true)
 	
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(1.4).timeout
 	
 	_state = KNState.MOVING
 	kidnapper.can_kill = false
-	kidnapper.navigation_agent_3d.target_position = player.global_position
 
 func _physics_process(delta: float) -> void:
 	match _state:
 		KNState.MOVING:
-			Utils.update_just_speed(kidnapper, 4.0, 1.2, delta)
+			kidnapper.navigation_agent_3d.target_position = player.global_position
+			Utils.update_just_speed(kidnapper, 4.0, 2.3, delta)
 			if abs((kidnapper.global_position - player.global_position).length()) < 2.0:
 				_state = KNState.KIDNAPPING
 				player.movement_sm.change_state("DieState", {"bypass_timer": true, "to_look": kidnapper.get_eyes_reference()})

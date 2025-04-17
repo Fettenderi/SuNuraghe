@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2eb8d25tqca3"]
+[gd_scene load_steps=9 format=3 uid="uid://b2eb8d25tqca3"]
 
 [ext_resource type="Script" uid="uid://t068hwpjvhis" path="res://scripts/credits.gd" id="1_2fbfq"]
 [ext_resource type="Texture2D" uid="uid://m5jgbglodk38" path="res://assets/ui/logo_large_monochrome_dark.png" id="3_2fbfq"]
 [ext_resource type="Theme" uid="uid://nts6ppuasqgx" path="res://assets/ui/theme.tres" id="3_8gwij"]
 [ext_resource type="Texture2D" uid="uid://cl2qg4i6a8b6e" path="res://assets/ui/spaghetti_invasion.png" id="4_8gwij"]
+[ext_resource type="PackedScene" uid="uid://dnu4xnrlxa7q6" path="res://assets/models/characters/mamuthones.blend" id="5_mah5v"]
+[ext_resource type="Script" uid="uid://tjinjqbl4bbe" path="res://scripts/mamuthones_rotate.gd" id="6_kyhnv"]
+[ext_resource type="Script" uid="uid://c0xg8ote2osqq" path="res://scripts/flickering_light.gd" id="7_ooihk"]
+[ext_resource type="PackedScene" uid="uid://dl7hhvhi8nb37" path="res://scenes/objects/environment_manager.tscn" id="8_ih6pn"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -30,9 +34,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -89.0
-offset_top = 738.0
+offset_top = 733.0
 offset_right = 89.0
-offset_bottom = 2431.0
+offset_bottom = 3250.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -78,9 +82,9 @@ bbcode_enabled = true
 text = "[color=#ffffff]
 Andrea Ferretti (BatFerro)
 
-Achille Ferrari (coca.cola)
-
 Vittoria Vignolini (Vivi)
+
+Achille Ferrari (coca.cola)
 
 Marco Manganaro (Fettenderi)
 
@@ -115,9 +119,9 @@ bbcode_enabled = true
 text = "[color=#ffffff]
 SFX Designer
 
-3D Modeller
-
 Illustratrice Concept Artist
+
+3D Modeller
 
 Programmer & Designer
 
@@ -192,6 +196,41 @@ text = "
 
 [color=#ffffff]Continua . . .
 
+
+
+
+
+
+
+
 "
 fit_content = true
 horizontal_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Text/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SubViewport" type="SubViewport" parent="Text/VBox/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="mamuthones" parent="Text/VBox/SubViewportContainer/SubViewport" instance=ExtResource("5_mah5v")]
+transform = Transform3D(-0.683308, 0, -0.730131, 0, 1, 0, 0.730131, 0, -0.683308, 0, 0, -5.46672)
+script = ExtResource("6_kyhnv")
+
+[node name="Camera3D" type="Camera3D" parent="Text/VBox/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.934888, 0.354943, 0, -0.354943, 0.934888, 0, 1.0481, -2.3838)
+current = true
+
+[node name="DanceLights8" type="OmniLight3D" parent="Text/VBox/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12656, -4.20841)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.7
+shadow_enabled = true
+omni_range = 6.343
+script = ExtResource("7_ooihk")
+actual_max_energy = 0.7
+
+[node name="EnvironmentManager" parent="Text/VBox/SubViewportContainer/SubViewport" instance=ExtResource("8_ih6pn")]

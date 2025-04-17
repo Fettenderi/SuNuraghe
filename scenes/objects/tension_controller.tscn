@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxfxlj61ldae6"]
+
+[ext_resource type="Script" uid="uid://lqcj3gt2qkrl" path="res://scripts/tension_controller.gd" id="1_g4egs"]
+
+[node name="TensionController" type="Node"]
+script = ExtResource("1_g4egs")

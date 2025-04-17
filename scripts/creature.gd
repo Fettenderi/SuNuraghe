@@ -169,8 +169,10 @@ func get_eyes_reference() -> Node3D:
 	return _head
 
 func suspect_player(final := false) -> void:
-	#movement_state_machine.update({"suspect" : true, "final" : final})
-	pass
+	movement_state_machine.update({"suspect" : true, "final" : final})
+
+func dance_input() -> void:
+	movement_state_machine.update({"bell_note" : true})
 
 func look(target_position : Node3D, delta : float) -> void:
 	var _local_destination := target_position.global_position - global_position

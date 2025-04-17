@@ -14,6 +14,7 @@ func start(info : Dictionary = {}) -> void:
 	
 	user.max_speed = 0.0
 	user.change_rate = change_rate
+	user.is_manual_jumping = true
 
 	_next_state = ""
 	
@@ -50,7 +51,7 @@ func update(info : Dictionary = {}) -> void:
 
 func end() -> void:
 	_is_active = false
-
+	user.is_manual_jumping = false
 
 func _physics_process(delta: float) -> void:
 	if not _is_active: return

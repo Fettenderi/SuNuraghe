@@ -2,7 +2,9 @@ extends Control
 
 @onready var _text: CenterContainer = %Text
 
-func _ready() -> void:
-	var tween := create_tween()
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		get_tree().quit()
 	
-	tween.tween_property(_text, "position", Vector2(_text.position.x, -2436.0), 45.0)
+	var _sprinting := Input.is_anything_pressed()
+	_text.position.y = lerp(_text.position.y, -5000.0, 1.0 - exp(-delta * 0.01 * (5.0 if _sprinting else 1.0)))

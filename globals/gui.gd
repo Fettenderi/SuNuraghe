@@ -48,9 +48,8 @@ func remove_requirements(text : String) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
-		var tween := create_tween()
-		
 		if level_reference == null: return
+		var tween := create_tween()
 		
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -70,7 +69,7 @@ func set_stamina_visible(value: bool):
 func start_kidnap_screen():
 	var tween := create_tween()
 	
-	tween.tween_property(_transition_screen, "modulate", Color("#ffffff"), 0.5).from(Color("#ffffff00")).set_delay(0.5)
+	tween.tween_property(_transition_screen, "modulate", Color("#ffffff"), 0.05).from(Color("#ffffff00")).set_delay(0.45)
 	
 	await get_tree().create_timer(1).timeout
 	

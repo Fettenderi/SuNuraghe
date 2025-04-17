@@ -71,6 +71,8 @@ func _handle_walking(delta : float) -> void:
 		TimeKeeper.player_input()
 		return
 	
+	Engine.time_scale = 2.0 if Input.is_action_pressed("fast_forward") else 1.0
+	#Utils.update_just_max_speed(user, change_rate, max_walk_speed, delta)
 	Utils.update_just_max_speed(user, change_rate, max_dance_speed if _is_shifted else max_walk_speed, delta)
 
 
