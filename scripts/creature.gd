@@ -94,12 +94,15 @@ func _physics_process(delta: float) -> void:
 		#if _local_destination.length() <= 0.001:
 			#global_position = navigation_agent_3d.target_position
 		
-		if _direction.length_squared() > 0.0:
+		if _local_destination.length_squared() > 0.0:
 			global_rotation.y = lerp_angle(global_rotation.y, atan2(_direction.x, _direction.z), 1.0 - exp(-TURNING_SPEED * delta))
 			if not is_manual_jumping:
 				set_jump_delay(max_speed * 1.5)
 				request_jump()
 				
+	
+	#if _local_destination.length_squared() <= 0.0001:
+		#_on_navigation_finished()
 	
 	Utils.update_just_speed(self, change_rate, max_speed + speed_debufs, delta)
 	

@@ -74,7 +74,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_nqaye")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.79481, -2.99976, 8.28109)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.02415, -3.00005, 8.86635)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 

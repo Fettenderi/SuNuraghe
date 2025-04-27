@@ -14,11 +14,20 @@ enum {
 
 @export var footsteps_period := 1.0
 
+@export var craw_detector : Area3D
+
 var _active := false
 var _should_crawl := false
 
+var _standup_delay_timer : Timer
+var _on_standup_cooldown := false
+
 func start(_info : Dictionary = {}) -> void:
 	_active = true
+	
+	_standup_delay_timer = Utils.timer(0.1, _on_standup_delay_ended)
+	if not _standup_delay_timer.is_inside_tree():
+		add_child(_standup_delay_timer, true)
 	
 	user.footsteps_player.set_period(footsteps_period)
 	user.head_start_pos.y -= 0.9
@@ -47,6 +56,22 @@ func end() -> void:
 
 func _on_crawl_detector_box_area_entered(_area: Area3D) -> void:
 	_should_crawl = true
+	
+	_on_standup_cooldown = false
+	
+	if not _active: return
+	_standup_delay_timer.stop()
 
 func _on_crawl_detector_box_area_exited(_area: Area3D) -> void:
-	_should_crawl = false
+	if not _active: return
+	
+	_on_standup_cooldown = true
+	_standup_delay_timer.start()
+
+func _on_standup_delay_ended():
+	_on_standup_cooldown = false
+	
+	if not _active: return
+	
+	if not craw_detector.has_overlapping_areas():
+		_should_crawl = false

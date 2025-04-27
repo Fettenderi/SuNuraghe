@@ -190,6 +190,9 @@ func set_disguised(value : bool) -> void:
 func is_disguised() -> bool:
 	return PlayerStats.disguised
 
+func is_crouched() -> bool:
+	return movement_sm.current_state.name == "CoverState"
+
 func look(target : Node3D, delta : float) -> void:
 	var _local_destination := target.global_position - _head.global_position
 	var mouse_delta := mouse_acceleration * delta

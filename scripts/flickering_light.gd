@@ -8,7 +8,7 @@ extends OmniLight3D
 @export var actual_max_energy := 0.5:
 	set(value):
 		actual_max_energy = value
-		actual_min_energy = max(actual_max_energy - 0.25,0.0)
+		actual_min_energy = max(actual_max_energy - 0.25,0.1)
 		_update_preview()
 
 var actual_min_energy := 0.2

@@ -77,7 +77,11 @@ func start_kidnap_screen():
 	
 	tween.tween_property(_transition_screen, "modulate", Color("#ffffff00"), 1.5).from(Color("#ffffff")).set_delay(0.5)
 	
-	get_tree().change_scene_to_file("res://scenes/credits.tscn")
+	var credits_data = GStorage.create(&"cutscenes")
+	credits_data.set_value(&"game_finished", true)
+	credits_data.save_data()
+	
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/credits.tscn")
 
 func start_transition():
 	var tween := create_tween()
@@ -86,7 +90,7 @@ func start_transition():
 	
 	await get_tree().create_timer(1).timeout
 	
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
 
 func end_transition():
 	var tween := create_tween()

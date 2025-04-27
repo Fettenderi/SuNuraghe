@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 	var _seens := 0
 	var _player : Player
 	for _i in range(len(_rays)):
-		if _rays[_i].is_colliding() and _rays[_i].get_collider() is Player:
+		if _rays[_i].is_colliding() and _rays[_i].get_collider() is Player and _can_see(_i, _rays[_i].get_collider()):
 			_player = _rays[_i].get_collider()
 			_seens += 1
 	
@@ -53,6 +53,15 @@ func _physics_process(_delta: float) -> void:
 		not_visible.emit()
 	else:
 		located.emit(_player)
+
+func _can_see(ray_index : int, player : Player) -> bool:
+	if not player.is_crouched(): return true
+	
+	@warning_ignore("integer_division")
+	var index = abs(ray_index - ceil(len(_rays) / 2))
+	
+	@warning_ignore("integer_division")
+	return index <= ceil(len(_rays) / 2) * 1 / 3
 
 func _update_rays():
 	_reset_rays()

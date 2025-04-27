@@ -50,6 +50,19 @@ material_override = SubResource("StandardMaterial3D_dr4gf")
 [node name="CSGSphere3D2" parent="Mesh" index="5"]
 material_override = SubResource("StandardMaterial3D_vexqk")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Mesh" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.3775, -0.842629)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.05
+light_size = 0.05
+omni_range = 0.647511
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Mesh" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.26396, 0.94597)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.1
+omni_range = 0.449582
+
 [node name="MovementSM" parent="." index="4" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("IdleState")
 

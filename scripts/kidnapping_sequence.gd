@@ -34,11 +34,11 @@ func _start() -> void:
 	
 	cry_emitter.play()
 	
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(2.5).timeout
 	
 	get_tree().call_group(&"Enemy", "suspect_player", true)
 	
-	await get_tree().create_timer(1.4).timeout
+	await get_tree().create_timer(1.3).timeout
 	
 	_state = KNState.MOVING
 	kidnapper.can_kill = false
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	match _state:
 		KNState.MOVING:
 			kidnapper.navigation_agent_3d.target_position = player.global_position
-			Utils.update_just_speed(kidnapper, 4.0, 2.3, delta)
+			Utils.update_just_speed(kidnapper, 4.0, 2.0, delta)
 			if abs((kidnapper.global_position - player.global_position).length()) < 2.0:
 				_state = KNState.KIDNAPPING
 				player.movement_sm.change_state("DieState", {"bypass_timer": true, "to_look": kidnapper.get_eyes_reference()})
