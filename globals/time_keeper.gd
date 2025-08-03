@@ -56,7 +56,7 @@ func dance_input():
 	
 	_dance_input_buffered = true
 
-func bell_input(size : int):
+func bell_input(_size : int):
 	if not _wants_toggle: return
 	
 	_wants_toggle = false
