@@ -217,7 +217,7 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="mamuthones" parent="Text/VBox/SubViewportContainer/SubViewport" instance=ExtResource("5_mah5v")]
-transform = Transform3D(-0.683308, 0, -0.730131, 0, 1, 0, 0.730131, 0, -0.683308, 0, 0, -5.46672)
+transform = Transform3D(-0.626492, 0, 0.779429, 0, 1, 0, -0.779429, 0, -0.626492, 0, 0, -5.46672)
 script = ExtResource("6_kyhnv")
 
 [node name="Camera3D" type="Camera3D" parent="Text/VBox/SubViewportContainer/SubViewport"]

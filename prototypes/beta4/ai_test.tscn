@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://dajbsv5wsquwl"]
+
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_esai3"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_eg4sf"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="3_j1jjp"]
+[ext_resource type="PackedScene" uid="uid://cdhup6auak1jd" path="res://prototypes/beta4/mamuthones_beehave.tscn" id="4_qimaa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_t8fxv"]
+sky_material = SubResource("ProceduralSkyMaterial_u4f27")
+
+[sub_resource type="Environment" id="Environment_o4fph"]
+background_mode = 2
+sky = SubResource("Sky_t8fxv")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_c4voo"]
+vertices = PackedVector3Array(11.6181, -2.50668, -1.79861, 21.6181, -2.50668, -1.79861, 21.6181, -2.50668, -19.0486, 11.6181, -2.50668, -19.0486, -2.63194, -2.50668, -1.54861, 2.61806, -2.50668, -1.54861, 2.61806, -2.50668, -14.5486, -2.63194, -2.50668, -14.5486, 11.3681, -2.50668, 0.451389, 9.36806, -2.50668, 0.451389, 9.36806, -2.50668, 10.4514, 21.6181, -2.50668, 10.4514, -2.88194, -2.50668, 10.4514, -2.63194, -2.50668, 12.4514, 2.61806, -2.50668, 12.4514, 2.86806, -2.50668, 10.4514, 2.86806, -2.50668, 0.451389, -2.88194, -2.50668, 0.451389, -7.88194, -2.50668, 0.451389, -7.88194, -2.50668, 10.4514, 4.86806, -2.50668, 10.4514, 4.86806, -2.50668, 0.451389, -2.63194, -2.50668, 26.9514, 2.61806, -2.50668, 26.9514)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 0, 1), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 1), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(15, 12, 17), PackedInt32Array(15, 17, 16), PackedInt32Array(12, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(5, 16, 4), PackedInt32Array(4, 16, 17), PackedInt32Array(16, 21, 15), PackedInt32Array(15, 21, 20), PackedInt32Array(21, 9, 20), PackedInt32Array(20, 9, 10), PackedInt32Array(23, 22, 14), PackedInt32Array(14, 22, 13)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3e5f"]
+albedo_texture = ExtResource("3_j1jjp")
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_esai3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o4fph")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_eg4sf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.235)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_c4voo")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(13, 5, 13)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="PuppetedMamuthones" parent="Enemies" instance=ExtResource("4_qimaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375623, 1.27434, -4.87156)

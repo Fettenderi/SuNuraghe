@@ -23,16 +23,31 @@ static func _create_timer(wait_time : float, callable : Callable, one_shot := tr
 	
 	return _timer
 
+static func _smooth_piecewise(x: float, m : float, q : float, x_break : float) -> float:
+	if x <= 0.0:
+		return 0.0
+
+	if x >= x_break:
+		return m * x + q
+
+	var a := m * (1 - x_break + q) / 4.0
+	var b := (m * x_break + q - 8.0 * a) / 4.0
+
+	return a * x * x * x + b * x * x
+
+static func setup_movement_variables(user : Player, state : State) -> void:
+	user.max_speed = state.max_speed
+	user.head_bob_frequency = _smooth_piecewise(state.max_speed, 2.857, -3.0, 2.0)
+	user.footsteps_player.set_period(2.0 / user.max_speed)
+
 static func update_movement_variables(user : Player, state : State, delta : float) -> void:
 	if abs(user.max_speed - state.max_speed) >= 0.01:
 		user.max_speed = lerp(user.max_speed, state.max_speed, 1.0 - exp(-state.change_rate * delta))
-	else:
-		user.max_speed = state.max_speed
-		user.head_bob_amplitude = state.head_bob_amplitude
-		user.head_bob_frequency = state.head_bob_frequency
-	
-	#@warning_ignore("narrowing_conversion")
-	#Gui.update_wool_display(user.max_speed * 100)
+		user.footsteps_player.set_period(2.0 / user.max_speed)
+		
+		var previous_head_bob_frequency := user.head_bob_frequency
+		user.head_bob_frequency = lerp(user.head_bob_frequency, _smooth_piecewise(state.max_speed, 2.857, -3.0, 2.0), 1.0 - exp(-state.change_rate * delta))
+		user.head_bob_phase = (previous_head_bob_frequency - user.head_bob_frequency) * user._head_bob_tick + user.head_bob_phase
 
 static func update_just_speed(user : CharacterBody3D, change_rate : float, target_speed : float, delta : float) -> void:
 	if not user is Creature:

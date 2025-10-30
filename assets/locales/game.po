@@ -1,0 +1,291 @@
+# LANGUAGE translation for SuNuraghe for the following files:
+# res://scenes/credits.tscn
+# res://globals/gui.tscn
+# res://scenes/objects/bell.tscn
+# res://scenes/objects/bell_trap.tscn
+# res://scenes/objects/concept_art_piece.tscn
+# res://scenes/objects/disguise.tscn
+# res://scenes/objects/door.tscn
+# res://scenes/objects/double_door.tscn
+# res://scenes/objects/lever.tscn
+# res://scenes/objects/saving_station.tscn
+# res://scenes/objects/wool_piece.tscn
+# res://scenes/main_menu.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SuNuraghe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: scenes/credits.tscn
+msgid "[color=#ffffff]Su Nuraghe"
+msgstr "[color=#ffffff]Su Nuraghe"
+
+#: scenes/credits.tscn
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]Realizzato in un mese e mezzo, tra lavoro, \n"
+"studio e peripezie varie, da queste belle persone:\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]Developed in a month and a half, during work,\n"
+"study and other life stuff, from these wonderful people:\n"
+"\n"
+
+#: scenes/credits.tscn
+msgid ""
+"[color=#ffffff]\n"
+"Andrea Ferretti (BatFerro)\n"
+"\n"
+"Vittoria Vignolini (Vivi)\n"
+"\n"
+"Achille Ferrari (coca.cola)\n"
+"\n"
+"Marco Manganaro (Fettenderi)\n"
+"\n"
+msgstr ""
+"[color=#ffffff]\n"
+"Andrea Ferretti (BatFerro)\n"
+"\n"
+"Vittoria Vignolini (Vivi)\n"
+"\n"
+"Achille Ferrari (coca.cola)\n"
+"\n"
+"Marco Manganaro (Fettenderi)\n"
+"\n"
+
+#: scenes/credits.tscn
+msgid ""
+"[color=#ffffff]\n"
+"-\n"
+"\n"
+"-\n"
+"\n"
+"-\n"
+"\n"
+"-\n"
+msgstr ""
+"[color=#ffffff]\n"
+"-\n"
+"\n"
+"-\n"
+"\n"
+"-\n"
+"\n"
+"-\n"
+
+#: scenes/credits.tscn
+msgid ""
+"[color=#ffffff]\n"
+"SFX Designer\n"
+"\n"
+"Illustratrice Concept Artist\n"
+"\n"
+"3D Modeller\n"
+"\n"
+"Programmer & Designer\n"
+"\n"
+msgstr ""
+"[color=#ffffff]\n"
+"SFX Designer\n"
+"\n"
+"Illustrator Concept Artist\n"
+"\n"
+"3D Modeller\n"
+"\n"
+"Programmer & Designer\n"
+"\n"
+
+#: scenes/credits.tscn
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]Da un'idea nata grazie a Davide e la sua passione per la "
+"cultura del suo paese.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"Realizzato con:\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]From an idea that came to be thanks to Davide and his passion "
+"about his country's culture.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"Made with:\n"
+
+#: scenes/credits.tscn
+msgid ""
+"\n"
+"\n"
+"[color=#ffffff]Grazie a Yotobi e Soloumido per questa bellissima occasione.\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"[color=#ffffff]Thanks to Yotobi and SoloUmido for hosting this amazing game "
+"jam.\n"
+"\n"
+
+#: scenes/credits.tscn
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]Continua . . .\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"[color=#ffffff]Continue . . .\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+
+#: globals/gui.tscn
+msgid "0"
+msgstr ""
+
+#: globals/gui.tscn
+msgid "Pausa"
+msgstr "Pause"
+
+#: globals/gui.tscn
+msgid "Cambia Lingua - Ita"
+msgstr "Change Language - Eng"
+
+#: globals/gui.tscn
+msgid "Volume Generale"
+msgstr "Master Volume"
+
+#: globals/gui.tscn
+msgid "Esci"
+msgstr "Quit"
+
+#: scenes/objects/bell.tscn
+msgid ""
+"[center][img=40]res://assets/ui/key_e.png[/img] Silenzia e Ferma Campana"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Silence and Stop Bell"
+
+#: scenes/objects/bell_trap.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Disattiva"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Disable"
+
+#: scenes/objects/concept_art_piece.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi Concept Art"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take Concept Art"
+
+#: scenes/objects/disguise.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Indossa"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Wear"
+
+#: scenes/objects/door.tscn scenes/objects/double_door.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Apri "
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Open "
+
+#: scenes/objects/lever.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Attiva"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Activate"
+
+#: scenes/objects/saving_station.tscn
+msgid "[center][img=30]res://assets/ui/key_e.png[/img] Salva"
+msgstr "[center][img=30]res://assets/ui/key_e.png[/img] Save"
+
+#: scenes/objects/wool_piece.tscn
+msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi"
+msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take"
+
+#: scenes/main_menu.tscn
+msgid "Su Nuraghe"
+msgstr "Su Nuraghe"
+
+#: scenes/main_menu.tscn
+msgid "New Game"
+msgstr "New Game"
+
+#: scenes/main_menu.tscn
+msgid "Continue"
+msgstr "Continue"
+
+#: scenes/main_menu.tscn
+msgid "Quit"
+msgstr "Quit"
+
+#: globals/gui.gd
+msgid "Schermo Intero - Nativo"
+msgstr "Fullscreen - Native"
+
+#: globals/gui.gd
+msgid "Schermo Intero - ON"
+msgstr "Fullscreen - ON"
+
+#: globals/gui.gd
+msgid "Schermo Intero - OFF"
+msgstr "Fullscreen - OFF"
+
+#: scenes/components/volume_selector.tscn
+msgid "-"
+msgstr ""
+
+#: scenes/components/volume_selector.tscn
+msgid "10"
+msgstr ""
+
+#: scenes/components/volume_selector.tscn
+msgid "+"
+msgstr ""

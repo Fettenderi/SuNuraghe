@@ -1,0 +1,132 @@
+[gd_scene load_steps=20 format=3 uid="uid://cdhup6auak1jd"]
+
+[ext_resource type="PackedScene" uid="uid://cphm70vicseat" path="res://scenes/actors/creatures/creature.tscn" id="1_1gtf5"]
+[ext_resource type="Script" uid="uid://7pj4wuotv7pe" path="res://scripts/puppeted_mamuthones.gd" id="2_pfkpj"]
+[ext_resource type="Texture2D" uid="uid://dueaw3xyepeht" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="3_8w4wy"]
+[ext_resource type="Texture2D" uid="uid://c5edmya8fh0e0" path="res://addons/kenney_prototype_textures/orange/texture_08.png" id="4_mqndm"]
+[ext_resource type="Script" uid="uid://bs4g6atbv1vr0" path="res://scenes/actors/creatures/movement_states/idle_state.gd" id="5_3gf8k"]
+[ext_resource type="Script" uid="uid://bhrqsfsyii1gh" path="res://scenes/actors/creatures/movement_states/move_state.gd" id="6_nwhw7"]
+[ext_resource type="Script" uid="uid://btanmiboxbf8p" path="res://scenes/actors/creatures/movement_states/stare_state.gd" id="7_fsu5c"]
+[ext_resource type="Script" uid="uid://6ghcjfnrbjv2" path="res://scenes/actors/creatures/movement_states/follow_state.gd" id="8_gled2"]
+[ext_resource type="Script" uid="uid://cgwnta6j3makj" path="res://scenes/actors/creatures/movement_states/dance_state.gd" id="9_yu0q1"]
+[ext_resource type="Script" uid="uid://dvtldq0qxud5t" path="res://scenes/actors/creatures/movement_states/chase_state.gd" id="10_kcbma"]
+[ext_resource type="Script" uid="uid://chjrj1d1jdmrs" path="res://scenes/actors/creatures/movement_states/kill_state.gd" id="11_goiee"]
+[ext_resource type="Script" uid="uid://c36wyajajwypx" path="res://scenes/actors/creatures/movement_states/wandering_state.gd" id="12_1eag1"]
+[ext_resource type="Script" uid="uid://c7ubq7oc8fh0f" path="res://scenes/actors/creatures/movement_states/returning_state.gd" id="13_qbm1u"]
+[ext_resource type="Script" uid="uid://drreay5j7tk33" path="res://scenes/actors/creatures/movement_states/new_patrol_state.gd" id="14_1e54j"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhukm"]
+radius = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u7wol"]
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nu7mx"]
+albedo_texture = ExtResource("3_8w4wy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dr4gf"]
+albedo_texture = ExtResource("4_mqndm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vexqk"]
+albedo_texture = ExtResource("4_mqndm")
+
+[node name="MamuthonesBeehave" instance=ExtResource("1_1gtf5")]
+script = ExtResource("2_pfkpj")
+schedule = null
+
+[node name="CollisionShape" parent="." index="1"]
+shape = SubResource("CapsuleShape3D_uhukm")
+
+[node name="Head" parent="Mesh" index="0"]
+visible = true
+
+[node name="CSGMesh3D" parent="Mesh" index="3"]
+mesh = SubResource("CapsuleMesh_u7wol")
+material = SubResource("StandardMaterial3D_nu7mx")
+
+[node name="CSGSphere3D" parent="Mesh" index="4"]
+material_override = SubResource("StandardMaterial3D_dr4gf")
+
+[node name="CSGSphere3D2" parent="Mesh" index="5"]
+material_override = SubResource("StandardMaterial3D_vexqk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Mesh" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.3775, -0.842629)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.05
+light_size = 0.05
+omni_range = 0.647511
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Mesh" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.76837e-07, 1.26396, 0.94597)
+light_color = Color(1, 0.948667, 0.86, 1)
+light_energy = 0.1
+omni_range = 0.449582
+
+[node name="MovementSM" parent="." index="4" node_paths=PackedStringArray("starting_state")]
+starting_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="MovementSM" index="0"]
+script = ExtResource("5_3gf8k")
+change_rate = 4.0
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="MoveState" type="Node" parent="MovementSM" index="1"]
+script = ExtResource("6_nwhw7")
+change_rate = 4.0
+max_speed = 2.1
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="StareState" type="Node" parent="MovementSM" index="2"]
+script = ExtResource("7_fsu5c")
+change_rate = 4.0
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="FollowState" type="Node" parent="MovementSM" index="3"]
+script = ExtResource("8_gled2")
+change_rate = 4.0
+max_speed = 2.1
+distance = 3.0
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="DanceState" type="Node" parent="MovementSM" index="4"]
+script = ExtResource("9_yu0q1")
+change_rate = 4.0
+max_speed = 0.5
+little_jump_time = 0.8
+little_jump_speed = 300.0
+little_jump_factor = 0.25
+swings = 0.5
+max_suspects = 6
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="ChaseState" type="Node" parent="MovementSM" index="5"]
+script = ExtResource("10_kcbma")
+change_rate = 4.0
+max_speed = 3.5
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="KillState" type="Node" parent="MovementSM" index="6"]
+script = ExtResource("11_goiee")
+change_rate = 4.0
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="WanderingState" type="Node" parent="MovementSM" index="7"]
+script = ExtResource("12_1eag1")
+change_rate = 4.0
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="ReturningState" type="Node" parent="MovementSM" index="8"]
+unique_name_in_owner = true
+script = ExtResource("13_qbm1u")
+change_rate = 4.0
+max_speed = 2.1
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[node name="PatrolState" type="Node" parent="MovementSM" index="9"]
+script = ExtResource("14_1e54j")
+change_rate = 4.0
+max_speed = 1.5
+metadata/_custom_type_script = "uid://tl3irb7fk41e"
+
+[editable path="Mesh/Mamuthon"]

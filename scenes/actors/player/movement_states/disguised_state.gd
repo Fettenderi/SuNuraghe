@@ -4,8 +4,6 @@ extends State
 
 @export var max_walk_speed := 3.0
 @export var max_dance_speed := 3.0
-@export var head_bob_amplitude := 0.01
-@export var head_bob_frequency := 0.3
 
 @export_subgroup("Little Jump Configuration")
 @export var little_jump_time := 1.5
@@ -26,8 +24,6 @@ func start(_info : Dictionary = {}) -> void:
 	_active = true
 	
 	_starting_head_pos = user.head_start_pos.y
-	user.head_bob_amplitude = head_bob_amplitude
-	user.head_bob_frequency = head_bob_frequency
 	user.sound_maker.set_enabled(true)
 
 func _physics_process(delta: float) -> void:

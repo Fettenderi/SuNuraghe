@@ -9,10 +9,6 @@ enum {
 @export var change_rate := 1.0
 
 @export var max_speed := 1.0
-@export var head_bob_amplitude := 0.01
-@export var head_bob_frequency := 0.3
-
-@export var footsteps_period := 1.0
 
 @export var craw_detector : Area3D
 
@@ -29,7 +25,6 @@ func start(_info : Dictionary = {}) -> void:
 	if not _standup_delay_timer.is_inside_tree():
 		add_child(_standup_delay_timer, true)
 	
-	user.footsteps_player.set_period(footsteps_period)
 	user.head_start_pos.y -= 0.9
 	user.shape_controller.set_active_shape(CRAWLING)
 

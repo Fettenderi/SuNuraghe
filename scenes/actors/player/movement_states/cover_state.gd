@@ -9,10 +9,6 @@ enum {
 @export var change_rate := 1.0
 
 @export var max_speed := 1.0
-@export var head_bob_amplitude := 0.01
-@export var head_bob_frequency := 0.3
-
-@export var footsteps_period := 1.0
 
 var _active := false
 var _wants_crawl := false
@@ -20,7 +16,6 @@ var _wants_crawl := false
 func start(_info : Dictionary = {}) -> void:
 	_active = true
 
-	user.footsteps_player.set_period(footsteps_period)
 	user.head_start_pos.y -= 0.6
 	user.shape_controller.set_active_shape(CROUCHING)
 

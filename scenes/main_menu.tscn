@@ -40,50 +40,42 @@ transform = Transform3D(-0.426395, 0.219475, -0.877506, 0.135323, 0.974677, 0.17
 light_energy = 0.5
 actual_max_energy = 0.5
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -469.0
-offset_top = -462.0
-offset_right = -800.0
-offset_bottom = -462.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -86.0
+offset_right = 240.0
+offset_bottom = 86.0
 grow_vertical = 2
-scale = Vector2(1.70827, 1.70827)
-metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_bqqt6")
 text = "Su Nuraghe"
 label_settings = SubResource("LabelSettings_vue75")
 horizontal_alignment = 1
 
-[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
-visible = false
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "New Game"
+alignment = 0
 
-[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "Continue"
+alignment = 0
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
-visible = false
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
+alignment = 0
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 
 [editable path="SubViewportContainer/SubViewport/MenuBG"]
 [editable path="SubViewportContainer/SubViewport/MenuBG/Objects/bell_trap"]

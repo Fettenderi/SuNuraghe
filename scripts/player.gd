@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 const MASS = 80.0
 const TURNING_SPEED = 6.0
+const HEAD_BOBBING_SPEED = 90.0
 
 const HEAD_ROTATION_MIN = -90.0
 const HEAD_ROTATION_MAX = 90.0
@@ -42,15 +43,17 @@ var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var max_speed : float
 var stamina : float
-var head_bob_frequency := 0.3
-var head_bob_amplitude := 0.01
+var head_bob_frequency := 3.0
+var head_bob_amplitude := 0.1
+var head_bob_phase := 0.0
 var head_start_pos : Vector3
 
 var _accel := acceleration
 
 var _rotation_target_player : float
 var _rotation_target_head : float
-var _head_bob_tick := 0
+var _head_bob_tick := 0.0
+var _head_pos_target : Vector3
 
 var jump_buffered := false:
 	set(value):
@@ -71,6 +74,7 @@ var _was_jumping := false
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
+	Utils.setup_movement_variables(self, movement_sm.current_state)
 	#_scary_sound_timer = Utils.timer(3.0, _make_scary_sound)
 	#add_child(_scary_sound_timer, true)
 
@@ -86,15 +90,17 @@ func _ready() -> void:
 func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	_head_bob_tick += 1
+	_head_bob_tick += delta
 	
 	#_check_fear_distances()
 	_move_player(delta)
 	rotate_player(delta)
 	
+	
 	if velocity and is_on_floor():
-		_head_bob_update()
-	_reset_head_bob(delta)
+		_head_bob_update(delta)
+	else:
+		_reset_head_bob(delta)
 
 
 func _input(event : InputEvent) -> void:
@@ -145,18 +151,18 @@ func _set_rotation_target(mouse_motion : Vector2) -> void:
 	
 	_rotation_target_head = clamp(_rotation_target_head, deg_to_rad(HEAD_ROTATION_MIN), deg_to_rad(HEAD_ROTATION_MAX))
 
-func _head_bob_update() -> void:
+func _head_bob_update(delta : float) -> void:
 	var _pos := Vector3.ZERO
 	
-	_pos.y += sin(_head_bob_tick * head_bob_frequency) * head_bob_amplitude
-	_pos.x += cos(_head_bob_tick * head_bob_frequency / 2) * head_bob_amplitude * 2
+	_pos.x = (sin(_head_bob_tick * head_bob_frequency + head_bob_phase)) * head_bob_amplitude
+	_pos.y = - (cos(2 * _head_bob_tick * head_bob_frequency + head_bob_phase * 2) / 2) * head_bob_amplitude
 	
-	_head.position += _pos
+	_head.position = lerp(_head.position, head_start_pos + _pos, 1.0 - exp(-HEAD_BOBBING_SPEED * delta))
 
 func _reset_head_bob(delta : float) -> void:
 	if _head.position == head_start_pos: return
 	
-	_head.position = lerp(_head.position, head_start_pos, 2 * (1 / head_bob_frequency) * delta)
+	_head.position = lerp(_head.position, head_start_pos, 1.0 - exp(-HEAD_BOBBING_SPEED * delta))
 
 func _on_jump_buffer_timeout() -> void:
 	jump_buffered = false
@@ -206,6 +212,8 @@ func look(target : Node3D, delta : float) -> void:
 	
 	quaternion = quaternion.slerp(Quaternion(Vector3.UP, up_angle), mouse_delta).normalized()
 	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.RIGHT, right_angle), mouse_delta).normalized()
+
+
 
 func _load_data(data : GStorage) -> void:
 	if not data.has_value(&"player_" + &"position"): return

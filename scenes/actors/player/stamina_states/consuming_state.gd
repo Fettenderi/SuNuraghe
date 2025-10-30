@@ -1,5 +1,7 @@
 extends State
 
+@export var changing_factor := 1.0
+
 var _max_stamina : float = 0.0
 var _stamina : float
 var _is_active := false
@@ -21,7 +23,7 @@ func start(info : Dictionary = {}) -> void:
 func _physics_process(delta: float) -> void:
 	if not _is_active: return
 	
-	_stamina -= delta
+	_stamina -= delta * changing_factor
 	user.stamina = _stamina
 	Gui.update_stamina(_stamina / _max_stamina)
 	

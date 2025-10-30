@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxvnldxstrru7"]
+
+[ext_resource type="Script" uid="uid://b7qo2nkih0nau" path="res://scripts/volume_selector.gd" id="1_utrhf"]
+
+[node name="VolumeSelector" type="VBoxContainer"]
+script = ExtResource("1_utrhf")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Decrease" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../Increase")
+focus_neighbor_right = NodePath("../Increase")
+mouse_default_cursor_shape = 2
+disabled = true
+text = "<"
+
+[node name="VolumeVisualizer" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+disabled = true
+text = ">"
+
+[connection signal="button_up" from="HBoxContainer/Decrease" to="." method="_on_decrease_button_up"]
+[connection signal="button_up" from="HBoxContainer/Increase" to="." method="_on_increase_button_up"]
