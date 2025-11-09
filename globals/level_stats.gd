@@ -53,6 +53,7 @@ func save_data(save_name : String = "") -> void:
 		level_data.call_deferred(&"save_data")
 	else:
 		var new_level_data := GStorage.create(&"saves_" + save_name)
+		new_level_data.copy_data(level_data)
 		saving.emit(new_level_data)
 		new_level_data.call_deferred(&"save_data")
 

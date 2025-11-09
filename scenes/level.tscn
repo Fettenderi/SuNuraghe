@@ -4950,7 +4950,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.4202, -1.09973, 1.44521)
 collision_mask = 33
 schedule = SubResource("Resource_bo6tc")
 activation_receiver = ExtResource("9_ql8jr")
-deactivation_receiver = ExtResource("32_kbk4x")
+deactivation_receiver = ExtResource("19_idnaj")
 
 [node name="Waypoints" type="Node" parent="Enemies/Layer1/Cosmo"]
 

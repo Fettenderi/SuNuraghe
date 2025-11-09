@@ -271,65 +271,8 @@ func _save_data(data : GStorage) -> void:
 		&"disguised": PlayerStats.disguised,
 	})
 
-#func _on_fear_box_body_entered(body: Node3D) -> void:
-	#if not body is Creature: return
-	#
-	##print("DISTANZA DA UN MAMUTHOS DAL PLAYER VICINA")
-	#
-	#_nearest_distance = INF
-	#
-	#for _creature : Creature in fear_box.get_overlapping_bodies():
-		#if abs((_creature.global_position - global_position).length()) <= _nearest_distance:
-			#_nearest_creature = _creature
-			#_nearest_distance = abs((_creature.global_position - global_position).length())
-#
-#func _on_fear_box_body_exited(body: Node3D) -> void:
-	#if not body is Creature: return
-	#
-	#_check_fear_box()
-
-
 func _on_expanded_hit_box_body_entered(_body: Node3D) -> void:
 	_on_stairs = true
 
 func _on_expanded_hit_box_body_exited(_body: Node3D) -> void:
 	_on_stairs = false
-
-
-#func _check_fear_box():
-	#if not is_inside_tree(): return
-	#
-	#_nearest_distance = INF
-	#
-	#if not fear_box.has_overlapping_bodies():
-		#_nearest_creature = null
-		##print("DISTANZA DA UN MAMUTHOS DAL PLAYER TROPPO ALTA")
-		#return
-	#
-	#for _creature : Creature in fear_box.get_overlapping_bodies():
-		#if abs((_creature.global_position - global_position).length()) < _nearest_distance:
-			#_nearest_creature = _creature
-			#_nearest_distance = abs((_creature.global_position - global_position).length())
-#
-#func _check_fear_distances():
-	#if not is_inside_tree(): return
-	#
-	#if _nearest_creature == null: return
-	#
-	#_nearest_distance = INF
-	#
-	#for _creature : Creature in fear_box.get_overlapping_bodies():
-		#if abs((_creature.global_position - global_position).length()) <= _nearest_distance:
-			#_nearest_creature = _creature
-			#_nearest_distance = abs((_creature.global_position - global_position).length())
-	#
-	#if not _in_scary_sound_cooldown:
-		#_in_scary_sound_cooldown = true
-		#_scary_sound_timer.start(max(randfn(23.0, 1.0), 0.0))
-	#
-	##print("DISTANZA DA UN MAMUTHOS DAL PLAYER " + str(_nearest_distance))
-
-#func _make_scary_sound():
-	#if _nearest_creature != null:
-		#_nearest_creature.make_noise()
-	#_in_scary_sound_cooldown = false

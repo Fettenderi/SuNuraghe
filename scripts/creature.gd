@@ -58,6 +58,8 @@ var _voices_timer : Timer
 var is_manual_jumping := false
 
 func _ready() -> void:
+	set_deferred("visible", false)
+	
 	if activation_receiver != null:
 		activation_receiver.received.connect(_start_movement.unbind(1))
 	else:
@@ -102,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		_on_navigation_finished()
 	
+	
 	#if _local_destination.length_squared() <= 0.0001:
 		#_on_navigation_finished()
 	
@@ -142,8 +145,6 @@ func _start_movement() -> void:
 
 func _end_movement() -> void:
 	assert(LevelStats.level_data != null)
-	
-	
 	
 	LevelStats.level_data.set_value(Utils.nhash(self), {
 		&"erased" : true
@@ -232,12 +233,16 @@ func _roof_function(value : float, lenght : float):
 
 func _load_data(data : GStorage) -> void:
 	if not data.has_value(Utils.nhash(self)):
+		set_deferred("visible", false)
 		if _can_start_movement:
 			_start_movement()
 		return
 	
 	var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
 	if loaded_data[&"erased"]:
+		LevelStats.level_data.set_value(Utils.nhash(self), {
+			&"erased" : true
+		})
 		queue_free()
 		return
 	

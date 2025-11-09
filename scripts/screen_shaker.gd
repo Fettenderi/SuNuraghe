@@ -5,4 +5,7 @@ extends Node
 
 func _ready() -> void:
 	if receiver != null:
-		receiver.received.connect(player.shake)
+		receiver.received.connect(_shake.unbind(1))
+
+func _shake():
+	player.shake()

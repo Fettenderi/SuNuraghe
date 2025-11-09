@@ -56,6 +56,7 @@ func _on_trap_activated(value : Variant):
 	
 	_new_task_info[&"located"] = value
 	
+	
 	interrupted_state = movement_state_machine.current_state.name
 	movement_state_machine.change_state(schedule.trap_activated_task.get_state(), _new_task_info, true)
 
@@ -69,7 +70,11 @@ func _load_data(data : GStorage) -> void:
 	
 	var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
 	if loaded_data[&"erased"]:
-		queue_free()
+		LevelStats.level_data.set_value(Utils.nhash(self), {
+			&"erased" : true
+		})
+
+		call_deferred("queue_free")
 		return
 	
 	if not loaded_data[&"is_active"]:

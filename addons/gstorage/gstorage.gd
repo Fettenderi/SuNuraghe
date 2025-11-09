@@ -54,6 +54,9 @@ func load_data():
 			data = JSON.parse_string(content) if content else {}
 			file.close()
 
+func copy_data(other_storage : GStorage):
+	data = other_storage.data.duplicate()
+
 func has_data() -> bool:
 	return FileAccess.file_exists(save_path)
 
