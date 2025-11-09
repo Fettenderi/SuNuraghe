@@ -1,6 +1,6 @@
 extends State
 
-const TARGET_SAMPLING_TIME = 3.0
+const TARGET_SAMPLING_TIME = 1.5
 
 @export var change_rate := 1.0
 
@@ -24,7 +24,8 @@ func start(info : Dictionary = {}) -> void:
 		_navigation_agent_3d = user.navigation_agent_3d
 	
 	_target = user.target
-		
+	_navigation_agent_3d.target_position = _get_actual_target_position(Vector3(_target.global_position.x, user.global_position.y,_target.global_position.z))
+	
 	if info.has(&"speed"):
 		max_speed = info[&"speed"]
 	
@@ -72,11 +73,16 @@ func _physics_process(delta: float) -> void:
 	
 	user.look(_target, delta)
 	
+	_stop_if_near(Vector3(_target.global_position.x, user.global_position.y,_target.global_position.z))
+	
 	if _target_sampling_elapsed > TARGET_SAMPLING_TIME:
 		_target_sampling_elapsed = 0.0
 		_navigation_agent_3d.target_position = _get_actual_target_position(Vector3(_target.global_position.x, user.global_position.y,_target.global_position.z))
 	
 
+func _stop_if_near(target_position : Vector3):
+	if (user.global_position - target_position).length() <= distance:
+		_navigation_agent_3d.target_position = user.global_position
 
 func _get_actual_target_position(target_position : Vector3) -> Vector3:
 	if (user.global_position - target_position).length() > distance:

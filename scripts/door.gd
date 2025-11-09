@@ -18,7 +18,10 @@ const ARRIVED_THRESHOLD = 0.01
 		is_open = value
 		_set_open(value)
 
-@export var is_locked := false
+@export var is_locked := false:
+	set(value):
+		is_locked = value
+		_has_been_tampered = true
 
 @export var lock_receiver_resource : ReceiverRes
 @export var open_receiver_resource : ReceiverRes
@@ -26,7 +29,7 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var strattle_emitter_resource : EmitterRes
 
-@export var rebake_emitter : EmitterRes
+#@export var rebake_emitter : EmitterRes
 
 @export var has_pressures := true
 

@@ -1,7 +1,10 @@
 class_name SightDetectorBox
 extends Area3D
 
-@export var active := false
+@export var active := false:
+	set(value):
+		active = value
+		_has_been_tampered = true
 @export var emit_watcher_position := false
 
 @export var receiver_resource : ReceiverRes

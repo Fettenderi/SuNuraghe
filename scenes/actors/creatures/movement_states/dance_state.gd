@@ -44,8 +44,11 @@ var _suspect_level := 0
 var _on_delay := false 
 var _delay_timer : Timer 
 
+var _increment_progress_counter := false
+
 func start(info : Dictionary = {}) -> void:
 	_is_active = true
+	_increment_progress_counter = true
 	
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
@@ -96,6 +99,8 @@ func start(info : Dictionary = {}) -> void:
 		_right_handed = info[&"right_handed"]
 
 func update(info : Dictionary = {}) -> void:
+	if not _is_active: return
+	
 	if info.has(&"touched"):
 		get_tree().call_group(&"Enemy", "suspect_player")
 		return
@@ -120,11 +125,13 @@ func update(info : Dictionary = {}) -> void:
 
 
 	if info.has(&"arrived"):
-		_waypoint_progress += 1
+		if _increment_progress_counter:
+			_waypoint_progress += 1
 		
 		if _waypoint_progress < len(_waypoints):
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 		else:
+			_increment_progress_counter = false
 			if _emitter != null:
 				var _prev_emitter := _emitter
 				_emitter.send_signal(true)
@@ -151,6 +158,7 @@ func _rotation_function(elapsed : float):
 
 func end() -> void:
 	_is_active = false
+	_increment_progress_counter = false
 	user.mesh.rotation.y = _starting_rotation
 	if _delay_timer != null:
 		_delay_timer.stop()
