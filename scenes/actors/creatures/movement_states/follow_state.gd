@@ -21,20 +21,20 @@ func start(info : Dictionary = {}) -> void:
 	
 	_target = user.target
 		
-	if info.has("speed"):
-		max_speed = info["speed"]
+	if info.has(&"speed"):
+		max_speed = info[&"speed"]
 	
 	user.max_speed = max_speed
 	user.change_rate = change_rate
 
-	if info.has("await"):
-		_receiver = info["await"]
+	if info.has(&"await"):
+		_receiver = info[&"await"]
 		_receiver.received.connect(_on_received_signal)
 	else:
 		_receiver = null
 
-	if info.has("time"):
-		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
+	if info.has(&"time"):
+		_stare_timer = Utils.timer(info[&"time"], _on_stare_timer_ended, _stare_timer)
 		
 		if not _stare_timer.is_inside_tree():
 			add_child(_stare_timer, true)
@@ -42,11 +42,11 @@ func start(info : Dictionary = {}) -> void:
 		_stare_timer.start()
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
+	if info.has(&"touched"):
 		#print("AOO ARRASSATI " + user.name + " " + name)
 		return
 
-	if info.has("end"):
+	if info.has(&"end"):
 		user.end_buffered = true
 
 
@@ -86,3 +86,6 @@ func _on_received_signal(_value) -> void:
 	_receiver.received.disconnect(_on_received_signal)
 	
 	user.progress()
+
+func get_timer_progress() -> Dictionary:
+	return {"time" : _stare_timer.time_left}

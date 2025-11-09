@@ -17,7 +17,6 @@ const KEY_BIND_COVER = "cover"
 const KEY_BIND_SPRINT = "sprint"
 const KEY_BIND_NOCLIP = "noclip"
 
-
 @export_subgroup("Movement")
 @export var acceleration := 50.0
 @export var in_air_acceleration := 5.0
@@ -26,6 +25,7 @@ const KEY_BIND_NOCLIP = "noclip"
 @export_subgroup("Mouse")
 @export var mouse_sentitivity := 0.002
 @export var mouse_acceleration := 50
+
 
 @onready var camera_3d: Camera3D = $Head/Camera3D
 
@@ -47,6 +47,10 @@ var head_bob_frequency := 3.0
 var head_bob_amplitude := 0.1
 var head_bob_phase := 0.0
 var head_start_pos : Vector3
+
+var _shaking := false
+var _shake_elapsed := 0.0
+var _shake_pos := Vector3.ZERO
 
 var _accel := acceleration
 
@@ -90,12 +94,12 @@ func _ready() -> void:
 func _usual_update(delta : float) -> void:
 	if Engine.is_editor_hint(): return
 	
-	_head_bob_tick += delta
-	
 	#_check_fear_distances()
 	_move_player(delta)
 	rotate_player(delta)
 	
+	if _shaking:
+		_handle_shaking(delta)
 	
 	if velocity and is_on_floor():
 		_head_bob_update(delta)
@@ -145,6 +149,26 @@ func rotate_player(delta : float) -> void:
 	
 	_head.quaternion = _head.quaternion.slerp(Quaternion(Vector3.LEFT, _rotation_target_head), mouse_acceleration * delta)
 
+func shake():
+	_shaking = true
+
+func _handle_shaking(delta : float):
+	if _shake_elapsed > 18.0:
+		_shake_elapsed = 0.0
+		_shaking = false
+		return
+	
+	_shake_elapsed += delta
+	_shake_pos.x = randf_range(-1.0, 1.0)
+	_shake_pos.y = randf_range(-1.0, 1.0)
+	
+	var noise := randfn(0.0, 0.5)
+	var xx := _shake_elapsed * _shake_elapsed # x^{2}e^{-0.5x}
+	var half_x := _shake_elapsed / 2.0
+	var y : float = max(xx * exp(-half_x), 0.0) * 5.0
+
+	camera_3d.position = lerp(camera_3d.position, _shake_pos, 1.0 - exp(-(noise + y) * delta))
+
 func _set_rotation_target(mouse_motion : Vector2) -> void:
 	_rotation_target_player += -mouse_motion.x * mouse_sentitivity
 	_rotation_target_head += -mouse_motion.y * mouse_sentitivity
@@ -154,15 +178,21 @@ func _set_rotation_target(mouse_motion : Vector2) -> void:
 func _head_bob_update(delta : float) -> void:
 	var _pos := Vector3.ZERO
 	
+	_head_bob_tick += delta
+	
 	_pos.x = (sin(_head_bob_tick * head_bob_frequency + head_bob_phase)) * head_bob_amplitude
 	_pos.y = - (cos(2 * _head_bob_tick * head_bob_frequency + head_bob_phase * 2) / 2) * head_bob_amplitude
 	
 	_head.position = lerp(_head.position, head_start_pos + _pos, 1.0 - exp(-HEAD_BOBBING_SPEED * delta))
 
 func _reset_head_bob(delta : float) -> void:
-	if _head.position == head_start_pos: return
+	if _head_bob_tick == 0.0: return
 	
-	_head.position = lerp(_head.position, head_start_pos, 1.0 - exp(-HEAD_BOBBING_SPEED * delta))
+	if _head.position == head_start_pos: 
+		_head_bob_tick = 0.0
+		return
+	
+	_head.position = lerp(_head.position, head_start_pos, 1.0 - exp(-HEAD_BOBBING_SPEED / 2 * delta))
 
 func _on_jump_buffer_timeout() -> void:
 	jump_buffered = false
@@ -216,30 +246,30 @@ func look(target : Node3D, delta : float) -> void:
 
 
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(&"player_" + &"position"): return
+	if not data.has_value(&"player"): return
 	
-	global_position = Utils.string_to_vector3(data.get_value(&"player_" + &"position"))
-	FmodServer.set_global_parameter_by_name("Tension", data.get_value(&"player_" + &"tension"))
+	global_position = Utils.string_to_vector3(data.get_value(&"player")[&"position"])
+	FmodServer.set_global_parameter_by_name("Tension", data.get_value(&"player")[&"tension"])
 	
-	var _rot_vector : Vector4 = Utils.string_to_vector4(data.get_value(&"player_" + &"rotation"))
+	var _rot_vector : Vector4 = Utils.string_to_vector4(data.get_value(&"player")[&"rotation"])
 	_rotation_target_player = sign(_rot_vector.x) * Quaternion(0.0, _rot_vector.x, 0.0, _rot_vector.y).get_angle()
 	_rotation_target_head = - sign(_rot_vector.z) * Quaternion(_rot_vector.z, 0.0, 0.0, _rot_vector.w).get_angle()
 	
-	var temp : Array = data.get_value(&"player_" + &"concept_art_pieces")
+	var temp : Array = data.get_value(&"player")[&"concept_art_pieces"]
 	PlayerStats.concept_art_pieces = temp
-	PlayerStats.wool_pieces = data.get_value(&"player_" + &"wool_pieces")
-	PlayerStats.disguised = data.get_value(&"player_" + &"disguised")
+	PlayerStats.wool_pieces = data.get_value(&"player")[&"wool_pieces"]
+	PlayerStats.disguised = data.get_value(&"player")[&"disguised"]
 
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(&"player_" + &"position", global_position)
-	data.set_value(&"player_" + &"tension", FmodServer.get_global_parameter_by_name("Tension"))
-	data.set_value(&"player_" + &"rotation", Vector4(quaternion.y, quaternion.w, _head.quaternion.x, _head.quaternion.w))
-	
-	data.set_value(&"player_" + &"concept_art_pieces", PlayerStats.concept_art_pieces)
-	data.set_value(&"player_" + &"wool_pieces",PlayerStats.wool_pieces)
-	data.set_value(&"player_" + &"disguised", PlayerStats.disguised)
-
+	data.set_value(&"player", {
+		&"position": global_position,
+		&"rotation": Vector4(quaternion.y, quaternion.w, _head.quaternion.x, _head.quaternion.w),
+		&"tension": FmodServer.get_global_parameter_by_name("Tension"),
+		&"concept_art_pieces": PlayerStats.concept_art_pieces,
+		&"wool_pieces": PlayerStats.wool_pieces,
+		&"disguised": PlayerStats.disguised,
+	})
 
 #func _on_fear_box_body_entered(body: Node3D) -> void:
 	#if not body is Creature: return

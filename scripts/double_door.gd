@@ -4,12 +4,12 @@ extends Node3D
 
 const ARRIVED_THRESHOLD = 0.01
 
-#@export var bake_override := false:
-	#set(value):
-		#if not Engine.is_editor_hint() or not is_inside_tree(): return
-#
-		#bake_override = value
-		#_set_bake_mode(value)
+@export var bake_override := false:
+	set(value):
+		if not Engine.is_editor_hint() or not is_inside_tree(): return
+
+		bake_override = value
+		_set_bake_mode(value)
 
 @export var is_open := false:
 	set(value):
@@ -18,12 +18,13 @@ const ARRIVED_THRESHOLD = 0.01
 
 @export var receiver_resource : ReceiverRes
 @export var strattle_emitter_resource : EmitterRes
-@export var rebake_emitter : EmitterRes
+#@export var rebake_emitter : EmitterRes
 
 @onready var _mesh_right: Node3D = %MeshRight
 @onready var _mesh_left: Node3D = %MeshLeft
 @onready var _interactable_box: InteractableBox = %InteractableBox
 @onready var _sfx_emitter: FmodEventEmitter3D = %SFXEmitter
+#@onready var _navigation_link_3d: NavigationLink3D = %NavigationLink3D
 
 var _right_target_rotation := PI / 2
 var _left_target_rotation := 0.0
@@ -33,6 +34,8 @@ var _max_vibrating_time := 0.4
 var _vibrating_time := 0.0
 var _vibration_angle := PI / 16
 var _vibration_amount := 2
+
+var _has_been_tampered := false
 
 func _ready() -> void:
 	_set_open(is_open, true)
@@ -55,7 +58,11 @@ func _set_open(value : bool, bypass := false):
 			_mesh_right.rotation.y = 0.0 if value else - PI / 2
 		if _mesh_left != null:
 			_mesh_left.rotation.y = PI if value else - PI / 2
+		#if _navigation_link_3d != null:
+			#_navigation_link_3d.set_deferred("enabled", value)
 	else:
+		_has_been_tampered = true
+		
 		if _sfx_emitter != null:
 			_sfx_emitter.play()
 		_arrived = false
@@ -63,8 +70,8 @@ func _set_open(value : bool, bypass := false):
 		_left_target_rotation = PI if value else - PI / 2
 
 func _set_bake_mode(value : bool) -> void:
-	_mesh_right.position.y = -2.65 if value else 0.0
-	_mesh_left.position.y = -2.65 if value else 0.0
+	_mesh_right.rotation.y = 0.0 if not value else - PI / 2
+	_mesh_left.rotation.y = PI if not value else - PI / 2
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -83,8 +90,9 @@ func _physics_process(delta: float) -> void:
 	if _vibrating_time <= 0.0 and abs(_mesh_right.rotation.y - _right_target_rotation) <= ARRIVED_THRESHOLD:
 		_arrived = true
 		
-		if rebake_emitter != null:
-			rebake_emitter.send_signal()
+		#_navigation_link_3d.set_deferred("enabled", is_open)
+		#if rebake_emitter != null:
+			#rebake_emitter.send_signal()
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if Engine.is_editor_hint(): return
@@ -104,9 +112,14 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	is_open = not is_open
 
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"is_open"): return
+	if not data.has_value(Utils.nhash(self)): return
 	
-	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
+	_has_been_tampered = true
+	is_open = data.get_value(Utils.nhash(self))[&"is_open"]
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"is_open", is_open)
+	if not _has_been_tampered: return
+	
+	data.set_value(Utils.nhash(self), {
+		&"is_open" : is_open
+	})

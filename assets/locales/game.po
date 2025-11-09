@@ -198,6 +198,10 @@ msgstr ""
 "\n"
 
 #: globals/gui.tscn
+msgid "DEBUG"
+msgstr ""
+
+#: globals/gui.tscn
 msgid "0"
 msgstr ""
 
@@ -217,38 +221,41 @@ msgstr "Master Volume"
 msgid "Esci"
 msgstr "Quit"
 
+#: globals/gui.tscn globals/gui.gd
+msgid "Reset Demo"
+msgstr "Reset Demo"
+
 #: scenes/objects/bell.tscn
-msgid ""
-"[center][img=40]res://assets/ui/key_e.png[/img] Silenzia e Ferma Campana"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Silence and Stop Bell"
+msgid "Silenzia e Ferma Campana"
+msgstr "Silence and Stop Bell"
 
 #: scenes/objects/bell_trap.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Disattiva"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Disable"
+msgid "Disattiva"
+msgstr "Deactivate"
 
 #: scenes/objects/concept_art_piece.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi Concept Art"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take Concept Art"
+msgid "Prendi Concept Art"
+msgstr "Pick up Concept Art"
 
 #: scenes/objects/disguise.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Indossa"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Wear"
+msgid "Indossa"
+msgstr "Wear"
 
 #: scenes/objects/door.tscn scenes/objects/double_door.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Apri "
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Open "
+msgid "Apri "
+msgstr "Open "
 
 #: scenes/objects/lever.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Attiva"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Activate"
+msgid "Attiva"
+msgstr "Activate"
 
 #: scenes/objects/saving_station.tscn
-msgid "[center][img=30]res://assets/ui/key_e.png[/img] Salva"
-msgstr "[center][img=30]res://assets/ui/key_e.png[/img] Save"
+msgid "Salva"
+msgstr "Save"
 
 #: scenes/objects/wool_piece.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi"
-msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take"
+msgid "Prendi"
+msgstr "Pick up"
 
 #: scenes/main_menu.tscn
 msgid "Su Nuraghe"
@@ -278,8 +285,12 @@ msgstr "Fullscreen - ON"
 msgid "Schermo Intero - OFF"
 msgstr "Fullscreen - OFF"
 
+#: globals/gui.gd
+msgid "SEI SICURO?"
+msgstr "ARE YOU SURE?"
+
 #: scenes/components/volume_selector.tscn
-msgid "-"
+msgid "<"
 msgstr ""
 
 #: scenes/components/volume_selector.tscn
@@ -287,5 +298,38 @@ msgid "10"
 msgstr ""
 
 #: scenes/components/volume_selector.tscn
-msgid "+"
+msgid ">"
 msgstr ""
+
+#: scenes/starting.tscn
+msgid ""
+"Si consiglia di giocare a luci spente e con le cuffie per un'esperienza "
+"migliore."
+msgstr ""
+"We suggest playing with headphones and lights off for a better experience."
+
+#~ msgid ""
+#~ "[center][img=40]res://assets/ui/key_e.png[/img] Silenzia e Ferma Campana"
+#~ msgstr ""
+#~ "[center][img=40]res://assets/ui/key_e.png[/img] Silence and Stop Bell"
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Disattiva"
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Disable"
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi Concept Art"
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take Concept Art"
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Indossa"
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Wear"
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Apri "
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Open "
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Attiva"
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Activate"
+
+#~ msgid "[center][img=30]res://assets/ui/key_e.png[/img] Salva"
+#~ msgstr "[center][img=30]res://assets/ui/key_e.png[/img] Save"
+
+#~ msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi"
+#~ msgstr "[center][img=40]res://assets/ui/key_e.png[/img] Take"

@@ -36,6 +36,7 @@ const ARRIVED_THRESHOLD = 0.01
 @onready var _collisions: StaticBody3D = %Collisions
 @onready var _interactable_box: InteractableBox = %InteractableBox
 @onready var _sfx_emitter: FmodEventEmitter3D = %SFXEmitter
+#@onready var _navigation_link_3d: NavigationLink3D = %NavigationLink3D
 
 var _target_rotation := 0.0
 var _arrived := true
@@ -48,6 +49,8 @@ var _vibration_amount := 2
 var _open_angle := PI / 2 + PI / 8
 
 var _player_near := false
+
+var _has_been_tampered := false
 
 func _ready() -> void:
 	_set_open(is_open or bake_override, true)
@@ -77,20 +80,27 @@ func _set_open(value : bool, bypass : bool = false) -> void:
 			_mesh.rotation.y = _open_angle if value else 0.0
 		if _collisions != null:
 			_collisions.rotation.y = _open_angle if value else 0.0
-		if not Engine.is_editor_hint() and rebake_emitter != null:
-			rebake_emitter.send_signal()
+		#if _navigation_link_3d != null:
+			#_navigation_link_3d.set_deferred("enabled", value)
+		#if not Engine.is_editor_hint() and rebake_emitter != null:
+			#rebake_emitter.send_signal()
 	else:
+		_has_been_tampered = true
+		
 		if _sfx_emitter != null:
 			_sfx_emitter.play(0.2)
 		_arrived = false
 		_target_rotation = _open_angle if value else 0.0
 		if _collisions != null:
 			_collisions.rotation.y = _target_rotation
-		if rebake_emitter != null:
-			rebake_emitter.send_signal()
+		
+		#if _navigation_link_3d != null:
+			#_navigation_link_3d.set_deferred("enabled", value)
+		#if rebake_emitter != null:
+			#rebake_emitter.send_signal()
 
 func _set_bake_mode(value : bool) -> void:
-	_mesh.rotation.y = _open_angle if value else 0.0
+	_collisions.rotation.y = _open_angle if (not value) else 0.0
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -120,14 +130,21 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	is_open = not is_open
 
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"is_open"): return
+	if not data.has_value(Utils.nhash(self)): return
 
-	is_open = bool(data.get_value(Utils.nhash(self) + &"is_open"))
-	is_locked = bool(data.get_value(Utils.nhash(self) + &"is_locked"))
+	_has_been_tampered = true
+
+	var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
+	is_open = loaded_data[&"is_open"]
+	is_locked = loaded_data[&"is_locked"]
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"is_open", is_open)
-	data.set_value(Utils.nhash(self) + &"is_locked", is_locked)
+	if not _has_been_tampered: return
+	
+	data.set_value(Utils.nhash(self), {
+		&"is_open" : is_open,
+		&"is_locked" : is_locked
+	})
 
 
 func _on_opener_box_signal_emitted() -> void:

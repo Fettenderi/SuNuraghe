@@ -18,20 +18,22 @@ func start(info : Dictionary = {}) -> void:
 
 	_next_state = ""
 	
-	if info.has("next_state"):
-		_next_state = info["next_state"]
+	user.emit_voice()
 	
-	if info.has("next_info"):
-		_next_info = info["next_info"]
+	if info.has(&"next_state"):
+		_next_state = info[&"next_state"]
+	
+	if info.has(&"next_info"):
+		_next_info = info[&"next_info"]
 
 	
-	if info.has("await"):
-		_receiver = info["await"]
+	if info.has(&"await"):
+		_receiver = info[&"await"]
 		_receiver.received.connect(_on_received_signal)
 
 	
-	if info.has("time"):
-		_stare_timer = Utils.timer(info["time"], _on_stare_timer_ended, _stare_timer)
+	if info.has(&"time"):
+		_stare_timer = Utils.timer(info[&"time"], _on_stare_timer_ended, _stare_timer)
 		
 		if not _stare_timer.is_inside_tree():
 			add_child(_stare_timer, true)
@@ -39,13 +41,13 @@ func start(info : Dictionary = {}) -> void:
 		_stare_timer.start()
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched") and info.has("can_kill") and info["can_kill"]:
-		var _toucher : Player = info["touched"]
+	if info.has(&"touched") and info.has(&"can_kill") and info[&"can_kill"]:
+		var _toucher : Player = info[&"touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher})
+		state_machine.change_state(&"KillState", {&"to_look": _toucher})
 
-	if info.has("end"):
+	if info.has(&"end"):
 		user.end_buffered = true
 
 
@@ -80,3 +82,6 @@ func _on_received_signal(_value) -> void:
 		user.progress()
 	else:
 		state_machine.change_state(_next_state, _next_info)
+
+func get_timer_progress() -> Dictionary:
+	return {"time" : _stare_timer.time_left}

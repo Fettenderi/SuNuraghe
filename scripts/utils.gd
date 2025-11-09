@@ -111,7 +111,7 @@ static func string_to_string_array(string := "") -> Array[String]:
 	return array
 
 static func nhash(node: Node) -> String:
-	return node.name + str(hash(node.name + str(node.get_path())))
+	return node.name + str(rand_from_seed(node.get_path().hash()))
 
 static func clremap(ivalue, imin, imax, fmin, fmax):
 	return clamp(remap(ivalue, imin, imax, fmin, fmax), fmin, fmax)

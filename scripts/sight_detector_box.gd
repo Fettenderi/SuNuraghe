@@ -9,6 +9,8 @@ extends Area3D
 
 signal signal_emitted(value)
 
+var _has_been_tampered := false
+
 func _ready() -> void:
 	if receiver_resource != null:
 		receiver_resource.received.connect((func(): active = not active).unbind(1))
@@ -19,6 +21,8 @@ func _ready() -> void:
 
 func _interactable_entered(area: Area3D):
 	if not active: return
+	
+	_has_been_tampered = true
 	
 	active = false   
 	signal_emitted.emit(true)
@@ -34,7 +38,10 @@ func _interactable_entered(area: Area3D):
 func _load_data(data : GStorage) -> void:
 	if not data.has_value(Utils.nhash(self) + &"is_active"): return
 
-	active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
+	_has_been_tampered = true
+	active = data.get_value(Utils.nhash(self) + &"is_active")
 
 func _save_data(data : GStorage) -> void:
+	if not _has_been_tampered: return
+	
 	data.set_value(Utils.nhash(self) + &"is_active", active)

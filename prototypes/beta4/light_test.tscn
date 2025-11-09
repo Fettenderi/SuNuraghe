@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://3igevuprqx4h"]
+
+[ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_1ybmc"]
+[ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_l8hgx"]
+[ext_resource type="Texture2D" uid="uid://dqteb8ss6s61x" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="3_f3yip"]
+[ext_resource type="PackedScene" uid="uid://cdhup6auak1jd" path="res://prototypes/beta4/mamuthones_beehave.tscn" id="4_870mk"]
+
+[sub_resource type="Environment" id="Environment_1ybmc"]
+background_mode = 2
+background_energy_multiplier = 6.07
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.2
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 2.77
+ssao_intensity = 8.53
+sdfgi_enabled = true
+sdfgi_read_sky_light = false
+sdfgi_energy = 2.505
+glow_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3e5f"]
+albedo_texture = ExtResource("3_f3yip")
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_1ybmc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1ybmc")
+
+[node name="Player" parent="." instance=ExtResource("2_l8hgx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.235)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.724, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+light_energy = 3.301
+omni_range = 7.887
+omni_attenuation = 0.452
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+use_collision = true
+flip_faces = true
+size = Vector3(13, 5, 13)
+material = SubResource("StandardMaterial3D_m3e5f")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="PuppetedMamuthones" parent="Enemies" instance=ExtResource("4_870mk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375623, 1.27434, -4.87156)

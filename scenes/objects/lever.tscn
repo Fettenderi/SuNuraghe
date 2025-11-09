@@ -133,13 +133,13 @@ uv1_triplanar_sharpness = 150.0
 texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ru7jp"]
-size = Vector3(1.94946, 1.57031, 2.13965)
+size = Vector3(1.1228, 1.2323, 1.47949)
 
 [node name="Lever" type="Node3D"]
 script = ExtResource("1_donkj")
 
 [node name="lever" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75618, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.75618, 0)
 
 [node name="Base" type="MeshInstance3D" parent="lever"]
 transform = Transform3D(5.96046e-06, -2.08616e-05, 59.3084, -100, 5.96046e-06, 5.30259e-06, -8.9407e-06, -100, -1.41402e-05, 0, 0, 0)
@@ -157,9 +157,12 @@ surface_material_override/1 = SubResource("StandardMaterial3D_hkwjd")
 [node name="InteractableBox" parent="." instance=ExtResource("2_1gg2o")]
 unique_name_in_owner = true
 required_input = &"interact"
-gui_text = "[center][img=40]res://assets/ui/key_e.png[/img] Attiva"
+gui_text = "Attiva"
+is_active = null
+state = null
 
 [node name="CollisionShape3D" parent="InteractableBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.169006, 0)
 shape = SubResource("BoxShape3D_ru7jp")
 
 [node name="SFXEmitter" type="FmodEventEmitter3D" parent="."]

@@ -14,9 +14,8 @@ func start(info : Dictionary = {}) -> void:
 	user.max_speed = 0.0
 	user.change_rate = change_rate
 	
-	state_machine.stop()
-	if info.has("to_look"):
-		_stare_target = info["to_look"]
+	if info.has(&"to_look"):
+		_stare_target = info[&"to_look"]
 
 func end() -> void:
 	_is_active = false

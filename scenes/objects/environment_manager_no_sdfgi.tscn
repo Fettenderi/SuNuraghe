@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://7h8gis51qtdf"]
+
+[ext_resource type="Script" uid="uid://cwxvrf1hsspg5" path="res://assets/post_processing/simple_effect.gd" id="2_cnfv5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y1djo"]
+sky_top_color = Color(0.0396, 0.0513, 0.18, 1)
+sky_horizon_color = Color(0.0418167, 0.0338, 0.13, 1)
+ground_bottom_color = Color(0.04446, 0.0306, 0.09, 1)
+ground_horizon_color = Color(0.0418167, 0.0338, 0.13, 1)
+sun_angle_max = 350.76
+energy_multiplier = 2.95
+
+[sub_resource type="Sky" id="Sky_4qkak"]
+sky_material = SubResource("ProceduralSkyMaterial_y1djo")
+
+[sub_resource type="Environment" id="Environment_cnfv5"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_4qkak")
+ambient_light_source = 2
+ambient_light_color = Color(0.23, 0.23, 0.23, 1)
+ambient_light_sky_contribution = 0.0
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 4.63
+ssao_intensity = 5.15
+sdfgi_read_sky_light = false
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.05
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_fj2dm"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_cnfv5")
+glsl_file = "uid://bcqyfbfro20q1"
+metadata/_custom_type_script = "uid://cwxvrf1hsspg5"
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_vkt7p"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_cnfv5")
+glsl_file = "uid://cjybpdswhk4bb"
+metadata/_custom_type_script = "uid://cwxvrf1hsspg5"
+
+[sub_resource type="Compositor" id="Compositor_y0sbe"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_fj2dm"), SubResource("CompositorEffect_vkt7p")])
+
+[node name="EnvironmentManager" type="Node3D"]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.871992, 2.13976e-08, -0.489519, 0.489519, -3.8116e-08, 0.871992, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 0.0
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_cnfv5")
+compositor = SubResource("Compositor_y0sbe")

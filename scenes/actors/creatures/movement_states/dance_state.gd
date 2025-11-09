@@ -53,8 +53,8 @@ func start(info : Dictionary = {}) -> void:
 	user.is_manual_jumping = true
 	user.set_jump_delay(0.1)
 
-	if info.has("waypoints"):
-		var _container : Node = user.get_node(info["waypoints"])
+	if info.has(&"waypoints"):
+		var _container : Node = user.get_node(info[&"waypoints"])
 		
 		if _container == null:
 			print(user.name + " NON HA UN NODEPATH ASSOLUTO")
@@ -65,8 +65,8 @@ func start(info : Dictionary = {}) -> void:
 			
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 	
-	if info.has("await"):
-		_receiver = info["await"]
+	if info.has(&"await"):
+		_receiver = info[&"await"]
 		
 		_delay_timer = Utils.timer(1.0, _delay_ended, _delay_timer)
 		
@@ -79,47 +79,47 @@ func start(info : Dictionary = {}) -> void:
 		if not _receiver.received.is_connected(_on_received_signal):
 			_receiver.received.connect(_on_received_signal)
 	
-	if info.has("emitter"):
-		_emitter = info["emitter"]
+	if info.has(&"emitter"):
+		_emitter = info[&"emitter"]
 
 	
-	if info.has("leader"):
-		_leader = info["leader"]
+	if info.has(&"leader"):
+		_leader = info[&"leader"]
 	
-	if info.has("speed"):
-		max_speed = info["speed"]
+	if info.has(&"speed"):
+		max_speed = info[&"speed"]
 
 	user.max_speed = max_speed
 	user.change_rate = change_rate
 
-	if info.has("right_handed"):
-		_right_handed = info["right_handed"]
+	if info.has(&"right_handed"):
+		_right_handed = info[&"right_handed"]
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
+	if info.has(&"touched"):
 		get_tree().call_group(&"Enemy", "suspect_player")
 		return
 
-	if info.has("bell_note"):
+	if info.has(&"bell_note"):
 		_starting_rotation = user.mesh.rotation.y
 		user.make_jump()
 		_tween_rotation()
 
-	if info.has("suspect"):
-		if info.has("final") and info["final"]:
-			state_machine.change_state("StareState")
+	if info.has(&"suspect"):
+		if info.has(&"final") and info[&"final"]:
+			state_machine.change_state(&"StareState")
 			return
 		
 		if not user.can_suspect: return
 			
 		_suspect_level += 1
 		if _suspect_level >= max_suspects:
-			state_machine.change_state("ChaseState", {"located": user.target.global_position})
+			state_machine.change_state(&"ChaseState", {&"located": user.target.global_position})
 		else:
-			state_machine.change_state("StareState", {"next_state": "DanceState", "time": 2.0})
+			state_machine.change_state(&"StareState", {&"next_state": &"DanceState", &"time": 2.0})
 
 
-	if info.has("arrived"):
+	if info.has(&"arrived"):
 		_waypoint_progress += 1
 		
 		if _waypoint_progress < len(_waypoints):
@@ -137,7 +137,7 @@ func update(info : Dictionary = {}) -> void:
 			
 			user.progress()
 
-	if info.has("end"):
+	if info.has(&"end"):
 		user.end_buffered = true
 
 

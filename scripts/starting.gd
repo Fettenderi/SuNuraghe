@@ -8,6 +8,9 @@ var config_data : GStorage
 func _ready() -> void:
 	level_data = GStorage.create(&"saves")
 	config_data = GStorage.create(&"config")
+	
+	if config_data.has_value(&"language"):
+		TranslationServer.set_locale(config_data.get_value(&"language"))
 
 	if config_data.has_value(&"cutscene_played") and config_data.get_value(&"cutscene_played"):
 		if config_data.has_value(&"game_finished") and config_data.get_value(&"game_finished"):

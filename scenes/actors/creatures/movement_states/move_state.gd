@@ -20,25 +20,25 @@ func start(info : Dictionary = {}) -> void:
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
 	
-	if info.has("position"):
-		var _target : Marker3D = user.get_node(info["position"])
+	if info.has(&"position"):
+		var _target : Marker3D = user.get_node(info[&"position"])
 		
 		if _target == null:
 			print(user.name + " NON HA UN NODEPATH ASSOLUTO")
 			return
 		_navigation_agent_3d.target_position = _target.global_position
 	
-	if info.has("speed"):
-		max_speed = info["speed"]
+	if info.has(&"speed"):
+		max_speed = info[&"speed"]
 	
 	user.max_speed = max_speed
 	user.change_rate = change_rate
 	
-	if info.has("emitter"):
-		_emitter = info["emitter"]
+	if info.has(&"emitter"):
+		_emitter = info[&"emitter"]
 	
-	if info.has("await"):
-		_receiver = info["await"]
+	if info.has(&"await"):
+		_receiver = info[&"await"]
 		
 		_delay_timer = Utils.timer(0.2, _delay_ended, _delay_timer)
 		
@@ -53,11 +53,11 @@ func start(info : Dictionary = {}) -> void:
 
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
+	if info.has(&"touched"):
 		#print("OH SCUS TI SONO VENUTO ADDOSSO " + user.name + " " + name)
 		return
 
-	if info.has("arrived"):
+	if info.has(&"arrived"):
 		if _emitter != null:
 			_emitter.send_signal(true)
 			_emitter = null
@@ -67,8 +67,8 @@ func update(info : Dictionary = {}) -> void:
 		if _receiver != null: return
 		
 		user.progress()
-
-	if info.has("end"):
+		
+	if info.has(&"end"):
 		user.end_buffered = true
 
 #func _physics_process(delta: float) -> void:

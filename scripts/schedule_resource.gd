@@ -20,5 +20,8 @@ func progess_tasks() -> ScheduleTaskRes:
 	
 	return task
 
+func get_current_task() -> ScheduleTaskRes:
+	return tasks[progress - 1]
+
 func reset_progress() -> void:
 	progress = 0

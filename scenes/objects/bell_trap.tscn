@@ -34,7 +34,8 @@ wool_needed = 2
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0158216, 0)
 required_input = &"interact"
-gui_text = "[center][img=40]res://assets/ui/key_e.png[/img] Disattiva"
+gui_text = "Disattiva"
+is_active = null
 state = true
 
 [node name="CollisionShape3D" parent="DefuseBox" index="0"]

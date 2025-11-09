@@ -13,6 +13,8 @@ extends Node3D
 
 var _fused := true
 
+var _has_been_tampered := false
+
 func _ready() -> void:
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
@@ -41,21 +43,28 @@ func _on_defuse_box_signal_emitted(_value: Variant) -> void:
 	_defuse()
 
 func _defuse():
+	_has_been_tampered = true
+	
 	_defuse_box.set_active(false)
 	_activation_box.set_enabled(false)
 	_fused = false
 
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"fused"): return
+	if not data.has_value(Utils.nhash(self)): return
 
-	if not data.get_value(Utils.nhash(self) + &"fused"):
+	_has_been_tampered = true
+
+	if not data.get_value(Utils.nhash(self))[&"fused"]:
 		queue_free()
-	_activation_box.set_enabled(_fused)
-	_defuse_box.set_active(_fused)
-	_mesh.visible = not _fused
+		return
+
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"fused", _fused)
+	if not _has_been_tampered: return
+	
+	data.set_value(Utils.nhash(self), {
+		&"fused" : _fused
+	})
 
 
 func _on_defuse_box_area_entered(_area: Area3D) -> void:

@@ -11,12 +11,8 @@ extends Node3D
 var _available := true
 
 func _ready() -> void:
-	if emitter_resource != null:
-		_interactable_box.emitter_resource = emitter_resource
-	
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
-
 
 func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	if not _available: return
@@ -26,13 +22,20 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	_sfx_emitter.play()
 	PlayerStats.wool_pieces += amount
 	_mesh.visible = false
+	
+	if emitter_resource != null:
+		emitter_resource.send_signal()
+
 
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"available"): return
+	if not data.has_value(Utils.nhash(self)): return
 
-	_available = bool(data.get_value(Utils.nhash(self) + &"available"))
-	_interactable_box.set_active(_available)
-	_mesh.visible = _available
+	if not data.get_value(Utils.nhash(self))[&"available"]:
+		queue_free()
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"available", _available)
+	if _available: return
+	
+	data.set_value(Utils.nhash(self), {
+		&"available" : _available
+	})

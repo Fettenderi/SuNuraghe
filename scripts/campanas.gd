@@ -9,6 +9,7 @@ extends Node3D
 @onready var _sfx_campanas1: FmodEventEmitter3D = %SFXCampanas1
 
 var wants_stop := false
+var _stopped := false
 
 var _first_bell := false
 
@@ -20,9 +21,14 @@ func _ready() -> void:
 	
 	_sfx_campanas0.set_parameter("Bells_Pitch", size)
 	_sfx_campanas1.set_parameter("Bells_Pitch", size)
+	
+	LevelStats.saving.connect(_save_data)
+	LevelStats.loading.connect(_load_data)
+
 
 func stop():
 	wants_stop = true
+	_stopped = true
 
 func _actually_stop():
 	if not wants_stop: return
@@ -38,3 +44,19 @@ func play_sound():
 	TimeKeeper.bell_input(size)
 	
 	_first_bell = not _first_bell
+
+
+func _load_data(data : GStorage) -> void:
+	if not data.has_value(Utils.nhash(self)): return
+
+	if not data.get_value(Utils.nhash(self))[&"stopped"]: return
+	
+	_animation_player.play("custom/stopping")
+	_stopped = true
+
+func _save_data(data : GStorage) -> void:
+	if not _stopped: return
+	
+	data.set_value(Utils.nhash(self), {
+		&"stopped" : _stopped
+	})

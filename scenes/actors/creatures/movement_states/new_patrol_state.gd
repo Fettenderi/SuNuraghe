@@ -15,7 +15,6 @@ var _waypoint_progress := 0
 func start(info : Dictionary = {}) -> void:
 	if user.end_buffered:
 		state_machine.stop()
-		user.queue_free()
 		return
 	
 	_is_active = true
@@ -23,15 +22,15 @@ func start(info : Dictionary = {}) -> void:
 	if _navigation_agent_3d == null:
 		_navigation_agent_3d = user.navigation_agent_3d
 		
-	if info.has("waypoint_progress"):
-		_waypoint_progress = info["waypoint_progress"]
+	if info.has(&"waypoint_progress"):
+		_waypoint_progress = info[&"waypoint_progress"]
 		_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 	
-	if info.has("vigilant"):
-		_vigilant = info["vigilant"]
+	if info.has(&"vigilant"):
+		_vigilant = info[&"vigilant"]
 	
-	if info.has("waypoints"):
-		var _container : Node = user.get_node(info["waypoints"])
+	if info.has(&"waypoints"):
+		var _container : Node = user.get_node(info[&"waypoints"])
 		
 		if _container == null:
 			print(user.name + " NON HA UN NODEPATH ASSOLUTO")
@@ -45,8 +44,8 @@ func start(info : Dictionary = {}) -> void:
 			
 			_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 	
-	if info.has("speed"):
-		max_speed = info["speed"]
+	if info.has(&"speed"):
+		max_speed = info[&"speed"]
 	
 	user.max_speed = max_speed
 	user.change_rate = change_rate
@@ -58,32 +57,39 @@ func start(info : Dictionary = {}) -> void:
 	#Utils.update_just_speed(user, change_rate, max_speed, delta)
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("rebaked"):
+	if info.has(&"rebaked"):
 		_navigation_agent_3d.target_position = _waypoints[_waypoint_progress].global_position
 
-	if info.has("touched"):
-		var _toucher : Player = info["touched"]
+	if info.has(&"touched"):
+		var _toucher : Player = info[&"touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher})
+		state_machine.change_state(&"KillState", {&"to_look": _toucher})
 		return
 
-	if info.has("end"):
+	if info.has(&"end"):
 		state_machine.stop()
-		user.queue_free()
-
-	if _vigilant and info.has("located"):
-		state_machine.change_state("ChaseState", {"located": info["located"]})
 		return
 
-	if info.has("arrived"):
+	if _vigilant and info.has(&"located"):
+		user.interrupted_state = name
+		state_machine.change_state(&"ChaseState", {&"located": info[&"located"]})
+		return
+
+	if info.has(&"arrived"):
 		_waypoint_progress += 1
 		
 		if _waypoint_progress >= len(_waypoints):
 			user.progress()
 			return
 		
-		state_machine.change_state("WanderingState", {"next_state": "PatrolState", "next_info": {"waypoint_progress": _waypoint_progress}})
+		state_machine.change_state(&"WanderingState", {&"next_state": &"PatrolState", &"next_info": {&"waypoint_progress": _waypoint_progress}})
 
 func end() -> void:
 	_is_active = false
+
+func get_save_data() -> Dictionary[String, Variant]:
+	return {&"waypoint_progress": _waypoint_progress}
+
+func load_save_data(data : Dictionary[String, Variant]):
+	_waypoint_progress = data[&"waypoint_progress"]

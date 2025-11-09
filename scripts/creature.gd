@@ -34,7 +34,7 @@ var speed_debufs := 0.0
 var speed := 0.0
 var change_rate := 1.0
 
-var interrupted_state : StringName
+var interrupted_state := ""
 
 var _acceleration := 12.0
 
@@ -59,7 +59,6 @@ var is_manual_jumping := false
 
 func _ready() -> void:
 	if activation_receiver != null:
-		_is_active = false
 		activation_receiver.received.connect(_start_movement.unbind(1))
 	else:
 		_can_start_movement = true
@@ -67,7 +66,7 @@ func _ready() -> void:
 	if deactivation_receiver != null:
 		deactivation_receiver.received.connect(_end_movement.unbind(1))
 
-	_voices_timer = Utils.timer(1.0, _emit_voice)
+	_voices_timer = Utils.timer(1.0, emit_voice)
 	add_child(_voices_timer, true)
 
 	navigation_agent_3d.navigation_finished.connect(_on_navigation_finished)
@@ -75,9 +74,10 @@ func _ready() -> void:
 	
 	movement_state_machine.verbose = verbose
 
+	movement_state_machine.stopped.connect(_on_movement_stopped)
 	LevelStats.saving.connect(_save_data)
 	LevelStats.loading.connect(_load_data)
-	LevelStats.sig_level_ready.connect(_on_level_ready)
+	#LevelStats.sig_level_ready.connect(_on_level_ready)
 
 
 func _physics_process(delta: float) -> void:
@@ -99,7 +99,8 @@ func _physics_process(delta: float) -> void:
 			if not is_manual_jumping:
 				set_jump_delay(max_speed * 1.5)
 				request_jump()
-				
+	else:
+		_on_navigation_finished()
 	
 	#if _local_destination.length_squared() <= 0.0001:
 		#_on_navigation_finished()
@@ -134,17 +135,26 @@ func _collide_with_rigidbodies():
 		_collision.get_collider().apply_impulse(_push_direction * _velocity_difference * _push_force, _collision.get_position() - _collision.get_collider().global_position)
 
 func _start_movement() -> void:
+	if _is_active: return
+	
 	_is_active = true
 	movement_state_machine.start()
-	
-	if LevelStats.level_data != null:
-		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", true)
 
 func _end_movement() -> void:
-	movement_state_machine.update({"end": true})
+	assert(LevelStats.level_data != null)
 	
-	if LevelStats.level_data != null:
-		LevelStats.level_data.set_value(Utils.nhash(self) + &"active", false)
+	
+	
+	LevelStats.level_data.set_value(Utils.nhash(self), {
+		&"erased" : true
+	})
+
+	print(Utils.nhash(self) + " E' STATO ELIMINATO")
+
+	movement_state_machine.update({&"end": true})
+	
+	#queue_free()
+
 
 func _on_eyes_located(collider: Player) -> void:
 	if not _is_active: return
@@ -152,30 +162,28 @@ func _on_eyes_located(collider: Player) -> void:
 	if target == null:
 		target = collider
 	
-	interrupted_state = movement_state_machine.current_state.name
-	
-	movement_state_machine.update({"located": collider.global_position, "is_disguised": collider.is_disguised()})
+	movement_state_machine.update({&"located": collider.global_position, &"is_disguised": collider.is_disguised()})
 
 func _on_kill_box_body_entered(body: Node3D) -> void:
 	if not _is_active: return
 	
-	movement_state_machine.update({"touched" : body, "can_kill" : can_kill})
+	movement_state_machine.update({&"touched" : body, &"can_kill" : can_kill})
 	
 	target = body
 
 
 func _on_navigation_finished():
 	_direction = Vector3.ZERO
-	movement_state_machine.update({"arrived" : true})
+	movement_state_machine.update({&"arrived" : true})
 
 func get_eyes_reference() -> Node3D:
 	return _head
 
 func suspect_player(final := false) -> void:
-	movement_state_machine.update({"suspect" : true, "final" : final})
+	movement_state_machine.update({&"suspect" : true, &"final" : final})
 
 func dance_input() -> void:
-	movement_state_machine.update({"bell_note" : true})
+	movement_state_machine.update({&"bell_note" : true})
 
 func look(target_position : Node3D, delta : float) -> void:
 	var _local_destination := target_position.global_position - global_position
@@ -199,7 +207,7 @@ func request_jump() -> void:
 func make_jump() -> void:
 	_footsteps_player.do_play()
 
-func _emit_voice() -> void:
+func emit_voice() -> void:
 	_sfx_voice.play()
 	_voices_timer.start(max(randfn(15.0, 2.0), 0.0))
 
@@ -218,15 +226,34 @@ func _roof_function(value : float, lenght : float):
 	return max(2.0 * (lenght - abs((value - lenght) * (value - lenght) * (2.0 / lenght) - lenght)), 0.0)
 
 
-func _on_level_ready():
-	if _can_start_movement:
-		_start_movement()
+#func _on_level_ready():
+	#if _can_start_movement:
+		#_start_movement()
 
 func _load_data(data : GStorage) -> void:
-	if data.has_value(Utils.nhash(self) + &"active"):
-		if data.get_value(Utils.nhash(self) + &"active"): _start_movement()
-		else: queue_free()
+	if not data.has_value(Utils.nhash(self)):
+		if _can_start_movement:
+			_start_movement()
+		return
+	
+	var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
+	if loaded_data[&"erased"]:
+		queue_free()
+		return
+	
+	global_position = Utils.string_to_vector3(loaded_data[&"position"])
+	global_rotation.y = loaded_data[&"rotation"]
+	
+	if loaded_data[&"is_active"]:
+		_start_movement()
 
 func _save_data(data : GStorage) -> void:
-	if _is_active:
-		data.set_value(Utils.nhash(self) + &"active", true)
+	data.set_value(Utils.nhash(self), {
+		&"erased" : end_buffered,
+		&"is_active" : _is_active,
+		&"position" : global_position,
+		&"rotation" : global_rotation.y
+	})
+
+func _on_movement_stopped():
+	queue_free()

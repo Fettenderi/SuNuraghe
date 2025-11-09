@@ -27,6 +27,8 @@ var _is_active := true:
 			_target_light = 0.0
 			_flicker_cooldown_timer.stop()
 
+var _has_been_tampered := false
+
 var saves_individually := true
 
 func _ready() -> void:
@@ -60,6 +62,8 @@ func _update_preview():
 	light_energy = actual_max_energy
 
 func _on_received(value : Variant):
+	_has_been_tampered = true
+	
 	if value is bool:
 		_is_active = value
 		return
@@ -69,20 +73,26 @@ func _on_received(value : Variant):
 		actual_min_energy = max(actual_min_energy - value.y, 0.0)
 		omni_range = max(omni_range - value.z, 0.0)
 
+
 func _load_data(data : GStorage) -> void:
 	if not saves_individually: return
-	if not data.has_value(Utils.nhash(self) + &"parameters"): return
+	if not data.has_value(Utils.nhash(self)): return
 	
-	var _parameters := Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"parameters"))
+	var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
 	
-	actual_max_energy = _parameters.x
-	actual_min_energy = _parameters.y
-	omni_range = _parameters.z
+	_has_been_tampered = true
 	
-	_is_active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
+	actual_max_energy = loaded_data[&"max_energy"]
+	actual_min_energy = loaded_data[&"min_energy"]
+	omni_range = loaded_data[&"range"]
+	_is_active = loaded_data[&"is_active"]
 
 func _save_data(data : GStorage) -> void:
-	if not saves_individually: return
+	if not _has_been_tampered: return
 	
-	data.set_value(Utils.nhash(self) + &"is_active", _is_active)
-	data.set_value(Utils.nhash(self) + &"parameters", Vector3(actual_max_energy, actual_min_energy, omni_range))
+	data.set_value(Utils.nhash(self), {
+		&"max_energy" : actual_max_energy,
+		&"min_energy" : actual_min_energy,
+		&"range" : omni_range,
+		&"is_active" : _is_active
+	})

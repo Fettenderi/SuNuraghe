@@ -4,5 +4,6 @@
 
 [node name="LevelStats" type="Node"]
 script = ExtResource("1_4hvpu")
+level_scene = "uid://diymi2h3f5cqq"
 save_saves = true
 load_saves = true

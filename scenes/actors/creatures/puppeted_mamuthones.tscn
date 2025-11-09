@@ -103,7 +103,7 @@ metadata/_custom_type_script = "uid://tl3irb7fk41e"
 [node name="ChaseState" type="Node" parent="MovementSM" index="5"]
 script = ExtResource("8_vu6r7")
 change_rate = 4.0
-max_speed = 3.5
+max_speed = 3.7
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="KillState" type="Node" parent="MovementSM" index="6"]

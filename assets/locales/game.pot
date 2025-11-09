@@ -13,6 +13,7 @@
 # res://scenes/main_menu.tscn
 # res://globals/gui.gd
 # res://scenes/components/volume_selector.tscn
+# res://scenes/starting.tscn
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -124,6 +125,10 @@ msgid ""
 msgstr ""
 
 #: globals/gui.tscn
+msgid "DEBUG"
+msgstr ""
+
+#: globals/gui.tscn
 msgid "0"
 msgstr ""
 
@@ -143,37 +148,42 @@ msgstr ""
 msgid "Esci"
 msgstr ""
 
+#: globals/gui.tscn
+#: globals/gui.gd
+msgid "Reset Demo"
+msgstr ""
+
 #: scenes/objects/bell.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Silenzia e Ferma Campana"
+msgid "Silenzia e Ferma Campana"
 msgstr ""
 
 #: scenes/objects/bell_trap.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Disattiva"
+msgid "Disattiva"
 msgstr ""
 
 #: scenes/objects/concept_art_piece.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi Concept Art"
+msgid "Prendi Concept Art"
 msgstr ""
 
 #: scenes/objects/disguise.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Indossa"
+msgid "Indossa"
 msgstr ""
 
 #: scenes/objects/door.tscn
 #: scenes/objects/double_door.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Apri "
+msgid "Apri "
 msgstr ""
 
 #: scenes/objects/lever.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Attiva"
+msgid "Attiva"
 msgstr ""
 
 #: scenes/objects/saving_station.tscn
-msgid "[center][img=30]res://assets/ui/key_e.png[/img] Salva"
+msgid "Salva"
 msgstr ""
 
 #: scenes/objects/wool_piece.tscn
-msgid "[center][img=40]res://assets/ui/key_e.png[/img] Prendi"
+msgid "Prendi"
 msgstr ""
 
 #: scenes/main_menu.tscn
@@ -208,8 +218,12 @@ msgstr ""
 msgid "Schermo Intero - OFF"
 msgstr ""
 
+#: globals/gui.gd
+msgid "SEI SICURO?"
+msgstr ""
+
 #: scenes/components/volume_selector.tscn
-msgid "-"
+msgid "<"
 msgstr ""
 
 #: scenes/components/volume_selector.tscn
@@ -217,5 +231,9 @@ msgid "10"
 msgstr ""
 
 #: scenes/components/volume_selector.tscn
-msgid "+"
+msgid ">"
+msgstr ""
+
+#: scenes/starting.tscn
+msgid "Si consiglia di giocare a luci spente e con le cuffie per un'esperienza migliore."
 msgstr ""

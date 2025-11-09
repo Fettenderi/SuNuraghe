@@ -36,13 +36,15 @@ var actual_min_energy := 0.2
 
 var _lights : Array[FlickeringLight] = []
 
+#var _has_been_tampered := false
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		_update_tooltip()
 		return
 	
-	LevelStats.saving.connect(_save_data)
-	LevelStats.loading.connect(_load_data)
+	#LevelStats.saving.connect(_save_data)
+	#LevelStats.loading.connect(_load_data)
 
 
 func _update_tooltip() -> void:
@@ -91,14 +93,22 @@ func _create_light(pos : Vector3) -> void:
 	
 	_light.position = pos
 
-func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"parameters"): return
-	
-	var _parameters := Utils.string_to_vector3(data.get_value(Utils.nhash(self) + &"parameters"))
-	
-	actual_max_energy = _parameters.x
-	actual_min_energy = _parameters.y
-	omni_range = _parameters.z
-
-func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"parameters", Vector3(actual_max_energy, actual_min_energy, omni_range))
+#func _load_data(data : GStorage) -> void:
+	#if not data.has_value(Utils.nhash(self)): return
+	#
+	#var loaded_data : Dictionary = data.get_value(Utils.nhash(self))
+	#
+	#_has_been_tampered = true
+	#
+	#actual_max_energy = loaded_data[&"max_energy"]
+	#actual_min_energy = loaded_data[&"min_energy"]
+	#omni_range = loaded_data[&"range"]
+#
+#func _save_data(data : GStorage) -> void:
+	#if not _has_been_tampered: return
+	#
+	#data.set_value(Utils.nhash(self), {
+		#&"max_energy" : actual_max_energy,
+		#&"min_energy" : actual_min_energy,
+		#&"range" : omni_range
+	#})

@@ -10,7 +10,6 @@ var _vigilant := false
 func start(info : Dictionary = {}) -> void:
 	if user.end_buffered:
 		state_machine.stop()
-		user.queue_free()
 		return
 	
 	_is_active = true
@@ -18,31 +17,32 @@ func start(info : Dictionary = {}) -> void:
 	user.max_speed = 0.0
 	user.change_rate = change_rate
 	
-	if info.has("await"):
-		_receiver = info["await"]
+	if info.has(&"await"):
+		_receiver = info[&"await"]
 		if not _receiver.received.is_connected(_on_received_signal):
 			_receiver.received.connect(_on_received_signal)
 	else:
 		_receiver = null
 	
-	if info.has("vigilant"):
-		_vigilant = info["vigilant"]
+	if info.has(&"vigilant"):
+		_vigilant = info[&"vigilant"]
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
-		var _toucher : Player = info["touched"]
+	if info.has(&"touched"):
+		var _toucher : Player = info[&"touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher})
+		state_machine.change_state(&"KillState", {&"to_look": _toucher})
 		return
 
-	if _vigilant and info.has("located"):
-		state_machine.change_state("ChaseState", {"located": info["located"]})
+	if _vigilant and info.has(&"located"):
+		user.interrupted_state = name
+
+		state_machine.change_state(&"ChaseState", {&"located": info[&"located"]})
 		return
 	
-	if info.has("end"):
+	if info.has(&"end"):
 		state_machine.stop()
-		user.queue_free()
 
 
 func end() -> void:

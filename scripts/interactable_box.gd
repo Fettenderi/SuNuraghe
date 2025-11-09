@@ -20,13 +20,13 @@ func _interactable_entered(_area: Area3D):
 	if not is_active: return
 	
 	_in_range = true
-	Gui.append_interaction(gui_text)
+	Gui.append_interaction(gui_text, required_input)
 
 func _interactable_exited(_area: Area3D):
 	if not is_active: return
 	
 	_in_range = false
-	Gui.remove_interaction(gui_text)
+	Gui.remove_interaction(gui_text, required_input)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_active: return
@@ -37,11 +37,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if emitter_resource != null:
 			emitter_resource.send_signal(state)
 		signal_emitted.emit(state)
-		Gui.remove_interaction(gui_text)
+		Gui.remove_interaction(gui_text, required_input)
 
 func set_active(active : bool) -> void:
 	is_active = active
 	
 	if _in_range:
 		_in_range = false
-		Gui.remove_interaction(gui_text)
+		Gui.remove_interaction(gui_text, required_input)

@@ -209,7 +209,7 @@ metadata/_custom_type_script = "uid://cy2neyq5e26g4"
 
 [node name="IdleState" type="Node" parent="StaminaSM"]
 script = ExtResource("12_068wj")
-max_stamina = 700.0
+max_stamina = 5.0
 metadata/_custom_type_script = "uid://tl3irb7fk41e"
 
 [node name="ConsumingState" type="Node" parent="StaminaSM"]

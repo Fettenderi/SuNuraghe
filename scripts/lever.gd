@@ -30,12 +30,15 @@ func _on_interactable_box_signal_emitted(_value: Variant) -> void:
 	
 	tween.tween_property(_mesh, "rotation", Vector3(deg_to_rad(-124.9), _mesh.rotation.y, _mesh.rotation.z), 2.50).set_trans(Tween.TRANS_ELASTIC)
 
+
 func _load_data(data : GStorage) -> void:
-	if not data.has_value(Utils.nhash(self) + &"is_active"): return
+	if not data.has_value(Utils.nhash(self)): return
 	
-	_is_active = bool(data.get_value(Utils.nhash(self) + &"is_active"))
+	_is_active = data.get_value(Utils.nhash(self))[&"is_active"]
 	_interactable_box.set_active(not _is_active)
 	_mesh.rotation.x = deg_to_rad(-124.9 if _is_active else -55.1)
 
 func _save_data(data : GStorage) -> void:
-	data.set_value(Utils.nhash(self) + &"is_active", _is_active)
+	data.set_value(Utils.nhash(self), {
+		&"is_active" : _is_active
+	})

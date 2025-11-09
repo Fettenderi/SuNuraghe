@@ -38,6 +38,7 @@ func _ready() -> void:
 
 func toggle_dance_mode() -> void:
 	_wants_toggle = true
+	Gui.set_timing_hint_visibility(true)
 
 func player_input():
 	if not is_active: return
@@ -83,3 +84,7 @@ func _correct_input():
 func _wrong_input():
 	_reset_buffers()
 	get_tree().call_group(&"Enemy", "suspect_player")
+	Gui.made_timing_mistake()
+
+func highlight_hint():
+	Gui.highlight_timing_hint()

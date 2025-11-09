@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://8vyu2s1vt4u4"]
+[gd_scene load_steps=27 format=3 uid="uid://8vyu2s1vt4u4"]
 
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="1_nqaye"]
 [ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_qivie"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://chqdhdocxqxru" path="res://assets/receivers/layer2/lay2-kidnap.tres" id="13_bketw"]
 [ext_resource type="PackedScene" uid="uid://2mf2pma5xj2h" path="res://scenes/objects/wool_piece.tscn" id="14_u3k10"]
 [ext_resource type="PackedScene" uid="uid://c7puo3suli4x5" path="res://assets/models/goat/testa_pecora.fbx" id="15_72msm"]
+[ext_resource type="PackedScene" uid="uid://dbn8fn5je2ttx" path="res://scenes/objects/time_keeper_controller.tscn" id="16_72msm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4f27"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -194,3 +195,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19063, -3.00005, 4.84846)
 emitter_resource = SubResource("Resource_x6vv4")
 
 [node name="Mesh" parent="Objects/WoolPiece" instance=ExtResource("15_72msm")]
+
+[node name="TimeKeeperController" parent="." instance=ExtResource("16_72msm")]
+receiver_resource = ExtResource("7_x6vv4")

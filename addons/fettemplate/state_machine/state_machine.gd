@@ -28,6 +28,8 @@ var current_state : State
 var _is_active := false
 var _states_names : Array[String] = []
 
+signal stopped
+
 func _ready():
 	current_state = starting_state
 	if current_state is State:
@@ -86,3 +88,5 @@ func stop():
 	if verbose:
 		print("State Machine stopped")
 	_is_active = false
+
+	stopped.emit()

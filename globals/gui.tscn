@@ -10,6 +10,37 @@ font_size = 30
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_w8mk6")
 
+[node name="DebugLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 55.0
+offset_top = 35.0
+offset_right = 198.0
+offset_bottom = 79.0
+text = "DEBUG"
+
+[node name="TimingHint" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -146.0
+offset_right = 250.0
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme = ExtResource("2_nprld")
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +116,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_nprld")
-color = Color(0, 0, 0, 0.431373)
+color = Color(0, 0, 0, 0.666667)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pausa"]
 layout_mode = 1
@@ -95,9 +126,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -250.0
-offset_top = -200.0
+offset_top = -205.5
 offset_right = 250.0
-offset_bottom = 200.0
+offset_bottom = 205.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -110,6 +141,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme = ExtResource("2_nprld")
+theme_override_font_sizes/normal_font_size = 66
 bbcode_enabled = true
 text = "Pausa"
 fit_content = true
@@ -141,7 +173,7 @@ bus = "Master"
 [node name="QuitButton" type="Button" parent="Pausa/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../LanguageCycleButton")
+focus_neighbor_bottom = NodePath("../../ResetDemoButton")
 mouse_default_cursor_shape = 2
 disabled = true
 text = "Esci"
@@ -155,14 +187,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -92.0
-offset_right = 250.0
+offset_left = -173.0
+offset_top = -76.0
+offset_right = 173.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_neighbor_left = NodePath("../VBoxContainer/LanguageCycleButton")
+focus_neighbor_top = NodePath("../VBoxContainer/LanguageCycleButton")
+focus_neighbor_right = NodePath("../VBoxContainer/LanguageCycleButton")
 focus_neighbor_bottom = NodePath("../VBoxContainer/LanguageCycleButton")
 mouse_default_cursor_shape = 8
+theme_override_font_sizes/font_size = 20
 disabled = true
 text = "Reset Demo"
 
@@ -182,3 +218,4 @@ color = Color(0, 0, 0, 1)
 [connection signal="button_up" from="Pausa/VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_button_up"]
 [connection signal="button_up" from="Pausa/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_up"]
 [connection signal="button_up" from="Pausa/ResetDemoButton" to="." method="_on_reset_demo_button_button_up"]
+[connection signal="focus_exited" from="Pausa/ResetDemoButton" to="." method="_on_reset_demo_button_focus_exited"]

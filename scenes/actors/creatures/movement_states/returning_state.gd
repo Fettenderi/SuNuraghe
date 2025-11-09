@@ -16,22 +16,24 @@ func start(_info : Dictionary = {}) -> void:
 	user.navigation_agent_3d.target_position = last_position
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
-		var _toucher : Player = info["touched"]
+	if info.has(&"touched"):
+		var _toucher : Player = info[&"touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher})
+		state_machine.change_state(&"KillState", {&"to_look": _toucher})
 		return
 
-	if info.has("end"):
+	if info.has(&"end"):
 		user.end_buffered = true
 	
-	if info.has("located"):
-		state_machine.change_state("ChaseState", {"located": info["located"]})
+	if info.has(&"located"):
+		state_machine.change_state(&"ChaseState", {&"located": info[&"located"]})
 		return
 	
-	if info.has("arrived"):
+	if info.has(&"arrived"):
 		state_machine.change_state(user.interrupted_state)
+		user.interrupted_state = ""
+
 
 #func _physics_process(_delta: float) -> void:
 	#if not _is_active: return

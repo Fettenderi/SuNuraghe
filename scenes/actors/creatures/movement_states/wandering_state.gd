@@ -22,27 +22,27 @@ func start(info : Dictionary = {}) -> void:
 	user.max_speed = 0.0
 	user.change_rate = change_rate
 	
-	if info.has("next_state"):
-		_next_state = info["next_state"]
+	if info.has(&"next_state"):
+		_next_state = info[&"next_state"]
 	
-	if info.has("next_info"):
-		_next_info = info["next_info"]
+	if info.has(&"next_info"):
+		_next_info = info[&"next_info"]
 	else:
 		_next_info = {}
 
 func update(info : Dictionary = {}) -> void:
-	if info.has("touched"):
-		var _toucher : Player = info["touched"]
+	if info.has(&"touched"):
+		var _toucher : Player = info[&"touched"]
 		
 		_toucher.start_dying(user.get_eyes_reference())
-		state_machine.change_state("KillState", {"to_look": _toucher})
+		state_machine.change_state(&"KillState", {&"to_look": _toucher})
 		return
 
-	if info.has("end"):
+	if info.has(&"end"):
 		user.end_buffered = true
 	
-	if info.has("located"):
-		state_machine.change_state("ChaseState", {"located": info["located"]})
+	if info.has(&"located"):
+		state_machine.change_state(&"ChaseState", {&"located": info[&"located"]})
 
 func end() -> void:
 	_is_active = false
@@ -59,4 +59,9 @@ func _physics_process(delta: float) -> void:
 	
 	if _elapsed >= wander_time:
 		state_machine.change_state(_next_state, _next_info)
-	
+
+func get_save_data() -> Dictionary:
+	return {
+		&"next_state" : _next_state,
+		&"next_info" : _next_info
+	}

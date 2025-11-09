@@ -10,6 +10,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 41
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -33,6 +34,8 @@ horizontal_alignment = 1
 [node name="Increase" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Decrease")
+focus_neighbor_right = NodePath("../Decrease")
 mouse_default_cursor_shape = 2
 disabled = true
 text = ">"
