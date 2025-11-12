@@ -6,4 +6,4 @@ func _ready() -> void:
 	receiver_resource.received.connect(_on_received.unbind(1))
 
 func _on_received():
-	TimeKeeper.toggle_dance_mode()
+	TimeKeeper.start_dance_mode()

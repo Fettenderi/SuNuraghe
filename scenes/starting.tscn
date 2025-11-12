@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://n5unkxx8n0hd"]
 
-[ext_resource type="VideoStream" uid="uid://bbsbs0ca4l5dd" path="res://assets/cutscene/intro.ogv" id="1_hc2nf"]
 [ext_resource type="Script" uid="uid://dq8lt8gxn3rox" path="res://scripts/starting.gd" id="1_osrhh"]
 [ext_resource type="Theme" uid="uid://nts6ppuasqgx" path="res://assets/ui/theme.tres" id="2_hc2nf"]
+[ext_resource type="VideoStream" uid="uid://bpl4ncgdspaar" path="res://assets/cutscene/su-nuraghe.ogv" id="2_yq57p"]
 
 [sub_resource type="Animation" id="Animation_yq57p"]
 length = 0.001
@@ -140,7 +140,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("1_hc2nf")
+stream = ExtResource("2_yq57p")
 volume_db = -10.0
 expand = true
 script = ExtResource("1_osrhh")

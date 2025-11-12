@@ -36,9 +36,13 @@ func _ready() -> void:
 	add_child(_player_input_buffer, true)
 	add_child(_dance_input_buffer, true)
 
-func toggle_dance_mode() -> void:
+func start_dance_mode() -> void:
 	_wants_toggle = true
 	Gui.set_timing_hint_visibility(true)
+
+func stop_dance_mode() -> void:
+	is_active = false
+	Gui.set_timing_hint_visibility(false)
 
 func player_input():
 	if not is_active: return

@@ -6,6 +6,8 @@ var _receiver : ReceiverRes
 var _is_active := false
 
 var _vigilant := false
+var _expected_rotation := 0.0
+var _has_expected_rotation := false
 
 func start(info : Dictionary = {}) -> void:
 	if user.end_buffered:
@@ -26,6 +28,12 @@ func start(info : Dictionary = {}) -> void:
 	
 	if info.has(&"vigilant"):
 		_vigilant = info[&"vigilant"]
+
+	if info.has(&"rotation"):
+		_expected_rotation = info[&"rotation"]
+		_has_expected_rotation = true
+	else:
+		_has_expected_rotation = false
 
 func update(info : Dictionary = {}) -> void:
 	if info.has(&"touched"):
@@ -57,7 +65,8 @@ func _on_received_signal(_value) -> void:
 
 	user.progress()
 
-#func _physics_process(delta: float) -> void:
-	#if not _is_active: return
-		#
-	#Utils.update_just_speed(user, change_rate, 0.0, delta)
+func _physics_process(delta: float) -> void:
+	if not _is_active: return
+		
+	if not _has_expected_rotation: return
+	user.global_rotation.y = lerp_angle(user.global_rotation.y, _expected_rotation, 1.0 - exp(-user.TURNING_SPEED * delta))

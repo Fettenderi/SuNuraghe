@@ -34,9 +34,6 @@ albedo_texture = ExtResource("4_f5tf7")
 script = ExtResource("2_7u4uq")
 schedule = null
 
-[node name="NavigationAgent3D" parent="." index="0"]
-debug_enabled = true
-
 [node name="CollisionShape" parent="." index="1"]
 shape = SubResource("CapsuleShape3D_uhukm")
 

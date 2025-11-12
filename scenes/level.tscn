@@ -830,7 +830,8 @@ metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 script = ExtResource("53_w33q4")
 state = 0
 info = Dictionary[String, Variant]({
-"await": ExtResource("44_ovgnb")
+"await": ExtResource("44_ovgnb"),
+"rotation": -134.7
 })
 metadata/_custom_type_script = "uid://cqmpp7cvquw6e"
 

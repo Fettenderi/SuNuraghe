@@ -105,9 +105,13 @@ func remove_interaction(text : String, input : StringName) -> void:
 
 func set_timing_hint_visibility(value: bool):
 	_timing_hint.set_deferred(&"visible", value)
-
+	
+	var tween := create_tween()
 	if value:
+		tween.tween_property(_timing_hint, "modulate", Color("#ffffff"),0.7).from(Color("#ffffff00"))
 		change_timing_hint_size()
+	else:
+		tween.tween_property(_timing_hint, "modulate", Color("#ffffff00"),0.7).from(Color("#ffffff"))
 
 func change_timing_hint_size(size := DEFAULT_DANCE_HINT_SIZE):
 	_timing_hint.text = &"[center]" + _get_input_text(&"dance", size)

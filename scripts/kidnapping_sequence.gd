@@ -26,6 +26,8 @@ func _ready() -> void:
 	receiver_resource.received.connect(_start.unbind(1))
 
 func _start() -> void:
+	TimeKeeper.stop_dance_mode()
+	
 	await get_tree().create_timer(0.5).timeout
 	
 	sheep_mesh.visible = true
