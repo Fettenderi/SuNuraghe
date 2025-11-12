@@ -1,4 +1,4 @@
-[gd_scene load_steps=308 format=4 uid="uid://diymi2h3f5cqq"]
+[gd_scene load_steps=309 format=4 uid="uid://diymi2h3f5cqq"]
 
 [ext_resource type="Script" uid="uid://b3cdscd5vfps6" path="res://scripts/level.gd" id="1_30hdq"]
 [ext_resource type="PackedScene" uid="uid://cvdhqvacrttlw" path="res://scenes/actors/player/player.tscn" id="2_30hdq"]
@@ -499,6 +499,11 @@ metadata/_custom_type_script = "uid://daqy62a65vloj"
 [sub_resource type="Resource" id="Resource_5fap2"]
 script = ExtResource("17_ltwek")
 receivers = Array[ExtResource("15_u0n8q")]([ExtResource("74_iij8i")])
+metadata/_custom_type_script = "uid://daqy62a65vloj"
+
+[sub_resource type="Resource" id="Resource_g3e2o"]
+script = ExtResource("17_ltwek")
+receivers = Array[ExtResource("15_u0n8q")]([ExtResource("139_jvf0p")])
 metadata/_custom_type_script = "uid://daqy62a65vloj"
 
 [sub_resource type="Resource" id="Resource_psjm5"]
@@ -1230,7 +1235,7 @@ environment = SubResource("Environment_p7frq")
 compositor = SubResource("Compositor_y0sbe")
 
 [node name="Player" parent="." instance=ExtResource("2_30hdq")]
-transform = Transform3D(-0.999968, 0, -0.00780127, 0, 1, 0, 0.00780127, 0, -0.999968, 0.0756207, -2.09405, 43.2504)
+transform = Transform3D(-0.00780123, 0, 0.999968, 0, 1, 0, -0.999968, 0, -0.00780123, 12.0615, 5.50599, -35.8157)
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 4.37114e-08, -4.37114e-08, 1.91068e-15, 1, 0, -1, 1.91069e-15, 0, 14.724, 0)
@@ -3543,6 +3548,7 @@ emitter = SubResource("Resource_5fap2")
 
 [node name="WoolPiece0" parent="Objects/Static/Layer2" instance=ExtResource("33_p1qlp")]
 transform = Transform3D(0.843119, 0, 0.537726, 0, 1, 0, -0.537726, 0, 0.843119, 17.8115, 5.50961, -33.255)
+emitter_resource = SubResource("Resource_g3e2o")
 
 [node name="Mesh" parent="Objects/Static/Layer2/WoolPiece0" instance=ExtResource("40_dk6qd")]
 transform = Transform3D(-0.387065, -0.922052, 0, 0.922052, -0.387065, 0, 0, 0, 1, 0.0754796, 0.0865681, 3.72529e-09)
@@ -5413,7 +5419,7 @@ target = NodePath("../../../Player")
 [node name="TopCam" parent="." instance=ExtResource("54_s2ybf")]
 
 [node name="Camera3D" parent="TopCam/SubViewportContainer/SubViewport" index="0"]
-transform = Transform3D(-0.999968, 0.00780127, -4.371e-08, -4.37114e-08, 1.91068e-15, 1, 0.00780127, 0.999968, 3.41003e-10, 0.0756207, 12.6299, 43.2504)
+transform = Transform3D(-0.00780123, -0.999968, -3.41001e-10, -4.37114e-08, 1.91068e-15, 1, -0.999968, 0.00780123, -4.371e-08, 12.0615, 20.23, -35.8157)
 
 [node name="LayersManager" type="Node" parent="." node_paths=PackedStringArray("layer0", "layer1", "layer2", "layer3")]
 script = ExtResource("55_dk6qd")
