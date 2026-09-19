@@ -265,7 +265,7 @@ func _on_reset_demo_button_button_up() -> void:
 		LevelStats.config_data.save_data()
 		
 		LevelStats.load_data()
-		#get_tree().quit()
+		get_tree().quit()
 		return
 
 	_reset_demo_button.text = tr("SEI SICURO?")
