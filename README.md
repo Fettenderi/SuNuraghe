@@ -20,3 +20,9 @@ Su Nuraghe is a horror game developed in a month and a half for the Spaghetti In
 ## Postmortem:
 
 We think the project still has very nice potential, in the future we will return to it and refine the demo to post the game on Steam.
+
+## Links:
+
+[Trailer](https://www.youtube.com/watch?v=Jnuc8bxnYpQ)
+
+[Itch.io Page](https://fettenderi.itch.io/su-nuraghe)
