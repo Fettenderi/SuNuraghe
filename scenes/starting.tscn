@@ -153,6 +153,15 @@ libraries = {
 autoplay = "starting"
 
 [node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 event_name = "event:/MX/MX_Pad"
 event_guid = "{2af8ef37-eb18-422e-84e8-b1df9c78eb93}"
 autoplay = true
@@ -160,3 +169,4 @@ volume = 0.0
 fmod_parameters/Tension/id = -7982028026641706873
 fmod_parameters/Tension = 0.0
 fmod_parameters/Tension/variant_type = 3
+script = null

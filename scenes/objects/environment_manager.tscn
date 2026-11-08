@@ -16,14 +16,11 @@ sky_material = SubResource("ProceduralSkyMaterial_e6psu")
 
 [sub_resource type="Environment" id="Environment_yh7dg"]
 background_mode = 2
-background_energy_multiplier = 0.1
 sky = SubResource("Sky_xr3nu")
 ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.0
 tonemap_mode = 2
 ssao_radius = 2.32
-sdfgi_enabled = true
 sdfgi_read_sky_light = false
 glow_enabled = true
 adjustment_enabled = true
@@ -44,7 +41,7 @@ metadata/_custom_type_script = "uid://cwxvrf1hsspg5"
 [sub_resource type="CompositorEffect" id="CompositorEffect_vkt7p"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
